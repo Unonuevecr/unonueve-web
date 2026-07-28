@@ -17,9 +17,9 @@
     // Vacío = muestra el botón de WhatsApp como respaldo.
     agendaUrl: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0yJ3iH09agBQ9Okk7JEdentch4nJozhvL6X1XcyGqulLOkpsG4LrW7HiO6h3UI-mPdFwMChGIW',
 
-    // Web3Forms: pegá tu access key gratis de web3forms.com.
+    // Web3Forms: llave pública del formulario (va en el HTML a propósito).
     // Vacío = el formulario abre el correo del usuario con todo el detalle.
-    web3formsKey: '',
+    web3formsKey: '0747f1fa-892e-4a00-a295-d4775e1b953f',
 
     correo: 'coti@unonuevecr.com',
     whatsapp: '50660508446',      // sin +, sin espacios
@@ -415,6 +415,11 @@
       msg.textContent = 'Te abrí el correo con todo el detalle listo para enviar.';
       return;
     }
+
+    // Asunto útil en la bandeja + responder le contesta al cliente
+    document.getElementById('hSubject').value =
+      'Cotización — ' + negocio + ' (' + nombre + ')';
+    document.getElementById('hReply').value = correo;
 
     btn.disabled = true;
     msg.textContent = 'Enviando…';
