@@ -13,8 +13,9 @@
      CONFIG — cambiá estos valores y listo
      ========================================================== */
   const CONFIG = {
-    // Cal.com: poné aquí tu enlace, ej. 'unonueve/30min'. Vacío = muestra WhatsApp.
-    calLink: '',
+    // Página de reserva de Google Calendar (enlace público, sin el /u/0/).
+    // Vacío = muestra el botón de WhatsApp como respaldo.
+    agendaUrl: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0yJ3iH09agBQ9Okk7JEdentch4nJozhvL6X1XcyGqulLOkpsG4LrW7HiO6h3UI-mPdFwMChGIW',
 
     // Web3Forms: pegá tu access key gratis de web3forms.com.
     // Vacío = el formulario abre el correo del usuario con todo el detalle.
@@ -446,25 +447,18 @@
     const wa = document.getElementById('waFallback');
     if (wa) wa.href = 'https://wa.me/' + CONFIG.whatsapp;
 
-    if (!CONFIG.calLink) return;
+    if (!CONFIG.agendaUrl) return;
     const host = document.getElementById('calEmbed');
-    host.innerHTML = '';
-    host.setAttribute('data-cal-link', CONFIG.calLink);
 
-    const s = document.createElement('script');
-    s.src = 'https://app.cal.com/embed/embed.js';
-    s.async = true;
-    s.onload = function () {
-      if (window.Cal) {
-        window.Cal('init', { origin: 'https://cal.com' });
-        window.Cal('inline', {
-          elementOrSelector: '#calEmbed',
-          calLink: CONFIG.calLink,
-          config: { theme: 'light' }
-        });
-      }
-    };
-    document.body.appendChild(s);
+    // Google Calendar se incrusta con ?gv=true
+    const marco = document.createElement('iframe');
+    marco.src = CONFIG.agendaUrl + '?gv=true';
+    marco.title = 'Agendá una cita de 30 minutos con UNONUEVE';
+    marco.loading = 'lazy';
+    marco.style.cssText = 'width:100%;height:640px;border:0;display:block;';
+    host.innerHTML = '';
+    host.appendChild(marco);
+    host.classList.add('calEmbed--live');
   })();
 
   document.getElementById('year').textContent = new Date().getFullYear();

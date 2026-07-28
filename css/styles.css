@@ -421,6 +421,7 @@ body{
   backdrop-filter:blur(8px);
   overflow:hidden;
 }
+.calEmbed--live{ padding:0; background:#fff; min-height:0; display:block; }
 .calFallback{ text-align:center; padding:2.5rem; max-width:420px; }
 .calFallback__title{
   font-family:var(--font-serif); font-size:1.5rem; margin:0 0 .6rem;
