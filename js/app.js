@@ -33,7 +33,7 @@
   const SERVICIOS = [
     {
       id: 'contenido',
-      icono: 'contenido',
+      imagen: 'assets/svc-contenido.png',
       num: '01',
       titulo: 'Contenido que <em>conecta</em>.',
       eyebrow: 'Generación de contenido y pauta',
@@ -48,7 +48,7 @@
     },
     {
       id: 'automatizacion',
-      icono: 'automatizacion',
+      imagen: 'assets/svc-automatizacion.png',
       num: '02',
       titulo: 'Tu negocio <em>trabajando solo</em>.',
       eyebrow: 'Automatizaciones y bots',
@@ -63,7 +63,7 @@
     },
     {
       id: 'mercadeo',
-      icono: 'mercadeo',
+      imagen: 'assets/svc-mercadeo.png',
       num: '03',
       titulo: 'Estrategia, <em>no suerte</em>.',
       eyebrow: 'Mercadeo',
@@ -78,7 +78,7 @@
     },
     {
       id: 'foto',
-      icono: 'foto',
+      imagen: 'assets/svc-foto.png',
       num: '04',
       titulo: 'Tu marca, <em>bien vista</em>.',
       eyebrow: 'Fotografía profesional',
@@ -146,7 +146,7 @@
     list.push(S.fromPhoto(imgs.cerebro, N, (wide ? 1.30 : 0.56), 1.30));
 
     SERVICIOS.forEach(function (s) {                            // 2–5 · servicios
-      list.push(S.fromIcon(S.ICONS[s.icono], N, 1.20 * k));
+      list.push(S.fromPhoto(imgs[s.id], N, (wide ? 1.25 : 0.55), 1.22));
     });
     list.push(S.torus(N, 0.60 * k, 0.235 * k));                 // 6 · cierre
 
@@ -177,7 +177,6 @@
     try {
       N = window.innerWidth > 860 ? 150000 : 45000;
       field = new window.ParticleField(canvas, N);
-      window.__field = field;                 // útil para depurar en consola
     } catch (e) {
       // Sin WebGL: mostramos la foto como respaldo y seguimos.
       canvas.style.display = 'none';
@@ -187,8 +186,9 @@
 
     // Carga rostro + cerebro antes de construir las formas
     const fuentes = { cara: 'assets/hero-head.png', cerebro: 'assets/brain.png' };
+    SERVICIOS.forEach(function (s) { fuentes[s.id] = s.imagen; });
     const imgs = {};
-    let faltan = 2;
+    let faltan = Object.keys(fuentes).length;
 
     function listo() {
       if (--faltan > 0) return;
@@ -468,6 +468,8 @@
     marco.src = CONFIG.agendaUrl + '?gv=true';
     marco.title = 'Agendá una cita de 30 minutos con UNONUEVE';
     marco.loading = 'lazy';
+    marco.referrerPolicy = 'no-referrer';
+    marco.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox');
     marco.style.cssText = 'width:100%;height:640px;border:0;display:block;';
     host.innerHTML = '';
     host.appendChild(marco);

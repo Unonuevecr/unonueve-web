@@ -3,6 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ===== Seguridad =====
+     El sitio es estático (sin servidor ni base de datos). Estas reglas
+     limitan a qué dominios puede conectarse la página, así una inyección
+     de código no tendría a dónde mandar datos. -->
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  base-uri 'self';
+  object-src 'none';
+  form-action 'self';
+  frame-ancestors 'none';
+  script-src 'self';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src https://fonts.gstatic.com;
+  img-src 'self' data:;
+  connect-src 'self' https://api.web3forms.com;
+  frame-src https://calendar.google.com;
+  upgrade-insecure-requests;
+">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>UNONUEVE — Agencia de marketing y automatización con IA</title>
 <meta name="description" content="Creamos contenido, automatizamos tu negocio y ponemos la inteligencia artificial a trabajar por vos. Agencia de marketing en Costa Rica.">
 <link rel="canonical" href="https://unonuevecr.com/">
@@ -92,14 +112,14 @@
 
   <!-- Etapa 6 · Cierre -->
   <section class="stage" data-stage="6">
-    <div class="stage__text stage__text--center">
+    <div class="stage__text">
       <p class="eyebrow">Todo junto</p>
       <h2 class="display display--md">Una sola pieza,<br><em>funcionando sola</em>.</h2>
       <p class="lead">
         No vendemos servicios sueltos. Armamos un engranaje donde el contenido
         atrae, el bot atiende, el sistema cobra y vos ves los números.
       </p>
-      <div class="cta-row cta-row--center">
+      <div class="cta-row">
         <a href="#cotizador" class="btn btn--dark">Cotizar mi proyecto <span class="btn__arrow">→</span></a>
       </div>
     </div>
@@ -241,7 +261,7 @@
         <div class="calFallback">
           <p class="calFallback__title">Cargando calendario…</p>
           <p>Si no carga, escribime directo por WhatsApp y lo coordinamos.</p>
-          <a class="btn btn--dark" href="https://wa.me/50600000000" id="waFallback">Escribime por WhatsApp <span class="btn__arrow">→</span></a>
+          <a class="btn btn--dark" href="https://wa.me/50660508446" id="waFallback" target="_blank" rel="noopener noreferrer">Escribime por WhatsApp <span class="btn__arrow">→</span></a>
         </div>
       </div>
     </div>
