@@ -201,10 +201,12 @@ body{
 
 /* Enlaces de redes en el footer */
 #redes a{
-  display:block; color:rgba(239,231,220,.8); text-decoration:none;
-  font-size:.87rem; padding:.28rem 0;
+  display:flex; align-items:center; gap:.6rem;
+  color:rgba(239,231,220,.8); text-decoration:none;
+  font-size:.87rem; padding:.32rem 0;
   transition:color .3s var(--ease), transform .3s var(--ease);
 }
+#redes a svg{ width:17px; height:17px; flex:none; }
 #redes a:hover{ color:var(--gold-soft); transform:translateX(3px); }
 .nav__links{ display:flex; gap:1.8rem; }
 .nav__links a{
@@ -456,7 +458,7 @@ body{
 }
 .footer__grid{
   display:grid; gap:2.5rem;
-  grid-template-columns:1.4fr 1fr 1fr;
+  grid-template-columns:1.5fr 1fr 1fr 1fr;
 }
 .nav__brand--footer{ color:var(--cream); }
 .footer__tag{

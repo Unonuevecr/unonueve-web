@@ -25,9 +25,9 @@
 
     // Redes: dejá en blanco las que no uses y no se muestran
     redes: {
-      instagram: '',
-      facebook:  '',
-      tiktok:    '',
+      instagram: 'https://www.instagram.com/unonuevecr',
+      tiktok:    'https://www.tiktok.com/@unonuevecr',
+      facebook:  'https://www.facebook.com/unonuevecr',
       linkedin:  '',
       youtube:   ''
     },
@@ -493,16 +493,28 @@
   (function redes() {
     const host = document.getElementById('redes');
     if (!host) return;
-    const nombres = {
-      instagram: 'Instagram', facebook: 'Facebook', tiktok: 'TikTok',
+
+    const ICO = {
+      instagram: '<rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>',
+      tiktok:    '<path d="M15 3v10.6a3.6 3.6 0 1 1-3.6-3.6"/><path d="M15 3.2c.5 2.4 2.1 3.9 4.5 4.1"/>',
+      facebook:  '<path d="M14.2 8.6V6.9c0-.8.3-1.3 1.3-1.3h1.6V2.7c-.4-.1-1.3-.2-2.3-.2-2.3 0-3.8 1.4-3.8 4v2.1H8.5V12h2.5v9.4h3.2V12h2.4l.4-3.4h-2.8z"/>',
+      linkedin:  '<rect x="2.5" y="2.5" width="19" height="19" rx="3"/><path d="M7.2 10.2v7M7.2 6.7v.1M11.6 17.2v-4a2.6 2.6 0 0 1 5.2 0v4"/>',
+      youtube:   '<rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="M10.2 9.4l5 2.6-5 2.6z"/>'
+    };
+    const NOM = {
+      instagram: 'Instagram', tiktok: 'TikTok', facebook: 'Facebook',
       linkedin: 'LinkedIn', youtube: 'YouTube'
     };
+
     const links = Object.keys(CONFIG.redes)
       .filter(function (k) { return CONFIG.redes[k]; })
       .map(function (k) {
         return '<a href="' + CONFIG.redes[k] + '" target="_blank" rel="noopener noreferrer">' +
-               nombres[k] + '</a>';
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" ' +
+          'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICO[k] + '</svg>' +
+          '<span>' + NOM[k] + '</span></a>';
       });
+
     if (!links.length) { host.closest('.footer__col').style.display = 'none'; return; }
     host.innerHTML = links.join('');
   })();
