@@ -185,7 +185,27 @@ body{
   text-decoration:none; color:var(--ink);
   font-weight:600; font-size:.92rem; letter-spacing:.14em;
 }
-.nav__mark{ color:var(--gold); font-size:.7rem; }
+.nav__mark{ color:var(--gold); font-size:.72rem; }
+/* La marca manda: más grande y con más aire que el resto del nav */
+.nav__brand{ font-size:1.05rem; letter-spacing:.16em; }
+.nav__cr{ color:var(--gold); }
+.nav.is-onDark .nav__cr{ color:var(--gold-soft); }
+
+/* Aviso de descuento en la agenda */
+.lead--destacado{
+  border-left:2px solid var(--gold);
+  padding-left:1.1rem;
+  color:var(--ink);
+}
+.lead--destacado strong{ font-weight:500; }
+
+/* Enlaces de redes en el footer */
+#redes a{
+  display:block; color:rgba(239,231,220,.8); text-decoration:none;
+  font-size:.87rem; padding:.28rem 0;
+  transition:color .3s var(--ease), transform .3s var(--ease);
+}
+#redes a:hover{ color:var(--gold-soft); transform:translateX(3px); }
 .nav__links{ display:flex; gap:1.8rem; }
 .nav__links a{
   position:relative;

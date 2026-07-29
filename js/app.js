@@ -22,6 +22,16 @@
     web3formsKey: '0747f1fa-892e-4a00-a295-d4775e1b953f',
 
     correo: 'coti@unonuevecr.com',
+
+    // Redes: dejá en blanco las que no uses y no se muestran
+    redes: {
+      instagram: '',
+      facebook:  '',
+      tiktok:    '',
+      linkedin:  '',
+      youtube:   ''
+    },
+
     whatsapp: '50660508446',      // sin +, sin espacios
     moneda: '$'
   };
@@ -93,13 +103,14 @@
     }
   ];
 
-  // El caso del cliente aplica DESCUENTO sobre el precio de lista
+  // El caso del cliente NO cambia el precio mostrado: el cotizador da el
+  // precio real. El descuento se ofrece al agendar la llamada.
   const TAMANOS = [
-    { id: 'emp',   nombre: 'Emprendedor',    desc: '1–3 personas · 20% desc.',  mult: 0.80 },
-    { id: 'pyme',  nombre: 'Pyme',           desc: '4–20 personas · 15% desc.', mult: 0.85 },
-    { id: 'emp2',  nombre: 'Empresa',        desc: '+20 personas · 10% desc.',  mult: 0.90 },
-    { id: 'marca', nombre: 'Marca personal', desc: 'Tu nombre es la marca · 20% desc.', mult: 0.80 },
-    { id: 'sesion', nombre: 'Sesión de fotos', desc: 'Solo la sesión, sin mensualidad', mult: 1.00 }
+    { id: 'sesion', nombre: 'Sesión de fotografía', desc: 'Solo la sesión, sin mensualidad', mult: 1, rebaja: 0 },
+    { id: 'marca',  nombre: 'Marca personal',       desc: 'Tu nombre es la marca',          mult: 1, rebaja: 20 },
+    { id: 'emp',    nombre: 'Emprendedor',          desc: '1–3 personas',                   mult: 1, rebaja: 20 },
+    { id: 'pyme',   nombre: 'Pyme',                 desc: '4–20 personas',                  mult: 1, rebaja: 15 },
+    { id: 'emp2',   nombre: 'Empresa',              desc: '+20 personas',                   mult: 1, rebaja: 10 }
   ];
 
   // La urgencia es solo un dato para agendar la entrega: NO cambia el precio.
@@ -295,8 +306,8 @@
   const boxTam  = document.getElementById('optTamano');
   const boxUrg  = document.getElementById('optUrgencia');
 
-  boxServ.innerHTML = SERVICIOS.map(function (s) {
-    return optHTML('checkbox', 'servicio', s.id, s.eyebrow, s.cotDesc);
+  boxServ.innerHTML = SERVICIOS.map(function (s, i) {
+    return optHTML('checkbox', 'servicio', s.id, (i + 1) + '. ' + s.eyebrow, s.cotDesc);
   }).join('');
 
   boxTam.innerHTML = TAMANOS.map(function (t) {
@@ -358,7 +369,9 @@
 
     document.getElementById('hResumen').value =
       (nombres.join(', ') || 'ninguno') +
-      ' | Tamaño: ' + tam.nombre + ' | Urgencia: ' + urg.nombre;
+      ' | Caso: ' + tam.nombre +
+      (tam.rebaja ? ' (le corresponde ' + tam.rebaja + '% al agendar)' : '') +
+      ' | Urgencia: ' + urg.nombre;
     document.getElementById('hMensual').value = txtM;
     document.getElementById('hSetup').value = txtS;
     document.getElementById('hHora').value = txtH;
@@ -474,6 +487,24 @@
     host.innerHTML = '';
     host.appendChild(marco);
     host.classList.add('calEmbed--live');
+  })();
+
+  // Redes sociales en el footer
+  (function redes() {
+    const host = document.getElementById('redes');
+    if (!host) return;
+    const nombres = {
+      instagram: 'Instagram', facebook: 'Facebook', tiktok: 'TikTok',
+      linkedin: 'LinkedIn', youtube: 'YouTube'
+    };
+    const links = Object.keys(CONFIG.redes)
+      .filter(function (k) { return CONFIG.redes[k]; })
+      .map(function (k) {
+        return '<a href="' + CONFIG.redes[k] + '" target="_blank" rel="noopener noreferrer">' +
+               nombres[k] + '</a>';
+      });
+    if (!links.length) { host.closest('.footer__col').style.display = 'none'; return; }
+    host.innerHTML = links.join('');
   })();
 
   document.getElementById('year').textContent = new Date().getFullYear();
