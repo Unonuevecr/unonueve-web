@@ -58,7 +58,7 @@
         'Seguimiento automático de cada lead hasta que alguien lo contacte',
         'Cobros, pedidos y reportes que se registran solos'
       ],
-      mensual: [500, 2000], setup: [0, 0],
+      mensual: [300, 500], setup: [500, 2000],
       cotDesc: 'Bots de WhatsApp, flujos y seguimiento automático.'
     },
     {
@@ -88,7 +88,7 @@
         'Producto y tienda listos para catálogo y redes',
         'Edición y entrega en formatos para web y redes'
       ],
-      mensual: [0, 0], setup: [70, 100],
+      mensual: [0, 0], setup: [0, 0], porHora: [70, 100],
       cotDesc: 'Por hora de sesión (≈ ₡30.000): equipo, producto o local.'
     }
   ];
@@ -314,6 +314,7 @@
   const form = document.getElementById('quoteForm');
   const elMensual = document.getElementById('priceMonthly');
   const elSetup   = document.getElementById('priceSetup');
+  const elHora    = document.getElementById('priceHora');
 
   function calcular() {
     const elegidos = Array.prototype.slice
@@ -325,26 +326,31 @@
     const tam = TAMANOS.find(function (t) { return t.id === tamId; }) || TAMANOS[1];
     const urg = URGENCIAS.find(function (u) { return u.id === urgId; }) || URGENCIAS[0];
 
-    let mMin = 0, mMax = 0, sMin = 0, sMax = 0;
+    let mMin = 0, mMax = 0, sMin = 0, sMax = 0, hMin = 0, hMax = 0;
     elegidos.forEach(function (id) {
       const s = SERVICIOS.find(function (x) { return x.id === id; });
       if (!s) return;
       mMin += s.mensual[0]; mMax += s.mensual[1];
       sMin += s.setup[0];   sMax += s.setup[1];
+      if (s.porHora) { hMin += s.porHora[0]; hMax += s.porHora[1]; }
     });
 
     // descuento por tamaño de negocio + recargo por urgencia
     const f = tam.mult * urg.mult;
     mMin *= f; mMax *= f;
     sMin *= f; sMax *= f;
+    hMin *= f; hMax *= f;
 
     const txtM = elegidos.length === 0 ? '—'
       : (mMax === 0 ? 'Sin mensualidad' : money(mMin) + ' – ' + money(mMax));
     const txtS = elegidos.length === 0 ? '—'
-      : (sMax === 0 ? 'Sin costo aparte' : money(sMin) + ' – ' + money(sMax) + ' / hora');
+      : (sMax === 0 ? 'Sin costo de arranque' : money(sMin) + ' – ' + money(sMax));
+    const txtH = elegidos.length === 0 ? '—'
+      : (hMax === 0 ? 'No incluida' : money(hMin) + ' – ' + money(hMax) + ' / hora');
 
     elMensual.textContent = txtM;
     elSetup.textContent = txtS;
+    elHora.textContent = txtH;
 
     const nombres = elegidos.map(function (id) {
       return (SERVICIOS.find(function (x) { return x.id === id; }) || {}).eyebrow;
@@ -355,8 +361,9 @@
       ' | Tamaño: ' + tam.nombre + ' | Urgencia: ' + urg.nombre;
     document.getElementById('hMensual').value = txtM;
     document.getElementById('hSetup').value = txtS;
+    document.getElementById('hHora').value = txtH;
 
-    return { nombres: nombres, tam: tam, urg: urg, txtM: txtM, txtS: txtS };
+    return { nombres: nombres, tam: tam, urg: urg, txtM: txtM, txtS: txtS, txtH: txtH };
   }
 
   form.addEventListener('change', calcular);
@@ -405,7 +412,8 @@
         'Tamaño: ' + d.tam.nombre + '\n' +
         'Urgencia: ' + d.urg.nombre + '\n\n' +
         'Estimado mensual: ' + d.txtM + '\n' +
-        'Fotografía: ' + d.txtS + '\n\n' +
+        'Implementación: ' + d.txtS + '\n' +
+        'Fotografía: ' + d.txtH + '\n\n' +
         'Qué quiere cotizar: ' + quiere;
 
       window.location.href = 'mailto:' + CONFIG.correo +
