@@ -186,8 +186,18 @@ body{
   font-weight:600; font-size:.92rem; letter-spacing:.14em;
 }
 .nav__mark{ color:var(--gold); font-size:.72rem; }
+
+/* Logo: hereda el color del texto, así funciona en fondo claro y oscuro */
+.nav__logo{
+  width:auto; height:1.5rem; flex:none;
+  color:var(--gold);
+  transition:color .4s var(--ease);
+}
+.nav__brand--footer .nav__logo{ height:1.7rem; margin-right:.1rem; }
+.nav.is-onDark .nav__logo{ color:var(--gold-soft); }
+
 /* La marca manda: más grande y con más aire que el resto del nav */
-.nav__brand{ font-size:1.05rem; letter-spacing:.16em; }
+.nav__brand{ font-size:1.05rem; letter-spacing:.16em; gap:.7rem; }
 .nav__cr{ color:var(--gold); }
 .nav.is-onDark .nav__cr{ color:var(--gold-soft); }
 
