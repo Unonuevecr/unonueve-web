@@ -45,16 +45,17 @@
       id: 'contenido',
       imagen: 'assets/svc-contenido.png',
       num: '01',
-      titulo: 'Contenido que <em>conecta</em>.',
-      eyebrow: 'Generación de contenido y pauta',
-      lead: 'Guiones, piezas y publicaciones pensadas por nivel de conciencia: no publicamos por publicar, publicamos para mover a alguien. Y lo que funciona, lo empujamos con pauta.',
+      titulo: 'Contenido que <em>vende</em>.',
+      eyebrow: 'Marketing Digital',
+      lead: 'Primero definimos a quien le hablamos y que tiene que escuchar para comprar. De ahi salen los guiones, las piezas y la pauta: no publicamos por publicar, publicamos para mover a alguien.',
       puntos: [
+        'Propuesta de valor, buyer persona y diagnostico de tus redes',
         'Cronograma mensual listo antes de que empiece el mes',
-        'Piezas gráficas, carruseles y reels con tu identidad',
-        'Pauta publicitaria administrada y medida'
+        'Piezas, carruseles y reels con tu identidad + historias todos los dias',
+        'Pauta publicitaria administrada y medida semana a semana'
       ],
-      mensual: [799, 1199], setup: [0, 0],
-      cotDesc: 'Cronograma, piezas, guiones y pauta publicitaria.'
+      mensual: [800, 1200], setup: [0, 0],
+      cotDesc: 'Estrategia, cronograma, piezas, guiones y pauta publicitaria.'
     },
     {
       id: 'automatizacion',
@@ -68,28 +69,13 @@
         'Seguimiento automático de cada lead hasta que alguien lo contacte',
         'Cobros, pedidos y reportes que se registran solos'
       ],
-      mensual: [300, 500], setup: [500, 2000],
+      mensual: [200, 500], setup: [500, 5000],
       cotDesc: 'Bots de WhatsApp, flujos y seguimiento automático.'
-    },
-    {
-      id: 'mercadeo',
-      imagen: 'assets/svc-mercadeo.png',
-      num: '03',
-      titulo: 'Estrategia, <em>no suerte</em>.',
-      eyebrow: 'Mercadeo',
-      lead: 'Antes de gastar en pauta definimos a quién le hablamos, en qué momento está y qué tiene que escuchar para comprar.',
-      puntos: [
-        'Investigación de mercado y de tu competencia',
-        'Embudo y ángulos por nivel de conciencia',
-        'Campañas medidas: sabemos qué peso trae qué'
-      ],
-      mensual: [540, 1199], setup: [0, 0],
-      cotDesc: 'Estrategia, embudo y campañas medidas.'
     },
     {
       id: 'foto',
       imagen: 'assets/svc-foto.png',
-      num: '04',
+      num: '03',
       titulo: 'Tu marca, <em>bien vista</em>.',
       eyebrow: 'Fotografía profesional',
       lead: 'Fotos de equipo, producto y local con calidad de catálogo. Porque la primera impresión de tu marca casi siempre es una imagen.',
@@ -98,25 +84,26 @@
         'Producto y tienda listos para catálogo y redes',
         'Edición y entrega en formatos para web y redes'
       ],
-      mensual: [0, 0], setup: [0, 0], porHora: [70, 100],
-      cotDesc: 'Por hora de sesión (≈ ₡30.000): equipo, producto o local.'
+      mensual: [0, 0], setup: [0, 0], porHoraCRC: 30000,
+      cotDesc: 'Sesión por hora: 30 fotos editadas el mismo día.'
     }
   ];
 
-  // El caso del cliente NO cambia el precio mostrado: el cotizador da el
-  // precio real. El descuento se ofrece al agendar la llamada.
+  // El caso del cliente y la urgencia SI mueven el precio de Marketing Digital:
+  // rango [minimo, maximo] en dolares por mes. Los bots dependen del alcance,
+  // no del tamano, y la fotografia es tarifa fija por hora.
   const TAMANOS = [
-    { id: 'sesion', nombre: 'Sesión de fotografía', desc: 'Solo la sesión, sin mensualidad', mult: 1, rebaja: 0 },
-    { id: 'marca',  nombre: 'Marca personal',       desc: 'Tu nombre es la marca',          mult: 1, rebaja: 20 },
-    { id: 'emp',    nombre: 'Emprendedor',          desc: '1–3 personas',                   mult: 1, rebaja: 20 },
-    { id: 'pyme',   nombre: 'Pyme',                 desc: '4–20 personas',                  mult: 1, rebaja: 15 },
-    { id: 'emp2',   nombre: 'Empresa',              desc: '+20 personas',                   mult: 1, rebaja: 10 }
+    { id: 'sesion', nombre: 'Sesión de fotografía', desc: 'Solo la sesión, sin mensualidad', mkt: [800, 1200] },
+    { id: 'marca',  nombre: 'Marca personal',       desc: 'Tu nombre es la marca',          mkt: [800, 800]  },
+    { id: 'emp',    nombre: 'Emprendedor',          desc: '1–3 personas',                   mkt: [800, 1200] },
+    { id: 'pyme',   nombre: 'Pyme',                 desc: '4–20 personas',                  mkt: [800, 1200] },
+    { id: 'emp2',   nombre: 'Empresa',              desc: '+20 personas',                   mkt: [1200, 1200] }
   ];
 
-  // La urgencia es solo un dato para agendar la entrega: NO cambia el precio.
+  // Urgente entra directo al plan de atencion prioritaria.
   const URGENCIAS = [
-    { id: 'normal', nombre: 'Tiempo normal', desc: 'Calendario habitual', mult: 1.00 },
-    { id: 'ya',     nombre: 'Urgente',       desc: 'Lo antes posible',    mult: 1.00 }
+    { id: 'normal', nombre: 'Tiempo normal', desc: 'Calendario habitual', prioritario: false },
+    { id: 'ya',     nombre: 'Urgente',       desc: 'Lo antes posible',    prioritario: true  }
   ];
 
   /* ==========================================================
@@ -293,6 +280,10 @@
     return CONFIG.moneda + Math.round(n).toLocaleString('en-US');
   }
 
+  function colones(n) {
+    return '₡' + Math.round(n).toLocaleString('en-US').replace(/,/g, '.');
+  }
+
   function optHTML(type, name, id, titulo, desc) {
     return '<label class="opt">' +
       '<input type="' + type + '" name="' + name + '" value="' + id + '">' +
@@ -334,30 +325,32 @@
 
     const tamId = (form.querySelector('input[name="tamano"]:checked') || {}).value;
     const urgId = (form.querySelector('input[name="urgencia"]:checked') || {}).value;
-    const tam = TAMANOS.find(function (t) { return t.id === tamId; }) || TAMANOS[1];
+    const tam = TAMANOS.find(function (t) { return t.id === tamId; }) || TAMANOS[2];
     const urg = URGENCIAS.find(function (u) { return u.id === urgId; }) || URGENCIAS[0];
 
-    let mMin = 0, mMax = 0, sMin = 0, sMax = 0, hMin = 0, hMax = 0;
+    let mMin = 0, mMax = 0, sMin = 0, sMax = 0, hCRC = 0;
     elegidos.forEach(function (id) {
       const s = SERVICIOS.find(function (x) { return x.id === id; });
       if (!s) return;
-      mMin += s.mensual[0]; mMax += s.mensual[1];
-      sMin += s.setup[0];   sMax += s.setup[1];
-      if (s.porHora) { hMin += s.porHora[0]; hMax += s.porHora[1]; }
+      if (s.id === 'contenido') {
+        // Marketing Digital: el rango sale del tamano del negocio.
+        // Si lo ocupa urgente, entra directo al plan prioritario.
+        const r = urg.prioritario ? [1200, 1200] : (tam.mkt || s.mensual);
+        mMin += r[0]; mMax += r[1];
+      } else {
+        mMin += s.mensual[0]; mMax += s.mensual[1];
+      }
+      sMin += s.setup[0]; sMax += s.setup[1];
+      if (s.porHoraCRC) { hCRC += s.porHoraCRC; }
     });
 
-    // descuento por tamaño de negocio + recargo por urgencia
-    const f = tam.mult * urg.mult;
-    mMin *= f; mMax *= f;
-    sMin *= f; sMax *= f;
-    hMin *= f; hMax *= f;
-
     const txtM = elegidos.length === 0 ? '—'
-      : (mMax === 0 ? 'Sin mensualidad' : money(mMin) + ' – ' + money(mMax));
+      : (mMax === 0 ? 'Sin mensualidad'
+      : (mMin === mMax ? money(mMin) + ' / mes' : money(mMin) + ' – ' + money(mMax) + ' / mes'));
     const txtS = elegidos.length === 0 ? '—'
       : (sMax === 0 ? 'Sin costo de arranque' : money(sMin) + ' – ' + money(sMax));
     const txtH = elegidos.length === 0 ? '—'
-      : (hMax === 0 ? 'No incluida' : money(hMin) + ' – ' + money(hMax) + ' / hora');
+      : (hCRC === 0 ? 'No incluida' : colones(hCRC) + ' / hora');
 
     elMensual.textContent = txtM;
     elSetup.textContent = txtS;
@@ -370,7 +363,6 @@
     document.getElementById('hResumen').value =
       (nombres.join(', ') || 'ninguno') +
       ' | Caso: ' + tam.nombre +
-      (tam.rebaja ? ' (le corresponde ' + tam.rebaja + '% al agendar)' : '') +
       ' | Urgencia: ' + urg.nombre;
     document.getElementById('hMensual').value = txtM;
     document.getElementById('hSetup').value = txtS;
