@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagnóstico de Productividad — UNONUEVECR</title>
+<meta name="description" content="Doce preguntas para saber qué automatizar primero, cuánto tiempo y dinero está perdiendo y en qué rango andaría la inversión. Al terminar, agenda su reunión.">
+<link rel="canonical" href="https://unonuevecr.com/diagnostico/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#EFE7DC">
+<meta property="og:type" content="website"><meta property="og:url" content="https://unonuevecr.com/diagnostico/">
+<meta property="og:title" content="¿Cuánto le está costando hacerlo a mano?">
+<meta property="og:description" content="Diagnóstico gratuito en 3 minutos. Al terminar puede agendar su reunión de 30 minutos.">
+<meta property="og:image" content="https://unonuevecr.com/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+
+<style>
+:root{
+  --ground:#EFE7DC; --surface:#F6F1E9; --surface-2:#FBF8F3;
+  --ink:#14110E; --ink-soft:#4A423A; --ink-mute:#7A6E5F;
+  --accent:#A66F1E; --accent-bright:#C8892F;
+  --rule:rgba(20,17,14,.13); --rule-soft:rgba(20,17,14,.07);
+  --sel:rgba(200,137,47,.12); --shadow:rgba(20,17,14,.07);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#14110E; --surface:#1D1915; --surface-2:#241F1A;
+  --ink:#EFE7DC; --ink-soft:#C4B9AB; --ink-mute:#8D8172;
+  --accent:#E0B168; --accent-bright:#E0B168;
+  --rule:rgba(239,231,220,.14); --rule-soft:rgba(239,231,220,.07);
+  --sel:rgba(224,177,104,.14); --shadow:rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+  --ground:#14110E; --surface:#1D1915; --surface-2:#241F1A;
+  --ink:#EFE7DC; --ink-soft:#C4B9AB; --ink-mute:#8D8172;
+  --accent:#E0B168; --accent-bright:#E0B168;
+  --rule:rgba(239,231,220,.14); --rule-soft:rgba(239,231,220,.07);
+  --sel:rgba(224,177,104,.14); --shadow:rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+em,.serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic}
+button{font-family:inherit}
+
+.wrap{max-width:44rem;margin:0 auto;padding:0 1.4rem 5rem}
+
+/* ── barra de progreso ── */
+.top{position:sticky;top:0;z-index:10;background:var(--ground);padding-top:1.1rem}
+.topline{display:flex;align-items:center;gap:.6rem;margin-bottom:.7rem}
+.mark{display:flex;align-items:center;gap:.45rem;color:var(--ink)}
+.mark svg{height:17px;width:auto;display:block}
+.mark span{font-size:.68rem;font-weight:600;letter-spacing:.13em}
+.mark span i{color:var(--accent);font-style:normal}
+.counter{margin-left:auto;font-size:.72rem;font-weight:600;letter-spacing:.1em;
+  color:var(--ink-mute);font-variant-numeric:tabular-nums}
+.track{height:2px;background:var(--rule);overflow:hidden}
+.fill{height:100%;width:0;background:var(--accent-bright);transition:width .35s cubic-bezier(.4,0,.2,1)}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+
+/* ── portada ── */
+.hero{padding:3.5rem 0 0}
+.eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin:0}
+h1{font-size:clamp(2rem,6vw,2.9rem);font-weight:300;line-height:1.08;letter-spacing:-.025em;
+  margin:.7rem 0 0;text-wrap:balance}
+h1 em{color:var(--accent);font-weight:400}
+.lede{font-size:1.05rem;color:var(--ink-soft);margin:1.1rem 0 0;max-width:34rem}
+.meta{display:flex;gap:1.6rem;flex-wrap:wrap;margin:1.8rem 0 0;padding-top:1.4rem;
+  border-top:1px solid var(--rule)}
+.meta div{display:flex;flex-direction:column;gap:.1rem}
+.meta b{font-size:1.15rem;font-weight:500;color:var(--accent)}
+.meta small{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute)}
+
+/* ── preguntas ── */
+.step{display:none;padding:2.6rem 0 0;animation:in .3s ease}
+.step.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.step.on{animation:none}}
+.qnum{font-size:.7rem;font-weight:600;letter-spacing:.14em;color:var(--accent);
+  font-variant-numeric:tabular-nums;margin:0}
+h2{font-size:clamp(1.35rem,4.4vw,1.75rem);font-weight:400;line-height:1.25;letter-spacing:-.018em;
+  margin:.6rem 0 0;text-wrap:balance}
+.hint{font-size:.93rem;color:var(--ink-mute);margin:.55rem 0 0}
+.opts{display:flex;flex-direction:column;gap:.55rem;margin-top:1.6rem}
+.opt{
+  display:flex;align-items:center;gap:.85rem;width:100%;text-align:left;
+  background:var(--surface);border:1px solid var(--rule);border-radius:6px;
+  padding:.9rem 1.05rem;font-size:1rem;font-weight:300;color:var(--ink);
+  cursor:pointer;transition:border-color .15s,background .15s;
+}
+.opt:hover{border-color:var(--accent-bright);background:var(--surface-2)}
+.opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opt.sel{border-color:var(--accent-bright);background:var(--sel)}
+.dot{width:15px;height:15px;border-radius:50%;border:1.5px solid var(--ink-mute);flex-shrink:0;
+  position:relative;transition:border-color .15s}
+.opt.sel .dot{border-color:var(--accent-bright)}
+.opt.sel .dot::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--accent-bright)}
+
+.nav{display:flex;gap:.7rem;align-items:center;margin-top:1.8rem}
+.btn{
+  background:var(--ink);color:var(--ground);border:none;border-radius:5px;
+  padding:.8rem 1.5rem;font-size:.95rem;font-weight:500;cursor:pointer;
+  transition:opacity .15s;
+}
+.btn:hover{opacity:.86}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn.gold{background:var(--accent-bright);color:#14110E}
+.btn[disabled]{opacity:.3;cursor:not-allowed}
+.back{background:none;border:none;color:var(--ink-mute);font-size:.9rem;cursor:pointer;padding:.5rem}
+.back:hover{color:var(--accent)}
+.back:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ── resultado ── */
+.res{display:none;padding:2.6rem 0 0}
+.res.on{display:block}
+.loss{
+  border:1px solid var(--rule);border-left:3px solid var(--accent-bright);
+  border-radius:6px;background:var(--surface);padding:1.5rem 1.5rem;margin-top:1.6rem;
+}
+.loss .big{font-size:clamp(1.8rem,6vw,2.5rem);font-weight:400;color:var(--accent);
+  line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.loss p{margin:.5rem 0 0;font-size:.95rem;color:var(--ink-soft)}
+.loss small{display:block;margin-top:.8rem;font-size:.8rem;color:var(--ink-mute);line-height:1.5}
+
+h3{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-mute);margin:2.4rem 0 1rem}
+.piece{
+  display:flex;gap:1rem;align-items:flex-start;padding:1.05rem 0;border-top:1px solid var(--rule-soft);
+}
+.piece:first-of-type{border-top:1px solid var(--rule)}
+.rank{font-size:.72rem;font-weight:600;color:var(--accent);letter-spacing:.1em;
+  font-variant-numeric:tabular-nums;padding-top:.28rem;flex-shrink:0}
+.piece h4{margin:0;font-size:1.05rem;font-weight:600;letter-spacing:-.01em}
+.piece p{margin:.25rem 0 0;font-size:.94rem;color:var(--ink-soft)}
+
+.price{
+  background:var(--surface);border:1px solid var(--rule);border-radius:6px;
+  padding:1.3rem 1.4rem;margin-top:1rem;display:flex;flex-direction:column;gap:.9rem;
+}
+.prow{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  padding-bottom:.9rem;border-bottom:1px solid var(--rule-soft)}
+.prow:last-child{padding-bottom:0;border-bottom:none}
+.prow span{font-size:.95rem;color:var(--ink-soft)}
+.prow b{font-size:1.1rem;font-weight:600;color:var(--accent);white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+.disc{font-size:.82rem;color:var(--ink-mute);margin-top:.9rem;line-height:1.55}
+
+.cta{margin-top:2.6rem;padding-top:1.8rem;border-top:1px solid var(--rule)}
+.cta p{margin:0 0 1.1rem;font-size:1rem;color:var(--ink-soft)}
+.actions{display:flex;gap:.7rem;flex-wrap:wrap}
+a.btn{text-decoration:none;display:inline-block}
+
+/* ── casilla "Otro" ── */
+.otrobox{display:none;margin-top:.9rem;flex-direction:column;gap:.6rem}
+.otrobox.on{display:flex}
+.otrobox input{
+  font-family:inherit;font-size:1rem;font-weight:300;color:var(--ink);
+  background:var(--surface);border:1px solid var(--accent-bright);border-radius:6px;
+  padding:.9rem 1.05rem;width:100%;
+}
+.otrobox input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.otrobox input::placeholder{color:var(--ink-mute);opacity:.7}
+.otrobox .row{display:flex;gap:.7rem;align-items:center;flex-wrap:wrap}
+.otrobox small{font-size:.84rem;color:var(--ink-mute)}
+
+/* ── formulario de contacto ── */
+.fields{display:flex;flex-direction:column;gap:1.05rem;margin-top:1.6rem}
+.field{display:flex;flex-direction:column;gap:.4rem}
+.field label{font-size:.72rem;font-weight:600;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-mute)}
+.field label i{color:var(--accent);font-style:normal}
+.field input,.field select{
+  font-family:inherit;font-size:1rem;font-weight:300;color:var(--ink);
+  background:var(--surface);border:1px solid var(--rule);border-radius:6px;
+  padding:.8rem 1rem;width:100%;
+}
+.field input:focus,.field select:focus{outline:2px solid var(--accent);outline-offset:1px;
+  border-color:var(--accent-bright)}
+.field input::placeholder{color:var(--ink-mute);opacity:.7}
+.privacy{font-size:.82rem;color:var(--ink-mute);margin-top:1.1rem;line-height:1.55}
+
+footer{margin-top:3.5rem;padding-top:1.3rem;border-top:1px solid var(--rule);
+  font-size:.82rem;color:var(--ink-mute)}
+
+@media (max-width:600px){
+  body{font-size:16px}
+  .wrap{padding:0 1.1rem 3.5rem}
+  .hero{padding:2.4rem 0 0}
+  .meta{gap:1.2rem}
+}
+
+/* ══ CLAUDIA ══ */
+/* ==========================================================
+   CLAUDIA — botón de WhatsApp + chat de la asistente
+   ========================================================== */
+.cl { position: fixed; right: 20px; bottom: 20px; z-index: 900;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+
+.cl__wa { width: 52px; height: 52px; border-radius: 50%; background: #25D366;
+  display: grid; place-items: center; box-shadow: 0 6px 20px rgba(0,0,0,.18);
+  transition: transform .18s ease; }
+.cl__wa:hover { transform: translateY(-2px) scale(1.04); }
+.cl__wa svg { width: 30px; height: 30px; fill: #fff; }
+
+.cl__toggle { border: 0; cursor: pointer; border-radius: 999px;
+  background: var(--tinta, #14110E); color: var(--crema, #EFE7DC);
+  padding: 13px 22px; font: inherit; font-size: .92rem; letter-spacing: .01em;
+  box-shadow: 0 6px 20px rgba(0,0,0,.18); transition: transform .18s ease, opacity .18s ease; }
+.cl__toggle:hover { transform: translateY(-2px); }
+.cl__toggle--oculto { display: none; }
+
+.cl__panel[hidden] { display: none; }
+.cl__panel { width: min(360px, calc(100vw - 32px)); height: min(520px, calc(100vh - 120px));
+  background: #fff; border: 1px solid rgba(20,17,14,.12); border-radius: 18px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.22); display: flex; flex-direction: column; overflow: hidden; }
+
+.cl__head { display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 16px; background: var(--tinta, #14110E); color: var(--crema, #EFE7DC); }
+.cl__head strong { display: block; font-size: 1rem; }
+.cl__head span { display: block; font-size: .74rem; opacity: .72; margin-top: 2px; }
+.cl__close { background: none; border: 0; color: inherit; font-size: 1.5rem; line-height: 1;
+  cursor: pointer; opacity: .8; padding: 0 4px; }
+.cl__close:hover { opacity: 1; }
+
+.cl__msgs { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px;
+  background: #FAF7F2; }
+
+.cl__msg { max-width: 86%; padding: 10px 13px; border-radius: 14px; font-size: .92rem; line-height: 1.45;
+  white-space: pre-wrap; word-wrap: break-word; }
+.cl__msg--bot { background: #fff; border: 1px solid rgba(20,17,14,.10); color: #14110E;
+  align-self: flex-start; border-bottom-left-radius: 5px; }
+.cl__msg--yo { background: var(--tinta, #14110E); color: var(--crema, #EFE7DC);
+  align-self: flex-end; border-bottom-right-radius: 5px; }
+
+.cl__link { display: block; margin-top: 8px; color: #C8892F; font-weight: 600; }
+
+.cl__typing { display: flex; gap: 4px; align-items: center; }
+.cl__typing i { width: 6px; height: 6px; border-radius: 50%; background: rgba(20,17,14,.35);
+  animation: clDot 1s infinite ease-in-out; }
+.cl__typing i:nth-child(2) { animation-delay: .15s; }
+.cl__typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes clDot { 0%, 60%, 100% { opacity: .3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); } }
+
+.cl__form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid rgba(20,17,14,.10); background: #fff; }
+.cl__input { flex: 1; border: 1px solid rgba(20,17,14,.16); border-radius: 999px; padding: 11px 16px;
+  font: inherit; font-size: .92rem; outline: none; color: #14110E; background: #fff; }
+.cl__input:focus { border-color: #C8892F; }
+.cl__send { border: 0; cursor: pointer; width: 42px; border-radius: 50%;
+  background: #C8892F; color: #fff; font-size: 1.1rem; }
+.cl__send:hover { filter: brightness(1.07); }
+
+@media (max-width: 600px) {
+  .cl { right: 14px; bottom: 14px; }
+  .cl__toggle { padding: 12px 18px; font-size: .88rem; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<div class="top">
+  <div class="topline">
+    <a class="mark" href="/" style="text-decoration:none">
+      <svg viewBox="0 0 647.47 557.92" fill="currentColor" role="img" aria-label="UNONUEVECR"><path d="M102.04,0v543.23h-38.91V52.12L5.14,114.52l-5.14-4.4L102.04,0Z"/><path d="M137.27,372.92c0-18.35,14.68-33.03,33.04-33.03s32.3,14.68,32.3,33.03-14.68,32.3-32.3,32.3-33.04-14.68-33.04-32.3ZM137.27,524.88c0-17.62,14.68-32.3,33.04-32.3s32.3,14.68,32.3,32.3-14.68,33.03-32.3,33.03-33.04-14.68-33.04-33.03Z"/><path d="M352.36,549.84c140.21,0,224.63-132.14,246.66-255.47-26.43,65.33-90.29,106.44-161.5,106.44-116.72,0-199.68-83.69-199.68-199.67S326.67,2.2,437.52,2.2c129.2,0,209.95,104.98,209.95,228.31,0,162.97-123.33,326.67-295.11,326.67v-7.34ZM605.62,225.37c0-99.84-53.59-216.56-168.11-216.56-101.31,0-158.57,101.31-158.57,192.33s57.26,192.33,158.57,192.33c94.7,0,168.11-73.41,168.11-168.11Z"/></svg>
+      <span>UNONUEVE<i>CR</i></span>
+    </a>
+    <div class="counter" id="counter"></div>
+  </div>
+  <div class="track"><div class="fill" id="fill"></div></div>
+</div>
+
+<!-- ─────── PORTADA ─────── -->
+<div class="hero" id="hero">
+  <p class="eyebrow">Diagnóstico gratuito</p>
+  <h1>¿Cuánto le está costando <em>hacerlo a mano</em>?</h1>
+  <p class="lede">Doce preguntas sobre cómo opera su negocio hoy. Al final le decimos qué se puede
+  automatizar primero, cuánto tiempo y dinero está perdiendo, y en qué rango andaría la inversión.
+  Sin compromiso y sin que nadie lo llame si usted no quiere.</p>
+  <div class="meta">
+    <div><b>3 min</b><small>Lo que toma</small></div>
+    <div><b>12</b><small>Preguntas</small></div>
+    <div><b>Al instante</b><small>Su resultado</small></div>
+  </div>
+  <div class="nav"><button class="btn gold" id="start">Empezar el diagnóstico</button></div>
+</div>
+
+<div id="steps"></div>
+
+<!-- ─────── CONTACTO ─────── -->
+<div class="step" id="contact">
+  <p class="qnum">ÚLTIMO PASO</p>
+  <h2>¿A nombre de quién va este diagnóstico?</h2>
+  <p class="hint">Para poder mandárselo y, si usted quiere, prepararle la reunión con esto en la mano.</p>
+  <div class="fields">
+    <div class="field">
+      <label for="fNombre">Su nombre <i>*</i></label>
+      <input id="fNombre" type="text" autocomplete="name" placeholder="Nombre y apellido">
+    </div>
+    <div class="field">
+      <label for="fEmpresa">Nombre del negocio</label>
+      <input id="fEmpresa" type="text" autocomplete="organization" placeholder="Cómo se llama su empresa">
+    </div>
+    <div class="field">
+      <label for="fTel">Teléfono o WhatsApp <i>*</i></label>
+      <input id="fTel" type="tel" autocomplete="tel" inputmode="tel" placeholder="8888-8888">
+    </div>
+    <div class="field">
+      <label for="fMail">Correo</label>
+      <input id="fMail" type="email" autocomplete="email" placeholder="opcional">
+    </div>
+    <div class="field">
+      <label for="fEquipo">¿Cuántas personas trabajan en el negocio, contándolo a usted? <i>*</i></label>
+      <select id="fEquipo">
+        <option value="">Seleccione…</option>
+        <option value="1">Solo yo, o somos dos</option>
+        <option value="2">Entre 3 y 10</option>
+        <option value="3">Entre 11 y 30</option>
+        <option value="4">Más de 30</option>
+      </select>
+    </div>
+  </div>
+  <p class="privacy">Sus datos se usan únicamente para enviarle este diagnóstico y contactarlo si
+  usted lo pide. No se comparten con nadie ni se usan para publicidad.</p>
+  <div class="nav">
+    <button class="btn gold" id="verRes" disabled>Ver mi diagnóstico</button>
+    <button class="back" data-back="1">← Atrás</button>
+  </div>
+</div>
+
+<!-- ─────── RESULTADO ─────── -->
+<div class="res" id="res">
+  <p class="eyebrow">Su diagnóstico</p>
+  <h1 id="resTitle">Esto es lo que <em>encontramos</em></h1>
+
+  <div class="loss">
+    <div class="big" id="lossNum">—</div>
+    <p id="lossTxt"></p>
+    <small id="lossCalc"></small>
+  </div>
+
+  <h3>Por dónde empezar</h3>
+  <div id="pieces"></div>
+
+  <h3>Rango estimado de inversión</h3>
+  <div class="price">
+    <div class="prow"><span>Implementación <em>(una vez)</em></span><b id="pImp">—</b></div>
+    <div class="prow"><span>Operación mensual</span><b id="pMes">—</b></div>
+  </div>
+  <p class="disc">Es un <strong>rango estimado</strong> a partir de sus respuestas, no una
+  cotización. El número final sale de la reunión, cuando vemos su operación de cerca. Lo que sí es
+  fijo: antes de empezar dejamos por escrito qué resultado tiene que dar el sistema, y si no lo da
+  se devuelve el dinero. Además el sistema queda suyo — no se lo alquilamos.</p>
+
+  <div class="cta">
+    <p><strong>Listo — ya puede agendar.</strong> Llegamos a la reunión con este diagnóstico en la
+    mano, así que no tiene que volver a explicar nada.</p>
+    <div class="actions">
+      <a class="btn gold" id="agendar" href="#" target="_blank" rel="noopener" hidden>Agendar mi reunión de 30 min</a>
+      <a class="btn" id="wa" href="#" target="_blank" rel="noopener">Enviármelo por WhatsApp</a>
+      <button class="btn" id="again">Volver a empezar</button>
+    </div>
+    <p class="disc" id="horario">Lunes a viernes, 9:00 a.m. a 5:00 p.m. · 30 minutos por Google Meet
+    · la invitación te llega al correo.</p>
+  </div>
+
+  <footer>UNONUEVECR · Infraestructura de inteligencia artificial, mercadeo, contenido y fotografía
+  · <a href="/" style="color:inherit">unonuevecr.com</a> · coti@unonuevecr.com</footer>
+</div>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ═══ CONFIGURACIÓN — lo único que hay que editar ═══
+   Pegá el link de "Horarios de citas" de Google Calendar.
+   calendar.google.com → Crear → Horarios de citas → Compartir → Copiar enlace  */
+var CONFIG = {
+  CALENDARIO: "",
+  WHATSAPP:   "https://wa.me/50660508446"
+};
+
+var PIEZAS = {
+  whatsapp:    {n:"Atención por WhatsApp 24/7", d:"Contesta todos los mensajes, cotiza y agenda solo — de noche, domingos y feriados incluidos."},
+  recuperacion:{n:"Recuperación de clientes",   d:"Detecta a quien le compraba y dejó de comprarle, y se lo pone al vendedor con el guion listo."},
+  prospeccion: {n:"Prospección automática",     d:"Sale a buscar negocios por Google y redes, los clasifica por rubro y se los reparte a cada vendedor."},
+  cobros:      {n:"Seguimiento de cobros",      d:"Le pone delante quién le debe, cuánto y desde cuándo. Avisa sola cuando se vence y no deja que se olvide."},
+  tareas:      {n:"Tareas del equipo",          d:"Reparte, recuerda y cierra los pendientes para que nada se caiga por olvido."},
+  documentos:  {n:"Manejo de documentos",       d:"Recibe fotos y PDFs, los archiva solos en la carpeta correcta y arma las listas."},
+  contenido:   {n:"Contenido con IA",           d:"Produce imágenes y videos en volumen para que sus anuncios tengan variedad y no se quemen."},
+  tablero:     {n:"Tablero de resultados",      d:"Todo aterriza en un panel donde usted ve el número sin pedírselo a nadie."},
+  data:        {n:"Data de por qué se van",     d:"Genera la información que hoy no existe: por qué dejan de comprarle sus clientes."}
+};
+
+var Q = [
+  {q:"¿A qué se dedica principalmente?", h:"Cambia qué piezas tienen más sentido.",
+   o:[{t:"Vendo productos",v:{rubro:"productos"}},
+      {t:"Presto servicios",v:{rubro:"servicios"}},
+      {t:"Turismo o experiencias",v:{rubro:"turismo",documentos:2}},
+      {t:"Distribución o mayoreo",v:{rubro:"distribución",cobros:1,prospeccion:1}},
+      {t:"Otro — se lo escribo",otro:1,v:{rubro:"otro"}}]},
+
+  {q:"¿Cuántos mensajes o consultas le entran en un día normal?", h:"WhatsApp, Instagram, Facebook, llamadas — todo junto.",
+   o:[{t:"Menos de 20",v:{vol:1,whatsapp:1}},{t:"Entre 20 y 50",v:{vol:2,whatsapp:2}},
+      {t:"Entre 50 y 200",v:{vol:3,whatsapp:4}},{t:"Más de 200",v:{vol:4,whatsapp:5}}]},
+
+  {q:"¿Qué pasa con los mensajes que llegan de noche o el fin de semana?", h:"Sea honesto — es la pregunta que más plata mueve.",
+   o:[{t:"Se contestan igual, alguien está pendiente",v:{}},
+      {t:"Se contestan al día siguiente",v:{whatsapp:2}},
+      {t:"Muchos se quedan sin contestar",v:{whatsapp:4}},
+      {t:"La verdad, no sé cuántos se pierden",v:{whatsapp:4,tablero:1}}]},
+
+  {q:"¿Cuántas horas por semana se le van a su equipo en tareas repetitivas?", h:"Copiar y pegar precios, llenar planillas, ordenar archivos, reenviar lo mismo.",
+   o:[{t:"Menos de 5 horas",v:{horas:3,tareas:1}},{t:"Entre 5 y 15 horas",v:{horas:10,tareas:2}},
+      {t:"Entre 15 y 40 horas",v:{horas:27,tareas:3,documentos:1}},{t:"Más de 40 horas",v:{horas:50,tareas:4,documentos:2}}]},
+
+  {q:"¿Tiene clientes que le compraban antes y hoy ya no?", h:"",
+   o:[{t:"No, los míos siguen comprando",v:{}},{t:"Sí, algunos",v:{recuperacion:2}},
+      {t:"Sí, bastantes",v:{recuperacion:4,data:2}},
+      {t:"Sí — y no sé por qué se fueron",v:{recuperacion:5,data:4}}]},
+
+  {q:"¿Tiene facturas vencidas sin cobrar?", h:"",
+   o:[{t:"No, todos me pagan a tiempo",v:{}},{t:"Algunas",v:{cobros:2}},
+      {t:"Bastantes, es un dolor de cabeza",v:{cobros:4}},
+      {t:"No sabría decirle cuánto",v:{cobros:4,tablero:3}}]},
+
+  {q:"Sus vendedores, ¿tienen lista de a quién llamar cada mañana?", h:"",
+   o:[{t:"Sí, siempre tienen a quién",v:{}},{t:"A veces sí, a veces no",v:{prospeccion:2}},
+      {t:"No — cada quien la busca como puede",v:{prospeccion:5}},
+      {t:"No tengo vendedores",v:{}}]},
+
+  {q:"¿Reciben fotos, comprobantes o documentos que alguien tiene que ordenar a mano?", h:"Comprobantes de pago, cédulas, pasaportes, órdenes de compra.",
+   o:[{t:"Sí, muchísimos",v:{documentos:5}},{t:"Algunos",v:{documentos:2}},{t:"Casi nunca",v:{}}]},
+
+  {q:"¿Sabe cuántos clientes nuevos entraron el mes pasado y de dónde vinieron?", h:"",
+   o:[{t:"Sí, con número exacto",v:{}},{t:"Más o menos",v:{tablero:2}},
+      {t:"No, la verdad no",v:{tablero:4,data:2}}]},
+
+  {q:"Si mañana pudiera quitarle UNA sola tarea a su equipo para siempre, ¿cuál sería?", h:"La última, y la más importante.",
+   o:[{t:"Contestar mensajes todo el día",v:{whatsapp:5}},
+      {t:"Buscar clientes nuevos",v:{prospeccion:5}},
+      {t:"Perseguir a los que no pagan",v:{cobros:5}},
+      {t:"Ordenar papeles y archivos",v:{documentos:5}},
+      {t:"Producir contenido para redes",v:{contenido:5}}]}
+];
+
+var ans = new Array(Q.length).fill(null);
+var otroTexto = {};
+var cur = 0;
+
+function seguirDesdeOtro(qi){
+  var caja=document.getElementById('otro'+qi); if(!caja) return;
+  var v=caja.querySelector('input').value.trim();
+  if(!v){ caja.querySelector('input').focus(); return; }
+  otroTexto[qi]=v;
+  cur=qi+1; show(cur);
+}
+var COSTO_HORA = 2433; // ₡505.000 / 207,8 h  (₡350.000 base + 44,5% cargas · jornada 48 h/sem)
+
+var stepsEl = document.getElementById('steps');
+var heroEl  = document.getElementById('hero');
+var resEl   = document.getElementById('res');
+var fillEl  = document.getElementById('fill');
+var cntEl   = document.getElementById('counter');
+
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+Q.forEach(function(item,i){
+  var d=document.createElement('div');
+  d.className='step'; d.id='s'+i;
+  var opts=item.o.map(function(o,j){
+    return '<button class="opt" data-q="'+i+'" data-o="'+j+'"><span class="dot"></span>'+esc(o.t)+'</button>';
+  }).join('');
+  var tieneOtro=item.o.some(function(o){return o.otro;});
+  d.innerHTML='<p class="qnum">PREGUNTA '+(i+1)+' DE '+Q.length+'</p>'+
+    '<h2>'+esc(item.q)+'</h2>'+
+    (item.h?'<p class="hint">'+esc(item.h)+'</p>':'')+
+    '<div class="opts">'+opts+'</div>'+
+    (tieneOtro?'<div class="otrobox" id="otro'+i+'">'+
+      '<input type="text" maxlength="80" placeholder="¿A qué se dedica su negocio?" aria-label="A qué se dedica su negocio">'+
+      '<div class="row"><button class="btn gold" data-seguir="'+i+'">Continuar</button>'+
+      '<small>Nos sirve para saber qué le conviene primero.</small></div></div>':'')+
+    '<div class="nav">'+(i>0?'<button class="back" data-back="1">← Atrás</button>':'')+'</div>';
+  stepsEl.appendChild(d);
+});
+
+var TOTAL=Q.length+1; // preguntas + paso de contacto
+
+function show(i){
+  document.querySelectorAll('.step').forEach(function(s){s.classList.remove('on');});
+  heroEl.style.display='none'; resEl.classList.remove('on');
+  document.getElementById(i<Q.length?('s'+i):'contact').classList.add('on');
+  cntEl.textContent=(i+1)+' / '+TOTAL;
+  fillEl.style.width=(i/TOTAL*100)+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.getElementById('start').addEventListener('click',function(){cur=0;show(0);});
+
+stepsEl.addEventListener('keydown',function(e){
+  if(e.key!=='Enter') return;
+  var caja=e.target.closest('.otrobox'); if(!caja) return;
+  e.preventDefault();
+  seguirDesdeOtro(+caja.id.replace('otro',''));
+});
+
+stepsEl.addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(!b) return;
+  if(b.dataset.back){ cur--; show(cur); return; }
+  if(b.dataset.seguir!==undefined){ seguirDesdeOtro(+b.dataset.seguir); return; }
+  if(b.dataset.o===undefined) return;
+  var qi=+b.dataset.q, oi=+b.dataset.o;
+  ans[qi]=oi;
+  document.querySelectorAll('#s'+qi+' .opt').forEach(function(o){o.classList.remove('sel');});
+  b.classList.add('sel');
+
+  var caja=document.getElementById('otro'+qi);
+  if(Q[qi].o[oi].otro){                       // eligió "Otro": pedimos el texto, no avanzamos
+    if(caja){ caja.classList.add('on'); caja.querySelector('input').focus(); }
+    return;
+  }
+  if(caja){ caja.classList.remove('on'); otroTexto[qi]=''; }
+  setTimeout(function(){ cur=qi+1; show(cur); },180);
+});
+
+// ── el paso de contacto ──
+var fNombre=document.getElementById('fNombre'), fTel=document.getElementById('fTel'),
+    fMail=document.getElementById('fMail'), fEmpresa=document.getElementById('fEmpresa'),
+    fEquipo=document.getElementById('fEquipo'), verRes=document.getElementById('verRes');
+
+function validar(){
+  verRes.disabled = !(fNombre.value.trim() && fTel.value.trim() && fEquipo.value);
+}
+[fNombre,fTel,fEquipo].forEach(function(el){
+  el.addEventListener('input',validar); el.addEventListener('change',validar);
+});
+verRes.addEventListener('click',finish);
+
+// ── precarga desde el link (match con Evolution) ──
+// El bot manda el link ya con los datos que conoce: ?t=50688888888&n=Gerson&emp=Volcano&e=correo
+// Lo que ya viene, no se vuelve a preguntar.
+(function(){
+  var p=new URLSearchParams(location.search);
+  var mapa=[['t',fTel],['n',fNombre],['emp',fEmpresa],['e',fMail]];
+  var precargados=0;
+  mapa.forEach(function(par){
+    var v=p.get(par[0]); if(!v) return;
+    par[1].value=v.trim();
+    par[1].closest('.field').style.display='none';
+    precargados++;
+  });
+  if(precargados){
+    var h=document.querySelector('#contact .hint');
+    h.textContent='Ya tenemos sus datos. Solo confírmenos el tamaño del equipo y le damos el resultado.';
+  }
+  validar();
+})();
+document.getElementById('contact').addEventListener('click',function(e){
+  var b=e.target.closest('button[data-back]'); if(!b) return;
+  cur=Q.length-1; show(cur);
+});
+
+function tally(){
+  var t={size:+(fEquipo.value||1),vol:1,horas:0,rubro:"",piezas:{}};
+  Object.keys(PIEZAS).forEach(function(k){t.piezas[k]=0;});
+  ans.forEach(function(oi,qi){
+    if(oi===null) return;
+    var v=Q[qi].o[oi].v;
+    Object.keys(v).forEach(function(k){
+      if(k==='vol') t[k]=Math.max(t[k],v[k]);
+      else if(k==='horas') t.horas+=v[k];
+      else if(k==='rubro') t.rubro = (v[k]==='otro' && otroTexto[qi]) ? otroTexto[qi] : v[k];
+      else t.piezas[k]+=v[k];
+    });
+  });
+  return t;
+}
+
+function miles(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
+function crc(n){return '₡'+miles(n);}
+
+function finish(){
+  var t=tally();
+
+  var orden=Object.keys(t.piezas).filter(function(k){return t.piezas[k]>=2;})
+    .sort(function(a,b){return t.piezas[b]-t.piezas[a];});
+  if(orden.indexOf('whatsapp')===-1) orden.unshift('whatsapp');
+  var top=orden.slice(0,4);
+
+  // pérdida mensual estimada por tareas repetitivas
+  var mensual = t.horas * 4.33 * COSTO_HORA;
+  document.getElementById('lossNum').textContent = crc(mensual)+' al mes';
+  document.getElementById('lossTxt').innerHTML =
+    'Es lo que le cuesta hoy sostener a mano las tareas repetitivas que nos describió — unas <strong>'+
+    t.horas+' horas por semana</strong>. Al año son <strong>'+crc(mensual*12)+'</strong>.';
+  document.getElementById('lossCalc').textContent =
+    'Cálculo: '+t.horas+' h/semana × 4,33 semanas × ₡2.433 la hora. Esa tarifa sale del salario base '+
+    'de ₡350.000 más un 44,5% de cargas y provisiones (₡505.000 al mes), dividido entre las 208 horas '+
+    'de una jornada de 48 horas semanales. No incluye comisiones. Es un estimado con sus propias '+
+    'respuestas, no una medición de su planilla.';
+
+  var html='';
+  top.forEach(function(k,i){
+    html+='<div class="piece"><div class="rank">0'+(i+1)+'</div><div><h4>'+esc(PIEZAS[k].n)+
+      '</h4><p>'+esc(PIEZAS[k].d)+'</p></div></div>';
+  });
+  document.getElementById('pieces').innerHTML=html;
+
+  // nivel mensual
+  var nivel=t.vol+t.size, mes, mesTxt;
+  if(nivel<=3){mes=300;mesTxt='$300 / mes';}
+  else if(nivel<=5){mes=600;mesTxt='$600 / mes';}
+  else {mes=850;mesTxt='$850 / mes';}
+  document.getElementById('pMes').textContent=mesTxt;
+
+  // implementación: base + piezas extra
+  var extra=Math.max(0,top.length-1);
+  var lo=3000+extra*400, hi=3000+extra*1000;
+  document.getElementById('pImp').textContent = extra===0 ? '$3.000' : '$'+miles(lo)+' – $'+miles(hi);
+
+  // WhatsApp
+  var equipoTxt=fEquipo.options[fEquipo.selectedIndex].text;
+  var lines=['Hola, completé el diagnóstico de productividad. Este es mi resultado:',''];
+  lines.push('Nombre: '+fNombre.value.trim());
+  if(fEmpresa.value.trim()) lines.push('Negocio: '+fEmpresa.value.trim());
+  lines.push('Teléfono: '+fTel.value.trim());
+  if(fMail.value.trim()) lines.push('Correo: '+fMail.value.trim());
+  lines.push('Equipo: '+equipoTxt);
+  lines.push('Actividad: '+(t.rubro||'—'));
+  lines.push('Mensajes al día: '+Q[1].o[ans[1]].t);
+  lines.push('Horas repetitivas/semana: ~'+t.horas);
+  lines.push('Pérdida estimada: '+crc(mensual)+' al mes');
+  lines.push('');
+  lines.push('Piezas recomendadas:');
+  top.forEach(function(k,i){lines.push((i+1)+'. '+PIEZAS[k].n);});
+  lines.push('');
+  lines.push('Rango: implementación '+document.getElementById('pImp').textContent+' · '+mesTxt);
+  lines.push('');
+  lines.push('Quiero agendar la reunión.');
+  document.getElementById('wa').href=CONFIG.WHATSAPP+'?text='+encodeURIComponent(lines.join('\n'));
+
+  var ag=document.getElementById('agendar'), hr=document.getElementById('horario');
+  if(CONFIG.CALENDARIO){ ag.href=CONFIG.CALENDARIO; ag.hidden=false; }
+  else {                                  // sin calendario todavía: se agenda por WhatsApp
+    ag.hidden=true;
+    hr.textContent='Para agendar, mándenos el resultado por WhatsApp y le pasamos los horarios. '+
+      'Lunes a viernes, 9:00 a.m. a 5:00 p.m., 30 minutos por Google Meet.';
+  }
+
+  var pila=fNombre.value.trim().split(/\s+/)[0];
+  document.getElementById('resTitle').innerHTML = pila
+    ? esc(pila)+', esto es lo que <em>encontramos</em>'
+    : 'Esto es lo que <em>encontramos</em>';
+
+  document.querySelectorAll('.step').forEach(function(s){s.classList.remove('on');});
+  heroEl.style.display='none';
+  resEl.classList.add('on');
+  fillEl.style.width='100%';
+  cntEl.textContent='Listo';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.getElementById('again').addEventListener('click',function(){
+  ans=new Array(Q.length).fill(null); otroTexto={}; cur=0;
+  document.querySelectorAll('.otrobox').forEach(function(c){c.classList.remove('on');c.querySelector('input').value='';});
+  [fNombre,fEmpresa,fTel,fMail].forEach(function(el){el.value='';});
+  fEquipo.value=''; validar();
+  document.querySelectorAll('.opt').forEach(function(o){o.classList.remove('sel');});
+  resEl.classList.remove('on');
+  heroEl.style.display='block';
+  fillEl.style.width='0'; cntEl.textContent='';
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+})();
+</script>
+<script src="/js/claudia.js" defer></script>
+</body>
+</html>
