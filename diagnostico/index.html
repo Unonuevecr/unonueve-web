@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Diagnóstico de Productividad — UNONUEVECR</title>
-<meta name="description" content="Doce preguntas para saber qué automatizar primero, cuánto tiempo y dinero está perdiendo y en qué rango andaría la inversión. Al terminar, agenda su reunión.">
+<meta name="description" content="Trece preguntas para saber qué automatizar primero, cuánto tiempo y dinero está perdiendo y en qué rango andaría la inversión. Al terminar, agenda su reunión.">
 <link rel="canonical" href="https://unonuevecr.com/diagnostico/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#EFE7DC">
@@ -127,7 +127,14 @@ h2{font-size:clamp(1.35rem,4.4vw,1.75rem);font-weight:400;line-height:1.25;lette
 }
 .loss .big{font-size:clamp(1.8rem,6vw,2.5rem);font-weight:400;color:var(--accent);
   line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.loss p{margin:.5rem 0 0;font-size:.95rem;color:var(--ink-soft)}
+.loss p{margin:.7rem 0 0;font-size:.95rem;color:var(--ink-soft);display:flex;
+  flex-direction:column;gap:.5rem}
+.loss .dos{display:block;padding-left:.9rem;border-left:2px solid var(--rule);line-height:1.5}
+.loss .dos b{color:var(--accent);font-weight:600;font-variant-numeric:tabular-nums}
+.loss .dos i{font-style:normal;color:var(--ink-mute);font-size:.9em}
+.loss .dos--tot{border-left-color:var(--accent-bright);padding-top:.15rem}
+.loss--chico .big{display:none}
+.loss--chico small{display:none}
 .loss small{display:block;margin-top:.8rem;font-size:.8rem;color:var(--ink-mute);line-height:1.5}
 
 h3{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
@@ -157,6 +164,18 @@ h3{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercas
 .cta p{margin:0 0 1.1rem;font-size:1rem;color:var(--ink-soft)}
 .actions{display:flex;gap:.7rem;flex-wrap:wrap}
 a.btn{text-decoration:none;display:inline-block}
+
+/* ── cuadro de agenda ── */
+.agendabox{margin-top:1.6rem;border:1px solid var(--rule);border-radius:8px;overflow:hidden;
+  background:var(--surface)}
+.agendabox__h{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;
+  padding:.95rem 1.4rem;border-bottom:1px solid var(--rule)}
+.agendabox__t{font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-mute)}
+.agendabox__d{margin-left:auto;font-size:.78rem;color:var(--accent);font-weight:500}
+.agendabox__b{padding:1.5rem 1.4rem;display:flex;flex-direction:column;gap:1.1rem;
+  align-items:flex-start}
+.agendabox__b p{margin:0;font-size:.95rem;color:var(--ink-soft)}
 
 /* ── casilla "Otro" ── */
 .otrobox{display:none;margin-top:.9rem;flex-direction:column;gap:.6rem}
@@ -284,12 +303,12 @@ footer{margin-top:3.5rem;padding-top:1.3rem;border-top:1px solid var(--rule);
 <div class="hero" id="hero">
   <p class="eyebrow">Diagnóstico gratuito</p>
   <h1>¿Cuánto le está costando <em>hacerlo a mano</em>?</h1>
-  <p class="lede">Doce preguntas sobre cómo opera su negocio hoy. Al final le decimos qué se puede
+  <p class="lede">Diez preguntas sobre cómo opera su negocio hoy. Al final le decimos qué se puede
   automatizar primero, cuánto tiempo y dinero está perdiendo, y en qué rango andaría la inversión.
   Sin compromiso y sin que nadie lo llame si usted no quiere.</p>
   <div class="meta">
     <div><b>3 min</b><small>Lo que toma</small></div>
-    <div><b>12</b><small>Preguntas</small></div>
+    <div><b>10</b><small>Preguntas</small></div>
     <div><b>Al instante</b><small>Su resultado</small></div>
   </div>
   <div class="nav"><button class="btn gold" id="start">Empezar el diagnóstico</button></div>
@@ -365,17 +384,24 @@ footer{margin-top:3.5rem;padding-top:1.3rem;border-top:1px solid var(--rule);
   <div class="cta">
     <p><strong>Listo — ya puede agendar.</strong> Llegamos a la reunión con este diagnóstico en la
     mano, así que no tiene que volver a explicar nada.</p>
+    <div class="agendabox">
+      <div class="agendabox__h">
+        <span class="agendabox__t">Reunión con Gerson Serrano Vargas</span>
+        <span class="agendabox__d">30 min · Google Meet</span>
+      </div>
+      <div class="agendabox__b">
+        <p id="horario">Lunes a viernes, de 9:00 a.m. a 5:00 p.m. Escoja el espacio que le sirva y le
+        llega la invitación al correo, con este diagnóstico adjunto.</p>
+        <a class="btn gold" id="agendar" href="#" target="_blank" rel="noopener">Agendar mi reunión de 30 minutos</a>
+      </div>
+    </div>
     <div class="actions">
-      <a class="btn gold" id="agendar" href="#" target="_blank" rel="noopener" hidden>Agendar mi reunión de 30 min</a>
-      <a class="btn" id="wa" href="#" target="_blank" rel="noopener">Enviármelo por WhatsApp</a>
       <button class="btn" id="again">Volver a empezar</button>
     </div>
-    <p class="disc" id="horario">Lunes a viernes, 9:00 a.m. a 5:00 p.m. · 30 minutos por Google Meet
-    · la invitación te llega al correo.</p>
   </div>
 
-  <footer>UNONUEVECR · Infraestructura de inteligencia artificial, mercadeo, contenido y fotografía
-  · <a href="/" style="color:inherit">unonuevecr.com</a> · coti@unonuevecr.com</footer>
+  <footer>UNONUEVECR · Gerson Serrano Vargas · Infraestructura de inteligencia artificial, mercadeo,
+  contenido y fotografía · <a href="/" style="color:inherit">unonuevecr.com</a></footer>
 </div>
 
 </div>
@@ -413,14 +439,20 @@ var Q = [
       {t:"Otro — se lo escribo",otro:1,v:{rubro:"otro"}}]},
 
   {q:"¿Cuántos mensajes o consultas le entran en un día normal?", h:"WhatsApp, Instagram, Facebook, llamadas — todo junto.",
-   o:[{t:"Menos de 20",v:{vol:1,whatsapp:1}},{t:"Entre 20 y 50",v:{vol:2,whatsapp:2}},
-      {t:"Entre 50 y 200",v:{vol:3,whatsapp:4}},{t:"Más de 200",v:{vol:4,whatsapp:5}}]},
+   o:[{t:"Menos de 20",v:{vol:1,whatsapp:1,msj:12}},{t:"Entre 20 y 50",v:{vol:2,whatsapp:2,msj:35}},
+      {t:"Entre 50 y 200",v:{vol:3,whatsapp:4,msj:110}},{t:"Más de 200",v:{vol:4,whatsapp:5,msj:260}}]},
 
   {q:"¿Qué pasa con los mensajes que llegan de noche o el fin de semana?", h:"Sea honesto — es la pregunta que más plata mueve.",
-   o:[{t:"Se contestan igual, alguien está pendiente",v:{}},
-      {t:"Se contestan al día siguiente",v:{whatsapp:2}},
-      {t:"Muchos se quedan sin contestar",v:{whatsapp:4}},
-      {t:"La verdad, no sé cuántos se pierden",v:{whatsapp:4,tablero:1}}]},
+   o:[{t:"Se contestan igual, alguien está pendiente",v:{fuga:0.04}},
+      {t:"Se contestan al día siguiente",v:{whatsapp:2,fuga:0.18}},
+      {t:"Muchos se quedan sin contestar",v:{whatsapp:4,fuga:0.35}},
+      {t:"La verdad, no sé cuántos se pierden",v:{whatsapp:4,tablero:1,fuga:0.30}}]},
+
+  {q:"¿Cuánto deja en promedio una venta suya?", h:"Sin esto no podemos calcularle lo que se le está escapando.",
+   o:[{t:"Menos de ₡25.000",v:{ticket:15000}},
+      {t:"Entre ₡25.000 y ₡100.000",v:{ticket:60000}},
+      {t:"Entre ₡100.000 y ₡500.000",v:{ticket:280000}},
+      {t:"Más de ₡500.000",v:{ticket:800000}}]},
 
   {q:"¿Cuántas horas por semana se le van a su equipo en tareas repetitivas?", h:"Copiar y pegar precios, llenar planillas, ordenar archivos, reenviar lo mismo.",
    o:[{t:"Menos de 5 horas",v:{horas:3,tareas:1}},{t:"Entre 5 y 15 horas",v:{horas:10,tareas:2}},
@@ -574,7 +606,7 @@ document.getElementById('contact').addEventListener('click',function(e){
 });
 
 function tally(){
-  var t={size:+(fEquipo.value||1),vol:1,horas:0,rubro:"",piezas:{}};
+  var t={size:+(fEquipo.value||1),vol:1,horas:0,rubro:"",msj:0,fuga:0,ticket:0,piezas:{}};
   Object.keys(PIEZAS).forEach(function(k){t.piezas[k]=0;});
   ans.forEach(function(oi,qi){
     if(oi===null) return;
@@ -582,6 +614,7 @@ function tally(){
     Object.keys(v).forEach(function(k){
       if(k==='vol') t[k]=Math.max(t[k],v[k]);
       else if(k==='horas') t.horas+=v[k];
+      else if(k==='msj'||k==='fuga'||k==='ticket') t[k]=v[k];
       else if(k==='rubro') t.rubro = (v[k]==='otro' && otroTexto[qi]) ? otroTexto[qi] : v[k];
       else t.piezas[k]+=v[k];
     });
@@ -600,17 +633,26 @@ function finish(){
   if(orden.indexOf('whatsapp')===-1) orden.unshift('whatsapp');
   var top=orden.slice(0,4);
 
-  // pérdida mensual estimada por tareas repetitivas
-  var mensual = t.horas * 4.33 * COSTO_HORA;
+  // ── la fuga tiene dos partes, y la segunda casi siempre es la grande ──
+  var pTiempo = t.horas * 4.33 * COSTO_HORA;                    // horas repetitivas
+  var perdidos = t.msj * t.fuga * 30;                           // consultas que nadie contestó
+  var pVentas  = perdidos * 0.03 * t.ticket;                    // 3% de ellas habría comprado
+  var mensual  = pTiempo + pVentas;
+
   document.getElementById('lossNum').textContent = crc(mensual)+' al mes';
   document.getElementById('lossTxt').innerHTML =
-    'Es lo que le cuesta hoy sostener a mano las tareas repetitivas que nos describió — unas <strong>'+
-    t.horas+' horas por semana</strong>. Al año son <strong>'+crc(mensual*12)+'</strong>.';
-  document.getElementById('lossCalc').textContent =
-    'Cálculo: '+t.horas+' h/semana × 4,33 semanas × ₡2.433 la hora. Esa tarifa sale del salario base '+
-    'de ₡350.000 más un 44,5% de cargas y provisiones (₡505.000 al mes), dividido entre las 208 horas '+
-    'de una jornada de 48 horas semanales. No incluye comisiones. Es un estimado con sus propias '+
-    'respuestas, no una medición de su planilla.';
+    '<span class="dos"><b>'+crc(pTiempo)+'</b> en horas que su equipo gasta en tareas repetitivas '+
+    '<i>— unas '+t.horas+' por semana</i></span>'+
+    '<span class="dos"><b>'+crc(pVentas)+'</b> en ventas que no se cerraron '+
+    '<i>— unas '+Math.round(perdidos)+' consultas al mes sin respuesta a tiempo</i></span>'+
+    '<span class="dos dos--tot">Al año son <b>'+crc(mensual*12)+'</b>.</span>';
+  document.getElementById('lossCalc').innerHTML =
+    '<b>Cómo sale el número.</b> El tiempo: '+t.horas+' h/semana × 4,33 semanas × ₡2.433 la hora — esa '+
+    'tarifa es el salario base de ₡350.000 más 44,5% de cargas (₡505.000 al mes) entre las 208 horas de '+
+    'una jornada de 48 h. Las ventas: '+t.msj+' consultas al día, de las que un '+Math.round(t.fuga*100)+
+    '% no recibe respuesta a tiempo según lo que usted contestó, y de esas apenas un <b>3%</b> habría '+
+    'comprado a '+crc(t.ticket)+' — un supuesto deliberadamente bajo. No incluye comisiones, cartera '+
+    'vencida ni clientes dormidos, que suman aparte. Es un estimado con sus respuestas, no una auditoría.';
 
   var html='';
   top.forEach(function(k,i){
@@ -652,18 +694,27 @@ function finish(){
   lines.push('Quiero agendar la reunión.');
   document.getElementById('wa').href=CONFIG.WHATSAPP+'?text='+encodeURIComponent(lines.join('\n'));
 
-  var ag=document.getElementById('agendar'), hr=document.getElementById('horario');
-  if(CONFIG.CALENDARIO){ ag.href=CONFIG.CALENDARIO; ag.hidden=false; }
-  else {                                  // sin calendario todavía: se agenda por WhatsApp
-    ag.hidden=true;
-    hr.textContent='Para agendar, mándenos el resultado por WhatsApp y le pasamos los horarios. '+
-      'Lunes a viernes, 9:00 a.m. a 5:00 p.m., 30 minutos por Google Meet.';
-  }
+  var ag=document.getElementById('agendar');
+  ag.href = CONFIG.CALENDARIO || ('mailto:coti@unonuevecr.com?subject='+
+    encodeURIComponent('Quiero agendar la reunión — '+(fNombre.value.trim()||'diagnóstico'))+
+    '&body='+encodeURIComponent(lines.join('\n')));
 
   var pila=fNombre.value.trim().split(/\s+/)[0];
-  document.getElementById('resTitle').innerHTML = pila
-    ? esc(pila)+', esto es lo que <em>encontramos</em>'
-    : 'Esto es lo que <em>encontramos</em>';
+  var chico = mensual < 320000;   // sin fuga grande: se le dice, no se le infla el número
+
+  document.getElementById('resTitle').innerHTML = chico
+    ? (pila? esc(pila)+', su operación está <em>bastante sana</em>' : 'Su operación está <em>bastante sana</em>')
+    : (pila? esc(pila)+', esto es lo que <em>encontramos</em>' : 'Esto es lo que <em>encontramos</em>');
+
+  if(chico){
+    document.querySelector('.loss').classList.add('loss--chico');
+    document.getElementById('lossTxt').innerHTML =
+      '<span class="dos">Con lo que nos contó, <b>no le vemos una fuga grande todavía</b>. '+
+      'Contesta a tiempo y las tareas repetitivas no le están comiendo el día.</span>'+
+      '<span class="dos">Le decimos la verdad: <b>hoy no le urge</b>. Igual le dejamos abajo por dónde '+
+      'empezaría el día que crezca el volumen, y la reunión de 30 minutos sigue en pie si quiere '+
+      'adelantarse.</span>';
+  }
 
   document.querySelectorAll('.step').forEach(function(s){s.classList.remove('on');});
   heroEl.style.display='none';

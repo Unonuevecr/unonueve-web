@@ -340,7 +340,7 @@ body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-sa
 .float:hover{opacity:.92}
 .float b{width:7px;height:7px;border-radius:50%;background:#3FBF6A}
 
-/* ══════ CLAUDIA — tomado del sitio en vivo, no tocar ══════ */
+/* ══════ CLAUDIA — del sitio en vivo, no tocar ══════ */
 /* ==========================================================
    CLAUDIA — botón de WhatsApp + chat de la asistente
    ========================================================== */
@@ -867,7 +867,7 @@ body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-sa
       conversación se va directo a lo que te sirve.</p>
       <div class="cta-row">
         <a class="btn btn--dark" href="/diagnostico">Hacer el test y agendar · 3 min <span class="btn__arrow">→</span></a>
-        <a class="btn btn--ghost" href="https://wa.me/50660508446" target="_blank" rel="noopener">Ya lo hice</a>
+        <a class="btn btn--ghost" href="#" data-cal="1">Ya hice el test — agendar</a>
       </div>
       <p style="margin-top:1.1rem;font-size:.86rem;color:var(--muted)">Reunión de 30 minutos por
       Google Meet, lunes a viernes de 9:00 a.m. a 5:00 p.m. Te llega la invitación al correo.</p>
@@ -883,7 +883,7 @@ body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-sa
       </div>
       <div class="cont">
         <span class="cont__rol">Quien lleva la reunión</span>
-        <h3>Gerson Serrano</h3>
+        <h3>Gerson Serrano Vargas</h3>
         <p>Director de UNONUEVECR. La reunión de 30 minutos la toma él, no un vendedor.<br>
         <a href="mailto:coti@unonuevecr.com">coti@unonuevecr.com</a></p>
       </div>
@@ -931,7 +931,7 @@ body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-sa
   </div>
 </footer>
 
-
+<a class="float" href="https://wa.me/50660508446" target="_blank" rel="noopener"><b></b>Hablá con Claudia</a>
 
 
 
@@ -942,6 +942,10 @@ window.addEventListener("DOMContentLoaded",function(){
 
 /* ═══ CONFIGURACIÓN ═══ */
 var CONFIG = { CALENDARIO: "", WHATSAPP: "https://wa.me/50660508446" };
+document.querySelectorAll("[data-cal]").forEach(function(a){
+  a.href = CONFIG.CALENDARIO || "mailto:coti@unonuevecr.com?subject=Quiero%20agendar%20la%20reuni%C3%B3n";
+  if(CONFIG.CALENDARIO){ a.target="_blank"; a.rel="noopener"; }
+});
 
 var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
