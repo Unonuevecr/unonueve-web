@@ -942,11 +942,8 @@ window.addEventListener("DOMContentLoaded",function(){
 
 /* ═══ CONFIGURACIÓN ═══ */
 var CONFIG = { CALENDARIO: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1tAU9od17wAmSwcmF4YD9HMuHwCRxtca-qXM3JqY5vS_gNZXnkAD3EpGs4FKkBKGv_c8J54UgR", WHATSAPP: "https://wa.me/50660508446" };
-/* Sin calendario todavía: el botón abre un correo ya redactado en Gmail,
-   que abre siempre. Un mailto: no abre nada si no hay app de correo. */
 document.querySelectorAll("[data-cal]").forEach(function(a){
-  a.href = CONFIG.CALENDARIO || "https://mail.google.com/mail/?view=cm&fs=1&to=coti@unonuevecr.com&su=" + encodeURIComponent("Ya hice el test — quiero agendar la reunión");
-  a.target="_blank"; a.rel="noopener";
+  a.href=CONFIG.CALENDARIO; a.target="_blank"; a.rel="noopener";
 });
 
 var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -972,111 +969,140 @@ if(!reduce && window.Lenis){
   });
 }
 
-/* ═══════════ 2 · LA CARA QUE SE VUELVE RED DE BOTS ═══════════ */
+/* ═══════════ 2 · LA CARA QUE SE VUELVE CEREBROS ═══════════ */
 var cv=document.getElementById('gl'), ctx=cv.getContext('2d');
+var pts=[], nodos=[], cerebro=[], W=0,H=0, t=0, morph=0;
+var dpr=Math.min(window.devicePixelRatio||1,2);
 
-// Un punto suave dibujado una sola vez y reusado miles de veces.
-// Es lo que da el difuminado: un círculo duro se ve digital, un degradado respira.
+// La data al centro: es lo que ningún competidor da. El WhatsApp es la puerta.
+var PIEZAS=['DATA','WHATSAPP','PROSPECCIÓN','RECUPERACIÓN','COBROS','TAREAS','DOCUMENTOS','CONTENIDO'];
+
+/* ── paleta de puntos suaves, uno por tono ──
+   Un sprite por color permite que el retrato salga a color y que cada punto
+   siga siendo un degradado, no un círculo duro. */
+var PAL=[], PASO=48;
 function sprite(r,g,b){
-  var S=64, c=document.createElement('canvas'); c.width=c.height=S;
+  var S=48, c=document.createElement('canvas'); c.width=c.height=S;
   var x=c.getContext('2d'), gr=x.createRadialGradient(S/2,S/2,0,S/2,S/2,S/2);
   gr.addColorStop(0,   'rgba('+r+','+g+','+b+',1)');
-  gr.addColorStop(0.35,'rgba('+r+','+g+','+b+',0.55)');
-  gr.addColorStop(0.7, 'rgba('+r+','+g+','+b+',0.14)');
+  gr.addColorStop(0.32,'rgba('+r+','+g+','+b+',0.5)');
+  gr.addColorStop(0.68,'rgba('+r+','+g+','+b+',0.12)');
   gr.addColorStop(1,   'rgba('+r+','+g+','+b+',0)');
   x.fillStyle=gr; x.fillRect(0,0,S,S);
   return c;
 }
-var SP_TINTA=sprite(20,17,14), SP_PIEL=sprite(120,86,62), SP_ORO=sprite(200,137,47);
-var pts=[], nodos=[], W=0,H=0, t=0, morph=0;
-var dpr=Math.min(window.devicePixelRatio||1,2);
+function paleta(r,g,b){                      // se cuantiza el color y se cachea
+  var k=(Math.round(r/PASO)*PASO)+','+(Math.round(g/PASO)*PASO)+','+(Math.round(b/PASO)*PASO);
+  if(!PAL[k]){ var p=k.split(','); PAL[k]=sprite(Math.min(255,+p[0]),Math.min(255,+p[1]),Math.min(255,+p[2])); }
+  return PAL[k];
+}
+var SP_ORO=sprite(200,137,47);
 
-// las 8 piezas del ecosistema — el WhatsApp al centro, es la puerta
-var PIEZAS=[
-  {n:'WHATSAPP', c:true}, {n:'PROSPECCIÓN'}, {n:'RECUPERACIÓN'}, {n:'COBROS'},
-  {n:'TAREAS'}, {n:'DOCUMENTOS'}, {n:'CONTENIDO'}, {n:'DATA'}
-];
-
-var img=new Image();
-img.onload=function(){ resize(); loop(); };
+var img=new Image(), imgCer=new Image(), listas=0;
+function cargada(){ if(++listas===2){ resize(); loop(); } }
+img.onload=cargada; imgCer.onload=cargada;
 img.src="assets/hero-head.png";
+imgCer.src="assets/brain.png";
 
-function armarNodos(){
-  nodos=[];
-  var c=cajaRetrato();
-  var cx=c.ox+c.ancho/2, cy=H*0.47;
-  var R=Math.min(c.ancho*0.9, Math.min(W,H)*(c.detras?0.30:0.27));
-  PIEZAS.forEach(function(pz,k){
-    if(pz.c){ nodos.push({x:cx,y:cy,r:R*0.34,n:pz.n,c:true}); return; }
-    var ang=-Math.PI/2 + (k-1)*(Math.PI*2/7);
-    nodos.push({x:cx+Math.cos(ang)*R, y:cy+Math.sin(ang)*R, r:R*0.17, n:pz.n});
-  });
+/* ── la silueta del cerebro, en coordenadas de 0 a 1 ── */
+function muestrearCerebro(){
+  var m=54, oc=document.createElement('canvas');
+  oc.width=m; oc.height=Math.round(m*imgCer.naturalHeight/imgCer.naturalWidth);
+  var x=oc.getContext('2d',{willReadFrequently:true});
+  x.drawImage(imgCer,0,0,oc.width,oc.height);
+  var d=x.getImageData(0,0,oc.width,oc.height).data;
+  cerebro=[];
+  for(var y=0;y<oc.height;y++)for(var q=0;q<oc.width;q++){
+    var i=(y*oc.width+q)*4;
+    if(d[i+3]<40) continue;
+    if(d[i]>238 && d[i+1]>238 && d[i+2]>238) continue;   // el fondo blanco no cuenta
+    var nx=q/oc.width-0.5, ny=y/oc.height-0.5;
+    // Se le inventa profundidad: cuanto más al centro de la silueta, más hondo
+    // puede estar el punto. Con eso la nube gira como un volumen, no como un recorte.
+    var borde=Math.min(1, Math.sqrt(nx*nx+ny*ny)/0.5);
+    var hondo=0.42*Math.sqrt(Math.max(0,1-borde*borde));
+    cerebro.push({x:nx, y:ny, z:(Math.random()*2-1)*hondo});
+  }
 }
 
-// El retrato vive en la zona que le queda libre a la derecha del texto.
-// Si esa zona es angosta, se encoge; nunca se monta encima del titular.
+/* ── dónde vive la red: a la izquierda, para no tapar el texto ── */
+function zonaRed(){
+  if(W<900) return {cx:W*0.5, cy:H*0.42, R:Math.min(W*0.30,H*0.22), chico:true};
+  // La red ocupa 3,38 radios de ancho. Se le da el hueco que queda libre a la
+  // izquierda del texto y se encoge si ese hueco es angosto.
+  var pad=Math.max(20,Math.min(W*0.06,96));
+  var textoIzq=W-pad-Math.min(416,W*0.32);         // el bloque de texto va a la derecha
+  var libre=Math.max(180,textoIzq-24-pad);
+  var R=Math.min(libre/3.38, H*0.25, 190);
+  return {cx:pad+libre/2, cy:H*0.47, R:R, chico:false};
+}
+
+function armarNodos(){
+  var z=zonaRed(); nodos=[];
+  nodos.push({x:z.cx, y:z.cy, s:z.R*0.95, n:PIEZAS[0], centro:true});   // el cerebro grande
+  for(var k=1;k<PIEZAS.length;k++){                                      // los cerebritos
+    var ang=-Math.PI/2 + (k-1)*(Math.PI*2/(PIEZAS.length-1));
+    nodos.push({x:z.cx+Math.cos(ang)*z.R*1.35, y:z.cy+Math.sin(ang)*z.R*1.35,
+                s:z.R*0.34, n:PIEZAS[k]});
+  }
+}
+
+/* ── el retrato: a color y con poros finos ── */
 function cajaRetrato(){
   var ratio=img.naturalWidth/img.naturalHeight;
   var pad=Math.max(20,Math.min(W*0.06,96));
-  var anchoTexto=Math.min(544,W*0.46);          // 34rem tope
-  var zonaIzq=pad+anchoTexto+32, zonaDer=W-pad*0.4;
-  var zona=zonaDer-zonaIzq;
-
-  if(W<900 || zona<260){                         // no cabe al lado: va detrás, centrado
+  var anchoTexto=Math.min(544,W*0.46);
+  var zi=pad+anchoTexto+32, zd=W-pad*0.4, zona=zd-zi;
+  if(W<900 || zona<260){
     var a1=Math.min(H*0.5,520), an1=a1*ratio;
     return {ancho:an1, alto:a1, ox:W*0.5-an1/2, oy:H*0.44-a1/2, detras:true};
   }
   var alto=Math.min(H*0.72,760), ancho=alto*ratio;
-  if(ancho>zona){ ancho=zona; alto=ancho/ratio; }   // se encoge para caber
-  return {ancho:ancho, alto:alto, ox:zonaIzq+(zona-ancho)/2, oy:H*0.46-alto/2, detras:false};
+  if(ancho>zona){ ancho=zona; alto=ancho/ratio; }
+  return {ancho:ancho, alto:alto, ox:zi+(zona-ancho)/2, oy:H*0.46-alto/2, detras:false};
 }
 
 function build(){
-  if(!img.complete||!img.naturalWidth) return;
-  var c=cajaRetrato();
-  var alto=c.alto, ancho=c.ancho, ox=c.ox, oy=c.oy;
-  cv.style.opacity=c.detras?'0.5':'1';            // detrás del texto, más discreto
+  if(!img.naturalWidth || !imgCer.naturalWidth) return;
+  if(!cerebro.length) muestrearCerebro();
+  armarNodos();
 
-  var m=185, oc=document.createElement('canvas');
+  var c=cajaRetrato();
+  cv.style.opacity=c.detras?'0.55':'1';
+
+  var m=260, oc=document.createElement('canvas');
   oc.width=m; oc.height=Math.round(m*img.naturalHeight/img.naturalWidth);
   var octx=oc.getContext('2d',{willReadFrequently:true});
   octx.drawImage(img,0,0,oc.width,oc.height);
   var d=octx.getImageData(0,0,oc.width,oc.height).data;
 
-  armarNodos();
   pts=[];
-  var ex=ancho/oc.width, ey=alto/oc.height, idx=0;
+  var ex=c.ancho/oc.width, ey=c.alto/oc.height, idx=0;
   for(var y=0;y<oc.height;y++){
     for(var x=0;x<oc.width;x++){
-      var i=(y*oc.width+x)*4, a=d[i+3];
-      if(a<40) continue;
+      var i=(y*oc.width+x)*4;
+      if(d[i+3]<40) continue;
       var lum=(d[i]*.299+d[i+1]*.587+d[i+2]*.114)/255;
-      // se guardan bastantes puntos incluso en las zonas claras: antes se perdía la cara
-      if(Math.random() > 0.30+(1-lum)*0.42) continue;
+      if(Math.random() > 0.26+(1-lum)*0.38) continue;
 
-      // a qué pieza se va este punto cuando la cara se desintegra
-      var nk = idx%3===0 ? 0 : 1+(idx%7);        // el centro se lleva un tercio
+      var nk = idx%3===0 ? 0 : 1+(idx%(PIEZAS.length-1));    // un tercio va al cerebro grande
       var nd = nodos[nk];
-      var ang=Math.random()*Math.PI*2, rad=Math.sqrt(Math.random())*nd.r;
+      var cb = cerebro[(Math.random()*cerebro.length)|0];
 
       pts.push({
-        fx:ox+x*ex, fy:oy+y*ey,                   // posición en la cara
-        nx:nd.x+Math.cos(ang)*rad,                // posición en la red
-        ny:nd.y+Math.sin(ang)*rad,
-        k:nk,
-        r:(1.6+Math.random()*2.6)*(1.25-lum*0.45), // los oscuros pesan más
-        a:(0.30+(1-lum)*0.62),                     // y son más opacos
-        sp:lum<0.42?SP_TINTA:SP_PIEL,              // sombra en tinta, piel en cálido
+        fx:c.ox+x*ex, fy:c.oy+y*ey,
+        k:nk, bx:cb.x*2, by:cb.y*2, bz:cb.z*2,      // su lugar dentro del cerebro que gira
+        r:(1.1+Math.random()*1.7)*(1.2-lum*0.4),    // poros más finos
+        a:(0.22+(1-lum)*0.46),                      // y más livianos
+        sp:paleta(d[i],d[i+1],d[i+2]),              // su color real
         f:Math.random()*Math.PI*2,
         v:0.25+Math.random()*0.6,
-        d:Math.random()                            // retraso: se desintegra de a poco
+        d:Math.random()
       });
       idx++;
     }
   }
-
-  // tope de seguridad para no ahogar equipos lentos
-  var TOPE=14000;
+  var TOPE=20000;
   if(pts.length>TOPE){
     var paso=pts.length/TOPE, sal=[];
     for(var q=0;q<pts.length;q+=paso) sal.push(pts[Math.floor(q)]);
@@ -1097,47 +1123,63 @@ function ease(x){ return x<0.5 ? 4*x*x*x : 1-Math.pow(-2*x+2,3)/2; }
 function draw(){
   ctx.clearRect(0,0,W,H);
 
-  // las conexiones aparecen cuando la red ya está formada
   if(morph>0.45 && nodos.length){
     var op=(morph-0.45)/0.55;
-    // cada línea late a su ritmo: el sistema está trabajando
     for(var k=1;k<nodos.length;k++){
       var pulso=reduce?1:(0.55+0.45*Math.sin(t*1.6+k*0.9));
-      ctx.strokeStyle='rgba(200,137,47,'+(op*0.34*pulso).toFixed(3)+')';
+      ctx.strokeStyle='rgba(200,137,47,'+(op*0.30*pulso).toFixed(3)+')';
       ctx.lineWidth=1;
       ctx.beginPath();
       ctx.moveTo(nodos[0].x,nodos[0].y);
       ctx.lineTo(nodos[k].x,nodos[k].y);
       ctx.stroke();
     }
-
-    // el nombre de cada pieza, discreto
     if(morph>0.72){
       var lo=(morph-0.72)/0.28;
-      ctx.font='500 9px "JetBrains Mono",monospace';
       ctx.textAlign='center';
-      ctx.fillStyle='rgba(124,114,102,'+(lo*0.85).toFixed(3)+')';
       for(var q=0;q<nodos.length;q++){
-        ctx.fillText(nodos[q].n, nodos[q].x, nodos[q].y+nodos[q].r+14);
+        var nd=nodos[q];
+        ctx.font=(nd.centro?'700 12px':'500 9px')+' "JetBrains Mono",monospace';
+        ctx.fillStyle=nd.centro
+          ? 'rgba(200,137,47,'+(lo*0.95).toFixed(3)+')'
+          : 'rgba(124,114,102,'+(lo*0.8).toFixed(3)+')';
+        ctx.fillText(nd.n, nd.x, nd.y+nd.s+(nd.centro?20:12));
       }
     }
   }
 
+  // Un giro por nodo, calculado una sola vez por cuadro. Cada cerebrito
+  // arranca en un ángulo distinto para que no se vean sincronizados.
+  var giro=[];
+  for(var g=0;g<nodos.length;g++){
+    var a=reduce ? 0.6 : (t*(nodos[g].centro?0.30:0.42)+g*0.8);
+    giro.push({c:Math.cos(a), s:Math.sin(a)});
+  }
+
   for(var i=0;i<pts.length;i++){
-    var p=pts[i];
-    // cada punto arranca su viaje en un momento distinto
+    var p=pts[i], nd=nodos[p.k], gr=giro[p.k];
+
+    // rotación en Y + perspectiva: lo que está atrás se ve chico y tenue
+    var rx=p.bx*gr.c - p.bz*gr.s;
+    var rz=p.bx*gr.s + p.bz*gr.c;
+    var per=1/(1+rz*0.55);
+    var tx=nd.x+rx*nd.s*per;
+    var ty=nd.y+p.by*nd.s*per;
+
     var m=Math.min(1,Math.max(0,(morph-p.d*0.52)/0.48));
     m=ease(m);
-    var dx=reduce?0:Math.cos(t*p.v+p.f)*(1.5+m*2.5);
-    var dy=reduce?0:Math.sin(t*p.v*0.8+p.f)*(1.5+m*2.5);
-    var x=p.fx+(p.nx-p.fx)*m+dx;
-    var y=p.fy+(p.ny-p.fy)*m+dy;
-    var rr=p.r*(1+m*0.5), s2=rr*2;
+    var dx=reduce?0:Math.cos(t*p.v+p.f)*(1.4+m*2.2);
+    var dy=reduce?0:Math.sin(t*p.v*0.8+p.f)*(1.4+m*2.2);
+    var x=p.fx+(tx-p.fx)*m+dx;
+    var y=p.fy+(ty-p.fy)*m+dy;
 
-    ctx.globalAlpha=p.a*(1-m*0.35);
+    var prof=1+(per-1)*m;                        // la perspectiva entra con el morph
+    var rr=p.r*(1+m*0.35)*prof, s2=rr*2;
+
+    ctx.globalAlpha=p.a*prof;
     ctx.drawImage(p.sp, x-rr, y-rr, s2, s2);
-    if(m>0.25){                                   // en el viaje se enciende en dorado
-      ctx.globalAlpha=(m-0.25)/0.75*0.75;
+    if(m>0.45){
+      ctx.globalAlpha=(m-0.45)/0.55*0.55*prof;
       ctx.drawImage(SP_ORO, x-rr, y-rr, s2, s2);
     }
   }
@@ -1149,12 +1191,11 @@ function loop(){ if(!reduce) t+=0.006; draw(); requestAnimationFrame(loop); }
 var rt=null;
 window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(resize,180);});
 
-// el morph y el desvanecido van atados al scroll
 function onScroll(){
   var y=window.scrollY||window.pageYOffset;
   morph=Math.min(1,Math.max(0,(y-H*0.30)/(H*1.00)));
   var o=Math.max(0,Math.min(1,1-(y-H*1.72)/(H*0.42)));
-  cv.style.opacity=(o*(W<900?0.5:1)).toFixed(2);
+  cv.style.opacity=(o*(W<900?0.55:1)).toFixed(2);
 }
 window.addEventListener('scroll',onScroll,{passive:true});
 onScroll();
