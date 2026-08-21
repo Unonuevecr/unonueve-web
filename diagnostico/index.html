@@ -1,18 +1,34 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-CR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Diagnóstico de Productividad — UNONUEVECR</title>
-<meta name="description" content="Trece preguntas para saber qué automatizar primero, cuánto está perdiendo y en qué rango andaría la inversión. Al terminar, agenda su reunión.">
+<title>Diagnóstico gratuito: ¿qué puede automatizar en su negocio? | UNONUEVECR</title>
+<meta name="description" content="Test gratuito de 13 preguntas. Le decimos qué automatizar primero, cuánto tiempo y dinero está perdiendo hoy en tareas manuales y mensajes sin contestar, y en qué rango andaría la inversión.">
 <link rel="canonical" href="https://unonuevecr.com/diagnostico/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#EFE7DC">
+<meta name="robots" content="index, follow">
 <meta property="og:type" content="website"><meta property="og:url" content="https://unonuevecr.com/diagnostico/">
+<meta property="og:locale" content="es_CR">
 <meta property="og:title" content="¿Cuánto le está costando hacerlo a mano?">
 <meta property="og:description" content="Diagnóstico gratuito en 3 minutos. Al terminar puede agendar su reunión de 30 minutos.">
 <meta property="og:image" content="https://unonuevecr.com/assets/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Diagnóstico de Productividad — UNONUEVECR",
+  "url": "https://unonuevecr.com/diagnostico/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "es-CR",
+  "description": "Test gratuito de 13 preguntas que estima cuánto tiempo y dinero está perdiendo un negocio en tareas manuales y mensajes sin contestar, y recomienda qué automatizar primero.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CRC" },
+  "provider": { "@type": "ProfessionalService", "name": "UNONUEVECR", "url": "https://unonuevecr.com/" }
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,9 +85,9 @@ button{font-family:inherit}
 .hero{padding:3.5rem 0 0}
 .eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
   color:var(--accent);margin:0}
-h1{font-size:clamp(2rem,6vw,2.9rem);font-weight:300;line-height:1.08;letter-spacing:-.025em;
-  margin:.7rem 0 0;text-wrap:balance}
-h1 em{color:var(--accent);font-weight:400}
+h1,.resTitle{font-size:clamp(2rem,6vw,2.9rem);font-weight:300;line-height:1.08;
+  letter-spacing:-.025em;margin:.7rem 0 0;text-wrap:balance}
+h1 em,.resTitle em{color:var(--accent);font-weight:400}
 .lede{font-size:1.05rem;color:var(--ink-soft);margin:1.1rem 0 0;max-width:34rem}
 .meta{display:flex;gap:1.6rem;flex-wrap:wrap;margin:1.8rem 0 0;padding-top:1.4rem;
   border-top:1px solid var(--rule)}
@@ -360,7 +376,7 @@ footer{margin-top:3.5rem;padding-top:1.3rem;border-top:1px solid var(--rule);
 <!-- ─────── RESULTADO ─────── -->
 <div class="res" id="res">
   <p class="eyebrow">Su diagnóstico</p>
-  <h1 id="resTitle">Esto es lo que <em>encontramos</em></h1>
+  <h2 id="resTitle" class="resTitle">Esto es lo que <em>encontramos</em></h2>
 
   <div class="loss">
     <div class="big" id="lossNum">—</div>
