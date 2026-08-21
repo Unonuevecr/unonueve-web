@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Diagnóstico de Productividad — UNONUEVECR</title>
-<meta name="description" content="Trece preguntas para saber qué automatizar primero, cuánto tiempo y dinero está perdiendo y en qué rango andaría la inversión. Al terminar, agenda su reunión.">
+<meta name="description" content="Trece preguntas para saber qué automatizar primero, cuánto está perdiendo y en qué rango andaría la inversión. Al terminar, agenda su reunión.">
 <link rel="canonical" href="https://unonuevecr.com/diagnostico/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#EFE7DC">
@@ -626,6 +626,16 @@ function miles(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'
 function crc(n){return '₡'+miles(n);}
 
 function finish(){
+  try { pintarResultado(); }
+  catch(err){                       // pase lo que pase, el resultado se muestra
+    console.error('diagnóstico:',err);
+    document.querySelectorAll('.step').forEach(function(x){x.classList.remove('on');});
+    heroEl.style.display='none'; resEl.classList.add('on');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+}
+
+function pintarResultado(){
   var t=tally();
 
   var orden=Object.keys(t.piezas).filter(function(k){return t.piezas[k]>=2;})
@@ -692,11 +702,11 @@ function finish(){
   lines.push('Rango: implementación '+document.getElementById('pImp').textContent+' · '+mesTxt);
   lines.push('');
   lines.push('Quiero agendar la reunión.');
-  document.getElementById('wa').href=CONFIG.WHATSAPP+'?text='+encodeURIComponent(lines.join('\n'));
-
+  // El botón de agendar. Si todavía no hay calendario conectado, abre un correo
+  // ya redactado en Gmail — que sí abre siempre, a diferencia de un mailto.
   var ag=document.getElementById('agendar');
-  ag.href = CONFIG.CALENDARIO || ('mailto:coti@unonuevecr.com?subject='+
-    encodeURIComponent('Quiero agendar la reunión — '+(fNombre.value.trim()||'diagnóstico'))+
+  ag.href = CONFIG.CALENDARIO || ('https://mail.google.com/mail/?view=cm&fs=1&to=coti@unonuevecr.com'+
+    '&su='+encodeURIComponent('Quiero agendar la reunión — '+(fNombre.value.trim()||'diagnóstico'))+
     '&body='+encodeURIComponent(lines.join('\n')));
 
   var pila=fNombre.value.trim().split(/\s+/)[0];

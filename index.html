@@ -942,9 +942,11 @@ window.addEventListener("DOMContentLoaded",function(){
 
 /* ═══ CONFIGURACIÓN ═══ */
 var CONFIG = { CALENDARIO: "", WHATSAPP: "https://wa.me/50660508446" };
+/* Sin calendario todavía: el botón abre un correo ya redactado en Gmail,
+   que abre siempre. Un mailto: no abre nada si no hay app de correo. */
 document.querySelectorAll("[data-cal]").forEach(function(a){
-  a.href = CONFIG.CALENDARIO || "mailto:coti@unonuevecr.com?subject=Quiero%20agendar%20la%20reuni%C3%B3n";
-  if(CONFIG.CALENDARIO){ a.target="_blank"; a.rel="noopener"; }
+  a.href = CONFIG.CALENDARIO || "https://mail.google.com/mail/?view=cm&fs=1&to=coti@unonuevecr.com&su=" + encodeURIComponent("Ya hice el test — quiero agendar la reunión");
+  a.target="_blank"; a.rel="noopener";
 });
 
 var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
