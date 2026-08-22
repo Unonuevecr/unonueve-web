@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Automatización con inteligencia artificial para pymes | UNONUEVECR Costa Rica</title>
-<meta name="description" content="Instalamos infraestructura de IA en su negocio: bot de WhatsApp que atiende 24/7, prospección automática, recuperación de clientes, cobros, contenido y fotografía. Diagnóstico gratuito. Costa Rica.">
+<meta name="description" content="Instalamos infraestructura de IA en su negocio desde $3.000: bot de WhatsApp que atiende 24/7, prospección automática, recuperación de clientes, cobros, contenido y fotografía. Diagnóstico gratuito. Costa Rica.">
 <link rel="canonical" href="https://unonuevecr.com/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#EFE7DC">
@@ -14,13 +14,13 @@
 <meta property="og:type" content="website"><meta property="og:site_name" content="UNONUEVECR">
 <meta property="og:locale" content="es_CR"><meta property="og:url" content="https://unonuevecr.com/">
 <meta property="og:title" content="No está perdiendo mensajes. Está perdiendo clientes.">
-<meta property="og:description" content="Infraestructura de inteligencia artificial para que su negocio produzca más con la misma gente. Bots, mercadeo, contenido y fotografía en Costa Rica.">
+<meta property="og:description" content="Infraestructura de inteligencia artificial desde $3.000 para que su negocio produzca más con la misma gente. Bots, mercadeo, contenido y fotografía en Costa Rica.">
 <meta property="og:image" content="https://unonuevecr.com/assets/og.jpg">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="UNONUEVECR — infraestructura de inteligencia artificial">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="No está perdiendo mensajes. Está perdiendo clientes.">
-<meta name="twitter:description" content="Infraestructura de IA para negocios de Costa Rica.">
+<meta name="twitter:description" content="Infraestructura de IA desde $3.000 para negocios de Costa Rica.">
 <meta name="twitter:image" content="https://unonuevecr.com/assets/og.jpg">
 <link rel="preload" as="image" href="assets/hero-head.png">
 <script type="application/ld+json">
@@ -259,7 +259,13 @@ body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-sa
 .pfila h3{margin:0 0 .3rem;font-size:1.12rem;font-weight:500;letter-spacing:-.01em}
 .pfila p{margin:0;font-size:.87rem;color:var(--muted);line-height:1.55}
 .pfila b{font-family:var(--font-display);font-style:normal;font-weight:900;
-  font-size:1.85rem;color:var(--gold);white-space:nowrap;letter-spacing:-.01em}
+  font-size:1.85rem;color:var(--gold);white-space:nowrap;letter-spacing:-.01em;
+  display:flex;flex-direction:column;align-items:flex-end;line-height:1.05}
+.pfila b small{font-family:var(--font-mono);font-size:.34em;font-weight:500;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:.25rem}
+.pfila b u{font-family:var(--font-sans);font-size:.4em;font-weight:400;text-decoration:none;
+  color:var(--muted);letter-spacing:0;margin-top:.1rem}
+@media(max-width:520px){.pfila b{align-items:flex-start}}
 .pnota{margin:1.6rem 0 0;font-size:.88rem;color:var(--muted);line-height:1.65;max-width:40rem}
 
 /* ── comparación de mercado ── */
@@ -415,7 +421,7 @@ body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-sa
 .float:hover{opacity:.92}
 .float b{width:7px;height:7px;border-radius:50%;background:#3FBF6A}
 
-/* ══════ CLAUDIA — del sitio en vivo, no tocar ══════ */
+/* ══════ CLAUDIA ══════ */
 /* ==========================================================
    CLAUDIA — botón de WhatsApp + chat de la asistente
    ========================================================== */
@@ -734,14 +740,15 @@ body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-sa
       <li class="pfila"><div><h3>Implementación</h3>
         <p>El bot completo de WhatsApp, con seguimiento y todo lo que lleva. <strong>Pago único</strong>,
         con facilidad de pago a <strong>3 o 6 meses</strong> si prefiere abonarlo.</p></div>
-        <b>$3.000</b></li>
+        <b><small>Desde</small>$3.000</b></li>
       <li class="pfila"><div><h3>Mantenimiento mensual</h3>
-        <p>Que todo siga funcionando, y las mejoras y funciones nuevas que le vayamos montando encima.
-        Va cubierto ahí adentro.</p></div>
-        <b>$300 – $400</b></li>
+        <p>Que todo siga funcionando, y las mejoras y funciones nuevas que le vayamos montando
+        encima. Va de $300 a $400 según el volumen y cuántas piezas estén corriendo.</p></div>
+        <b><small>Desde</small>$300<u>/mes</u></b></li>
       <li class="pfila"><div><h3>Cada pieza nueva</h3>
-        <p>Diseño de la lógica para su negocio, desarrollo y acople con lo que ya está corriendo.</p></div>
-        <b>$400 – $1.000</b></li>
+        <p>Diseño de la lógica para su negocio, desarrollo y acople con lo que ya está corriendo.
+        Entre $400 y $1.000 según el trabajo que lleve.</p></div>
+        <b><small>Desde</small>$400</b></li>
     </ul>
     <p class="urgencia">Precio de lanzamiento · puede cambiar sin previo aviso</p>
   </div>
@@ -1327,7 +1334,7 @@ if(window.gsap && window.ScrollTrigger && !reduce){
   });
 
   // las cifras: cuentan hacia arriba al aparecer
-  gsap.utils.toArray('.rcell__num, .pfila b, .vs__n, .ahorro b, .caso h3 b').forEach(function(el){
+  gsap.utils.toArray('.rcell__num, .vs__n, .ahorro b, .caso h3 b').forEach(function(el){
     var txt=el.textContent, m=txt.match(/[\d.,]+/);
     if(!m){ return; }
     var limpio=m[0].replace(/\./g,'').replace(',','.');
