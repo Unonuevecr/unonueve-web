@@ -70,52 +70,47 @@ button[disabled]{opacity:.45;cursor:default}
 /* ── portal ── */
 #portal{flex:1;display:flex;flex-direction:column;min-height:0}
 .barra{border-bottom:1px solid var(--rule);background:var(--surface-2);flex-shrink:0}
-.barra-in{max-width:80rem;margin:0 auto;padding:.65rem 1.2rem;display:flex;align-items:center;gap:.9rem}
+.barra-in{max-width:100%;margin:0 auto;padding:.65rem 1.4rem;display:flex;align-items:center;gap:.9rem}
 .barra .marca{margin:0}
 .quien{margin-left:auto;display:flex;align-items:center;gap:.8rem;font-size:.82rem;color:var(--ink-mute)}
 .quien b{color:var(--ink);font-weight:500}
-.salir{background:none;color:var(--ink-mute);border:1px solid var(--rule);padding:.3rem .8rem;font-size:.78rem}
+.salir{background:none;color:var(--ink-mute);border:1px solid var(--rule);padding:.3rem .8rem;
+  font-size:.78rem;border-radius:100px}
 .salir:hover{color:var(--accent);border-color:var(--accent)}
-.cuerpo{flex:1;display:grid;grid-template-columns:22rem 1fr;min-height:0;max-width:80rem;
-  margin:0 auto;width:100%}
-.lista{border-right:1px solid var(--rule);padding:1.4rem 1.2rem;overflow-y:auto;display:flex;
-  flex-direction:column;gap:.5rem}
-.lista h2{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ink-mute);margin:0 0 .4rem;font-weight:600}
-.doc{text-align:left;background:var(--surface);border:1px solid var(--rule-soft);border-radius:5px;
-  padding:.85rem 1rem;color:var(--ink);display:flex;flex-direction:column;gap:.28rem;
-  align-items:stretch;justify-content:flex-start;font-weight:400}
-.doc:hover{border-color:var(--accent-hi);opacity:1}
-.doc[aria-current="true"]{border-color:var(--accent-hi);background:color-mix(in srgb,var(--accent-hi) 8%,var(--surface))}
-.doc b{font-size:1rem;font-weight:500;letter-spacing:-.01em}
-.doc small{font-size:.82rem;color:var(--ink-mute);line-height:1.45;font-weight:300}
-.doc u{text-decoration:none;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--accent)}
-.visor{position:relative;min-height:0;background:var(--ground)}
+
+.pestanas{flex-shrink:0;display:flex;gap:.2rem;padding:0 1.4rem;border-bottom:1px solid var(--rule);
+  background:var(--surface-2);overflow-x:auto;scrollbar-width:none}
+.pestanas::-webkit-scrollbar{display:none}
+.pes{flex:0 0 auto;background:none;border:none;border-bottom:2px solid transparent;
+  border-radius:0;padding:.85rem 1rem .7rem;color:var(--ink-mute);font-size:.95rem;font-weight:400;
+  letter-spacing:-.01em;white-space:nowrap;cursor:pointer;transition:color .18s,border-color .18s}
+.pes:hover{color:var(--ink);opacity:1}
+.pes[aria-current="true"]{color:var(--ink);border-bottom-color:var(--accent-hi);font-weight:500}
+.pes:focus-visible{outline:2px solid var(--accent);outline-offset:-4px}
+
+.tira{flex-shrink:0;display:flex;align-items:baseline;gap:1rem;padding:.6rem 1.4rem;
+  border-bottom:1px solid var(--rule-soft);background:var(--surface)}
+.tira p{margin:0;font-size:.85rem;color:var(--ink-soft);line-height:1.4}
+.tira u{margin-left:auto;text-decoration:none;font-family:var(--mono);font-size:.6rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);white-space:nowrap}
+.grande-btn{background:none;border:1px solid var(--rule);color:var(--ink-mute);border-radius:100px;
+  padding:.28rem .8rem;font-size:.75rem;white-space:nowrap;flex-shrink:0}
+.grande-btn:hover{color:var(--accent);border-color:var(--accent);opacity:1}
+
+.visor{position:relative;flex:1;min-height:0;background:var(--ground)}
 .visor iframe{width:100%;height:100%;border:none;display:block;background:var(--ground)}
-.vacio{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:.5rem;padding:2rem;text-align:center;color:var(--ink-mute)}
-.vacio p{margin:0;font-size:.95rem;max-width:26rem}
-.recordatorio{background:var(--surface);border-left:3px solid var(--accent-hi);border-radius:4px;
-  padding:.8rem .95rem;font-size:.84rem;color:var(--ink-soft);line-height:1.5;margin-top:.6rem}
-.recordatorio b{color:var(--ink);font-weight:600}
 .cargando{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
   background:var(--ground);font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--ink-mute)}
+  text-transform:uppercase;color:var(--ink-mute);padding:2rem;text-align:center}
 
 @media(max-width:820px){
-  .cuerpo{grid-template-columns:1fr;grid-template-rows:auto 1fr}
-  .lista{border-right:none;border-bottom:1px solid var(--rule);max-height:45vh;padding:1rem}
-  .lista.compacta{flex-direction:row;max-height:none;overflow-x:auto;overflow-y:hidden;
-    padding:.65rem .9rem;gap:.45rem;scrollbar-width:none}
-  .lista.compacta::-webkit-scrollbar{display:none}
-  .lista.compacta h2,.lista.compacta .recordatorio{display:none}
-  .lista.compacta .doc{flex:0 0 auto;padding:.5rem .95rem}
-  .lista.compacta .doc small,.lista.compacta .doc u{display:none}
-  .lista.compacta .doc b{font-size:.88rem;white-space:nowrap}
   h1{font-size:1.8rem}
   .barra-in{padding:.6rem .9rem}
   .quien b{display:none}
+  .pestanas{padding:0 .9rem}
+  .pes{padding:.75rem .8rem .6rem;font-size:.88rem}
+  .tira{padding:.55rem .9rem}
+  .tira u{display:none}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none !important}}
 </style>
@@ -152,15 +147,13 @@ button[disabled]{opacity:.45;cursor:default}
       <div class="quien"><b id="nombre"></b><button class="salir" id="salir" type="button">Salir</button></div>
     </div>
   </div>
-  <div class="cuerpo">
-    <nav class="lista" id="lista" aria-label="Documentos"></nav>
-    <div class="visor" id="visor">
-      <div class="vacio" id="vacio">
-        <p>Elegí un documento de la lista.</p>
-        <p style="font-size:.85rem">Todo se lee desde el teléfono, incluso en media llamada.</p>
-      </div>
-    </div>
+  <div class="pestanas" id="pestanas" role="tablist" aria-label="Documentos"></div>
+  <div class="tira">
+    <p id="tira-txt"></p>
+    <u id="tira-fecha"></u>
+    <button class="grande-btn" id="agrandar" type="button">Pantalla completa</button>
   </div>
+  <div class="visor" id="visor"></div>
 </section>
 
 <script>
@@ -171,9 +164,10 @@ button[disabled]{opacity:.45;cursor:default}
   var form    = document.getElementById("form");
   var btn     = document.getElementById("btn");
   var error   = document.getElementById("error");
-  var lista   = document.getElementById("lista");
+  var pestanas= document.getElementById("pestanas");
   var visor   = document.getElementById("visor");
-  var vacio   = document.getElementById("vacio");
+  var tiraTxt = document.getElementById("tira-txt");
+  var tiraFec = document.getElementById("tira-fecha");
   var elNombre= document.getElementById("nombre");
   var sesion  = null;
 
@@ -201,55 +195,41 @@ button[disabled]{opacity:.45;cursor:default}
     try { sessionStorage.removeItem("u9ventas"); } catch(e){}
     portal.classList.add("oculto");
     entrada.classList.remove("oculto");
-    lista.innerHTML = "";
-    limpiarVisor();
+    pestanas.innerHTML = "";
+    visor.innerHTML = "";
+    tiraTxt.textContent = "";
+    tiraFec.textContent = "";
     document.getElementById("clave").value = "";
   }
 
-  function limpiarVisor(){
-    var marco = visor.querySelector("iframe");
-    if (marco) marco.remove();
-    var cargando = visor.querySelector(".cargando");
-    if (cargando) cargando.remove();
-    vacio.style.display = "";
+  function pintarPestanas(docs){
+    pestanas.innerHTML = "";
+    docs.forEach(function(d, i){
+      var b = document.createElement("button");
+      b.className = "pes";
+      b.type = "button";
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-current", "false");
+      b.textContent = d.titulo;
+      b.addEventListener("click", function(){ activar(i, docs); });
+      pestanas.appendChild(b);
+    });
+    if (docs.length) activar(0, docs);
   }
 
-  function pintarLista(docs){
-    lista.innerHTML = "";
-    var titulo = document.createElement("h2");
-    titulo.textContent = "Documentos";
-    lista.appendChild(titulo);
-
-    docs.forEach(function(d){
-      var b = document.createElement("button");
-      b.className = "doc";
-      b.type = "button";
-      b.setAttribute("aria-current", "false");
-      b.innerHTML = "<b></b><small></small><u></u>";
-      b.querySelector("b").textContent = d.titulo;
-      b.querySelector("small").textContent = d.resumen || "";
-      b.querySelector("u").textContent = "Actualizado " + (d.actualizado || "");
-      b.addEventListener("click", function(){
-        Array.prototype.forEach.call(lista.querySelectorAll(".doc"), function(o){
-          o.setAttribute("aria-current", "false");
-        });
-        b.setAttribute("aria-current", "true");
-        lista.classList.add("compacta");
-        abrir(d.slug, d.titulo);
-      });
-      lista.appendChild(b);
+  function activar(i, docs){
+    var d = docs[i];
+    Array.prototype.forEach.call(pestanas.children, function(o, j){
+      o.setAttribute("aria-current", j === i ? "true" : "false");
     });
-
-    var nota = document.createElement("p");
-    nota.className = "recordatorio";
-    nota.innerHTML = "<b>Antes de una llamada:</b> abrí los speeches del producto que vas a ofrecer, " +
-                     "no el catálogo entero. Una pieza por conversación.";
-    lista.appendChild(nota);
+    pestanas.children[i].scrollIntoView({ block: "nearest", inline: "nearest" });
+    tiraTxt.textContent = d.resumen || "";
+    tiraFec.textContent = d.actualizado ? "Actualizado " + d.actualizado : "";
+    abrir(d.slug, d.titulo);
   }
 
   function abrir(slug, titulo){
-    limpiarVisor();
-    vacio.style.display = "none";
+    visor.innerHTML = "";
     var cargando = document.createElement("div");
     cargando.className = "cargando";
     cargando.textContent = "Abriendo " + titulo;
@@ -258,11 +238,13 @@ button[disabled]{opacity:.45;cursor:default}
     pedir({ accion: "doc", token: sesion.token, slug: slug }).then(function(r){
       if (!r.ok) {
         cargando.textContent = r.motivo || "No se pudo abrir.";
-        if (/sesion/i.test(r.motivo || "")) setTimeout(salir, 1600);
+        if (/sesion|sesión/i.test(r.motivo || "")) setTimeout(salir, 1800);
         return;
       }
       var marco = document.createElement("iframe");
       marco.setAttribute("title", r.titulo || titulo);
+      marco.setAttribute("allowfullscreen", "");
+      marco.setAttribute("allow", "fullscreen");
       marco.setAttribute("srcdoc", r.html);
       visor.appendChild(marco);
       cargando.remove();
@@ -276,7 +258,7 @@ button[disabled]{opacity:.45;cursor:default}
     elNombre.textContent = s.nombre;
     entrada.classList.add("oculto");
     portal.classList.remove("oculto");
-    pintarLista(s.docs || []);
+    pintarPestanas(s.docs || []);
   }
 
   form.addEventListener("submit", function(ev){
@@ -301,6 +283,18 @@ button[disabled]{opacity:.45;cursor:default}
   });
 
   document.getElementById("salir").addEventListener("click", salir);
+
+  document.getElementById("agrandar").addEventListener("click", function(){
+    var marco = visor.querySelector("iframe");
+    if (!marco) return;
+    if (document.fullscreenElement) { document.exitFullscreen(); return; }
+    if (marco.requestFullscreen) marco.requestFullscreen();
+    else if (marco.webkitRequestFullscreen) marco.webkitRequestFullscreen();
+  });
+  document.addEventListener("fullscreenchange", function(){
+    document.getElementById("agrandar").textContent =
+      document.fullscreenElement ? "Salir de pantalla completa" : "Pantalla completa";
+  });
 
   var previa = leerSesion();
   if (previa) entrar(previa);
