@@ -87,10 +87,10 @@ dialog::backdrop{background:rgba(18,32,43,.45)}
     <nav>
       <button data-m="clientes" class="on">👥 Clientes</button>
       <button data-m="cobros">💰 Cobros</button>
-      <button data-m="retargeting">🎯 Retargeting <span class="pill">pronto</span></button>
-      <button data-m="bot">🤖 Bot <span class="pill">pronto</span></button>
-      <button data-m="tareas">✅ Tareas <span class="pill">pronto</span></button>
-      <button data-m="citas">📅 Citas <span class="pill">pronto</span></button>
+      <button data-m="retargeting">🎯 Retargeting</button>
+      <button data-m="bot">🤖 Bot</button>
+      <button data-m="tareas">✅ Tareas</button>
+      <button data-m="citas">📅 Citas</button>
     </nav>
     <div class="pie"><b id="quien">—</b><span id="rol"></span><br><a id="salir">Cerrar sesión</a></div>
   </aside>
@@ -148,17 +148,109 @@ function pronto(t,items){return `<div class="pronto"><b>${t}</b>Este módulo est
   <ul>${items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;}
 
 async function pintar(){
-  const v=$('#vista');
   if(S.modulo==='clientes') return clientes();
   if(S.modulo==='cobros') return S.salida?listaPax():cobros();
-  const textos={
-    retargeting:['Cada mañana revisa Evolution API','Clientes que preguntaron y no cerraron','Monto y destino consultado, fecha y resumen de la conversación'],
-    bot:['Conversaciones del bot: cerró o no cerró','Ticket promedio y teléfono','Si lo atiende un humano, y el freno del bot'],
-    tareas:['Tareas del día por persona','Seguimientos con recordatorio','Quién la cerró y con qué resultado'],
-    citas:['Agenda de citas en la oficina','Conectado al Agente de Citas del bot','Vista del día y de la semana']};
-  const titulos={retargeting:'Retargeting',bot:'Bot',tareas:'Tareas y seguimientos',citas:'Citas'};
-  v.innerHTML=`<h2>${titulos[S.modulo]}</h2><p class="sub">Definí conmigo qué querés ver acá.</p>
-    <div style="margin-top:20px">${pronto(titulos[S.modulo],textos[S.modulo])}</div>`;
+  if(S.modulo==='retargeting') return retargeting();
+  if(S.modulo==='bot') return botM();
+  if(S.modulo==='tareas') return tareas();
+  if(S.modulo==='citas') return citas();
+}
+
+async function retargeting(){
+  const v=$('#vista');
+  v.innerHTML=`<h2>Retargeting</h2><p class="sub">Gente que preguntó y no cerró. Sale del barrido diario de WhatsApp.</p>
+    <div id="kpis" class="kpis" style="margin-top:18px"></div>
+    <div class="tarj scroll" id="tabla"><div class="vacio">Cargando…</div></div>`;
+  const d=await api('sistema-retargeting',{});
+  if(!d.ok){$('#tabla').innerHTML=`<div class="vacio">${esc(d.error||'Error')}</div>`;return;}
+  $('#kpis').innerHTML=`<div class="kpi"><span>Leads sin cerrar</span><b>${d.total}</b></div>
+    <div class="kpi"><span>Calientes</span><b style="color:var(--alerta)">${d.porNivel.caliente}</b></div>
+    <div class="kpi"><span>Tibios</span><b style="color:var(--aviso)">${d.porNivel.tibio}</b></div>
+    <div class="kpi"><span>Sin contactar</span><b>${d.sinContactar}</b></div>
+    <div class="kpi"><span>Destino más pedido</span><b style="font-size:15px">${esc((d.topDestinos[0]||{}).destino||'—')}</b></div>`;
+  $('#tabla').innerHTML=`<table><thead><tr><th>Lead</th><th>Destino</th><th>Nivel</th><th>Última vez</th>
+    <th>Qué pasó</th><th>Estado</th></tr></thead><tbody>${
+    d.leads.map(l=>`<tr>
+      <td><b>${esc(l.nombre)}</b><br><span class="sub">${esc(l.telefono)}${l.tipo&&!/marcable/i.test(l.tipo)?' · '+esc(l.tipo):''}</span></td>
+      <td>${esc(l.destino)}</td>
+      <td><span class="chip ${l.nivel==='caliente'?'c-al':l.nivel==='tibio'?'c-av':'c-gr'}">${esc(l.nivel)}</span></td>
+      <td class="sub">${esc(l.fecha)}</td>
+      <td style="max-width:340px"><span class="sub">${esc(l.resumen||l.motivo)}</span></td>
+      <td>${l.resultado?`<span class="chip ${/no cerr/i.test(l.resultado)?'c-al':'c-ok'}">${esc(l.resultado)}</span>`
+        :l.estado?`<span class="chip c-gr">${esc(l.estado)}</span>`:'<span class="chip c-av">sin contactar</span>'}</td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+async function botM(){
+  const v=$('#vista');
+  v.innerHTML=`<h2>Bot</h2><p class="sub">Conversaciones de WhatsApp que atiende Charly.</p>
+    <div id="kpis" class="kpis" style="margin-top:18px"></div>
+    <div class="tarj scroll" id="tabla"><div class="vacio">Cargando…</div></div>`;
+  const d=await api('sistema-bot',{});
+  if(!d.ok){$('#tabla').innerHTML=`<div class="vacio">${esc(d.error||'Error')}</div>`;return;}
+  $('#kpis').innerHTML=`<div class="kpi"><span>Conversaciones hoy</span><b>${d.hoy}</b></div>
+    <div class="kpi"><span>Esperando respuesta</span><b style="color:${d.esperando?'var(--alerta)':'var(--ok)'}">${d.esperando}</b></div>
+    <div class="kpi"><span>Chats en total</span><b>${d.total.toLocaleString('es-CR')}</b></div>
+    <div class="kpi"><span>Sin número marcable</span><b>${d.noMarcables.toLocaleString('es-CR')}</b></div>`;
+  $('#tabla').innerHTML=`<table><thead><tr><th>Cliente</th><th>Teléfono</th><th>Último mensaje</th>
+    <th>Cuándo</th><th></th></tr></thead><tbody>${
+    d.chats.map(ch=>`<tr><td><b>${esc(ch.nombre)}</b></td>
+      <td>${ch.telefono==='(no marcable)'?'<span class="sub">(no marcable)</span>':esc(ch.telefono)}</td>
+      <td style="max-width:380px"><span class="sub">${esc(ch.ultimo||'—')}</span></td>
+      <td class="sub">${esc(ch.cuando)}</td>
+      <td>${ch.esperando?'<span class="chip c-al">esperando</span>':'<span class="chip c-ok">contestado</span>'}</td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+async function tareas(){
+  const v=$('#vista');
+  v.innerHTML=`<h2>Tareas y seguimientos</h2><p class="sub">Lo que hay que hacer hoy, con quién lo tiene.</p>
+    <div class="barra"><button class="btn chico" id="nueva">+ Nueva tarea</button></div>
+    <div id="kpis" class="kpis"></div>
+    <div class="tarj scroll" id="tabla"><div class="vacio">Cargando…</div></div>
+    <div id="hechas" style="margin-top:22px"></div>`;
+  $('#nueva').onclick=nuevaTarea;
+  const d=await api('sistema-tareas',{});
+  if(!d.ok){$('#tabla').innerHTML=`<div class="vacio">${esc(d.error||'Error')}</div>`;return;}
+  const t=d.totales;
+  $('#kpis').innerHTML=`<div class="kpi"><span>Abiertas</span><b>${t.abiertas}</b></div>
+    <div class="kpi"><span>Vencidas</span><b style="color:${t.vencidas?'var(--alerta)':'var(--ok)'}">${t.vencidas}</b></div>
+    <div class="kpi"><span>Para hoy</span><b>${t.hoy}</b></div>
+    <div class="kpi"><span>Cerradas</span><b>${t.cerradas}</b></div>`;
+  if(!d.tareas.length){$('#tabla').innerHTML='<div class="vacio">No hay tareas abiertas 🎉</div>';return;}
+  $('#tabla').innerHTML=`<table><thead><tr><th>Tarea</th><th>Cliente</th><th>Quién</th><th>Vence</th></tr></thead><tbody>${
+    d.tareas.map(x=>`<tr><td><b>${esc(x.titulo)}</b>${x.detalle?`<br><span class="sub">${esc(x.detalle)}</span>`:''}</td>
+      <td>${esc(x.cliente||'—')}${x.telefono?`<br><span class="sub">${esc(x.telefono)}</span>`:''}</td>
+      <td>${esc(x.asignada_a)}</td>
+      <td>${x.vencida?`<span class="chip c-al">${esc(x.vence)}</span>`:`<span class="chip c-gr">${esc(x.vence)}</span>`}</td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+function nuevaTarea(){
+  const t=prompt('¿Qué hay que hacer?'); if(!t) return;
+  const cli=prompt('¿Para cuál cliente? (opcional)')||'';
+  const tel=prompt('Teléfono (opcional)')||'';
+  const v=prompt('¿Para qué día? (aaaa-mm-dd)', new Date(Date.now()-6*3600*1000).toISOString().slice(0,10))||'';
+  api('sistema-tareas',{op:'nueva',titulo:t,cliente:cli,telefono:tel,vence:v,tipo:'tarea'}).then(r=>{
+    if(!r.ok) return alert(r.error||'No se pudo guardar'); tareas();
+  });
+}
+
+async function citas(){
+  const v=$('#vista');
+  v.innerHTML=`<h2>Citas</h2><p class="sub">Agenda de la oficina. Se llena sola con las que agenda el bot.</p>
+    <div id="kpis" class="kpis" style="margin-top:18px"></div><div id="lista"></div>`;
+  const d=await api('sistema-citas',{});
+  if(!d.ok){$('#lista').innerHTML=`<div class="tarj"><div class="vacio">${esc(d.error||'Error')}</div></div>`;return;}
+  $('#kpis').innerHTML=`<div class="kpi"><span>Citas hoy</span><b>${d.totales.hoy}</b></div>
+    <div class="kpi"><span>Próximos 30 días</span><b>${d.totales.proximas}</b></div>`;
+  if(!d.dias.length){$('#lista').innerHTML=`<div class="tarj"><div class="vacio">No hay citas agendadas.<br>
+    <span class="sub">Cuando el bot agende una, aparece acá sola.</span></div></div>`;return;}
+  $('#lista').innerHTML=d.dias.map(g=>`<div class="tarj" style="margin-bottom:14px">
+    <table><thead><tr><th colspan="3">${g.dia===d.hoy?'Hoy · ':''}${esc(g.dia)}</th></tr></thead><tbody>${
+    g.citas.map(c=>`<tr><td style="width:110px"><b>${esc(c.hora)}</b>${c.horaFin?`<span class="sub"> a ${esc(c.horaFin)}</span>`:''}</td>
+      <td><b>${esc(c.titulo)}</b>${c.detalle?`<br><span class="sub">${esc(c.detalle)}</span>`:''}</td>
+      <td class="sub">${esc(c.donde||'')}</td></tr>`).join('')}</tbody></table></div>`).join('');
 }
 
 async function clientes(q){
