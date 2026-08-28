@@ -2,4 +2,3 @@ User-agent: *
 Allow: /
 Disallow: /ventas/
 Sitemap: https://unonuevecr.com/sitemap.xml
-Disallow: /sistema/
