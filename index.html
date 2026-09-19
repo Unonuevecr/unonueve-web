@@ -6,7 +6,7 @@
 <title>Inteligencia artificial para negocios en Costa Rica | UNONUEVECR</title>
 <meta name="description" content="Reestructuramos cómo trabaja tu negocio con inteligencia artificial: ventas, prospección, atención, cobros y reportes. Sin despidos. Con el control en tu teléfono.">
 <meta name="theme-color" content="#14110E">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://n8n-unonueve-n8n.i5i6e4.easypanel.host https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://www.googletagmanager.com https://www.facebook.com; connect-src 'self' https://n8n-unonueve-n8n.i5i6e4.easypanel.host https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://www.facebook.com https://connect.facebook.net; base-uri 'self'; form-action 'self'">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://unonuevecr.com/">
@@ -559,7 +559,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;
   </form>
 </div></section>
 
-<footer><div class="wrap"><span>© 2026 UNONUEVE<span class="cr">CR</span> · Infraestructura de inteligencia artificial</span><span><a href="privacidad/">Privacidad y cookies</a> · <a href="aviso-legal/">Aviso legal</a> · <a href="diagnostico/">Test gratuito</a></span><span>San José, Costa Rica · @unonuevecr</span></div></footer>
+<footer><div class="wrap"><span>© 2026 UNONUEVE<span class="cr">CR</span> · Infraestructura de inteligencia artificial</span><span><a href="privacidad/">Privacidad</a> · <a href="#" data-cookies>Preferencias de cookies</a> · <a href="aviso-legal/">Aviso legal</a> · <a href="diagnostico/">Test gratuito</a></span><span>San José, Costa Rica · @unonuevecr</span></div></footer>
 
 <script>
 /* ===================== CONFIG (lo único que se edita) ===================== */
@@ -634,10 +634,14 @@ function enlazarForm(idForm, idOk, extra){
     var extras = extra ? extra() : {tipo:'contacto'};
     for(var k in extras) datos[k] = extras[k];
     f.querySelector('button[type=submit]').disabled = true;
-    if(window.un9Evento) window.un9Evento('generate_lead', {origen:'contacto'});
     var listo = function(){ f.style.display = 'none'; document.getElementById(idOk).style.display = 'block'; };
-    if(!CONFIG.WEBHOOK){ listo(); return; }
-    fetch(CONFIG.WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(datos)}).then(listo).catch(listo);
+    var meta = window.un9DatosMeta ? window.un9DatosMeta(datos.correo, datos.whatsapp) : Promise.resolve({});
+    meta.then(function(m){
+      for(var k in m) datos[k] = m[k];
+      if(window.un9Evento) window.un9Evento('generate_lead', {origen: datos.tipo || 'contacto'}, {meta:'Lead', eventID: m.event_id, datos:{content_name: datos.tipo || 'contacto'}});
+      if(!CONFIG.WEBHOOK){ listo(); return; }
+      fetch(CONFIG.WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(datos)}).then(listo).catch(listo);
+    });
   });
 }
 enlazarForm('f-contacto', 'ok-contacto');

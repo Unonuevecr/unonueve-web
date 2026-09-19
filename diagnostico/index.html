@@ -6,7 +6,7 @@
 <title>Test gratuito: ¿de verdad necesitás automatizar? | UNONUEVECR</title>
 <meta name="description" content="Test gratuito por área: ventas, atención, prospección, contabilidad, reportes y contenido. Te dice cuánto te cuesta hoy, cuánto costaría contratar a alguien y cuánto ahorrás con un sistema de inteligencia artificial.">
 <meta name="theme-color" content="#EFE7DC">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://n8n-unonueve-n8n.i5i6e4.easypanel.host https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://www.googletagmanager.com https://www.facebook.com; connect-src 'self' https://n8n-unonueve-n8n.i5i6e4.easypanel.host https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://www.facebook.com https://connect.facebook.net; base-uri 'self'; form-action 'self'">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://unonuevecr.com/diagnostico/">
@@ -369,9 +369,9 @@ function resultado(){
   h += '</div><div class="card" style="margin-top:40px"><h2>Recibí el informe y <em>agendá tu reunión</em></h2><p class="nota" style="font-size:15px">En 30 minutos revisamos estos números con los tuyos reales. Sin compromiso.</p>';
   h += '<form class="form" id="f" novalidate><input name="nombre" placeholder="Nombre" required maxlength="80" autocomplete="name"><input name="empresa" placeholder="Empresa" required maxlength="80" autocomplete="organization"><input name="whatsapp" placeholder="WhatsApp" required inputmode="tel" maxlength="20" autocomplete="tel"><input name="correo" type="email" placeholder="Correo" maxlength="120" autocomplete="email"><div class="hp" aria-hidden="true"><input name="sitio" tabindex="-1" autocomplete="off"></div><button class="btn oro full" type="submit">Enviarme el informe</button></form>';
   h += '<div class="ok" id="ok"><b>¡Listo!</b> Te mandamos el informe por WhatsApp.<br><br><a class="btn tinta" id="agenda" target="_blank" rel="noopener">Agendar mi reunión de 30 min →</a></div>';
-  h += '<p class="nota">Cifras estimadas con tus respuestas y con costos de referencia del mercado costarricense. En la reunión las ajustamos con tus números reales. Al enviar aceptás nuestra <a href="../privacidad/">política de privacidad</a>.</p></div>';
+  h += '<p class="nota">Cifras estimadas con tus respuestas y con costos de referencia del mercado costarricense. En la reunión las ajustamos con tus números reales. Al enviar aceptás nuestra <a href="../privacidad/">política de privacidad</a> · <a href="#" data-cookies>Preferencias de cookies</a>.</p></div>';
   var v = document.getElementById('v-res'); v.innerHTML = h; vista('v-res');
-  if(window.un9Evento) window.un9Evento('test_completado', {areas: sel.join ? sel.toString() : '', ahorro_mensual: Math.round(ahorro)});
+  if(window.un9Evento) window.un9Evento('test_completado', {areas: sel.toString(), ahorro_mensual: Math.round(ahorro)}, {meta:'TestCompletado', custom:true, datos:{areas: sel.toString()}});
   if(CONFIG.WEBHOOK){ try { fetch(CONFIG.WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({tipo:'test', areas:sel, respuestas:resp, cubrir:cubrir, hoy:Math.round(totHoy), contratar:Math.round(totContratar), sistema:Math.round(sistemaMes), ahorro:Math.round(ahorro), origen:location.pathname})}).catch(function(){}); } catch(x){} }
   document.getElementById('agenda').href = CONFIG.AGENDA;
   var f = document.getElementById('f');
@@ -383,10 +383,14 @@ function resultado(){
     if(wa.replace('+','').length < 8){ f.whatsapp.focus(); return; }
     var datos = {tipo:'diagnostico', nombre:nombre.slice(0,80), empresa:f.empresa.value.trim().slice(0,80), whatsapp:wa.slice(0,20), correo:f.correo.value.trim().slice(0,120), areas:sel, respuestas:resp, cubrir:cubrir, hoy:Math.round(totHoy), contratar:Math.round(totContratar), sistema:Math.round(sistemaMes), ahorro:Math.round(ahorro)};
     f.querySelector('button').disabled = true;
-    if(window.un9Evento) window.un9Evento('generate_lead', {origen:'test', value: Math.round(ahorro), currency:'CRC'});
     var listo = function(){ f.style.display = 'none'; document.getElementById('ok').style.display = 'block'; };
-    if(!CONFIG.WEBHOOK){ listo(); return; }
-    fetch(CONFIG.WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(datos)}).then(listo).catch(listo);
+    var meta = window.un9DatosMeta ? window.un9DatosMeta(datos.correo, datos.whatsapp) : Promise.resolve({});
+    meta.then(function(m){
+      for(var k in m) datos[k] = m[k];
+      if(window.un9Evento) window.un9Evento('generate_lead', {origen:'test', value: Math.round(ahorro), currency:'CRC'}, {meta:'Lead', eventID: m.event_id, datos:{content_name:'diagnostico', value: Math.round(ahorro), currency:'CRC'}});
+      if(!CONFIG.WEBHOOK){ listo(); return; }
+      fetch(CONFIG.WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(datos)}).then(listo).catch(listo);
+    });
   });
 }
 
