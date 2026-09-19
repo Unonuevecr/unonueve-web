@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="es-CR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diagnóstico gratuito — UNONUEVECR</title>
+<meta name="description" content="Test gratuito por área: ventas, atención, prospección, contabilidad, reportes y contenido. Te dice cuánto te cuesta hoy, cuánto costaría contratar a alguien y cuánto ahorrás con un sistema de inteligencia artificial.">
+<meta name="theme-color" content="#EFE7DC">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://n8n-unonueve-n8n.i5i6e4.easypanel.host; base-uri 'self'; form-action 'self'">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+:root{--crema:#EFE7DC;--crema2:#F6F1E9;--tinta:#14110E;--oro:#C8892F;--oro2:#E0B168;--gris:#7A6E5F;--linea:rgba(20,17,14,.12);--verde:#3f8f5f;--rojo:#b4513f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:var(--crema);color:var(--tinta);-webkit-font-smoothing:antialiased;line-height:1.55}
+em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400}
+.top{position:sticky;top:0;z-index:5;background:rgba(239,231,220,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+.top .in{max-width:900px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:16px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;text-decoration:none;color:var(--tinta)}
+.logo svg{height:24px;width:auto}
+.cr{color:var(--oro)}
+.barra{flex:1;height:6px;background:#E2D9CC;border-radius:9px;overflow:hidden}
+.barra i{display:block;height:100%;width:0;background:var(--oro);transition:width .4s}
+.paso-t{font-size:13px;color:var(--gris);font-weight:600;white-space:nowrap}
+main{max-width:900px;margin:0 auto;padding:40px 22px 90px}
+.k{font-size:13px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--oro)}
+h1{font-size:clamp(34px,5vw,56px);line-height:1.02;letter-spacing:-1.8px;font-weight:800;margin:10px 0 14px}
+h1 em,h2 em{color:var(--oro)}
+h2{font-size:clamp(26px,3.4vw,38px);letter-spacing:-1px;line-height:1.1;font-weight:800}
+.lead{font-size:18px;color:#4A423A;max-width:680px}
+.vista{display:none}.vista.on{display:block;animation:entra .35s ease}
+@keyframes entra{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.areas{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px}
+@media(max-width:640px){.areas{grid-template-columns:1fr}}
+.area{display:flex;gap:14px;align-items:flex-start;text-align:left;background:#fff;border:1.5px solid var(--linea);border-radius:20px;padding:18px;cursor:pointer;font-family:inherit;color:var(--tinta);transition:all .15s}
+.area:hover{border-color:var(--oro)}
+.area.sel{border-color:var(--oro);background:#FFF5E6}
+.area .ic{flex:none;width:46px;height:46px;border-radius:13px;background:var(--crema2);display:flex;align-items:center;justify-content:center;font-size:22px}
+.area b{display:block;font-size:17px}
+.area span{font-size:14px;color:var(--gris)}
+.area .ck{margin-left:auto;flex:none;width:26px;height:26px;border-radius:8px;border:1.5px solid var(--linea);display:flex;align-items:center;justify-content:center;font-size:15px;color:transparent}
+.area.sel .ck{background:var(--oro);border-color:var(--oro);color:var(--tinta)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;padding:17px 30px;font-weight:700;font-size:17px;border:0;cursor:pointer;font-family:inherit;text-decoration:none;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.oro{background:var(--oro);color:var(--tinta)}
+.btn.oro:hover{background:var(--oro2)}
+.btn.tinta{background:var(--tinta);color:var(--crema)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.acciones{display:flex;gap:12px;align-items:center;margin-top:28px;flex-wrap:wrap}
+.volver{background:none;border:0;color:var(--gris);font-family:inherit;font-size:15px;cursor:pointer}
+.card{background:#fff;border:1px solid var(--linea);border-radius:28px;padding:34px 30px;box-shadow:0 24px 60px rgba(20,17,14,.07)}
+.q h3{font-size:clamp(21px,2.5vw,27px);letter-spacing:-.6px;line-height:1.2}
+.q .ayuda{color:var(--gris);margin-top:6px}
+.ops{display:grid;gap:10px;margin-top:22px}
+.op{display:flex;gap:14px;align-items:center;text-align:left;border:1.5px solid var(--linea);border-radius:16px;padding:15px 17px;background:#fff;cursor:pointer;font-family:inherit;font-size:16px;color:var(--tinta);transition:all .15s}
+.op:hover{border-color:var(--oro);background:#FFFBF4}
+.op.sel{border-color:var(--oro);background:#FFF5E6}
+.op .l{flex:none;width:30px;height:30px;border-radius:9px;border:1.5px solid var(--linea);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--gris)}
+.op.sel .l{background:var(--oro);border-color:var(--oro);color:var(--tinta)}
+.chipa{display:inline-flex;align-items:center;gap:8px;background:var(--crema2);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--oro);margin-bottom:16px}
+/* resultado */
+.total{background:var(--tinta);color:var(--crema);border-radius:28px;padding:34px 30px;margin-top:24px}
+.total .fila{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+@media(max-width:700px){.total .fila{grid-template-columns:1fr}}
+.total .dato span{display:block;font-size:13px;color:#C4B9AB;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.total .dato b{display:block;font-size:clamp(26px,3.4vw,36px);font-weight:900;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.total .dato b.oro{color:var(--oro2)}
+.total .dato small{color:#C4B9AB;font-size:13px}
+.res-areas{display:grid;gap:14px;margin-top:22px}
+.ra{background:#fff;border:1px solid var(--linea);border-radius:22px;padding:22px}
+.ra .cab{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ra .cab b{font-size:19px}
+.veredicto{margin-left:auto;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:700}
+.v-si{background:#E6F4EA;color:var(--verde)}.v-quizas{background:#FFF1DC;color:#9a6a1f}.v-no{background:#EFEAE3;color:var(--gris)}
+.comp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+@media(max-width:640px){.comp{grid-template-columns:1fr}}
+.comp div{background:var(--crema2);border-radius:14px;padding:13px 14px}
+.comp span{display:block;font-size:12.5px;color:var(--gris);font-weight:600}
+.comp b{font-size:18px;font-variant-numeric:tabular-nums}
+.comp .ia{background:#FFF5E6;border:1px solid rgba(200,137,47,.35)}
+.ra p{color:#4A423A;margin-top:12px;font-size:15px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+@media(max-width:640px){.form{grid-template-columns:1fr}}
+.form input{width:100%;border:1.5px solid var(--linea);border-radius:14px;padding:15px 16px;font-family:inherit;font-size:16px;background:#fff}
+.form input:focus{outline:none;border-color:var(--oro)}
+.full{grid-column:1/-1}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.ok{display:none;text-align:center;padding:24px;background:#F2F9F4;border:1px solid #bfe3cb;border-radius:18px;margin-top:16px}
+.nota{font-size:12.5px;color:var(--gris);margin-top:12px}
+/* ==========================================================
+   CLAUDIA — botón de WhatsApp + chat de la asistente
+   ========================================================== */
+.cl { position: fixed; right: 20px; bottom: 20px; z-index: 900;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+
+.cl__wa { width: 52px; height: 52px; border-radius: 50%; background: #25D366;
+  display: grid; place-items: center; box-shadow: 0 6px 20px rgba(0,0,0,.18);
+  transition: transform .18s ease; }
+.cl__wa:hover { transform: translateY(-2px) scale(1.04); }
+.cl__wa svg { width: 30px; height: 30px; fill: #fff; }
+
+.cl__toggle { border: 0; cursor: pointer; border-radius: 999px;
+  background: var(--tinta, #14110E); color: var(--crema, #EFE7DC);
+  padding: 13px 22px; font: inherit; font-size: .92rem; letter-spacing: .01em;
+  box-shadow: 0 6px 20px rgba(0,0,0,.18); transition: transform .18s ease, opacity .18s ease; }
+.cl__toggle:hover { transform: translateY(-2px); }
+.cl__toggle--oculto { display: none; }
+
+.cl__panel[hidden] { display: none; }
+.cl__panel { width: min(360px, calc(100vw - 32px)); height: min(520px, calc(100vh - 120px));
+  background: #fff; border: 1px solid rgba(20,17,14,.12); border-radius: 18px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.22); display: flex; flex-direction: column; overflow: hidden; }
+
+.cl__head { display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 16px; background: var(--tinta, #14110E); color: var(--crema, #EFE7DC); }
+.cl__head strong { display: block; font-size: 1rem; }
+.cl__head span { display: block; font-size: .74rem; opacity: .72; margin-top: 2px; }
+.cl__close { background: none; border: 0; color: inherit; font-size: 1.5rem; line-height: 1;
+  cursor: pointer; opacity: .8; padding: 0 4px; }
+.cl__close:hover { opacity: 1; }
+
+.cl__msgs { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px;
+  background: #FAF7F2; }
+
+.cl__msg { max-width: 86%; padding: 10px 13px; border-radius: 14px; font-size: .92rem; line-height: 1.45;
+  white-space: pre-wrap; word-wrap: break-word; }
+.cl__msg--bot { background: #fff; border: 1px solid rgba(20,17,14,.10); color: #14110E;
+  align-self: flex-start; border-bottom-left-radius: 5px; }
+.cl__msg--yo { background: var(--tinta, #14110E); color: var(--crema, #EFE7DC);
+  align-self: flex-end; border-bottom-right-radius: 5px; }
+
+.cl__link { display: block; margin-top: 8px; color: #C8892F; font-weight: 600; }
+
+.cl__typing { display: flex; gap: 4px; align-items: center; }
+.cl__typing i { width: 6px; height: 6px; border-radius: 50%; background: rgba(20,17,14,.35);
+  animation: clDot 1s infinite ease-in-out; }
+.cl__typing i:nth-child(2) { animation-delay: .15s; }
+.cl__typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes clDot { 0%, 60%, 100% { opacity: .3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); } }
+
+.cl__form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid rgba(20,17,14,.10); background: #fff; }
+.cl__input { flex: 1; border: 1px solid rgba(20,17,14,.16); border-radius: 999px; padding: 11px 16px;
+  font: inherit; font-size: .92rem; outline: none; color: #14110E; background: #fff; }
+.cl__input:focus { border-color: #C8892F; }
+.cl__send { border: 0; cursor: pointer; width: 42px; border-radius: 50%;
+  background: #C8892F; color: #fff; font-size: 1.1rem; }
+.cl__send:hover { filter: brightness(1.07); }
+
+@media (max-width: 600px) {
+  .cl { right: 14px; bottom: 14px; }
+  .cl__toggle { padding: 12px 18px; font-size: .88rem; }
+}
+
+</style>
+</head>
+<body>
+<div class="top"><div class="in">
+  <a class="logo" href="../" aria-label="Volver a UNONUEVECR"><svg viewBox="0 0 647.47 557.92" fill="currentColor" aria-hidden="true"><path d="M102.04,0v543.23h-38.91V52.12L5.14,114.52l-5.14-4.4L102.04,0Z"/><path d="M137.27,372.92c0-18.35,14.68-33.03,33.04-33.03s32.3,14.68,32.3,33.03-14.68,32.3-32.3,32.3-33.04-14.68-33.04-32.3ZM137.27,524.88c0-17.62,14.68-32.3,33.04-32.3s32.3,14.68,32.3,32.3-14.68,33.03-32.3,33.03-33.04-14.68-33.04-33.03Z"/><path d="M352.36,549.84c140.21,0,224.63-132.14,246.66-255.47-26.43,65.33-90.29,106.44-161.5,106.44-116.72,0-199.68-83.69-199.68-199.67S326.67,2.2,437.52,2.2c129.2,0,209.95,104.98,209.95,228.31,0,162.97-123.33,326.67-295.11,326.67v-7.34ZM605.62,225.37c0-99.84-53.59-216.56-168.11-216.56-101.31,0-158.57,101.31-158.57,192.33s57.26,192.33,158.57,192.33c94.7,0,168.11-73.41,168.11-168.11Z"/></svg><span>UNONUEVE<span class="cr">CR</span></span></a>
+  <div class="barra"><i id="barra"></i></div><span class="paso-t" id="pasot">Paso 1</span>
+</div></div>
+
+<main>
+  <!-- 1. elegir áreas -->
+  <section class="vista on" id="v-areas">
+    <span class="k">Diagnóstico gratuito · 3 a 5 minutos</span>
+    <h1>¿De verdad necesitás <em>automatizar?</em></h1>
+    <p class="lead">Elegí las áreas que querés revisar. Por cada una te decimos cuánto te cuesta hoy, cuánto te costaría contratar a alguien para cubrirla (empleado o freelance) y cuánto sale con un sistema de inteligencia artificial. Si no conviene, te lo decimos.</p>
+    <div class="areas" id="areas"></div>
+    <div class="acciones"><button class="btn oro" id="empezar" disabled>Empezar el diagnóstico →</button><span class="nota" id="nsel">Elegí al menos un área</span></div>
+  </section>
+
+  <!-- 2. preguntas -->
+  <section class="vista" id="v-preg"><div class="card q" id="preg"></div></section>
+
+  <!-- 3. resultado -->
+  <section class="vista" id="v-res"></section>
+</main>
+
+<script>
+/* ============ CONFIG (valores de referencia, editables) ============ */
+var CONFIG = {
+  WEBHOOK: 'https://n8n-unonueve-n8n.i5i6e4.easypanel.host/webhook/unonueve-diagnostico',            /* vacío = no envía (propuesta) */
+  AGENDA: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1tAU9od17wAmSwcmF4YD9HMuHwCRxtca-qXM3JqY5vS_gNZXnkAD3EpGs4FKkBKGv_c8J54UgR',
+  TC: 505,                /* ₡ por dólar, aproximado */
+  COSTO_HORA: 4200,       /* ₡ por hora del equipo actual (costo total de la empresa) */
+  MENSUALIDAD: [[2,300],[4,600],[99,850]],   /* hasta N áreas → USD/mes */
+  IMPLEMENTACION: {base:1000, porArea:600}  /* USD, una sola vez, «desde» */
+};
+/* Costo de cubrir cada área contratando: empleado (costo total mensual) y freelance (mensual). Referencias de mercado CR. */
+var AREAS = {
+  ventas:      {ic:'📈', n:'Ventas', d:'Quién llama a quién, clientes calientes y seguimiento', emp:722500, fre:280000, rol:'un asistente comercial'},
+  prospeccion: {ic:'🎯', n:'Prospección', d:'Conseguir clientes nuevos todos los días', emp:680000, fre:250000, rol:'alguien que prospecte'},
+  atencion:    {ic:'💬', n:'Atención y WhatsApp', d:'Contestar rápido, a cualquier hora, con el mismo guion', emp:650000, fre:220000, rol:'una persona de servicio al cliente'},
+  conta:       {ic:'🧾', n:'Cobros y contabilidad', d:'Facturas, cuentas por cobrar y el mismo dato escrito tres veces', emp:700000, fre:230000, rol:'un auxiliar contable'},
+  reportes:    {ic:'📊', n:'Reportes ejecutivos', d:'Balances y números para las reuniones', emp:900000, fre:300000, rol:'un analista de datos'},
+  contenido:   {ic:'🎬', n:'Creación de contenido', d:'Publicar seguido con IA, alimentado por tu propio sistema', emp:700000, fre:320000, rol:'un creador de contenido o community manager'}
+};
+/* Preguntas por área. Cada opción: [texto, horas por semana que se van en eso] */
+var PREG = {
+  ventas:[
+    ['¿Tus vendedores saben cada mañana a quién llamar y a quién no?', [['Sí, reciben una lista priorizada',0],['Cada uno revisa su cartera',3],['Se lo dice el jefe cuando puede',6],['No hay seguimiento ordenado',9]]],
+    ['¿Distinguen un cliente caliente (listo para comprar) de uno frío?', [['Sí, el sistema los califica',0],['Por intuición',3],['No, a todos se les dedica el mismo tiempo',6]]],
+    ['¿Qué pasa con una cotización que el cliente no respondió?', [['Tiene seguimiento automático',0],['Alguien se acuerda de volver a escribir',2],['Se queda ahí',5]]]
+  ],
+  prospeccion:[
+    ['¿Cómo consiguen clientes nuevos?', [['Un sistema prospecta y agenda',0],['Los vendedores buscan a mano',6],['Solo por referidos',3],['Pautamos pero nadie sigue los mensajes',7]]],
+    ['¿Tienen una agenda diaria de prospección?', [['Sí, sale sola cada mañana',0],['Sí, pero la armamos a mano',3],['No, se prospecta cuando sobra tiempo',5]]]
+  ],
+  atencion:[
+    ['¿Cuántos mensajes (WhatsApp y redes) reciben al día?', [['Menos de 20',2],['Entre 20 y 60',6],['Entre 60 y 150',12],['Más de 150',20]]],
+    ['¿Cuánto tarda la primera respuesta a un cliente nuevo?', [['Menos de 5 minutos, a cualquier hora',0],['Menos de una hora, en horario',2],['El mismo día',4],['Al día siguiente, o nunca si escriben de noche',6]]],
+    ['¿Tu equipo atiende el WhatsApp de la misma forma?', [['Sí: hay guion y sistema',0],['Cada quien a su manera',3],['No hay nadie fijo',5]]]
+  ],
+  conta:[
+    ['¿Cuántas veces se escribe el mismo dato (un pedido, una factura)?', [['Una vez: llega solo a contabilidad',0],['Dos: sistema y Excel',4],['Tres o más: Excel, sistema y contabilidad',9]]],
+    ['¿Cómo saben qué facturas están pendientes de cobro?', [['El sistema avisa y cobra solo',0],['Alguien revisa un Excel',3],['Nos damos cuenta cuando ya es tarde',6]]],
+    ['¿Cómo llegan las facturas de compra a contabilidad?', [['Se registran solas',0],['Alguien las digita',4],['Fotos y papeles sueltos',6]]]
+  ],
+  reportes:[
+    ['¿Quién arma los balances y cuándo están listos?', [['Salen del sistema, al día',0],['El contador, a fin de mes',3],['Tardan semanas',6],['No tenemos balances al día',8]]],
+    ['¿Cómo se presentan los números en la reunión ejecutiva?', [['Con un panel en vivo',0],['Con una presentación armada a mano',5],['Compartimos el Excel',4],['No hay reunión de números',3]]]
+  ],
+  contenido:[
+    ['¿Cuántas veces publican por semana?', [['4 o más, con constancia',1],['2 o 3',3],['1 o ninguna',5]]],
+    ['¿Quién crea el contenido hoy?', [['Un sistema lo arma y lo aprobamos',0],['El dueño, cuando puede',6],['Alguien del equipo además de su trabajo',5],['Un freelance o agencia',2]]],
+    ['¿El contenido usa lo que pasa en tu negocio (preguntas de clientes, productos más vendidos)?', [['Sí, sale de los datos del sistema',0],['A veces',2],['No, se inventa cada semana',4]]]
+  ]
+};
+var GENERAL = [
+  ['Si tuvieras que resolver estas áreas con personas, ¿qué harías?', [['Contratar a alguien en planilla','emp'],['Buscar un freelance','fre'],['Cargárselo a alguien del equipo actual','eq'],['No lo resolvería','no']]],
+  ['¿Cuántas personas trabajan en administración, ventas y atención?', [['De 1 a 3',1],['De 4 a 10',1.6],['De 11 a 30',2.6],['Más de 30',4]]]
+];
+
+/* ============ estado ============ */
+var sel = [], cola = [], i = 0, resp = {};
+var elAreas = document.getElementById('areas');
+Object.keys(AREAS).forEach(function(k){
+  var a = AREAS[k], b = document.createElement('button');
+  b.className = 'area'; b.type = 'button';
+  b.innerHTML = '<div class="ic">'+a.ic+'</div><div><b></b><span></span></div><div class="ck">✓</div>';
+  b.querySelector('b').textContent = a.n; b.querySelector('span').textContent = a.d;
+  b.addEventListener('click', function(){
+    var p = sel.indexOf(k); if(p < 0) sel.push(k); else sel.splice(p,1);
+    b.classList.toggle('sel', p < 0);
+    document.getElementById('empezar').disabled = !sel.length;
+    document.getElementById('nsel').textContent = sel.length ? sel.length + (sel.length>1?' áreas elegidas':' área elegida') : 'Elegí al menos un área';
+  });
+  elAreas.appendChild(b);
+});
+function vista(id){ document.querySelectorAll('.vista').forEach(function(v){ v.classList.toggle('on', v.id === id); }); scrollTo({top:0, behavior:'smooth'}); }
+document.getElementById('empezar').addEventListener('click', function(){
+  cola = [];
+  Object.keys(AREAS).forEach(function(k){ if(sel.indexOf(k) >= 0) PREG[k].forEach(function(q,n){ cola.push({area:k, n:n, q:q}); }); });
+  GENERAL.forEach(function(q,n){ cola.push({area:'general', n:n, q:q}); });
+  i = 0; vista('v-preg'); pintar();
+});
+function pintar(){
+  var c = cola[i], p = document.getElementById('preg');
+  document.getElementById('barra').style.width = (i / cola.length * 100) + '%';
+  document.getElementById('pasot').textContent = (i+1) + ' de ' + cola.length;
+  var nombre = c.area === 'general' ? 'Tu negocio' : AREAS[c.area].n;
+  var h = '<span class="chipa"></span><h3></h3><div class="ops">';
+  c.q[1].forEach(function(o,n){ h += '<button class="op" type="button"><span class="l">'+'ABCD'[n]+'</span><span></span></button>'; });
+  h += '</div><div class="acciones"><button class="volver" type="button" id="atras">← Anterior</button></div>';
+  p.innerHTML = h;
+  p.querySelector('.chipa').textContent = nombre;
+  p.querySelector('h3').textContent = c.q[0];
+  var clave = c.area + ':' + c.n;
+  p.querySelectorAll('.op').forEach(function(b,n){
+    b.querySelector('span:last-child').textContent = c.q[1][n][0];
+    if(resp[clave] === n) b.classList.add('sel');
+    b.addEventListener('click', function(){ resp[clave] = n; i++; if(i < cola.length) pintar(); else resultado(); });
+  });
+  document.getElementById('atras').addEventListener('click', function(){ if(i){ i--; pintar(); } else vista('v-areas'); });
+}
+function fmt(n){ return '₡' + Math.round(n).toLocaleString('es-CR'); }
+function mensualidadUSD(n){ for(var k=0;k<CONFIG.MENSUALIDAD.length;k++) if(n <= CONFIG.MENSUALIDAD[k][0]) return CONFIG.MENSUALIDAD[k][1]; }
+
+function resultado(){
+  document.getElementById('barra').style.width = '100%';
+  document.getElementById('pasot').textContent = 'Resultado';
+  var cubrir = GENERAL[0][1][resp['general:0']][1];
+  var equipo = GENERAL[1][1][resp['general:1']][1];
+  var sistemaMes = mensualidadUSD(sel.length) * CONFIG.TC;
+  var porArea = sistemaMes / sel.length;
+  var totHoy = 0, totContratar = 0, filas = [];
+  sel.forEach(function(k){
+    var a = AREAS[k], horas = 0, max = 0;
+    PREG[k].forEach(function(q,n){ horas += q[1][resp[k+':'+n]][1]; max += Math.max.apply(null, q[1].map(function(o){ return o[1]; })); });
+    var hMes = horas * 4.33 * equipo;
+    var hoy = hMes * CONFIG.COSTO_HORA;
+    var contratar = cubrir === 'fre' ? a.fre : a.emp;
+    if(k === 'atencion'){ contratar = contratar * (horas >= 12 ? 2 : 1); }   /* cubrir noches y fines de semana exige más de una persona */
+    var grado = horas / max;
+    var ver = grado >= .5 ? ['v-si','Conviene automatizar'] : grado >= .2 ? ['v-quizas','Conviene, sin urgencia'] : ['v-no','Hoy no te urge'];
+    totHoy += hoy; totContratar += contratar;
+    filas.push({k:k, a:a, hMes:hMes, hoy:hoy, contratar:contratar, ver:ver, grado:grado});
+  });
+  filas.sort(function(x,y){ return y.grado - x.grado; });
+  var referencia = Math.max(totHoy, cubrir === 'no' || cubrir === 'eq' ? totHoy : totContratar);
+  var ahorro = Math.max(0, referencia - sistemaMes);
+  var impl = (CONFIG.IMPLEMENTACION.base + CONFIG.IMPLEMENTACION.porArea * (sel.length - 1)) * CONFIG.TC;
+  var meses = ahorro > 0 ? Math.max(1, Math.ceil(impl / ahorro)) : null;
+  var etiquetaRef = cubrir === 'emp' ? 'Contratar personal' : cubrir === 'fre' ? 'Contratar freelance' : 'Lo que te cuesta hoy';
+
+  var h = '<span class="k">Tu diagnóstico</span><h1>Esto es lo que <em>te cuesta hoy.</em></h1>';
+  h += '<div class="total"><span style="color:#C4B9AB">Resumen mensual de las ' + sel.length + ' áreas que revisaste</span><div class="fila">';
+  h += '<div class="dato"><span>Hoy, hecho a mano</span><b>'+fmt(totHoy)+'</b><small>≈ '+Math.round(filas.reduce(function(s,f){ return s+f.hMes; },0))+' h de tu equipo al mes</small></div>';
+  h += '<div class="dato"><span>'+(cubrir==='emp'||cubrir==='fre' ? etiquetaRef : 'Si contrataras personal')+'</span><b>'+fmt(totContratar)+'</b><small>'+(cubrir==='fre'?'freelance, por mes':'costo total por mes')+'</small></div>';
+  h += '<div class="dato"><span>Con el sistema de IA</span><b class="oro">'+fmt(sistemaMes)+'</b><small>mensualidad estimada, 24/7</small></div>';
+  h += '</div>';
+  if(ahorro > 0) h += '<p style="margin-top:22px;font-size:18px">Ahorro estimado: <b style="color:var(--oro2)">'+fmt(ahorro)+' al mes</b>. La implementación (desde '+fmt(impl)+', una sola vez) se pagaría en <b style="color:var(--oro2)">'+meses+(meses>1?' meses':' mes')+'</b>.</p>';
+  else h += '<p style="margin-top:22px;font-size:18px">Con tus respuestas, <b style="color:var(--oro2)">hoy no te conviene automatizar</b>. Y está bien: preferimos decírtelo.</p>';
+  h += '</div><h2 style="margin-top:40px">Área por área</h2><div class="res-areas">';
+  filas.forEach(function(f){
+    h += '<div class="ra"><div class="cab"><span style="font-size:24px">'+f.a.ic+'</span><b>'+f.a.n+'</b><span class="veredicto '+f.ver[0]+'">'+f.ver[1]+'</span></div>';
+    h += '<div class="comp"><div><span>Hoy, a mano</span><b>'+fmt(f.hoy)+'</b></div><div><span>Contratar '+f.a.rol+'</span><b>'+fmt(f.contratar)+'</b></div><div class="ia"><span>Con el sistema</span><b>'+fmt(porArea)+'</b></div></div>';
+    h += '<p>'+Math.round(f.hMes)+' horas al mes de tu equipo se van en esto. El sistema lo cubre 24/7 y tu gente se dedica a lo que ninguna máquina hace bien.</p></div>';
+  });
+  h += '</div><div class="card" style="margin-top:40px"><h2>Recibí el informe y <em>agendá tu reunión</em></h2><p class="nota" style="font-size:15px">En 30 minutos revisamos estos números con los tuyos reales. Sin compromiso.</p>';
+  h += '<form class="form" id="f" novalidate><input name="nombre" placeholder="Nombre" required maxlength="80" autocomplete="name"><input name="empresa" placeholder="Empresa" required maxlength="80" autocomplete="organization"><input name="whatsapp" placeholder="WhatsApp" required inputmode="tel" maxlength="20" autocomplete="tel"><input name="correo" type="email" placeholder="Correo" maxlength="120" autocomplete="email"><div class="hp" aria-hidden="true"><input name="sitio" tabindex="-1" autocomplete="off"></div><button class="btn oro full" type="submit">Enviarme el informe</button></form>';
+  h += '<div class="ok" id="ok"><b>¡Listo!</b> Te mandamos el informe por WhatsApp.<br><br><a class="btn tinta" id="agenda" target="_blank" rel="noopener">Agendar mi reunión de 30 min →</a></div>';
+  h += '<p class="nota">Cifras estimadas con tus respuestas y con costos de referencia del mercado costarricense. En la reunión las ajustamos con tus números reales.</p></div>';
+  var v = document.getElementById('v-res'); v.innerHTML = h; vista('v-res');
+  document.getElementById('agenda').href = CONFIG.AGENDA;
+  var f = document.getElementById('f');
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(f.sitio.value) return;
+    var nombre = f.nombre.value.trim(), wa = f.whatsapp.value.replace(/[^\d+]/g,'');
+    if(nombre.length < 2){ f.nombre.focus(); return; }
+    if(wa.replace('+','').length < 8){ f.whatsapp.focus(); return; }
+    var datos = {tipo:'diagnostico', nombre:nombre.slice(0,80), empresa:f.empresa.value.trim().slice(0,80), whatsapp:wa.slice(0,20), correo:f.correo.value.trim().slice(0,120), areas:sel, respuestas:resp, cubrir:cubrir, hoy:Math.round(totHoy), contratar:Math.round(totContratar), sistema:Math.round(sistemaMes), ahorro:Math.round(ahorro)};
+    f.querySelector('button').disabled = true;
+    var listo = function(){ f.style.display = 'none'; document.getElementById('ok').style.display = 'block'; };
+    if(!CONFIG.WEBHOOK){ listo(); return; }
+    fetch(CONFIG.WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(datos)}).then(listo).catch(listo);
+  });
+}
+
+</script>
+<script src="/js/claudia.js" defer></script>
+</body>
+</html>
