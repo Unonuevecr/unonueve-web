@@ -196,7 +196,12 @@ var CONFIG = {
   CONTENIDO_USD: 800,     /* servicio de creación de contenido hecho por UNONUEVECR, por mes */
   COSTO_HORA: 4200,       /* ₡ por hora del equipo actual (costo total de la empresa) */
   MENSUALIDAD: [[2,300],[99,350]],   /* hasta N áreas → USD/mes */
-  IMPLEMENTACION: {base:3500, porArea:500, tope:5000}  /* USD, una sola vez */
+  /* Implementación por módulo, USD, una sola vez. NO se muestra como lista: solo alimenta el cálculo. */
+  IMPL: { crm:3500,          /* WhatsApp + CRM: cubre atención y ventas */
+          conta:1000,        /* contabilidad y cobros */
+          prospeccion:1500,  /* PROVISIONAL — confirmar con Gerson */
+          reportes:1000,     /* PROVISIONAL — confirmar con Gerson */
+          contenido:2500 },  /* sistema de contenido propio del cliente */
 };
 /* Costo de cubrir cada área contratando: empleado (costo total mensual) y freelance (mensual). Referencias de mercado CR. */
 var AREAS = {
@@ -235,7 +240,8 @@ var PREG = {
   contenido:[
     ['¿Cuántas veces publican por semana?', [['4 o más, con constancia',1],['2 o 3',3],['1 o ninguna',5]]],
     ['¿Quién crea el contenido hoy?', [['Un sistema lo arma y lo aprobamos',0],['El dueño, cuando puede',6],['Alguien del equipo además de su trabajo',5],['Un freelance o agencia',2]]],
-    ['¿El contenido usa lo que pasa en tu negocio (preguntas de clientes, productos más vendidos)?', [['Sí, sale de los datos del sistema',0],['A veces',2],['No, se inventa cada semana',4]]]
+    ['¿El contenido usa lo que pasa en tu negocio (preguntas de clientes, productos más vendidos)?', [['Sí, sale de los datos del sistema',0],['A veces',2],['No, se inventa cada semana',4]]],
+    ['¿Cómo preferirías resolver el contenido?', [['Que UNONUEVECR lo cree y lo publique por mí',0],['Tener mi propio sistema: hace videos e imágenes y mi equipo solo aprueba',0],['Todavía no sé',0]]]
   ]
 };
 var GENERAL = [
@@ -294,13 +300,21 @@ function resultado(){
   var cubrir = GENERAL[0][1][resp['general:0']][1];
   var equipo = GENERAL[1][1][resp['general:1']][1];
   /* El contenido va aparte: lo crea UNONUEVECR por una tarifa mensual, o se le implementa al cliente su propio sistema (adicional). */
-  var nSis = sel.filter(function(k){ return k !== 'contenido'; }).length;
-  var contenidoMes = sel.indexOf('contenido') >= 0 ? CONFIG.CONTENIDO_USD * CONFIG.TC : 0;
+  function tiene(k){ return sel.indexOf(k) >= 0; }
+  var conCont = tiene('contenido');
+  var contSistema = conCont && resp['contenido:3'] === 1;     /* eligió tener su propio sistema de contenido */
+  var nSis = sel.filter(function(k){ return k !== 'contenido'; }).length + (contSistema ? 1 : 0);
+  var contenidoMes = conCont && !contSistema ? CONFIG.CONTENIDO_USD * CONFIG.TC : 0;
   var mensualSis = nSis ? mensualidadUSD(nSis) * CONFIG.TC : 0;
-  var impl = nSis ? Math.min(CONFIG.IMPLEMENTACION.tope, CONFIG.IMPLEMENTACION.base + CONFIG.IMPLEMENTACION.porArea * (nSis - 1)) * CONFIG.TC : 0;
+  var I = CONFIG.IMPL;
+  var implUSD = (tiene('atencion') || tiene('ventas') ? I.crm : 0) + (tiene('conta') ? I.conta : 0) + (tiene('prospeccion') ? I.prospeccion : 0) + (tiene('reportes') ? I.reportes : 0);
+  var implContUSD = I.contenido;
+  var impl = (implUSD + (contSistema ? implContUSD : 0)) * CONFIG.TC;
+  var nNoCont = nSis - (contSistema ? 1 : 0);
   var mensual = mensualSis + contenidoMes;         /* lo que se paga cada mes desde el 2.º año */
   var sistemaMes = impl / 12 + mensual;            /* 1.er año: implementación repartida en 12 meses + mensualidades */
-  var porArea = nSis ? (impl / 12 + mensualSis) / nSis : 0;
+  var porArea = nNoCont ? (implUSD * CONFIG.TC / 12 + mensualSis * nNoCont / nSis) / nNoCont : 0;
+  var contSistemaMes = implContUSD * CONFIG.TC / 12 + (nSis ? mensualSis / nSis : mensualidadUSD(1) * CONFIG.TC);
   var totHoy = 0, totContratar = 0, filas = [];
   sel.forEach(function(k){
     var a = AREAS[k], horas = 0, max = 0;
@@ -339,7 +353,7 @@ function resultado(){
   h += '</div><h2 style="margin-top:40px">Área por área</h2><div class="res-areas">';
   filas.forEach(function(f){
     h += '<div class="ra"><div class="cab"><span style="font-size:24px">'+f.a.ic+'</span><b>'+f.a.n+'</b><span class="veredicto '+f.ver[0]+'">'+f.ver[1]+'</span></div>';
-    h += '<div class="comp"><div><span>Hoy, a mano</span><b>'+fmt(f.hoy)+'</b></div><div><span>Contratar '+f.a.rol+'</span><b>'+fmt(f.contratar)+'</b></div>'+(f.k === 'contenido' ? '<div class="ia"><span>UNONUEVECR lo crea por vos</span><b>'+fmt(contenidoMes)+'</b></div></div><div class="alt"><b>O tu propio sistema de contenido</b> — hace los videos, las imágenes y los recortes; tu equipo solo aprueba lo que le gusta y acomoda los textos, sin crear desde cero. Se implementa aparte y lo cotizamos en la reunión.</div>' : '<div class="ia"><span>Con el sistema (1.er año)</span><b>'+fmt(porArea)+'</b></div></div>');
+    h += '<div class="comp"><div><span>Hoy, a mano</span><b>'+fmt(f.hoy)+'</b></div><div><span>Contratar '+f.a.rol+'</span><b>'+fmt(f.contratar)+'</b></div>'+(f.k === 'contenido' ? (contSistema ? '<div class="ia"><span>Tu propio sistema (1.er año)</span><b>'+fmt(contSistemaMes)+'</b></div></div><div class="alt"><b>O que UNONUEVECR lo cree por vos:</b> '+fmt(CONFIG.CONTENIDO_USD * CONFIG.TC)+' al mes, sin implementación. Nosotros lo hacemos y lo publicamos.</div>' : '<div class="ia"><span>UNONUEVECR lo crea por vos</span><b>'+fmt(contenidoMes)+'</b></div></div><div class="alt"><b>O tu propio sistema de contenido</b> — hace los videos, las imágenes y los recortes; tu equipo solo aprueba y acomoda los textos. Sale en '+fmt(contSistemaMes)+' al mes el primer año y después solo la mensualidad.</div>') : '<div class="ia"><span>Con el sistema (1.er año)</span><b>'+fmt(porArea)+'</b></div></div>');
     h += '<p>'+Math.round(f.hMes)+' horas al mes de tu equipo se van en esto. '+(f.k === 'contenido' ? 'Con nosotros o con tu propio sistema, nadie en tu equipo vuelve a crear desde cero.' : 'El sistema lo cubre 24/7 y tu gente se dedica a lo que ninguna máquina hace bien.')+'</p></div>';
   });
   h += '</div><div class="card" style="margin-top:40px"><h2>Recibí el informe y <em>agendá tu reunión</em></h2><p class="nota" style="font-size:15px">En 30 minutos revisamos estos números con los tuyos reales. Sin compromiso.</p>';
