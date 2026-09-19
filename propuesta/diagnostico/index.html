@@ -3,12 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Diagnóstico gratuito — UNONUEVECR</title>
+<title>Test gratuito: ¿de verdad necesitás automatizar? | UNONUEVECR</title>
 <meta name="description" content="Test gratuito por área: ventas, atención, prospección, contabilidad, reportes y contenido. Te dice cuánto te cuesta hoy, cuánto costaría contratar a alguien y cuánto ahorrás con un sistema de inteligencia artificial.">
 <meta name="theme-color" content="#EFE7DC">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://n8n-unonueve-n8n.i5i6e4.easypanel.host; base-uri 'self'; form-action 'self'">
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://unonuevecr.com/diagnostico/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_CR"><meta property="og:url" content="https://unonuevecr.com/diagnostico/">
+<meta property="og:title" content="¿De verdad necesitás automatizar? Test gratuito">
+<meta property="og:description" content="Cuánto te cuesta hoy, cuánto saldría contratar a alguien y cuánto con un sistema de IA. 3 a 5 minutos.">
+<meta property="og:image" content="https://unonuevecr.com/assets/og.jpg"><meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Diagnóstico de automatización — UNONUEVECR", "url": "https://unonuevecr.com/diagnostico/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "es-CR", "description": "Test gratuito por área que compara el costo de hacerlo a mano, contratar personal o freelance, y un sistema de inteligencia artificial, a uno y tres años.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "CRC"}, "provider": {"@type": "ProfessionalService", "name": "UNONUEVECR", "url": "https://unonuevecr.com/"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
@@ -194,23 +202,23 @@ var CONFIG = {
   AGENDA: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1tAU9od17wAmSwcmF4YD9HMuHwCRxtca-qXM3JqY5vS_gNZXnkAD3EpGs4FKkBKGv_c8J54UgR',
   TC: 505,                /* ₡ por dólar, aproximado */
   CONTENIDO_USD: 800,     /* servicio de creación de contenido hecho por UNONUEVECR, por mes */
-  COSTO_HORA: 4200,       /* ₡ por hora del equipo actual (costo total de la empresa) */
+  COSTO_HORA: 2430,       /* ₡505.000 (₡350.000 de salario + 44,5% de cargas y provisiones) ÷ 208 h al mes */
   MENSUALIDAD: [[2,300],[99,350]],   /* hasta N áreas → USD/mes */
   /* Implementación por módulo, USD, una sola vez. NO se muestra como lista: solo alimenta el cálculo. */
   IMPL: { crm:3500,          /* WhatsApp + CRM: cubre atención y ventas */
           conta:1000,        /* contabilidad y cobros */
-          prospeccion:1500,  /* PROVISIONAL — confirmar con Gerson */
-          reportes:1000,     /* PROVISIONAL — confirmar con Gerson */
+          prospeccion:500,   /* complemento del CRM: se alimenta del sistema */
+          reportes:500,      /* complemento del CRM: se alimenta del sistema */
           contenido:2500 },  /* sistema de contenido propio del cliente */
 };
-/* Costo de cubrir cada área contratando: empleado (costo total mensual) y freelance (mensual). Referencias de mercado CR. */
+/* Costo de cubrir cada área contratando: empleado = salario base × 1,445 (cargas y provisiones, CR) · freelance mensual. */
 var AREAS = {
-  ventas:      {ic:'📈', n:'Ventas', d:'Quién llama a quién, clientes calientes y seguimiento', emp:722500, fre:280000, rol:'un asistente comercial'},
-  prospeccion: {ic:'🎯', n:'Prospección', d:'Conseguir clientes nuevos todos los días', emp:680000, fre:250000, rol:'alguien que prospecte'},
-  atencion:    {ic:'💬', n:'Atención y WhatsApp', d:'Contestar rápido, a cualquier hora, con el mismo guion', emp:650000, fre:220000, rol:'una persona de servicio al cliente'},
-  conta:       {ic:'🧾', n:'Cobros y contabilidad', d:'Facturas, cuentas por cobrar y el mismo dato escrito tres veces', emp:700000, fre:230000, rol:'un auxiliar contable'},
-  reportes:    {ic:'📊', n:'Reportes ejecutivos', d:'Balances y números para las reuniones', emp:900000, fre:300000, rol:'un analista de datos'},
-  contenido:   {ic:'🎬', n:'Creación de contenido', d:'Publicar seguido con IA, alimentado por tu propio sistema', emp:700000, fre:320000, rol:'un creador de contenido o community manager'}
+  ventas:      {ic:'📈', n:'Ventas', d:'Quién llama a quién, clientes calientes y seguimiento', emp:505000, fre:280000, rol:'un asistente comercial'},
+  prospeccion: {ic:'🎯', n:'Prospección', d:'Conseguir clientes nuevos todos los días', emp:505000, fre:250000, rol:'alguien que prospecte'},
+  atencion:    {ic:'💬', n:'Atención y WhatsApp', d:'Contestar rápido, a cualquier hora, con el mismo guion', emp:505000, fre:220000, rol:'una persona de servicio al cliente'},
+  conta:       {ic:'🧾', n:'Cobros y contabilidad', d:'Facturas, cuentas por cobrar y el mismo dato escrito tres veces', emp:578000, fre:230000, rol:'un auxiliar contable'},
+  reportes:    {ic:'📊', n:'Reportes ejecutivos', d:'Balances y números para las reuniones', emp:867000, fre:300000, rol:'un analista de datos'},
+  contenido:   {ic:'🎬', n:'Creación de contenido', d:'Publicar seguido con IA, alimentado por tu propio sistema', emp:505000, fre:320000, rol:'un creador de contenido o community manager'}
 };
 /* Preguntas por área. Cada opción: [texto, horas por semana que se van en eso] */
 var PREG = {
@@ -307,7 +315,9 @@ function resultado(){
   var contenidoMes = conCont && !contSistema ? CONFIG.CONTENIDO_USD * CONFIG.TC : 0;
   var mensualSis = nSis ? mensualidadUSD(nSis) * CONFIG.TC : 0;
   var I = CONFIG.IMPL;
-  var implUSD = (tiene('atencion') || tiene('ventas') ? I.crm : 0) + (tiene('conta') ? I.conta : 0) + (tiene('prospeccion') ? I.prospeccion : 0) + (tiene('reportes') ? I.reportes : 0);
+  /* Prospección y reportes son complementos del CRM: si se eligen, el CRM va incluido. */
+  var usaCRM = tiene('atencion') || tiene('ventas') || tiene('prospeccion') || tiene('reportes');
+  var implUSD = (usaCRM ? I.crm : 0) + (tiene('conta') ? I.conta : 0) + (tiene('prospeccion') ? I.prospeccion : 0) + (tiene('reportes') ? I.reportes : 0);
   var implContUSD = I.contenido;
   var impl = (implUSD + (contSistema ? implContUSD : 0)) * CONFIG.TC;
   var nNoCont = nSis - (contSistema ? 1 : 0);
@@ -359,7 +369,7 @@ function resultado(){
   h += '</div><div class="card" style="margin-top:40px"><h2>Recibí el informe y <em>agendá tu reunión</em></h2><p class="nota" style="font-size:15px">En 30 minutos revisamos estos números con los tuyos reales. Sin compromiso.</p>';
   h += '<form class="form" id="f" novalidate><input name="nombre" placeholder="Nombre" required maxlength="80" autocomplete="name"><input name="empresa" placeholder="Empresa" required maxlength="80" autocomplete="organization"><input name="whatsapp" placeholder="WhatsApp" required inputmode="tel" maxlength="20" autocomplete="tel"><input name="correo" type="email" placeholder="Correo" maxlength="120" autocomplete="email"><div class="hp" aria-hidden="true"><input name="sitio" tabindex="-1" autocomplete="off"></div><button class="btn oro full" type="submit">Enviarme el informe</button></form>';
   h += '<div class="ok" id="ok"><b>¡Listo!</b> Te mandamos el informe por WhatsApp.<br><br><a class="btn tinta" id="agenda" target="_blank" rel="noopener">Agendar mi reunión de 30 min →</a></div>';
-  h += '<p class="nota">Cifras estimadas con tus respuestas y con costos de referencia del mercado costarricense. En la reunión las ajustamos con tus números reales.</p></div>';
+  h += '<p class="nota">Cifras estimadas con tus respuestas y con costos de referencia del mercado costarricense. En la reunión las ajustamos con tus números reales. Al enviar aceptás nuestra <a href="../privacidad/">política de privacidad</a>.</p></div>';
   var v = document.getElementById('v-res'); v.innerHTML = h; vista('v-res');
   if(CONFIG.WEBHOOK){ try { fetch(CONFIG.WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({tipo:'test', areas:sel, respuestas:resp, cubrir:cubrir, hoy:Math.round(totHoy), contratar:Math.round(totContratar), sistema:Math.round(sistemaMes), ahorro:Math.round(ahorro), origen:location.pathname})}).catch(function(){}); } catch(x){} }
   document.getElementById('agenda').href = CONFIG.AGENDA;
