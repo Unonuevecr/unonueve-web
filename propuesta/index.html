@@ -312,6 +312,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;
   .cl__toggle { padding: 12px 18px; font-size: .88rem; }
 }
 
+.dos-caminos{display:grid;gap:10px;margin-top:22px}
+.dos-caminos>div{border-left:3px solid var(--oro);padding:6px 0 6px 14px}
+.dos-caminos b{display:block}
+.dos-caminos span{color:#4A423A;font-size:15px}
 </style>
 </head>
 <body>
@@ -334,7 +338,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;
   <div class="ahorro rv" aria-label="Ahorro en vivo de nuestros clientes">
     <div><div class="t"><i></i>En este momento</div><div class="total" id="total">₡0</div><div class="sub">ahorrados este mes por nuestros clientes</div></div>
     <div id="clientes" style="display:contents"></div>
-    <details class="como-calc"><summary>¿Cómo lo calculamos?</summary><p>Por cada cliente sumamos lo que le costaría contratar a las personas que harían ese trabajo a mano (≈ ₡722.500 al mes cada una, costo total para la empresa), las herramientas que ya no paga (como GoHighLevel, $297 al mes) y el desarrollador que ya no contrata. Le restamos su mensualidad. El contador reparte ese ahorro mensual segundo a segundo.</p></details>
+    <details class="como-calc"><summary>¿Cómo lo calculamos?</summary><p>Por cada cliente sumamos lo que le costaría contratar a las personas que harían ese trabajo a mano (≈ ₡722.500 al mes cada una, costo total para la empresa), las herramientas que ya no paga (como GoHighLevel, $297 al mes) y el desarrollador que ya no contrata. Le restamos lo que nos paga cada mes (mensualidad del sistema o el servicio de contenido). El contador reparte ese ahorro mensual segundo a segundo.</p></details>
   </div>
 </div></header>
 
@@ -392,7 +396,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;
 </div></section>
 
 <section id="contenido"><div class="wrap"><div class="banner-cont rv" role="img" aria-label="Un creador de contenido y sus copias transparentes grabando, diseñando y programando publicaciones"><b>Grabar, diseñar y programar. Al mismo tiempo.</b></div></div><div class="wrap cont-ia">
-  <div class="cab rv" style="margin-bottom:0"><span class="k">Creación de contenido con IA</span><h2>Tu contenido sale <em>de tu propio sistema.</em></h2><p>También creamos contenido para empresas, pero no a ciegas: lo alimentan los datos del sistema que te implementamos. Las preguntas que más hacen tus clientes, los productos que más se venden y lo que se está quedando en bodega se convierten en publicaciones.</p><div style="margin-top:26px"><a class="btn tinta" href="diagnostico/">Ver si me conviene →</a></div></div>
+  <div class="cab rv" style="margin-bottom:0"><span class="k">Creación de contenido con IA</span><h2>Tu contenido sale <em>de tu propio sistema.</em></h2><p>También creamos contenido para empresas, pero no a ciegas: lo alimentan los datos del sistema que te implementamos. Las preguntas que más hacen tus clientes, los productos que más se venden y lo que se está quedando en bodega se convierten en publicaciones.</p><div class="dos-caminos"><div><b>Lo hacemos nosotros</b><span>Nuestro equipo crea y publica tu contenido cada mes, alimentado por tu sistema.</span></div><div><b>O te dejamos tu propio sistema</b><span>Hace los videos, las imágenes y los recortes. Tu equipo solo aprueba lo que le gusta y acomoda los textos: nadie crea desde cero.</span></div></div><div style="margin-top:26px"><a class="btn tinta" href="diagnostico/">Ver si me conviene →</a></div></div>
   <div class="flujo rv">
     <div><span class="ic">💬</span><div><b>Lo que preguntan tus clientes</b><span>El bot de atención detecta las dudas que más se repiten.</span></div></div>
     <div><span class="ic">📦</span><div><b>Lo que se vende y lo que no</b><span>Ventas e inventario dicen qué empujar esta semana.</span></div></div>
@@ -447,7 +451,7 @@ var CONFIG = {
   CLIENTES: [
     { icono:'🚚', rubro:'Distribuidora', detalle:'Atención 24/7, cartera de vendedores, cobros y prospección', personas:4.5, ghl:true, devUSD:1500, mensualidadUSD:350 },
     { icono:'✈️', rubro:'Agencia de viajes', detalle:'Ventas 24/7, listas de pasajeros, pasaportes y cobros', personas:4, ghl:true, devUSD:1500, mensualidadUSD:350 },
-    { icono:'🏗️', rubro:'Empresa de materiales', detalle:'Contenido con IA para 4 sucursales', personas:0.95, herramientasUSD:60, devUSD:500, mensualidadUSD:300 }
+    { icono:'🏗️', rubro:'Empresa de materiales', detalle:'Contenido con IA para 4 sucursales, hecho por nosotros', personas:0.95, herramientasUSD:60, devUSD:0, mensualidadUSD:800 }
   ]
 };
 

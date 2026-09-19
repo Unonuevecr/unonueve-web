@@ -160,6 +160,8 @@ h2{font-size:clamp(26px,3.4vw,38px);letter-spacing:-1px;line-height:1.1;font-wei
 .tiempo b{display:block;font-size:24px;font-weight:900;font-variant-numeric:tabular-nums}
 .tiempo b.oro{color:var(--oro2)}
 .tiempo small{color:#C4B9AB;font-size:12.5px}
+.alt{margin-top:12px;background:var(--crema2);border:1px dashed rgba(200,137,47,.5);border-radius:14px;padding:13px 15px;font-size:14px;color:#4A423A}
+.alt b{color:var(--tinta)}
 </style>
 </head>
 <body>
@@ -191,6 +193,7 @@ var CONFIG = {
   WEBHOOK: 'https://n8n-unonueve-n8n.i5i6e4.easypanel.host/webhook/unonueve-diagnostico',            /* vacío = no envía (propuesta) */
   AGENDA: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1tAU9od17wAmSwcmF4YD9HMuHwCRxtca-qXM3JqY5vS_gNZXnkAD3EpGs4FKkBKGv_c8J54UgR',
   TC: 505,                /* ₡ por dólar, aproximado */
+  CONTENIDO_USD: 800,     /* servicio de creación de contenido hecho por UNONUEVECR, por mes */
   COSTO_HORA: 4200,       /* ₡ por hora del equipo actual (costo total de la empresa) */
   MENSUALIDAD: [[2,300],[99,350]],   /* hasta N áreas → USD/mes */
   IMPLEMENTACION: {base:3500, porArea:500, tope:5000}  /* USD, una sola vez */
@@ -290,10 +293,14 @@ function resultado(){
   document.getElementById('pasot').textContent = 'Resultado';
   var cubrir = GENERAL[0][1][resp['general:0']][1];
   var equipo = GENERAL[1][1][resp['general:1']][1];
-  var mensual = mensualidadUSD(sel.length) * CONFIG.TC;
-  var impl = Math.min(CONFIG.IMPLEMENTACION.tope, CONFIG.IMPLEMENTACION.base + CONFIG.IMPLEMENTACION.porArea * (sel.length - 1)) * CONFIG.TC;
-  var sistemaMes = impl / 12 + mensual;            /* 1.er año: implementación repartida en 12 meses + mensualidad */
-  var porArea = sistemaMes / sel.length;
+  /* El contenido va aparte: lo crea UNONUEVECR por una tarifa mensual, o se le implementa al cliente su propio sistema (adicional). */
+  var nSis = sel.filter(function(k){ return k !== 'contenido'; }).length;
+  var contenidoMes = sel.indexOf('contenido') >= 0 ? CONFIG.CONTENIDO_USD * CONFIG.TC : 0;
+  var mensualSis = nSis ? mensualidadUSD(nSis) * CONFIG.TC : 0;
+  var impl = nSis ? Math.min(CONFIG.IMPLEMENTACION.tope, CONFIG.IMPLEMENTACION.base + CONFIG.IMPLEMENTACION.porArea * (nSis - 1)) * CONFIG.TC : 0;
+  var mensual = mensualSis + contenidoMes;         /* lo que se paga cada mes desde el 2.º año */
+  var sistemaMes = impl / 12 + mensual;            /* 1.er año: implementación repartida en 12 meses + mensualidades */
+  var porArea = nSis ? (impl / 12 + mensualSis) / nSis : 0;
   var totHoy = 0, totContratar = 0, filas = [];
   sel.forEach(function(k){
     var a = AREAS[k], horas = 0, max = 0;
@@ -311,7 +318,7 @@ function resultado(){
   var referencia = Math.max(totHoy, cubrir === 'no' || cubrir === 'eq' ? totHoy : totContratar);
   var ahorro = Math.max(0, referencia - sistemaMes);
   var ahorro2 = Math.max(0, referencia - mensual);
-  var meses = referencia > mensual ? Math.max(1, Math.ceil(impl / (referencia - mensual))) : null;
+  var meses = impl && referencia > mensual ? Math.max(1, Math.ceil(impl / (referencia - mensual))) : null;
   var anio1Sis = impl + mensual * 12, anio1Ref = referencia * 12;
   var tres = referencia * 36 - (impl + mensual * 36);
   var etiquetaRef = cubrir === 'emp' ? 'Contratar personal' : cubrir === 'fre' ? 'Contratar freelance' : 'Lo que te cuesta hoy';
@@ -320,20 +327,20 @@ function resultado(){
   h += '<div class="total"><span style="color:#C4B9AB">Resumen mensual de las ' + sel.length + ' áreas que revisaste</span><div class="fila">';
   h += '<div class="dato"><span>Hoy, hecho a mano</span><b>'+fmt(totHoy)+'</b><small>≈ '+Math.round(filas.reduce(function(s,f){ return s+f.hMes; },0))+' h de tu equipo al mes</small></div>';
   h += '<div class="dato"><span>'+(cubrir==='emp'||cubrir==='fre' ? etiquetaRef : 'Si contrataras personal')+'</span><b>'+fmt(totContratar)+'</b><small>'+(cubrir==='fre'?'freelance, por mes':'costo total por mes')+'</small></div>';
-  h += '<div class="dato"><span>Con el sistema de IA</span><b class="oro">'+fmt(sistemaMes)+'</b><small>al mes el 1.er año · desde el 2.º año '+fmt(mensual)+'/mes</small></div>';
+  h += '<div class="dato"><span>Con UNONUEVE<i style="font-style:normal;color:var(--oro2)">CR</i></span><b class="oro">'+fmt(sistemaMes)+'</b><small>al mes el 1.er año · desde el 2.º año '+fmt(mensual)+'/mes</small></div>';
   h += '</div>';
   if(referencia > mensual){
-    h += '<div class="tiempo"><div><span>Primer año</span><b>'+fmt(anio1Sis)+'</b><small>sistema: implementación de '+fmt(impl)+' (una sola vez) + 12 mensualidades de '+fmt(mensual)+'</small></div>';
+    h += '<div class="tiempo"><div><span>Primer año</span><b>'+fmt(anio1Sis)+'</b><small>'+(impl ? 'implementación de '+fmt(impl)+' (una sola vez) + ' : '')+'12 meses de '+fmt(mensual)+(contenidoMes ? ' (incluye contenido '+fmt(contenidoMes)+')' : '')+'</small></div>';
     h += '<div><span>Primer año '+(cubrir==='fre'?'con freelance':cubrir==='emp'?'contratando':'como hoy')+'</span><b>'+fmt(anio1Ref)+'</b><small>'+fmt(referencia)+' × 12 meses</small></div>';
     h += '<div><span>En 3 años ahorrás</span><b class="oro">'+fmt(Math.max(0,tres))+'</b><small>desde el 2.º año solo pagás la mensualidad</small></div></div>';
-    h += '<p style="margin-top:22px;font-size:18px">'+(ahorro > 0 ? 'Ahorro estimado el primer año: <b style="color:var(--oro2)">'+fmt(ahorro)+' al mes</b>, y desde el segundo año <b style="color:var(--oro2)">'+fmt(ahorro2)+' al mes</b>. ' : 'El primer año la inversión pesa más que el ahorro, pero desde el segundo año ahorrás <b style="color:var(--oro2)">'+fmt(ahorro2)+' al mes</b>. ')+'La implementación se paga sola en <b style="color:var(--oro2)">'+meses+(meses>1?' meses':' mes')+'</b>.</p>';
+    h += '<p style="margin-top:22px;font-size:18px">'+(ahorro > 0 ? 'Ahorro estimado el primer año: <b style="color:var(--oro2)">'+fmt(ahorro)+' al mes</b>, y desde el segundo año <b style="color:var(--oro2)">'+fmt(ahorro2)+' al mes</b>. ' : 'El primer año la inversión pesa más que el ahorro, pero desde el segundo año ahorrás <b style="color:var(--oro2)">'+fmt(ahorro2)+' al mes</b>. ')+(meses ? 'La implementación se paga sola en <b style="color:var(--oro2)">'+meses+(meses>1?' meses':' mes')+'</b>.' : '')+'</p>';
   }
   else h += '<p style="margin-top:22px;font-size:18px">Con tus respuestas, <b style="color:var(--oro2)">hoy no te conviene automatizar</b>. Y está bien: preferimos decírtelo.</p>';
   h += '</div><h2 style="margin-top:40px">Área por área</h2><div class="res-areas">';
   filas.forEach(function(f){
     h += '<div class="ra"><div class="cab"><span style="font-size:24px">'+f.a.ic+'</span><b>'+f.a.n+'</b><span class="veredicto '+f.ver[0]+'">'+f.ver[1]+'</span></div>';
-    h += '<div class="comp"><div><span>Hoy, a mano</span><b>'+fmt(f.hoy)+'</b></div><div><span>Contratar '+f.a.rol+'</span><b>'+fmt(f.contratar)+'</b></div><div class="ia"><span>Con el sistema (1.er año)</span><b>'+fmt(porArea)+'</b></div></div>';
-    h += '<p>'+Math.round(f.hMes)+' horas al mes de tu equipo se van en esto. El sistema lo cubre 24/7 y tu gente se dedica a lo que ninguna máquina hace bien.</p></div>';
+    h += '<div class="comp"><div><span>Hoy, a mano</span><b>'+fmt(f.hoy)+'</b></div><div><span>Contratar '+f.a.rol+'</span><b>'+fmt(f.contratar)+'</b></div>'+(f.k === 'contenido' ? '<div class="ia"><span>UNONUEVECR lo crea por vos</span><b>'+fmt(contenidoMes)+'</b></div></div><div class="alt"><b>O tu propio sistema de contenido</b> — hace los videos, las imágenes y los recortes; tu equipo solo aprueba lo que le gusta y acomoda los textos, sin crear desde cero. Se implementa aparte y lo cotizamos en la reunión.</div>' : '<div class="ia"><span>Con el sistema (1.er año)</span><b>'+fmt(porArea)+'</b></div></div>');
+    h += '<p>'+Math.round(f.hMes)+' horas al mes de tu equipo se van en esto. '+(f.k === 'contenido' ? 'Con nosotros o con tu propio sistema, nadie en tu equipo vuelve a crear desde cero.' : 'El sistema lo cubre 24/7 y tu gente se dedica a lo que ninguna máquina hace bien.')+'</p></div>';
   });
   h += '</div><div class="card" style="margin-top:40px"><h2>Recibí el informe y <em>agendá tu reunión</em></h2><p class="nota" style="font-size:15px">En 30 minutos revisamos estos números con los tuyos reales. Sin compromiso.</p>';
   h += '<form class="form" id="f" novalidate><input name="nombre" placeholder="Nombre" required maxlength="80" autocomplete="name"><input name="empresa" placeholder="Empresa" required maxlength="80" autocomplete="organization"><input name="whatsapp" placeholder="WhatsApp" required inputmode="tel" maxlength="20" autocomplete="tel"><input name="correo" type="email" placeholder="Correo" maxlength="120" autocomplete="email"><div class="hp" aria-hidden="true"><input name="sitio" tabindex="-1" autocomplete="off"></div><button class="btn oro full" type="submit">Enviarme el informe</button></form>';
