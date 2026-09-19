@@ -6,7 +6,7 @@
 <title>Inteligencia artificial para negocios en Costa Rica | UNONUEVECR</title>
 <meta name="description" content="Reestructuramos cómo trabaja tu negocio con inteligencia artificial: ventas, prospección, atención, cobros y reportes. Sin despidos. Con el control en tu teléfono.">
 <meta name="theme-color" content="#14110E">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://www.googletagmanager.com https://www.facebook.com; connect-src 'self' https://n8n-unonueve-n8n.i5i6e4.easypanel.host https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://www.facebook.com https://connect.facebook.net; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; frame-src https://calendar.google.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://www.googletagmanager.com https://www.facebook.com; connect-src 'self' https://n8n-unonueve-n8n.i5i6e4.easypanel.host https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://www.facebook.com https://connect.facebook.net; base-uri 'self'; form-action 'self'">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://unonuevecr.com/">
@@ -385,13 +385,16 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;
 .crece{margin-top:26px;background:var(--tinta);color:var(--crema);border-radius:24px;padding:28px 30px;font-size:18px}
 .crece b{color:var(--oro2)}
 .hero h1 .h1-sm{display:block;font-size:clamp(14px,1.3vw,17px);font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--oro2);margin-bottom:14px}
+.agenda-marco{background:#fff;border:1px solid var(--linea-c);border-radius:26px;overflow:hidden;box-shadow:0 24px 60px rgba(20,17,14,.08)}
+.agenda-marco iframe{display:block;width:100%;height:720px;border:0}
+@media(max-width:700px){.agenda-marco iframe{height:900px}}
 </style>
 </head>
 <body>
 
 <nav id="nav"><div class="wrap">
   <a class="logo" href="#top" aria-label="UNONUEVECR inicio"><svg viewBox="0 0 647.47 557.92" fill="currentColor" aria-hidden="true"><path d="M102.04,0v543.23h-38.91V52.12L5.14,114.52l-5.14-4.4L102.04,0Z"/><path d="M137.27,372.92c0-18.35,14.68-33.03,33.04-33.03s32.3,14.68,32.3,33.03-14.68,32.3-32.3,32.3-33.04-14.68-33.04-32.3ZM137.27,524.88c0-17.62,14.68-32.3,33.04-32.3s32.3,14.68,32.3,32.3-14.68,33.03-32.3,33.03-33.04-14.68-33.04-33.03Z"/><path d="M352.36,549.84c140.21,0,224.63-132.14,246.66-255.47-26.43,65.33-90.29,106.44-161.5,106.44-116.72,0-199.68-83.69-199.68-199.67S326.67,2.2,437.52,2.2c129.2,0,209.95,104.98,209.95,228.31,0,162.97-123.33,326.67-295.11,326.67v-7.34ZM605.62,225.37c0-99.84-53.59-216.56-168.11-216.56-101.31,0-158.57,101.31-158.57,192.33s57.26,192.33,158.57,192.33c94.7,0,168.11-73.41,168.11-168.11Z"/></svg><span>UNONUEVE<span class="cr">CR</span></span></a>
-  <div class="links"><a href="#areas" data-tab="ventas">Ventas</a><a href="#areas" data-tab="prospeccion">Prospección</a><a href="#areas" data-tab="atencion">Atención</a><a href="#areas" data-tab="conta">Contabilidad</a><a href="#areas" data-tab="reportes">Reportes</a><a href="#contenido">Contenido</a></div>
+  <div class="links"><a href="#agenda">Agendar</a><a href="#areas" data-tab="ventas">Ventas</a><a href="#areas" data-tab="prospeccion">Prospección</a><a href="#areas" data-tab="atencion">Atención</a><a href="#areas" data-tab="conta">Contabilidad</a><a href="#areas" data-tab="reportes">Reportes</a><a href="#contenido">Contenido</a></div>
   <a class="btn oro" href="diagnostico/">Hacer el test</a>
 </div></nav>
 
@@ -434,7 +437,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;
   <div class="blanco rv"><picture><source srcset="assets/gerson-caricatura.webp" type="image/webp"><img src="assets/gerson-caricatura.jpg" alt="Caricatura de Gerson Serrano revisando con una lupa dónde se le escapa la plata a un negocio" loading="lazy" width="760" height="943"></picture><h2>Antes de vender, <em>diagnosticamos.</em></h2><p>No nos sirve venderte nada si antes no encontramos dónde está la mayor pérdida de dinero de tu negocio.</p></div>
   <div class="hace rv"><span class="k">Lo que hacemos</span>
     <div class="lista-hace">
-      <div><span class="n">1</span><div><b>Encontramos la fuga</b><p>Con el test y una reunión de 30 minutos vemos qué se hace caminando: qué se digita dos veces, quién arma los balances, cómo se vende y cómo se atiende.</p></div></div>
+      <div><span class="n">1</span><div><b>Encontramos la fuga</b><p>Con el test y una reunión de 45 minutos vemos qué se hace caminando: qué se digita dos veces, quién arma los balances, cómo se vende y cómo se atiende.</p></div></div>
       <div><span class="n">2</span><div><b>Reestructuramos el proceso</b><p>Un solo lugar para los datos, contabilidad que recibe todo sin reescribirlo y vendedores que empiezan el día sabiendo a quién llamar.</p></div></div>
       <div><span class="n">3</span><div><b>Automatizamos y te damos el control</b><p>Los sistemas trabajan 24/7 y vos ves todo en tu panel: ventas, cobros, clientes calientes y conversaciones sin contestar.</p></div></div>
       <div><span class="n">4</span><div><b>Sin despidos</b><p>No se trata de tener menos gente: se trata de que cada persona de tu equipo rinda como nunca.</p></div></div>
@@ -527,6 +530,12 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;
 
 <section id="test" style="padding-top:20px"><div class="wrap">
   <div class="cta-test rv"><h2>¿De verdad necesitás <em>automatizar?</em></h2><p>Elegí las áreas: ventas, prospección, atención, contabilidad, reportes o contenido. El test te dice cuánto te cuesta hoy, cuánto saldría contratar a alguien (en planilla o freelance) y cuánto con un sistema de IA.</p><a class="btn" href="diagnostico/">Hacer el test gratuito →</a><div class="chips"><span>Gratis</span><span>3 a 5 minutos</span><span>Si no te conviene, te lo decimos</span></div></div>
+</div></section>
+
+<section id="agenda" style="padding-top:30px"><div class="wrap">
+  <div class="cab rv"><span class="k">Agendá tu reunión</span><h2>45 minutos para ver <em>dónde se te va la plata.</em></h2>
+  <p>Elegí el día y la hora: las reuniones son por Google Meet, empiezan en punto y duran 45 minutos. <b>La reunión se graba</b> para preparar tu propuesta sin que tengás que repetir nada; la grabación es confidencial y, si preferís que no se grabe, nos decís al iniciar.</p></div>
+  <div class="agenda-marco rv"><iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1tAU9od17wAmSwcmF4YD9HMuHwCRxtca-qXM3JqY5vS_gNZXnkAD3EpGs4FKkBKGv_c8J54UgR?gv=true" title="Agenda de reuniones de UNONUEVECR" loading="lazy"></iframe></div>
 </div></section>
 
 <section class="oscuro" id="faq"><div class="wrap">
@@ -635,10 +644,10 @@ function enlazarForm(idForm, idOk, extra){
     for(var k in extras) datos[k] = extras[k];
     f.querySelector('button[type=submit]').disabled = true;
     var listo = function(){ f.style.display = 'none'; document.getElementById(idOk).style.display = 'block'; };
-    var meta = window.un9DatosMeta ? window.un9DatosMeta(datos.correo, datos.whatsapp) : Promise.resolve({});
+    var meta = window.un9DatosMeta ? window.un9DatosMeta(datos.correo, datos.whatsapp, datos.nombre) : Promise.resolve({});
     meta.then(function(m){
       for(var k in m) datos[k] = m[k];
-      if(window.un9Evento) window.un9Evento('generate_lead', {origen: datos.tipo || 'contacto'}, {meta:'Lead', eventID: m.event_id, datos:{content_name: datos.tipo || 'contacto'}});
+      if(window.un9Evento) window.un9Evento('generate_lead', {origen: datos.tipo || 'contacto'}, {meta:'Lead', eventID: m.event_id, datos:{content_name: datos.tipo || 'contacto', content_category: datos.area || 'general', lead_origen: 'formulario_contacto'}});
       if(!CONFIG.WEBHOOK){ listo(); return; }
       fetch(CONFIG.WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(datos)}).then(listo).catch(listo);
     });

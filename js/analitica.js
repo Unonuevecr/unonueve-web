@@ -92,14 +92,25 @@
     });
   }
   function galleta(n) { var m = document.cookie.match(new RegExp('(?:^|; )' + n + '=([^;]*)')); return m ? decodeURIComponent(m[1]) : ''; }
-  window.un9DatosMeta = function (correo, whatsapp) {
+  function limpiar(t) { return String(t || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z\u00f1 ]/g, ''); }
+  window.un9DatosMeta = function (correo, whatsapp, nombre) {
     var id = 'un9-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
     var tel = String(whatsapp || '').replace(/\D/g, ''); if (tel.length === 8) tel = '506' + tel;
     var em = String(correo || '').trim().toLowerCase();
+    var partes = limpiar(nombre).split(/\s+/).filter(Boolean);
+    var fn = partes[0] || '', ln = partes.length > 1 ? partes[partes.length - 1] : '';
     var c = window.un9Consentimiento();
     if (!c.publicidad) return Promise.resolve({ event_id: id, consentimiento_publicidad: false });
-    return Promise.all([sha256(em), sha256(tel)]).then(function (h) {
-      return { event_id: id, consentimiento_publicidad: true, em_hash: h[0], ph_hash: h[1], fbp: galleta('_fbp'), fbc: galleta('_fbc'), url_evento: location.href };
+    return Promise.all([sha256(em), sha256(tel), sha256(fn), sha256(ln), sha256('cr'), sha256(tel)]).then(function (h) {
+      var r = { event_id: id, consentimiento_publicidad: true, em_hash: h[0], ph_hash: h[1], fn_hash: h[2], ln_hash: h[3], country_hash: h[4], external_id: h[5],
+        fbp: galleta('_fbp'), fbc: galleta('_fbc'), url_evento: location.href };
+      /* coincidencias avanzadas del Pixel: se le pasan los mismos datos, ya cifrados */
+      if (metaCargado) {
+        var am = { country: h[4] };
+        if (h[0]) am.em = h[0]; if (h[1]) am.ph = h[1]; if (h[2]) am.fn = h[2]; if (h[3]) am.ln = h[3]; if (h[5]) am.external_id = h[5];
+        window.fbq('init', PIXEL_ID, am);
+      }
+      return r;
     }).catch(function () { return { event_id: id, consentimiento_publicidad: true }; });
   };
 
