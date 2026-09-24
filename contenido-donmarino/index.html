@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Aprobación de contenido — Don Marino</title>
+<style>
+:root{--azul:#123a86;--azul2:#0a2a6b;--celeste:#eaf1fb;--verde:#1f9d55;--verdebg:#e4f5ec;--ambar:#c47f00;--ambarbg:#fdf3dc;--gris:#5b6472;--linea:#e4e8ef;--rojo:#ce1126;--oro:#c9911f}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#f5f7fb;color:#17223b;-webkit-font-smoothing:antialiased}
+a{color:var(--azul)}
+.wrap{max-width:820px;margin:0 auto;padding:0 16px 80px}
+header.top{background:linear-gradient(135deg,var(--azul2),var(--azul));color:#fff;padding:26px 16px 30px;text-align:center}
+header.top .k{opacity:.75;font-size:12px;letter-spacing:3px;text-transform:uppercase}
+header.top h1{margin:6px 0 2px;font-size:23px}
+header.top p{margin:0;opacity:.85;font-size:14px}
+/* landing */
+.cards{display:grid;gap:16px;margin-top:24px}
+@media(min-width:640px){.cards{grid-template-columns:1fr 1fr}}
+.brandcard{background:#fff;border:1px solid var(--linea);border-radius:18px;padding:26px 22px;text-align:center;cursor:pointer;transition:.15s;box-shadow:0 2px 10px rgba(18,58,134,.05)}
+.brandcard:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(18,58,134,.13);border-color:#c9d6ef}
+.brandcard .emoji{font-size:40px}
+.brandcard h2{margin:10px 0 4px;font-size:20px;color:var(--azul2)}
+.brandcard .sub{color:var(--gris);font-size:13px;margin-bottom:12px}
+.brandcard .go{display:inline-block;background:var(--azul);color:#fff;padding:9px 20px;border-radius:999px;font-weight:600;font-size:14px}
+.brandcard .mini{margin-top:12px;font-size:12px;color:var(--gris)}
+.intro{margin-top:22px;background:#fff;border:1px solid var(--linea);border-radius:14px;padding:16px 18px;color:var(--gris);font-size:13.5px;line-height:1.5}
+/* panel */
+.hidden{display:none}
+.bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--linea);padding:10px 16px;display:flex;align-items:center;gap:12px}
+.back{border:0;background:var(--celeste);color:var(--azul2);font-weight:600;border-radius:999px;padding:8px 14px;cursor:pointer;font-size:14px}
+.bar .t{font-weight:700;color:var(--azul2)}
+.prog{flex:1;height:9px;background:#e9edf5;border-radius:999px;overflow:hidden;min-width:60px}
+.prog>i{display:block;height:100%;width:0;background:var(--verde);transition:.3s}
+.prog-lbl{font-size:12px;color:var(--gris);white-space:nowrap}
+.item{background:#fff;border:1px solid var(--linea);border-radius:16px;padding:16px;margin-top:16px;box-shadow:0 1px 6px rgba(18,58,134,.04)}
+.item.aprobado{border-color:#b6e3c8}
+.item.cambios{border-color:#f2d798}
+.ihead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.fecha{font-weight:700;font-size:15.5px;color:var(--azul2)}
+.badge{font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:var(--celeste);color:var(--azul)}
+.st{margin-left:auto;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+.st.aprobado{background:var(--verdebg);color:var(--verde)}
+.st.cambios{background:var(--ambarbg);color:var(--ambar)}
+.st.pendiente{background:#eef1f6;color:var(--gris)}
+.vid{border-radius:12px;overflow:hidden;background:#000;margin-bottom:12px}
+.vid video{width:100%;display:block;max-height:70vh}
+.novid{background:var(--celeste);border:1px dashed #b9c7e6;border-radius:12px;padding:18px;text-align:center;color:var(--azul2);font-size:13.5px;margin-bottom:12px}
+.novid b{display:block;font-size:14px;margin-bottom:2px}
+.foto{background:#fff7e8;border:1px dashed #e3c98d;color:#8a6a1f}
+.toggle{border:0;background:none;color:var(--azul);font-weight:600;cursor:pointer;font-size:14px;padding:4px 0}
+.copy{white-space:pre-wrap;background:#fafbfe;border:1px solid var(--linea);border-radius:10px;padding:12px 14px;font-size:14px;line-height:1.5;margin-top:8px}
+.copybtn{margin-top:8px;border:1px solid var(--linea);background:#fff;border-radius:8px;padding:6px 12px;font-size:12.5px;cursor:pointer;color:var(--azul)}
+.formato{font-size:12.5px;color:var(--gris);margin-top:2px}
+.actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.btn{flex:1;min-width:130px;border:1.5px solid var(--linea);background:#fff;border-radius:10px;padding:11px;font-weight:700;font-size:14px;cursor:pointer;transition:.12s}
+.btn.ap{color:var(--verde)}
+.btn.ap.on{background:var(--verde);color:#fff;border-color:var(--verde)}
+.btn.cb{color:var(--ambar)}
+.btn.cb.on{background:var(--ambar);color:#fff;border-color:var(--ambar)}
+.coment{margin-top:10px}
+.coment textarea{width:100%;border:1px solid var(--linea);border-radius:10px;padding:10px;font-family:inherit;font-size:14px;resize:vertical;min-height:44px}
+.save{margin-top:8px;width:100%;background:var(--azul);color:#fff;border:0;border-radius:10px;padding:11px;font-weight:700;font-size:14.5px;cursor:pointer}
+.save:disabled{opacity:.5}
+.saved{font-size:12px;color:var(--verde);text-align:center;margin-top:6px;min-height:15px}
+footer{text-align:center;color:#9aa4b4;font-size:12px;padding:26px 16px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#17223b;color:#fff;padding:11px 18px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:20}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div id="landing">
+  <header class="top">
+    <div class="k">UNONUEVE · Aprobación de contenido</div>
+    <h1>Contenido de Octubre 2026</h1>
+    <p>Revisá cada publicación, mirá el video y aprobá o pedí un cambio.</p>
+  </header>
+  <div class="wrap">
+    <div class="cards">
+      <div class="brandcard" onclick="abrir('donmarino')">
+        <div class="emoji">🍽️</div>
+        <h2>Restaurante Don Marino</h2>
+        <div class="sub">Orotina · Ruta 27, km 57</div>
+        <span class="go">Entrar ›</span>
+        <div class="mini" id="mini-donmarino"></div>
+      </div>
+      <div class="brandcard" onclick="abrir('marisqueria')">
+        <div class="emoji">🦐</div>
+        <h2>Marisquería Don Marino</h2>
+        <div class="sub">El Roble de Puntarenas</div>
+        <span class="go">Entrar ›</span>
+        <div class="mini" id="mini-marisqueria"></div>
+      </div>
+    </div>
+    <div class="intro">
+      <b>¿Cómo funciona?</b> Elegí una marca, revisá cada pieza (video y texto), y tocá
+      <b>Aprobar</b> o <b>Pedir un cambio</b>. Si pedís un cambio, escribí qué ajustar y tocá
+      <b>Guardar</b>. Todo se guarda solo; podés volver cuando querás.
+      Las piezas que dicen <b>“pendiente de grabación”</b> todavía se van a grabar.
+    </div>
+  </div>
+  <footer>Hecho por UNONUEVE · Uso interno de aprobación</footer>
+</div>
+
+<div id="panel" class="hidden">
+  <div class="bar">
+    <button class="back" onclick="volver()">‹ Marcas</button>
+    <span class="t" id="panel-title"></span>
+    <div class="prog"><i id="prog-bar"></i></div>
+    <span class="prog-lbl" id="prog-lbl"></span>
+  </div>
+  <div class="wrap" id="lista"></div>
+  <footer>Hecho por UNONUEVE</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const WEBHOOK="https://n8n-unonueve-n8n.i5i6e4.easypanel.host/webhook/donmarino-contenido";
+const DATA={"donmarino": [{"n": 1, "fecha": "2026-10-01", "dia": "Jueves", "copy": "🛒 ¿Se te quedó algo para el paseo? En el Mini Súper Don Marino lo tenemos.\nBebidas bien frías, jugos, snacks, hielo, abarrotes, cerveza, licores y hasta comida para tus mascotas. Una parada rápida y seguís tranquilo rumbo al Pacífico.\n📲 WhatsApp: 8504-5000\n📍 Ruta 27, km 57, Orotina, frente a las fruteras – Waze: Don Marino", "formato": "", "video": "dm_1.mp4", "eje": "Mini Súper", "hasVideo": true, "esFoto": false}, {"n": 2, "fecha": "2026-10-02", "dia": "Viernes", "copy": "📍 ¿Vas rumbo al Pacífico? Tu parada es Don Marino.\nEstamos en el km 57 de la Ruta 27, en Orotina, frente a las fruteras. Amplio parqueo, Mini Súper, restaurante estilo buffet y salón de eventos: todo en un solo lugar.\n🗺️ Waze: Don Marino\n📲 WhatsApp: 8504-5000", "formato": "", "video": "dm_2.mp4", "eje": "Ubicación", "hasVideo": true, "esFoto": false}, {"n": 5, "fecha": "2026-10-05", "dia": "Lunes", "copy": "🎉 ¿Tenés algo que celebrar? Nosotros te damos el lugar.\nEl salón de eventos de Don Marino es ideal para cumpleaños, bodas, fiestas de empresa o esa reunión que querés que salga perfecta. Alquiler por 6 horas con mesas, sillas, mantelería blanca, saloneros y menaje completo para buffet.\n📞 Apartá tu fecha: 8504-5000\n📍 Ruta 27, km 57, Orotina, frente a las fruteras – Waze: Don Marino", "formato": "", "video": "dm_5.mp4", "eje": "Sala de Eventos", "hasVideo": true, "esFoto": false}, {"n": 6, "fecha": "2026-10-06", "dia": "Martes", "copy": "🍳 Arrancá el día con un buen desayuno tico.\nEn Don Marino el desayuno es estilo buffet: gallo pinto, huevos, acompañamientos, fruta y más, servido y listo para que te sirvás a tu gusto. Desde ₡3.200.\n📲 WhatsApp: 8504-5000\n📍 Ruta 27, km 57, Orotina, frente a las fruteras – Waze: Don Marino", "formato": "", "video": "dm_6.mp4", "eje": "Desayunos y almuerzos", "hasVideo": true, "esFoto": false}, {"n": 8, "fecha": "2026-10-08", "dia": "Jueves", "copy": "🥤 Nada como una bebida bien fría antes de seguir el camino.\nEn el Mini Súper Don Marino encontrás de todo: refrescos, jugos, hielo, snacks, abarrotes y licores. Todo en el mismo alto, sin desviarte.\n📲 WhatsApp: 8504-5000\n📍 Ruta 27, km 57, Orotina, frente a las fruteras – Waze: Don Marino", "formato": "", "video": "dm_8.mp4", "eje": "Mini Súper", "hasVideo": true, "esFoto": false}, {"n": 9, "fecha": "2026-10-09", "dia": "Viernes", "copy": "🌴 Fácil de encontrar, difícil de olvidar.\nDon Marino te espera en el km 57 de la Ruta 27, frente a las fruteras. Parás, comés rico, resolvés los antojos en el Mini Súper y seguís tu camino tranquilo.\n🗺️ Waze: Don Marino\n📲 WhatsApp: 8504-5000", "formato": "", "video": "dm_9.mp4", "eje": "Ubicación", "hasVideo": true, "esFoto": false}, {"n": 12, "fecha": "2026-10-12", "dia": "Lunes", "copy": "✨ La fiesta se disfruta más cuando alguien se encarga de la logística.\nEn nuestro salón vos ponés el motivo y nosotros ponemos el espacio, las mesas, las sillas, la mantelería, los saloneros y todo el menaje para tu buffet. 6 horas para celebrar sin apuros.\n📞 Apartá tu fecha: 8504-5000\n📍 Ruta 27, km 57, Orotina, frente a las fruteras – Waze: Don Marino", "formato": "", "video": "dm_12.mp4", "eje": "Sala de Eventos", "hasVideo": true, "esFoto": false}, {"n": 13, "fecha": "2026-10-13", "dia": "Martes", "copy": "🍛 ¿Ya pensaste qué vas a almorzar? Nosotros ya lo tenemos listo.\nAlmuerzo estilo buffet con proteínas, carbohidratos, ensaladas frescas, frutas y postres. Armás tu plato completo a tu gusto, desde ₡4.500.\n📲 WhatsApp: 8504-5000\n📍 Ruta 27, km 57, Orotina, frente a las fruteras – Waze: Don Marino", "formato": "", "video": "dm_13.mp4", "eje": "Desayunos y almuerzos", "hasVideo": true, "esFoto": false}, {"n": 15, "fecha": "2026-10-15", "dia": "Jueves", "copy": "🐶 De paseo con la familia… ¡incluida la mascota!\nEn nuestro Mini Súper hay bebidas, snacks, abarrotes, hielo, cerveza, licores y comida para mascotas. Lo que necesités para el camino, aquí lo hay.\n📲 WhatsApp: 8504-5000\n📍 Ruta 27, km 57, Orotina, frente a las fruteras – Waze: Don Marino", "formato": "", "video": "dm_15.mp4", "eje": "Mini Súper", "hasVideo": true, "esFoto": false}, {"n": 16, "fecha": "2026-10-16", "dia": "Viernes", "copy": "🚗 En tu viaje al Pacífico hay una parada que lo tiene todo.\nKm 57, Ruta 27, Orotina, frente a las fruteras: buffet, Mini Súper, salón de eventos y amplio parqueo. La parada estratégica para comer y descansar.\n🗺️ Waze: Don Marino\n📲 WhatsApp: 8504-5000", "formato": "", "video": "dm_16.mp4", "eje": "Ubicación", "hasVideo": true, "esFoto": false}, {"n": 19, "fecha": "2026-10-19", "dia": "Lunes", "copy": "🎶 Música, baile y buena comida: así se viven las celebraciones en Don Marino.\nNuestro salón está listo para tu evento, con todo incluido para que solo pensés en pasarla bien. Las fechas se llenan rápido, sobre todo de aquí a fin de año.\n📞 Consultá disponibilidad: 8504-5000\n📍 Ruta 27, km 57, Orotina, frente a las fruteras – Waze: Don Marino", "formato": "", "video": "dm_19.mp4", "eje": "Sala de Eventos", "hasVideo": true, "esFoto": false}, {"n": 20, "fecha": "2026-10-20", "dia": "Martes", "copy": "🌅 El mejor desayuno de la zona te espera en Orotina.\nBuffet con el pinto de siempre, huevos, acompañamientos, fruta fresca y más. Servido, rápido y desde ₡3.200. La energía perfecta para arrancar el día o el viaje.\n📲 WhatsApp: 8504-5000\n📍 Ruta 27, km 57, Orotina, frente a las fruteras – Waze: Don Marino", "formato": "", "video": "dm_20.mp4", "eje": "Desayunos y almuerzos", "hasVideo": true, "esFoto": false}, {"n": 23, "fecha": "2026-10-23", "dia": "Viernes", "copy": "🍽️ Un solo alto, todo resuelto.\nNos encontrás en el km 57 de la Ruta 27, frente a las fruteras, en Orotina. Comida de buffet, Mini Súper, salón de eventos y parqueo amplio para que tu parada sea cómoda.\n🗺️ Waze: Don Marino\n📲 WhatsApp: 8504-5000", "formato": "", "video": "dm_23.mp4", "eje": "Ubicación", "hasVideo": true, "esFoto": false}, {"n": 26, "fecha": "2026-10-26", "dia": "Lunes", "copy": "🥂 Fin de año se acerca… ¿ya tenés dónde hacer la fiesta de tu empresa o familia?\nEn Don Marino tenemos el salón equipado: 6 horas de alquiler, mobiliario, mantelería blanca, saloneros y menaje para buffet. Todo en un solo lugar.\n📞 Apartá tu fecha antes de que se ocupe: 8504-5000\n📍 Ruta 27, km 57, Orotina, frente a las fruteras – Waze: Don Marino", "formato": "", "video": "dm_26.mp4", "eje": "Sala de Eventos", "hasVideo": true, "esFoto": false}, {"n": 27, "fecha": "2026-10-27", "dia": "Martes", "copy": "🔥 Un almuerzo completo, servido y sin esperas.\nEn nuestro buffet elegís entre proteínas, carbohidratos, ensaladas, frutas y postres. Comés rico, quedás satisfecho y seguís tu día. Desde ₡4.500.\n📲 WhatsApp: 8504-5000\n📍 Ruta 27, km 57, Orotina, frente a las fruteras – Waze: Don Marino", "formato": "", "video": "dm_27.mp4", "eje": "Desayunos y almuerzos", "hasVideo": true, "esFoto": false}, {"n": 29, "fecha": "2026-10-29", "dia": "Jueves", "copy": "🧊 Tu parada inteligente rumbo al Pacífico tiene de todo.\nBebidas frías, hielo para la hielera, snacks, abarrotes, cerveza, licores y artículos para el paseo te esperan en el Mini Súper Don Marino. Rápido y en un solo lugar.\n📲 WhatsApp: 8504-5000\n📍 Ruta 27, km 57, Orotina, frente a las fruteras – Waze: Don Marino", "formato": "", "video": "dm_29.mp4", "eje": "Mini Súper", "hasVideo": true, "esFoto": false}], "marisqueria": [{"n": 1, "fecha": "2026-10-01", "dia": "Jueves", "copy": "📍 Se te antoja marisco fresco, pero no sabés dónde parar en Puntarenas.\n\nTe pasa cada vez que venís: das vueltas, ves lugares llenos y terminás comiendo cualquier cosa.\n\n✅ Estamos en El Roble, frente al Hotel Fiesta. Fácil de llegar, con campo para la familia y la cocina trabajando con producto fresco todo el día.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "Formato: VIDEO · Recorrido de llegada (fachada, rótulo, entrada, salón)", "video": "mq_1.mp4", "eje": "Jueves", "hasVideo": false, "esFoto": false}, {"n": 2, "fecha": "2026-10-02", "dia": "Viernes", "copy": "🐟 Querés comer pescado fresco, pero la cuenta siempre pesa más de lo que esperabas.\n\nY al final terminás pidiendo lo más barato del menú.\n\n✅ Escribinos al WhatsApp y te enviamos tu tarjeta digital con 15% de descuento en pescado. La mostrás al salonero y se canjea cualquier día de la semana.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "🎬 VIDEO · Guion V1 «La cuenta pesa» · ver PDF de guiones Octubre", "video": "mq_2.mp4", "eje": "Viernes", "hasVideo": true, "esFoto": false}, {"n": 5, "fecha": "2026-10-05", "dia": "Lunes", "copy": "🌊 Creés que en una marisquería solo hay ceviche.\n\nY te quedás con las ganas de probar algo distinto.\n\n✅ Aquí el mar llega completo: pescado, camarón, pulpo, piangua, calamar y langosta. En ceviches, arroces, cazuelas, mariscadas, casados y bandejas armadas a tu medida.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "Formato: VIDEO · Recorrido por la variedad (solo mencionar productos)", "video": "mq_5.mp4", "eje": "Lunes", "hasVideo": true, "esFoto": false}, {"n": 6, "fecha": "2026-10-06", "dia": "Martes", "copy": "🍤 Llegan varios a la mesa y nadie se pone de acuerdo con qué pedir.\n\nUno quiere camarón, otro pescado, otro quiere probar de todo.\n\n✅ Para eso está la BANDEJA: la armamos a tu medida, con los productos del mar que ustedes elijan, servida para compartir en el centro de la mesa.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "Formato: VIDEO · La Bandeja · armado y presentación en mesa ⚠️ confirmar qué trae y precio", "video": "mq_6.mp4", "eje": "Martes", "hasVideo": true, "esFoto": false}, {"n": 7, "fecha": "2026-10-07", "dia": "Miércoles", "copy": "🎁 La espera antes de que llegue el plato fuerte se hace larga.\n\nSobre todo cuando ya venís con hambre de verdad.\n\n✅ Mostrá esta publicación al salonero cuando ordenés y te damos una entrada de cortesía, gratis.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "🎬 VIDEO · Guion M1 «La espera» · ver PDF de guiones Octubre", "video": "mq_7.mp4", "eje": "Miércoles", "hasVideo": false, "esFoto": false}, {"n": 8, "fecha": "2026-10-08", "dia": "Jueves", "copy": "🚗 Vas camino a la playa y el hambre pega antes de llegar.\n\nY parar en el lugar equivocado le arruina el paseo a cualquiera.\n\n✅ Antes de seguir, hacé la parada en El Roble: frente al Hotel Fiesta encontrás ceviches, arroces y pescado fresco servido al momento.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "Formato: VIDEO · Toma desde la carretera + referencia del Hotel Fiesta", "video": "mq_8.mp4", "eje": "Jueves", "hasVideo": false, "esFoto": false}, {"n": 9, "fecha": "2026-10-09", "dia": "Viernes", "copy": "💸 Salir a comer en familia se vuelve caro rapidísimo.\n\nSobre todo cuando todos quieren pescado.\n\n✅ Pedí tu tarjeta de 15% en pescado por WhatsApp. Es digital, llega al instante y la podés usar el día que vengás.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "🎬 VIDEO · Guion V2 «En familia» · ver PDF de guiones Octubre", "video": "mq_9.mp4", "eje": "Viernes", "hasVideo": false, "esFoto": false}, {"n": 12, "fecha": "2026-10-12", "dia": "Lunes", "copy": "🇨🇷 Hoy es Día de las Culturas, y pocas cosas nos unen tanto como la mesa.\n\nEl problema es quedarse siempre con el mismo plato de siempre.\n\n✅ En nuestra cocina se junta todo lo que da el mar: pescado, camarón, pulpo, piangua, calamar y langosta, servidos en ceviches, arroces, cazuelas y mariscadas.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "Formato: FOTO · Día de las Culturas + variedad del mar", "video": "mq_12.mp4", "eje": "Lunes", "hasVideo": false, "esFoto": true}, {"n": 13, "fecha": "2026-10-13", "dia": "Martes", "copy": "🍚 Cuando un arroz lleva el nombre de la casa, es porque se lo ganó.\n\nEl problema es pedir un arroz que sepa a relleno y no a mar.\n\n✅ El ARROZ DON MARINO JUMBO es nuestro plato bandera: porción grande, bien servida y cargada de producto del mar.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "Formato: VIDEO · Arroz Don Marino Jumbo ⚠️ confirmar ingredientes y precio", "video": "mq_13.mp4", "eje": "Martes", "hasVideo": true, "esFoto": false}, {"n": 14, "fecha": "2026-10-14", "dia": "Miércoles", "copy": "📱 Guardaste la publicación y nunca la usaste.\n\nEsta vez sí conviene guardarla.\n\n✅ Mostrala en la mesa al momento de ordenar y recibís una entrada gratis. Así de simple: la enseñás y se aplica.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "🎬 VIDEO · Guion M2 «Guardala» · ver PDF de guiones Octubre", "video": "mq_14.mp4", "eje": "Miércoles", "hasVideo": false, "esFoto": false}, {"n": 15, "fecha": "2026-10-15", "dia": "Jueves", "copy": "👨‍👩‍👧‍👦 Organizar un almuerzo en grupo es fácil… hasta que hay que escoger el lugar.\n\nQue haya campo, que llegue rápido la comida, que a todos les guste algo.\n\n✅ Aquí lo tenés resuelto: estamos frente al Hotel Fiesta en El Roble, con espacio para grupos y un menú donde cada quien encuentra lo suyo.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "Formato: VIDEO · Salón y mesas grandes, ambiente de grupo", "video": "mq_15.mp4", "eje": "Jueves", "hasVideo": false, "esFoto": false}, {"n": 16, "fecha": "2026-10-16", "dia": "Viernes", "copy": "🎣 Pescado fresco del día, servido como se debe.\n\nEl problema nunca es el antojo: es esperar a que sea una ocasión especial.\n\n✅ Con nuestra tarjeta digital tenés 15% de descuento en pescado cuando vos querás. Se pide por WhatsApp y se canjea cualquier día.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "🎬 VIDEO · Guion V3 «Fresco del día» · ver PDF de guiones Octubre", "video": "mq_16.mp4", "eje": "Viernes", "hasVideo": true, "esFoto": false}, {"n": 19, "fecha": "2026-10-19", "dia": "Lunes", "copy": "🦐 Pedís siempre lo mismo porque no sabés qué más hay.\n\nY te perdés la mitad del menú.\n\n✅ Tenemos pescado, camarón, pulpo, piangua, calamar y langosta. Se sirven en ceviche, en arroz, en cazuela, en mariscada o en bandeja para compartir.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "Formato: VIDEO · Plano por plano de cada producto del mar", "video": "mq_19.mp4", "eje": "Lunes", "hasVideo": true, "esFoto": false}, {"n": 20, "fecha": "2026-10-20", "dia": "Martes", "copy": "🍹 Querés algo fresco, frío y que de verdad llene.\n\nNo un cóctel chiquito que se acaba en tres cucharadas.\n\n✅ El CÓCTEL PODEROSO le hace honor al nombre: bien frío, bien servido y con producto del mar en cada cucharada.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "Formato: VIDEO · Cóctel Poderoso ⚠️ confirmar qué lleva y precio", "video": "mq_20.mp4", "eje": "Martes", "hasVideo": true, "esFoto": false}, {"n": 21, "fecha": "2026-10-21", "dia": "Miércoles", "copy": "🍽️ Empezar un almuerzo sin algo que picar no es lo mismo.\n\nY pedir entrada aparte siempre sube la cuenta.\n\n✅ Hoy la entrada va por nuestra cuenta: mostrá esta publicación al ordenar y te la damos gratis.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "🎬 VIDEO · Guion M3 «Algo que picar» · ver PDF de guiones Octubre", "video": "mq_21.mp4", "eje": "Miércoles", "hasVideo": false, "esFoto": false}, {"n": 22, "fecha": "2026-10-22", "dia": "Jueves", "copy": "🗺️ Buscar direcciones con hambre es de las peores cosas que hay.\n\nVueltas, señal mala y la comida cada vez más lejos.\n\n✅ Ponés \"Marisquería & Grill Don Marino\" en Waze y te deja en la puerta. El Roble de Puntarenas, frente al Hotel Fiesta.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "Formato: VIDEO · Pantalla de Waze + llegada al parqueo", "video": "mq_22.mp4", "eje": "Jueves", "hasVideo": false, "esFoto": false}, {"n": 23, "fecha": "2026-10-23", "dia": "Viernes", "copy": "🍽️ Hay antojos que no aguantan hasta fin de mes.\n\nY el de pescado fresco es de esos.\n\n✅ Un mensaje al WhatsApp y te llega tu tarjeta con 15% en pescado. Sin pasos raros, sin letra menuda: la presentás y se aplica.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "🎬 VIDEO · Guion V4 «No aguanta a fin de mes» · ver PDF de guiones Octubre", "video": "mq_23.mp4", "eje": "Viernes", "hasVideo": false, "esFoto": false}, {"n": 26, "fecha": "2026-10-26", "dia": "Lunes", "copy": "🐙 El mar tiene más que ofrecer que un solo plato.\n\nY muchos se van sin saber todo lo que hay en la carta.\n\n✅ Pescado, camarón, pulpo, piangua, calamar y langosta, listos en ceviches, arroces, cazuelas, casados y bandejas para toda la mesa.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "Formato: FOTO · Mesa servida con varios productos a la vez", "video": "mq_26.mp4", "eje": "Lunes", "hasVideo": false, "esFoto": true}, {"n": 27, "fecha": "2026-10-27", "dia": "Martes", "copy": "🦑 Pedís arroz con mariscos y llega con más arroz que marisco.\n\nEs el reclamo más común, y con razón.\n\n✅ Nuestro arroz con mariscos viene cargado: camarón, pulpo, calamar y pescado salteados al momento, con el punto justo de sabor.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "Formato: FOTO · Arroz con mariscos ⚠️ confirmar ingredientes exactos y precio", "video": "mq_27.mp4", "eje": "Martes", "hasVideo": true, "esFoto": true}, {"n": 28, "fecha": "2026-10-28", "dia": "Miércoles", "copy": "🤝 Miércoles de premio para los que nos siguen.\n\nPorque el que está pendiente de nuestras publicaciones merece algo a cambio.\n\n✅ Mostrá esta publicación cuando vengás y te damos una entrada de cortesía, gratis, al momento de ordenar.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "🎬 VIDEO · Guion M4 «Premio al que nos sigue» · ver PDF de guiones Octubre", "video": "mq_28.mp4", "eje": "Miércoles", "hasVideo": false, "esFoto": false}, {"n": 29, "fecha": "2026-10-29", "dia": "Jueves", "copy": "🌅 Se acaba el mes y todavía no te diste el gusto.\n\nUn buen plato de mar no tiene que esperar a las vacaciones.\n\n✅ Estamos a la par del Hotel Fiesta, en El Roble. Vení hoy y cerrá el mes como se debe: con ceviche frío y un arroz bien servido.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "Formato: VIDEO · Ambiente de tarde + platos servidos", "video": "mq_29.mp4", "eje": "Jueves", "hasVideo": false, "esFoto": false}, {"n": 30, "fecha": "2026-10-30", "dia": "Viernes", "copy": "⏳ Último viernes del mes para aprovecharlo.\n\nSi venías posponiendo ese almuerzo de pescado, esta es la señal.\n\n✅ Escribinos y recibí tu tarjeta digital con 15% de descuento en pescado. Canjeable cualquier día, presentándola al salonero.\n\n📲 WhatsApp 8712-8484\n📍 Frente al Hotel Fiesta, El Roble de Puntarenas\n🚗 Waze: Marisquería & Grill Don Marino\nLo mejor del mar a tu mesa. 🌊", "formato": "🎬 VIDEO · Guion V5 «Último viernes» · ver PDF de guiones Octubre", "video": "mq_30.mp4", "eje": "Viernes", "hasVideo": false, "esFoto": false}]};
+const MARCAS={donmarino:"Restaurante Don Marino",marisqueria:"Marisquería Don Marino"};
+const MESES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+let ESTADOS={};
+
+function fechaBonita(iso){const[y,m,d]=iso.split("-").map(Number);const dt=new Date(y,m-1,d);const dias=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];return dias[dt.getDay()]+" "+d+" de "+MESES[m-1];}
+function esc(s){return (s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
+function toast(t){const e=document.getElementById("toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),1800);}
+
+async function api(obj){
+  const body=new URLSearchParams();body.append("data",JSON.stringify(obj));
+  const r=await fetch(WEBHOOK,{method:"POST",body});
+  return await r.json();
+}
+async function cargarEstados(){
+  try{const j=await api({accion:"estado"});ESTADOS=(j&&j.rows)||{};}catch(e){ESTADOS={};}
+  actualizarMinis();
+}
+function keyOf(marca,fecha){return marca+"|"+fecha;}
+function contar(marca){let ap=0;const t=DATA[marca].length;DATA[marca].forEach(it=>{const s=ESTADOS[keyOf(marca,it.fecha)];if(s&&s.estado==="aprobado")ap++;});return{ap,t};}
+function actualizarMinis(){for(const m of["donmarino","marisqueria"]){const{ap,t}=contar(m);const el=document.getElementById("mini-"+m);if(el)el.textContent=ap+" de "+t+" aprobadas";}}
+
+let MARCA=null;
+function abrir(marca){
+  MARCA=marca;
+  document.getElementById("landing").classList.add("hidden");
+  document.getElementById("panel").classList.remove("hidden");
+  document.getElementById("panel-title").textContent=MARCAS[marca];
+  render();window.scrollTo(0,0);
+}
+function volver(){document.getElementById("panel").classList.add("hidden");document.getElementById("landing").classList.remove("hidden");actualizarMinis();}
+
+function render(){
+  const cont=document.getElementById("lista");cont.innerHTML="";
+  DATA[MARCA].forEach((it,idx)=>cont.appendChild(card(it,idx)));
+  progreso();
+}
+function progreso(){const{ap,t}=contar(MARCA);document.getElementById("prog-bar").style.width=(t?ap/t*100:0)+"%";document.getElementById("prog-lbl").textContent=ap+"/"+t;}
+
+function card(it,idx){
+  const key=keyOf(MARCA,it.fecha);const st=ESTADOS[key]||{};
+  const el=document.createElement("div");el.className="item"+(st.estado?" "+st.estado:"");
+  const badge=it.eje?('<span class="badge">'+esc(it.eje)+'</span>'):"";
+  const stTxt={aprobado:"Aprobado",cambios:"Pide cambios"}[st.estado]||"Pendiente";
+  const stCls=st.estado||"pendiente";
+  let media;
+  if(it.hasVideo){media='<div class="vid"><video controls preload="metadata" playsinline src="vid/'+it.video+'"></video></div>';}
+  else if(it.esFoto){media='<div class="novid foto"><b>Pieza tipo FOTO</b>'+esc(it.formato||"")+'</div>';}
+  else{media='<div class="novid"><b>🎥 Video pendiente de grabación</b>'+esc(it.formato||"Se graba con Alina.")+'</div>';}
+  const formato=(!it.hasVideo)?"":(it.formato?'<div class="formato">'+esc(it.formato)+'</div>':"");
+  el.innerHTML=
+    '<div class="ihead"><span class="fecha">'+fechaBonita(it.fecha)+'</span>'+badge+
+    '<span class="st '+stCls+'" data-st>'+stTxt+'</span></div>'+
+    media+formato+
+    '<button class="toggle" data-tg>Ver texto ▾</button>'+
+    '<div class="copy hidden" data-copy>'+esc(it.copy)+
+      '<div><button class="copybtn" data-cp>📋 Copiar texto</button></div></div>'+
+    '<div class="actions">'+
+      '<button class="btn ap'+(st.estado==="aprobado"?" on":"")+'" data-ap>✓ Aprobar</button>'+
+      '<button class="btn cb'+(st.estado==="cambios"?" on":"")+'" data-cb>✎ Pedir un cambio</button>'+
+    '</div>'+
+    '<div class="coment"><textarea placeholder="Observaciones (opcional)" data-com>'+esc(st.comentario||"")+'</textarea></div>'+
+    '<button class="save" data-save>Guardar</button>'+
+    '<div class="saved" data-saved></div>';
+  // refs
+  const q=s=>el.querySelector(s);
+  let estado=st.estado||null;
+  q("[data-tg]").onclick=()=>{const c=q("[data-copy]");c.classList.toggle("hidden");q("[data-tg]").textContent=c.classList.contains("hidden")?"Ver texto ▾":"Ocultar texto ▴";};
+  q("[data-cp]").onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(it.copy);toast("Texto copiado");};
+  const bap=q("[data-ap]"),bcb=q("[data-cb]");
+  bap.onclick=()=>{estado="aprobado";bap.classList.add("on");bcb.classList.remove("on");};
+  bcb.onclick=()=>{estado="cambios";bcb.classList.add("on");bap.classList.remove("on");};
+  q("[data-save]").onclick=async()=>{
+    const btn=q("[data-save]");btn.disabled=true;btn.textContent="Guardando…";
+    const com=q("[data-com]").value.trim();
+    if(!estado){estado="aprobado";bap.classList.add("on");}
+    try{
+      await api({accion:"guardar",marca:MARCA,fecha:it.fecha,estado,comentario:com});
+      ESTADOS[key]={estado,comentario:com,actualizado:new Date().toISOString()};
+      el.className="item "+estado;
+      const s=q("[data-st]");s.className="st "+estado;s.textContent={aprobado:"Aprobado",cambios:"Pide cambios"}[estado];
+      q("[data-saved]").textContent="Guardado ✓";
+      progreso();toast("Guardado");
+    }catch(e){q("[data-saved]").textContent="Error al guardar, reintentá";}
+    btn.disabled=false;btn.textContent="Guardar";
+  };
+  return el;
+}
+cargarEstados();
+</script>
+</body>
+</html>
