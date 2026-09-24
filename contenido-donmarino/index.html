@@ -57,6 +57,24 @@ header.top p{margin:0;opacity:.85;font-size:14px}
 .pblock .pang{font-weight:800;color:#7a5a12;margin:6px 0 2px;font-size:14px}
 .pblock .pes{color:#6b5a2e;font-size:13px;line-height:1.45}
 .ribbon{position:absolute;top:-9px;right:14px;background:#c9911f;color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.5px;padding:3px 9px;border-radius:999px}
+.propuesta{margin-top:20px;background:#fff;border:1px solid var(--linea);border-radius:16px;padding:22px;box-shadow:0 2px 10px rgba(18,58,134,.05)}
+.ptag{display:inline-block;background:#fff3d6;color:#a9791a;font-weight:800;font-size:11px;letter-spacing:.6px;text-transform:uppercase;padding:4px 11px;border-radius:999px}
+.propuesta h2{margin:10px 0 4px;color:var(--azul2);font-size:20px}
+.propuesta .lead{color:var(--gris);font-size:14px;margin:0 0 6px;line-height:1.5}
+.pgrid{display:grid;gap:14px;margin:16px 0}
+@media(min-width:640px){.pgrid{grid-template-columns:1fr 1fr}}
+.pcol{background:#f7f9fd;border:1px solid var(--linea);border-radius:12px;padding:14px 16px}
+.pcol h3,.propuesta>h3{color:var(--azul);font-size:15px;margin:2px 0 8px}
+.pcol ul{margin:0;padding-left:18px}
+.pcol li{font-size:13.5px;line-height:1.55;margin-bottom:6px;color:#2b3444}
+.pcosts{display:grid;gap:10px;margin-top:6px}
+.pcost{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;border:1px solid var(--linea);border-radius:12px;padding:12px 14px}
+.pcost .pc-h{font-size:14px;color:var(--azul2);font-weight:700}
+.pcost .pc-d{font-size:12.5px;color:var(--gris);flex-basis:100%;order:3}
+.pcost .pc-p{font-weight:800;color:var(--azul);font-size:13.5px;margin-left:auto}
+.pcost .pc-p span{font-weight:600;color:var(--gris);font-size:12px}
+.pcost a{background:var(--celeste);color:var(--azul);padding:6px 12px;border-radius:8px;font-size:12.5px;font-weight:700;text-decoration:none}
+.pnote{margin-top:12px;background:var(--celeste);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--azul2);line-height:1.5}
 .toggle{border:0;background:none;color:var(--azul);font-weight:600;cursor:pointer;font-size:14px;padding:4px 0}
 .copy{white-space:pre-wrap;background:#fafbfe;border:1px solid var(--linea);border-radius:10px;padding:12px 14px;font-size:14px;line-height:1.5;margin-top:8px}
 .copybtn{margin-top:8px;border:1px solid var(--linea);background:#fff;border-radius:8px;padding:6px 12px;font-size:12.5px;cursor:pointer;color:var(--azul)}
@@ -106,6 +124,62 @@ footer{text-align:center;color:#9aa4b4;font-size:12px;padding:26px 16px}
       <b>Aprobar</b> o <b>Pedir un cambio</b>. Si pedís un cambio, escribí qué ajustar y tocá
       <b>Guardar</b>. Todo se guarda solo; podés volver cuando querás.
       Las piezas que dicen <b>“pendiente de grabación”</b> todavía se van a grabar.
+    </div>
+
+    <div class="propuesta">
+      <span class="ptag">Propuesta para la reunión</span>
+      <h2>El siguiente paso: un ecosistema digital propio</h2>
+      <p class="lead">Una web con <b>dominio propio</b> para Don Marino y para Marisquería, donde el cliente reserva, pide y se registra en cada actividad… y nosotros convertimos cada visita en <b>datos para vender más</b>.</p>
+      <div class="pgrid">
+        <div class="pcol">
+          <h3>Qué podría hacer el cliente</h3>
+          <ul>
+            <li><b>Reservar mesa</b> en línea.</li>
+            <li><b>Reservar el salón y espacios</b> para eventos especiales: celebraciones, actividades de índole religioso, familiares y de empresa.</li>
+            <li><b>Registrarse en cada actividad</b> — cada evento suma contactos nuevos.</li>
+            <li><b>Hacer pedidos</b> desde la web.</li>
+            <li><b>Buses y grupos</b>: reservar horarios especiales de llegada.</li>
+            <li><b>Tarjeta de fidelización</b>: acumula beneficios y recolecta datos del cliente.</li>
+          </ul>
+        </div>
+        <div class="pcol">
+          <h3>Por qué importa (el ecosistema de datos)</h3>
+          <ul>
+            <li>Todo se conecta al <b>Píxel de Meta</b> → anuncios dirigidos a quien ya nos conoce.</li>
+            <li>Ver <b>mes a mes quién visitó y quién no</b>, para reactivar a los que se enfrían.</li>
+            <li>Base de <b>clientes frecuentes</b> para campañas personalizadas.</li>
+            <li><b>Encuesta estilo Subway</b>: el cliente escanea la factura, llena la encuesta y deja su reseña en Google → gana una galleta o una entrada. Ganamos <b>reseñas, interacción y datos</b>.</li>
+          </ul>
+        </div>
+      </div>
+      <h3>Costos (solo herramientas — no cobramos mano de obra)</h3>
+      <div class="pcosts">
+        <div class="pcost">
+          <span class="pc-h">Dominio · Squarespace</span>
+          <span class="pc-p">≈ $12–20 <span>/ año · anual</span></span>
+          <a href="https://www.squarespace.com/domains" target="_blank" rel="noopener">Ver ›</a>
+          <span class="pc-d">La dirección web de cada marca.</span>
+        </div>
+        <div class="pcost">
+          <span class="pc-h">Hosting · Hostinger</span>
+          <span class="pc-p">desde ≈ $3 <span>/ mes</span></span>
+          <a href="https://www.hostinger.com/" target="_blank" rel="noopener">Ver ›</a>
+          <span class="pc-d">Donde vive el sitio y todo el ecosistema (reservas, pedidos, datos).</span>
+        </div>
+        <div class="pcost">
+          <span class="pc-h">App · Apple Developer</span>
+          <span class="pc-p">$99 <span>/ año · anual</span></span>
+          <a href="https://developer.apple.com/programs/" target="_blank" rel="noopener">Ver ›</a>
+          <span class="pc-d">Para publicar la app (tarjeta de fidelización, pedidos y reservas en el teléfono).</span>
+        </div>
+        <div class="pcost">
+          <span class="pc-h">Píxel de Meta</span>
+          <span class="pc-p">Gratis</span>
+          <a href="https://www.facebook.com/business/tools/meta-pixel" target="_blank" rel="noopener">Ver ›</a>
+          <span class="pc-d">Ya lo incluimos; conecta la web con los anuncios para medir y dirigir.</span>
+        </div>
+      </div>
+      <p class="pnote"><b>Importante:</b> en este momento <b>solo se cobra el costo de las herramientas</b> — el desarrollo va por nuestra cuenta. Son pagos que <b>mantienen vivo el ecosistema</b>: unos anuales (dominio, app) y otros mensuales (hosting). Con eso ya montado, mes a mes se puede: ligar todo al píxel, ver quién visita, fidelizar con la tarjeta y lanzar campañas dirigidas a los clientes frecuentes.</p>
     </div>
   </div>
   <footer>Hecho por UNONUEVE · Uso interno de aprobación</footer>
