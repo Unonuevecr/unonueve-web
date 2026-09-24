@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Don Marino — Demo</title>
+<style>
+:root{--oro:#e8b100;--oro2:#c9911f;--rojo:#c0392b;--rojo2:#ac1713;--cafe:#2a1a0c;--crema:#fdf7ea;--gris:#6b6156;--linea:#ece4d5;--verde:#1f9d55}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--cafe);background:var(--crema)}
+img{display:block;max-width:100%}
+.demo-flag{position:fixed;top:10px;left:10px;z-index:60;background:#2a1a0c;color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;padding:5px 11px;border-radius:999px;opacity:.85}
+nav{position:sticky;top:0;z-index:40;background:rgba(42,26,12,.97);color:#fff;display:flex;align-items:center;gap:8px;padding:11px 16px;flex-wrap:wrap}
+nav .logo{font-weight:800;font-size:16px;margin-right:auto;letter-spacing:.3px}
+nav .logo span{color:var(--oro)}
+nav a{color:#f0e6d4;text-decoration:none;font-size:13.5px;padding:5px 9px;border-radius:8px}
+nav a:hover{background:rgba(255,255,255,.12)}
+nav .cta{background:var(--oro);color:#3a2a00;padding:8px 15px;border-radius:999px;font-weight:800;font-size:13.5px;text-decoration:none}
+.hero{position:relative;color:#fff;text-align:center;padding:74px 18px 86px}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,18,6,.5),rgba(30,18,6,.82)),url('img/hero.jpg') center 30%/cover;z-index:-1}
+.hero .kick{color:var(--oro);font-weight:800;letter-spacing:3px;text-transform:uppercase;font-size:12px}
+.hero h1{font-size:40px;margin:8px 0 6px;line-height:1.03}
+.hero p{font-size:16px;opacity:.94;max-width:540px;margin:0 auto 20px}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{border:0;border-radius:999px;padding:13px 24px;font-weight:800;font-size:15px;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.p{background:var(--oro);color:#3a2a00}
+.btn.o{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.7)}
+section{max-width:1040px;margin:0 auto;padding:46px 16px}
+.stitle{text-align:center;margin-bottom:6px}
+.stitle .k{color:var(--rojo2);font-weight:800;letter-spacing:2px;text-transform:uppercase;font-size:12px}
+.stitle h2{font-size:27px;margin:6px 0 4px}
+.stitle p{color:var(--gris);max-width:580px;margin:0 auto;font-size:14.5px}
+/* reservas */
+.res{display:grid;gap:16px;margin-top:26px}
+@media(min-width:820px){.res{grid-template-columns:1fr 1fr 1fr}}
+.rcard{background:#fff;border:1px solid var(--linea);border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(42,26,12,.05)}
+.rcard img{height:150px;width:100%;object-fit:cover}
+.rcard .b{padding:15px}
+.rcard h3{margin:0 0 6px;font-size:18px;color:var(--rojo2)}
+.rcard p{margin:0;color:var(--gris);font-size:13.5px;line-height:1.5}
+.rcard .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{background:#fbf0d5;color:var(--oro2);font-weight:700;font-size:11.5px;padding:4px 10px;border-radius:999px}
+.form{background:#fff;border:1px solid var(--linea);border-radius:16px;padding:20px;margin-top:18px;display:grid;gap:12px;grid-template-columns:1fr 1fr}
+.form h3{grid-column:1/-1;margin:0;color:var(--rojo2)}
+.form label{font-size:12.5px;color:var(--gris);display:flex;flex-direction:column;gap:5px}
+.form input,.form select{border:1px solid var(--linea);border-radius:9px;padding:10px;font-size:14px;font-family:inherit}
+.form .full{grid-column:1/-1}
+.form .sub{grid-column:1/-1;background:var(--rojo);color:#fff;border:0;border-radius:10px;padding:13px;font-weight:800;font-size:15px;cursor:pointer}
+/* buffet */
+.buffet{background:var(--cafe);color:#fff;border-radius:20px;padding:28px 20px;margin-top:26px}
+.horarios{display:grid;gap:16px;margin-top:8px}
+@media(min-width:700px){.horarios{grid-template-columns:1fr 1fr}}
+.hcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:18px;display:flex;gap:14px;align-items:center}
+.hcard .em{font-size:34px}
+.hcard h3{margin:0 0 2px;font-size:19px;color:var(--oro)}
+.hcard .hr{font-size:20px;font-weight:800}
+.hcard .pr{font-size:13px;opacity:.85;margin-top:3px}
+.solo{text-align:center;margin-top:16px;font-size:13.5px;opacity:.85}
+.solo b{color:var(--oro)}
+.bimgs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.bimgs img{height:150px;width:100%;object-fit:cover;border-radius:12px}
+/* reseñas */
+.review{background:#fff;border:1px solid var(--linea);border-radius:18px;padding:24px;margin-top:26px;text-align:center;max-width:560px;margin-left:auto;margin-right:auto}
+.stars{display:flex;justify-content:center;gap:8px;margin:14px 0}
+.stars span{font-size:38px;cursor:pointer;filter:grayscale(1) opacity(.5);transition:.1s}
+.stars span.on{filter:none}
+.rout{margin-top:12px;min-height:20px}
+.rok{background:#e4f5ec;border:1px solid #b6e3c8;border-radius:12px;padding:16px}
+.rok a{display:inline-block;margin-top:10px;background:#4285F4;color:#fff;padding:11px 18px;border-radius:10px;text-decoration:none;font-weight:700}
+.rlow{background:#fdf3dc;border:1px solid #f0d79a;border-radius:12px;padding:16px}
+.rlow textarea{width:100%;border:1px solid var(--linea);border-radius:9px;padding:10px;font-family:inherit;margin-top:8px;min-height:60px}
+.rlow button{margin-top:8px;background:var(--rojo);color:#fff;border:0;border-radius:9px;padding:10px 16px;font-weight:700;cursor:pointer}
+.rnote{font-size:12px;color:var(--gris);margin-top:14px}
+/* fidelidad */
+.fid{display:grid;gap:20px;margin-top:26px}
+@media(min-width:720px){.fid{grid-template-columns:1fr 1fr;align-items:center}}
+.tarjeta{background:linear-gradient(135deg,#2a1a0c,#4a2f13);color:#fff;border-radius:18px;padding:22px;box-shadow:0 12px 30px rgba(42,26,12,.3);position:relative;overflow:hidden}
+.tarjeta::after{content:"🍽️";position:absolute;right:-8px;bottom:-16px;font-size:92px;opacity:.13}
+.tarjeta .t{opacity:.75;font-size:12px;letter-spacing:2px;text-transform:uppercase}
+.tarjeta .nm{font-size:22px;font-weight:800;margin:6px 0 16px;color:var(--oro)}
+.stamps{display:flex;gap:8px;flex-wrap:wrap}
+.stamp{width:34px;height:34px;border-radius:50%;border:2px dashed rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center;font-size:15px}
+.stamp.on{background:var(--oro);border-style:solid;border-color:var(--oro)}
+.fid ul{padding-left:18px;line-height:1.7;font-size:14.5px;color:#4a3d2c}
+footer{background:var(--cafe);color:#e8d9c2;text-align:center;padding:26px 16px;font-size:13px}
+footer b{color:#fff}
+</style>
+</head>
+<body>
+<div class="demo-flag">DEMO · UNONUEVE</div>
+<nav>
+  <div class="logo">Don <span>Marino</span></div>
+  <a href="#reservas">Reservas</a><a href="#buffet">Buffet</a><a href="#resenas">Reseñas</a><a href="#fidelidad">Fidelidad</a>
+  <a href="#reservas" class="cta">Reservar</a>
+</nav>
+
+<header class="hero">
+  <div class="kick">Ruta 27, km 57 · Orotina</div>
+  <h1>Tu parada rumbo al Pacífico</h1>
+  <p>Buffet todos los días, salón de eventos y el mejor ambiente familiar. Reservá tu mesa o tu evento en segundos.</p>
+  <div class="btns">
+    <a href="#reservas" class="btn p">Reservar evento</a>
+    <a href="#buffet" class="btn o">Ver el buffet</a>
+  </div>
+</header>
+
+<section id="reservas">
+  <div class="stitle"><div class="k">Sala de eventos</div><h2>Reservá tu evento o tu grupo</h2>
+    <p>Tenemos el salón equipado para grupos de turismo y toda clase de celebraciones. Un solo lugar, todo listo.</p></div>
+  <div class="res">
+    <div class="rcard"><img src="img/staff.jpg" alt="Grupos de turismo">
+      <div class="b"><h3>Grupos de turismo</h3><p>Recibimos buses y grupos con horarios de llegada coordinados y menú listo para servir.</p>
+      <div class="tags"><span class="tag">Buses</span><span class="tag">Horario de llegada</span><span class="tag">Menú de grupo</span></div></div></div>
+    <div class="rcard"><img src="img/evento1.jpg" alt="Eventos especiales">
+      <div class="b"><h3>Eventos especiales</h3><p>Actividades de índole religioso, empresariales, familiares y celebraciones en nuestro salón.</p>
+      <div class="tags"><span class="tag">Religiosos</span><span class="tag">Empresas</span><span class="tag">Celebraciones</span></div></div></div>
+    <div class="rcard"><img src="img/evento2.jpg" alt="Salón equipado">
+      <div class="b"><h3>Salón equipado</h3><p>6 horas de alquiler con mesas, sillas, mantelería, saloneros y menaje completo para buffet.</p>
+      <div class="tags"><span class="tag">6 horas</span><span class="tag">Saloneros</span><span class="tag">Todo incluido</span></div></div></div>
+  </div>
+  <form class="form" onsubmit="event.preventDefault();alert('Demo ✓ Solicitud de reserva enviada. En la versión real llega al ecosistema y confirmamos por WhatsApp.');">
+    <h3>Solicitá tu reserva</h3>
+    <label>Nombre<input required placeholder="Tu nombre"></label>
+    <label>WhatsApp<input required placeholder="8888-8888"></label>
+    <label>Tipo de evento
+      <select><option>Grupo de turismo</option><option>Actividad religiosa</option><option>Evento de empresa</option><option>Cumpleaños / celebración</option><option>Otro</option></select></label>
+    <label>Personas<input type="number" value="30" min="1"></label>
+    <label class="full">Fecha del evento<input type="date"></label>
+    <button class="sub">Solicitar reserva</button>
+  </form>
+</section>
+
+<section id="buffet">
+  <div class="stitle"><div class="k">Desayuno y almuerzo</div><h2>Nuestro buffet</h2>
+    <p>Las mejores proteínas, carbohidratos, ensaladas, frutas y postres. Te servís a tu gusto.</p></div>
+  <div class="buffet">
+    <div class="horarios">
+      <div class="hcard"><div class="em">🍳</div><div><h3>Desayuno</h3><div class="hr">5:00 a.m. – 11:30 a.m.</div><div class="pr">Desde ₡3.200 · gallo pinto y acompañamientos</div></div></div>
+      <div class="hcard"><div class="em">🍛</div><div><h3>Almuerzo</h3><div class="hr">11:30 a.m. – 4:00 p.m.</div><div class="pr">Desde ₡4.500 · proteínas, carbos, ensaladas y postres</div></div></div>
+    </div>
+    <div class="solo">🍽️ <b>Solo buffet</b> · te servís lo que querés, sin esperas · abierto todos los días</div>
+    <div class="bimgs"><img src="img/desayuno.jpg" alt="Desayuno buffet"><img src="img/buffet.jpg" alt="Almuerzo buffet"></div>
+  </div>
+</section>
+
+<section id="resenas">
+  <div class="stitle"><div class="k">Tu opinión cuenta</div><h2>Calificanos</h2>
+    <p>Contanos cómo estuvo tu visita. Si la pasaste bien, ayudanos con una reseña en Google.</p></div>
+  <div class="review">
+    <div style="font-weight:700">¿Cómo estuvo tu experiencia en Don Marino?</div>
+    <div class="stars" id="stars">
+      <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span>
+    </div>
+    <div class="rout" id="rout"></div>
+    <div class="rnote">Así conseguimos más reseñas buenas en Google y resolvemos en privado lo que haya que mejorar — sin filtrar a nadie.</div>
+  </div>
+</section>
+
+<section id="fidelidad">
+  <div class="stitle"><div class="k">Clientes frecuentes</div><h2>Tarjeta de fidelidad</h2>
+    <p>Cada visita suma. La familia que vuelve, gana… y nosotros aprendemos qué les gusta.</p></div>
+  <div class="fid">
+    <div class="tarjeta">
+      <div class="t">Restaurante Don Marino</div>
+      <div class="nm">Club Don Marino</div>
+      <div class="stamps">
+        <div class="stamp on">🍽️</div><div class="stamp on">🍽️</div><div class="stamp on">🍽️</div>
+        <div class="stamp on">🍽️</div><div class="stamp">🍽️</div><div class="stamp">🎁</div>
+      </div>
+      <div style="margin-top:14px;font-size:13.5px;opacity:.9">4 de 6 · a dos visitas de un desayuno gratis</div>
+    </div>
+    <ul>
+      <li><b>Acumulá</b> visitas con cada buffet.</li>
+      <li><b>Canjeá</b> por desayunos, postres o descuentos.</li>
+      <li>Recibí <b>promos personalizadas</b> según lo que te gusta.</li>
+      <li>Todo alimenta el <b>ecosistema de datos</b> del negocio.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <b>Restaurante Don Marino</b> · Ruta 27, km 57, Orotina · WhatsApp 8504-5000 · Waze: Don Marino<br>
+  Demo de ecosistema hecho por <b>UNONUEVE</b> · Los datos y accesos quedan a nombre del cliente.
+</footer>
+
+<script>
+let val=0;
+const stars=document.getElementById("stars"),rout=document.getElementById("rout");
+stars.querySelectorAll("span").forEach(s=>{
+  s.onmouseenter=()=>paint(s.dataset.v);
+  s.onclick=()=>{val=+s.dataset.v;paint(val);out(val);};
+});
+stars.onmouseleave=()=>paint(val);
+function paint(v){stars.querySelectorAll("span").forEach(s=>s.classList.toggle("on",s.dataset.v<=v));}
+function out(v){
+  if(v>=4){rout.innerHTML='<div class="rok">🎉 ¡Qué alegría! Dejanos tu reseña en Google, nos ayuda muchísimo.<br><a href="#" onclick="alert(\'Demo: abriría la página de reseñas de Google con las estrellas prellenadas.\');return false;">★ Dejar reseña en Google</a></div>';}
+  else{rout.innerHTML='<div class="rlow">🙏 Gracias por tu sinceridad. Contanos qué pasó para mejorarlo — esto llega en privado al dueño.<textarea placeholder="¿Qué podemos mejorar?"></textarea><button onclick="alert(\'Demo: tu comentario llega en privado y el local te contacta para resolverlo.\')">Enviar en privado</button></div>';}
+}
+</script>
+</body>
+</html>
