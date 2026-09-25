@@ -35,7 +35,8 @@ h1{font-size:28px;line-height:1.3;margin:6px 0 4px}
 label.campo{display:block;font-weight:500;margin:10px 0 6px}
 input[type=date],input[type=text],textarea{width:100%;font:inherit;font-size:19px;padding:12px 14px;border:2px solid var(--borde);border-radius:12px;background:#fff;color:var(--texto)}
 textarea{min-height:90px}
-.suelta{border:3px dashed var(--azul);border-radius:22px;background:var(--azul2);padding:56px 16px;text-align:center;cursor:pointer}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.suelta{border:3px dashed var(--azul);border-radius:22px;background:var(--azul2);padding:46px 12px;text-align:center;cursor:pointer;font:inherit;color:var(--texto);width:100%}
 .suelta.encima{background:var(--azul2)}
 .suelta strong{display:block;font-size:26px;color:var(--azul);margin:8px 0 2px}
 .miniaturas{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
@@ -100,20 +101,20 @@ textarea{min-height:90px}
 
   <section id="vistaSubir" class="oculto">
     <div id="formulario">
-      <h1>Subí tu pieza</h1>
-      <p class="sub">Apenas la subís, la IA la revisa y te dice si hay alguna falta.</p>
+      <h1>Revisemos la ortografía</h1>
+      <p class="sub">La IA revisa la ortografía y te dice qué corregir.</p>
 
       <details class="paso" style="margin-bottom:16px">
         <summary style="cursor:pointer;font-weight:500">Texto de la publicación (opcional)</summary>
         <textarea id="textoPost" style="margin-top:10px" placeholder="Si lo tenés, pegalo aquí. Ayuda a entender de qué trata la pieza."></textarea>
       </details>
 
-      <div class="suelta" id="suelta" tabindex="0">
-        <div style="font-size:54px;line-height:1">⬆️</div>
-        <strong>Tocá aquí para subir</strong>
-        Imagen, carrusel o video
+      <div class="dos">
+        <button class="suelta" id="btnImagen" type="button"><div style="font-size:54px;line-height:1">🖼️</div><strong>Subir imagen</strong>Una o varias</button>
+        <button class="suelta" id="btnVideo" type="button"><div style="font-size:54px;line-height:1">🎬</div><strong>Subir video</strong>&nbsp;</button>
       </div>
-      <input id="archivo" type="file" accept="image/*,video/*" multiple class="oculto">
+      <input id="archivo" type="file" accept="image/*" multiple class="oculto">
+      <input id="archivoVideo" type="file" accept="video/*" class="oculto">
       <div class="miniaturas" id="miniaturas"></div>
 
 
@@ -176,13 +177,12 @@ $('guardarCodigo').addEventListener('click', async () => {
   else { $('avisoCodigo').textContent = 'Ese código no funciona. Revisalo con Gerson.'; $('avisoCodigo').classList.remove('oculto'); }
 });
 
-const zona = $('suelta');
-zona.addEventListener('click', () => $('archivo').click());
-zona.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') $('archivo').click(); });
-zona.addEventListener('dragover', e => { e.preventDefault(); zona.classList.add('encima'); });
-zona.addEventListener('dragleave', () => zona.classList.remove('encima'));
-zona.addEventListener('drop', e => { e.preventDefault(); zona.classList.remove('encima'); tomarArchivos(e.dataTransfer.files); });
+$('btnImagen').addEventListener('click', () => $('archivo').click());
+$('btnVideo').addEventListener('click', () => $('archivoVideo').click());
 $('archivo').addEventListener('change', e => tomarArchivos(e.target.files));
+$('archivoVideo').addEventListener('change', e => tomarArchivos(e.target.files));
+document.addEventListener('dragover', e => e.preventDefault());
+document.addEventListener('drop', e => { e.preventDefault(); if (!$('formulario').classList.contains('oculto')) tomarArchivos(e.dataTransfer.files); });
 
 function tomarArchivos(lista) {
   const arr = [...lista].filter(f => /^image\/|^video\//.test(f.type) || /\.(mov|mp4|m4v|jpe?g|png|webp)$/i.test(f.name));
@@ -267,11 +267,12 @@ $('revisar').addEventListener('click', async () => {
     progreso('La IA está leyendo el texto…', 60);
     let pct = 60; const reloj = setInterval(() => { pct = Math.min(95, pct + 2); $('barra').style.width = pct + '%'; }, 700);
     const r = await enviar({
-      codigo, accion: 'revisar', id: estado.id, tipo: esVideo ? 'video' : 'imagen', archivo: estado.archivos.map(f => f.name).join(', '),
+      codigo, accion: 'revisar', id: estado.id, modelo: 'gpt-5-mini', tipo: esVideo ? 'video' : 'imagen', archivo: estado.archivos.map(f => f.name).join(', '),
       textoPost: $('textoPost').value.trim(), frames: estado.frames.map(f => ({ t: f.t, b64: f.b64 }))
     }).finally(() => clearInterval(reloj));
     progreso('Listo', 100);
     if (!r || r.ok === false) throw new Error((r && r.mensaje) || 'Algo falló');
+    r.tipoPieza = esVideo ? 'video' : 'imagen';
     pintarResultado(r);
   } catch (e) {
     $('progreso').classList.remove('visible'); $('formulario').classList.remove('oculto');
@@ -318,10 +319,10 @@ function pintarResultado(r) {
   res.querySelectorAll('[data-zoom]').forEach(img => img.addEventListener('click', () => { $('visor').querySelector('img').src = img.src; $('visor').classList.add('visible'); }));
   $('otraVez').addEventListener('click', () => {
     res.classList.remove('visible'); $('formulario').classList.remove('oculto');
-    estado.archivos = []; $('miniaturas').innerHTML = ''; $('archivo').value = '';
+    estado.archivos = []; $('miniaturas').innerHTML = ''; $('archivo').value = ''; $('archivoVideo').value = '';
     if (r.aprobado) { $('textoPost').value = ''; estado.id = nuevoId(); }
     revisarListo(); window.scrollTo({ top: 0 });
-    $('archivo').click();
+    (r.tipoPieza === 'video' ? $('archivoVideo') : $('archivo')).click();
   });
   const rc = $('reclamo');
   if (rc) {
@@ -341,7 +342,7 @@ async function cargarHistorial() {
   const et = { 'aprobada': ['aprobada', 'Aprobada'], 'con faltas': ['faltas', 'Con faltas'], 'consulta': ['consulta', 'Consultando a Gerson'] };
   $('listaHistorial').innerHTML = (r.historial || []).length ? r.historial.map(x => {
     const e = et[x.estado] || ['faltas', x.estado || ''];
-    return '<div class="item">' + (x.tipo === 'video' ? '🎬 ' : '🖼️ ') + '<b>' + esc(x.cliente || '') + '</b>' + (x.tema ? ' · ' + esc(x.tema) : '') +
+    return '<div class="item">' + (x.tipo === 'video' ? '🎬 <b>Video</b>' : '🖼️ <b>Imagen</b>') +
       '<span class="estado ' + e[0] + '">' + esc(e[1]) + '</span><br><small>' +
       (x.versiones || []).map(v => 'v' + v.v + ' ' + hora(v.hora) + (v.faltas ? ' (' + v.faltas + (v.faltas === 1 ? ' falta)' : ' faltas)') : ' ✓')).join(' → ') + '</small></div>';
   }).join('') : 'Todavía no has subido nada.';
