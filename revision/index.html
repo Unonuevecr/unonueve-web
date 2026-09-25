@@ -278,18 +278,21 @@ async function framesDeVideo(archivo) {
   const dur = isFinite(v.duration) ? v.duration : 0;
   if (!dur || !v.videoWidth) throw new Error('video');
   const paso = dur > 120 ? 1 : 0.5;
-  const peq = document.createElement('canvas'); peq.width = 48; peq.height = 86;
+  const PW = 96, PH = 170;
+  const peq = document.createElement('canvas'); peq.width = PW; peq.height = PH;
   const pctx = peq.getContext('2d', { willReadFrequently: true });
-  let previo = null; const guardados = [];
+  let previo = null, ultimoT = -99; const guardados = [];
   for (let t = 0.1; t < dur; t += paso) {
     v.currentTime = t; await esperar(v, 'seeked');
-    pctx.drawImage(v, 0, 0, 48, 86);
-    const px = pctx.getImageData(0, 0, 48, 86).data;
-    const gris = new Uint8Array(48 * 86);
+    pctx.drawImage(v, 0, 0, PW, PH);
+    const px = pctx.getImageData(0, 0, PW, PH).data;
+    const gris = new Uint8Array(PW * PH);
     for (let i = 0; i < gris.length; i++) gris[i] = (px[i * 4] + px[i * 4 + 1] + px[i * 4 + 2]) / 3;
-    let dif = 255;
-    if (previo) { let s = 0; for (let i = 0; i < gris.length; i++) s += Math.abs(gris[i] - previo[i]); dif = s / gris.length; }
-    if (dif > 7) { guardados.push({ t: Math.round(t * 10) / 10, url: aJpeg(v, v.videoWidth, v.videoHeight, 1280) }); previo = gris; }
+    let cambiados = gris.length;
+    if (previo) { cambiados = 0; for (let i = 0; i < gris.length; i++) if (Math.abs(gris[i] - previo[i]) > 45) cambiados++; }
+    if (cambiados > gris.length * 0.003 || t - ultimoT >= 3) {
+      guardados.push({ t: Math.round(t * 10) / 10, url: aJpeg(v, v.videoWidth, v.videoHeight, 1280) }); previo = gris; ultimoT = t;
+    }
     progreso('Mirando el video: segundo ' + Math.floor(t) + ' de ' + Math.floor(dur), 5 + 45 * t / dur);
   }
   let elegidos = guardados;
