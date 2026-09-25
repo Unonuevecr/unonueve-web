@@ -267,7 +267,7 @@ $('revisar').addEventListener('click', async () => {
     progreso('La IA está leyendo el texto…', 60);
     let pct = 60; const reloj = setInterval(() => { pct = Math.min(95, pct + 2); $('barra').style.width = pct + '%'; }, 700);
     const r = await enviar({
-      codigo, accion: 'revisar', id: estado.id, modelo: 'gpt-5-mini', tipo: esVideo ? 'video' : 'imagen', archivo: estado.archivos.map(f => f.name).join(', '),
+      codigo, accion: 'revisar', id: estado.id, tipo: esVideo ? 'video' : 'imagen', archivo: estado.archivos.map(f => f.name).join(', '),
       textoPost: $('textoPost').value.trim(), frames: estado.frames.map(f => ({ t: f.t, b64: f.b64 }))
     }).finally(() => clearInterval(reloj));
     progreso('Listo', 100);
@@ -288,7 +288,7 @@ function hablar(texto) {
 function pintarResultado(r) {
   $('progreso').classList.remove('visible');
   const res = $('resultado'); res.classList.add('visible');
-  const errores = r.errores || []; const dudas = r.dudas || [];
+  const errores = r.errores || []; const dudas = (r.dudas || []).filter(d => !/borros|mezcl|superpuest|transici|cuadro|fotograma/i.test((d.explicacion || '') + ' ' + (d.debe_decir || '')));
   let h = '';
   if (r.aprobado) {
     h += '<div class="cabeza bien"><h2>✅ ¡Perfecto! Sin faltas</h2><p style="margin:0;font-size:22px">☁️ Ya la podés subir a iCloud.</p></div>';
