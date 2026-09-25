@@ -77,6 +77,19 @@ header.top p{margin:0;opacity:.85;font-size:14px}
 .pcost.tot{background:#eef4ff;border-color:#bcd0ef}
 .pcost.tot .pc-h{font-size:15px}
 .pcost.tot .pc-p{font-size:16px}
+.tourbtn{position:fixed;right:16px;bottom:16px;z-index:50;background:var(--azul2);color:#fff;border:0;border-radius:999px;padding:13px 20px;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 6px 22px rgba(10,42,107,.4)}
+.tourwrap{display:none;position:fixed;inset:0;z-index:100}
+.tourwrap.on{display:block}
+.spot{position:fixed;border-radius:14px;box-shadow:0 0 0 9999px rgba(9,20,40,.74);border:3px solid #ffd85e;transition:top .28s,left .28s,width .28s,height .28s;pointer-events:none;display:none}
+.tourtip{position:fixed;width:min(330px,90vw);background:#fff;border-radius:16px;padding:17px 18px;box-shadow:0 16px 44px rgba(0,0,0,.35);z-index:101}
+.tourtip .tt-step{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--oro,#c9911f)}
+.tourtip .tt-title{font-size:18px;font-weight:800;color:var(--azul2);margin:4px 0 5px}
+.tourtip .tt-text{font-size:14px;line-height:1.5;color:#3a4557}
+.tourtip .tt-nav{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+.tourtip .tt-skip{background:none;border:0;color:var(--gris);font-size:13px;cursor:pointer}
+.tourtip .tt-right{display:flex;gap:8px}
+.tourtip .tt-right button{border:1px solid var(--linea);background:#fff;border-radius:9px;padding:8px 12px;font-weight:700;font-size:14px;cursor:pointer;color:var(--azul2)}
+.tourtip .tt-next{background:var(--azul)!important;color:#fff!important;border-color:var(--azul)!important}
 .pnote{margin-top:12px;background:var(--celeste);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--azul2);line-height:1.5}
 .pplus{margin:16px 0;background:linear-gradient(135deg,#fff8e7,#fdf0cf);border:1px solid #e6c983;border-radius:12px;padding:15px 16px}
 .pplus .h{font-weight:800;color:#8a6a1f;font-size:14.5px;margin-bottom:5px}
@@ -110,6 +123,7 @@ footer{text-align:center;color:#9aa4b4;font-size:12px;padding:26px 16px}
 </head>
 <body>
 <div id="landing">
+  <button class="tourbtn" onclick="startTour()">🎬 Tutorial guiado</button>
   <header class="top">
     <div class="k">UNONUEVE · Aprobación de contenido</div>
     <h1>Contenido de Octubre 2026</h1>
@@ -117,14 +131,14 @@ footer{text-align:center;color:#9aa4b4;font-size:12px;padding:26px 16px}
   </header>
   <div class="wrap">
     <div class="cards">
-      <div class="brandcard" onclick="abrir('donmarino')">
+      <div class="brandcard" id="tourDM" onclick="abrir('donmarino')">
         <div class="emoji">🍽️</div>
         <h2>Restaurante Don Marino</h2>
         <div class="sub">Orotina · Ruta 27, km 57</div>
         <span class="go">Entrar ›</span>
         <div class="mini" id="mini-donmarino"></div>
       </div>
-      <div class="brandcard" onclick="abrir('marisqueria')">
+      <div class="brandcard" id="tourMQ" onclick="abrir('marisqueria')">
         <div class="emoji">🦐</div>
         <h2>Marisquería Don Marino</h2>
         <div class="sub">El Roble de Puntarenas</div>
@@ -144,8 +158,8 @@ footer{text-align:center;color:#9aa4b4;font-size:12px;padding:26px 16px}
       <h2>El siguiente paso: un ecosistema digital propio</h2>
       <p class="lead">Una web con <b>dominio propio</b> para Don Marino y para Marisquería, donde el cliente reserva, pide y se registra en cada actividad… y nosotros convertimos cada visita en <b>datos para vender más</b>.</p>
       <div class="pdemos">
-        <a href="../demo-donmarino/" target="_blank">👀 Ver demo — Don Marino<span>Reservas · buffet · reseñas · fidelidad</span></a>
-        <a class="mq" href="../demo-marisqueria/" target="_blank">👀 Ver demo — Marisquería<span>Menú · pedidos · reservar mesa · salón</span></a>
+        <a id="tourDemoDM" href="../demo-donmarino/" target="_blank">👀 Ver demo — Don Marino<span>Reservas · buffet · reseñas · fidelidad</span></a>
+        <a id="tourDemoMQ" class="mq" href="../demo-marisqueria/" target="_blank">👀 Ver demo — Marisquería<span>Menú · pedidos · reservar mesa · salón</span></a>
       </div>
       <div class="pgrid">
         <div class="pcol">
@@ -173,16 +187,16 @@ footer{text-align:center;color:#9aa4b4;font-size:12px;padding:26px 16px}
         <div class="h">🔑 Todo queda a nombre del cliente — un plus que las agencias pequeñas no dan</div>
         <p>La centralizadora, los <b>accesos y los tokens</b> (Meta, Google Ads, Google Analytics, TikTok y el dominio) quedan <b>a nombre del negocio</b>. Si algún día cambian de agencia —o si dejamos de trabajar juntos— no pierden nada: la siguiente agencia solo toma los accesos y sigue el camino. <b>Los datos y el ecosistema son suyos, no de la agencia.</b></p>
       </div>
-      <div class="pdiagram">
+      <div class="pdiagram" id="tourEco">
         <img src="esquema-datos.png" alt="Esquema: qué pasa con los datos">
         <div class="cap">Esquema para la reunión: de dónde vienen los datos, cómo se centralizan y qué hacemos con ellos.</div>
       </div>
       <h3>Costos (solo herramientas — no cobramos mano de obra)</h3>
-      <div class="pcosts">
+      <div class="pcosts" id="tourCostos">
         <div class="pcost tot">
           <span class="pc-h">Hosting (VPS) + correos profesionales</span>
           <span class="pc-p">$29 <span>/ mes · total</span></span>
-          <a href="https://www.hostinger.com/vps-hosting" target="_blank" rel="noopener">Ver ›</a>
+          <a id="tourVer" href="https://www.hostinger.com/vps-hosting" target="_blank" rel="noopener">Ver ›</a>
           <span class="pc-d">Servidor VPS ($21) donde vive todo el ecosistema + correos del dominio, ej. hola@donmarino.cr ($8, lo que cuesta Gmail).</span>
         </div>
         <div class="pcost">
@@ -221,6 +235,70 @@ footer{text-align:center;color:#9aa4b4;font-size:12px;padding:26px 16px}
   <footer>Hecho por UNONUEVE</footer>
 </div>
 <div class="toast" id="toast"></div>
+
+<div class="tourwrap" id="tourWrap">
+  <div class="spot" id="spot"></div>
+  <div class="tourtip" id="tourtip">
+    <div class="tt-step" id="ttStep"></div>
+    <div class="tt-title" id="ttTitle"></div>
+    <div class="tt-text" id="ttText"></div>
+    <div class="tt-nav">
+      <button class="tt-skip" onclick="endTour()">Cerrar</button>
+      <div class="tt-right">
+        <button id="ttPrev" onclick="tourPrev()">‹ Atrás</button>
+        <button id="ttNext" class="tt-next" onclick="tourNext()">Siguiente ›</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const TOUR=[
+ {sel:"#tourDM",t:"Cronograma de Don Marino",x:"Aquí ves el contenido del mes de Don Marino: cada publicación con su video y su texto, para aprobar o pedir un cambio."},
+ {sel:"#tourMQ",t:"Cronograma de Marisquería",x:"Lo mismo para Marisquería Don Marino: revisás y aprobás cada pieza del mes."},
+ {sel:"#tourDemoDM",t:"Demo de la web — Don Marino",x:"Aquí abrís la demo de la web de Don Marino: reservas de eventos, buffet con horarios, reseñas y tarjeta de fidelidad."},
+ {sel:"#tourDemoMQ",t:"Demo de la web — Marisquería",x:"Y aquí la demo de Marisquería: menú con carrito, pedidos, reservar mesa con croquis y el salón para eventos."},
+ {sel:"#tourEco",t:"El ecosistema digital",x:"Este es el proyecto: de dónde llegan los clientes → los centralizamos en una base de datos → y hacia dónde los dirigimos para vender más."},
+ {sel:"#tourCostos",t:"Costos promedio",x:"Aquí están los costos. Son solo el costo de las herramientas — sin ningún cargo adicional de nuestra parte."},
+ {sel:"#tourVer",t:"Precios reales",x:"El botón “Ver” te lleva a la página oficial de cada plataforma, para que confirmes que es el precio real, tal cual, sin recargos."},
+ {sel:null,t:"Y esto apenas empieza",x:"Más adelante se pueden crear apps propias para iOS — para Marisquería, para Don Marino, o para cualquier otra tienda o sucursal que tengan."},
+];
+let ti=0;
+function startTour(){document.getElementById("panel").classList.add("hidden");document.getElementById("landing").classList.remove("hidden");ti=0;document.getElementById("tourWrap").classList.add("on");showStep();}
+function endTour(){document.getElementById("tourWrap").classList.remove("on");}
+function tourNext(){if(ti<TOUR.length-1){ti++;showStep();}else endTour();}
+function tourPrev(){if(ti>0){ti--;showStep();}}
+function showStep(){
+  const s=TOUR[ti];
+  document.getElementById("ttStep").textContent="Paso "+(ti+1)+" de "+TOUR.length;
+  document.getElementById("ttTitle").textContent=s.t;
+  document.getElementById("ttText").textContent=s.x;
+  document.getElementById("ttPrev").style.visibility=ti?"visible":"hidden";
+  document.getElementById("ttNext").textContent=ti==TOUR.length-1?"Terminar ✓":"Siguiente ›";
+  const spot=document.getElementById("spot"),tip=document.getElementById("tourtip");
+  const el=s.sel?document.querySelector(s.sel):null;
+  if(el){
+    el.scrollIntoView({behavior:"smooth",block:"center"});
+    setTimeout(()=>{
+      const r=el.getBoundingClientRect();
+      spot.style.display="block";
+      spot.style.top=(r.top-8)+"px";spot.style.left=(r.left-8)+"px";
+      spot.style.width=(r.width+16)+"px";spot.style.height=(r.height+16)+"px";
+      const th=tip.offsetHeight||190, vh=window.innerHeight, vw=window.innerWidth;
+      let tp;
+      if(r.bottom+14+th < vh-10) tp=r.bottom+14;          // debajo
+      else if(r.top-th-14 > 10) tp=r.top-th-14;           // arriba
+      else tp=vh-th-16;                                    // fijo abajo
+      let lft=Math.min(Math.max(12,r.left),vw-Math.min(342,vw-20));
+      tip.style.transform="none";tip.style.top=tp+"px";tip.style.left=lft+"px";
+    },360);
+  }else{
+    spot.style.display="none";
+    tip.style.transform="translate(-50%,-50%)";tip.style.top="50%";tip.style.left="50%";
+  }
+}
+window.addEventListener("resize",()=>{if(document.getElementById("tourWrap").classList.contains("on"))showStep();});
+</script>
 
 <script>
 const WEBHOOK="https://n8n-unonueve-n8n.i5i6e4.easypanel.host/webhook/donmarino-contenido";
