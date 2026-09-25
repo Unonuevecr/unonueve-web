@@ -298,6 +298,8 @@ function showStep(){
   }
 }
 window.addEventListener("resize",()=>{if(document.getElementById("tourWrap").classList.contains("on"))showStep();});
+// Arranca solo al abrir la página
+window.addEventListener("load",()=>{setTimeout(startTour,800);});
 </script>
 
 <script>
