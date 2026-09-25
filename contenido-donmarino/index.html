@@ -98,6 +98,14 @@ header.top p{margin:0;opacity:.85;font-size:14px}
 .pdemos a{flex:1;min-width:180px;text-align:center;background:var(--azul);color:#fff;text-decoration:none;padding:13px 16px;border-radius:12px;font-weight:700;font-size:14px}
 .pdemos a.mq{background:#0e4a7b}
 .pdemos a span{display:block;font-size:11.5px;font-weight:600;opacity:.85;margin-top:2px}
+.prefs-h{color:var(--azul);font-size:15px;margin:16px 0 2px;font-weight:800}
+.prefs-s{color:var(--gris);font-size:13px;margin:0 0 8px}
+.prefs{display:grid;gap:10px}
+@media(min-width:640px){.prefs{grid-template-columns:1fr 1fr 1fr}}
+.pref{border:1px solid var(--linea);border-radius:12px;padding:13px 14px;background:#fafbfe;display:flex;flex-direction:column;gap:6px}
+.pref .rh{font-weight:800;color:var(--azul2);font-size:14px}
+.pref .rf{font-size:12.5px;color:var(--gris);line-height:1.45;flex:1}
+.pref a{align-self:flex-start;background:var(--azul);color:#fff;text-decoration:none;padding:7px 13px;border-radius:8px;font-size:12.5px;font-weight:700}
 .pdiagram{margin:16px 0}
 .pdiagram img{width:100%;border:1px solid var(--linea);border-radius:12px}
 .pdiagram .cap{font-size:12px;color:var(--gris);text-align:center;margin-top:6px}
@@ -160,6 +168,15 @@ footer{text-align:center;color:#9aa4b4;font-size:12px;padding:26px 16px}
       <div class="pdemos">
         <a id="tourDemoDM" href="../demo-donmarino/" target="_blank">👀 Ver demo — Don Marino<span>Reservas · buffet · reseñas · fidelidad</span></a>
         <a id="tourDemoMQ" class="mq" href="../demo-marisqueria/" target="_blank">👀 Ver demo — Marisquería<span>Menú · pedidos · reservar mesa · salón</span></a>
+      </div>
+      <div id="tourRefs">
+        <div class="prefs-h">Webs de referencia — lo que ya construimos</div>
+        <p class="prefs-s">Ejemplos en vivo de otras marcas, para mostrar el tipo de web y sus funciones.</p>
+        <div class="prefs">
+          <div class="pref"><div class="rh">Web de evento / marca</div><div class="rf">Landing de un autor y su lanzamiento: charlas, libros, programa y contacto. Así se ve una web de marca personal.</div><a href="https://leandrojimenez.com" target="_blank" rel="noopener">Ver ›</a></div>
+          <div class="pref"><div class="rh">Registro a una actividad</div><div class="rf">La gente confirma su asistencia y sus datos caen a una base y a WhatsApp. Justo lo que serviría para las <b>actividades y eventos del local</b> (como los que se organizan en el salón).</div><a href="https://imparable.unonuevecr.com" target="_blank" rel="noopener">Ver ›</a></div>
+          <div class="pref"><div class="rh">Control de ingreso</div><div class="rf">App para el día del evento: lista en vivo, buscador y marcar ingreso, conectada a los mismos datos.</div><a href="https://leandrojimenez.com/ingreso/" target="_blank" rel="noopener">Ver ›</a></div>
+        </div>
       </div>
       <div class="pgrid">
         <div class="pcol">
@@ -258,6 +275,7 @@ const TOUR=[
  {sel:"#tourMQ",t:"Cronograma de Marisquería",x:"Lo mismo para Marisquería Don Marino: revisás y aprobás cada pieza del mes."},
  {sel:"#tourDemoDM",t:"Demo de la web — Don Marino",x:"Aquí abrís la demo de la web de Don Marino: reservas de eventos, buffet con horarios, reseñas y tarjeta de fidelidad."},
  {sel:"#tourDemoMQ",t:"Demo de la web — Marisquería",x:"Y aquí la demo de Marisquería: menú con carrito, pedidos, reservar mesa con croquis y el salón para eventos."},
+ {sel:"#tourRefs",t:"Webs de referencia",x:"Ejemplos en vivo de otras marcas que ya construimos — para mostrar el tipo de web y las funciones que se pueden lograr (registro, base de datos, control de ingreso)."},
  {sel:"#tourEco",t:"El ecosistema digital",x:"Este es el proyecto: de dónde llegan los clientes → los centralizamos en una base de datos → y hacia dónde los dirigimos para vender más."},
  {sel:"#tourCostos",t:"Costos promedio",x:"Aquí están los costos. Son solo el costo de las herramientas — sin ningún cargo adicional de nuestra parte."},
  {sel:"#tourVer",t:"Precios reales",x:"El botón “Ver” te lleva a la página oficial de cada plataforma, para que confirmes que es el precio real, tal cual, sin recargos."},
