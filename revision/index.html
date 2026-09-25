@@ -266,13 +266,16 @@ async function framesDeImagenes(archivos) {
   return out;
 }
 
-function esperar(video, evento) { return new Promise(ok => video.addEventListener(evento, ok, { once: true })); }
+function esperar(video, evento, ms) {
+  return new Promise(ok => { let t; const fin = () => { clearTimeout(t); ok(); }; video.addEventListener(evento, fin, { once: true }); t = setTimeout(fin, ms || 4000); });
+}
 
 async function framesDeVideo(archivo) {
   const v = document.createElement('video');
   v.muted = true; v.playsInline = true; v.preload = 'auto'; v.src = URL.createObjectURL(archivo);
-  await esperar(v, 'loadeddata');
-  const dur = v.duration || 0;
+  await esperar(v, 'loadeddata', 15000);
+  if (!isFinite(v.duration)) { v.currentTime = 1e7; await esperar(v, 'seeked'); v.currentTime = 0; await esperar(v, 'seeked'); }
+  const dur = isFinite(v.duration) ? v.duration : 0;
   if (!dur || !v.videoWidth) throw new Error('video');
   const paso = dur > 120 ? 1 : 0.5;
   const peq = document.createElement('canvas'); peq.width = 48; peq.height = 86;
