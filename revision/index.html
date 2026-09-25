@@ -35,9 +35,9 @@ h1{font-size:28px;line-height:1.3;margin:6px 0 4px}
 label.campo{display:block;font-weight:500;margin:10px 0 6px}
 input[type=date],input[type=text],textarea{width:100%;font:inherit;font-size:19px;padding:12px 14px;border:2px solid var(--borde);border-radius:12px;background:#fff;color:var(--texto)}
 textarea{min-height:90px}
-.suelta{border:3px dashed var(--azul);border-radius:18px;background:#fff;padding:26px 16px;text-align:center;cursor:pointer}
+.suelta{border:3px dashed var(--azul);border-radius:22px;background:var(--azul2);padding:56px 16px;text-align:center;cursor:pointer}
 .suelta.encima{background:var(--azul2)}
-.suelta strong{display:block;font-size:22px;color:var(--azul)}
+.suelta strong{display:block;font-size:26px;color:var(--azul);margin:8px 0 2px}
 .miniaturas{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .miniaturas img{height:90px;border-radius:8px;border:1px solid var(--borde)}
 .boton{display:block;width:100%;border:0;border-radius:16px;background:var(--azul);color:#fff;font:inherit;font-size:22px;font-weight:700;padding:18px;cursor:pointer;margin-top:8px}
@@ -100,38 +100,25 @@ textarea{min-height:90px}
 
   <section id="vistaSubir" class="oculto">
     <div id="formulario">
-      <h1>Revisemos tu pieza</h1>
-      <p class="sub">La IA lee todo el texto y te dice si hay alguna falta. Tarda menos de un minuto.</p>
+      <h1>Subí tu pieza</h1>
+      <p class="sub">Apenas la subís, la IA la revisa y te dice si hay alguna falta.</p>
 
-      <div class="paso">
-        <h2><span class="num">1</span>¿De qué cliente es?</h2>
-        <div class="clientes" id="clientes"></div>
-      </div>
+      <details class="paso" style="margin-bottom:16px">
+        <summary style="cursor:pointer;font-weight:500">Texto de la publicación (opcional)</summary>
+        <textarea id="textoPost" style="margin-top:10px" placeholder="Si lo tenés, pegalo aquí. Ayuda a entender de qué trata la pieza."></textarea>
+      </details>
 
-      <div class="paso">
-        <h2><span class="num">2</span>¿Qué día se publica y qué es?</h2>
-        <label class="campo" for="fecha">Día de publicación</label>
-        <input id="fecha" type="date">
-        <label class="campo">Tipo de pieza</label>
-        <div class="fila" id="formatos"></div>
-        <label class="campo" for="pieza">Nombre corto (opcional)</label>
-        <input id="pieza" type="text" placeholder="Ej.: promo arroces">
+      <div class="suelta" id="suelta" tabindex="0">
+        <div style="font-size:54px;line-height:1">⬆️</div>
+        <strong>Tocá aquí para subir</strong>
+        Imagen, carrusel o video
       </div>
+      <input id="archivo" type="file" accept="image/*,video/*" multiple class="oculto">
+      <div class="miniaturas" id="miniaturas"></div>
 
-      <div class="paso">
-        <h2><span class="num">3</span>Subí el archivo</h2>
-        <div class="suelta" id="suelta" tabindex="0">
-          <strong>Tocá aquí o arrastrá el archivo</strong>
-          Imagen, varias imágenes (carrusel) o video
-        </div>
-        <input id="archivo" type="file" accept="image/*,video/*" multiple class="oculto">
-        <div class="miniaturas" id="miniaturas"></div>
-        <label class="campo" for="textoPost">Texto de la publicación (opcional)</label>
-        <textarea id="textoPost" placeholder="Si tenés el texto que va abajo de la foto, pegalo aquí y también se revisa."></textarea>
-      </div>
 
       <div id="avisoForm" class="aviso error oculto"></div>
-      <button class="boton" id="revisar" disabled>Revisar ortografía</button>
+      <button class="boton oculto" id="revisar" disabled>Revisar</button>
     </div>
 
     <div class="progreso" id="progreso">
@@ -155,37 +142,20 @@ textarea{min-height:90px}
 
 <script>
 const WEBHOOK = 'https://n8n-unonueve-n8n.i5i6e4.easypanel.host/webhook/revisor-otto';
-const CLIENTES = [
-  ['Volcano','Volcano'], ['Transtour','Transtour'], ['Metales SQ','Metales SQ'],
-  ['Don Marino','Don marino'], ['Marisquería Don Marino','Marisqueria Don Marino'],
-  ['Rancho JSM','Restaurante jsm'], ['Súper Pig','Super Pig'], ['Mr. Gabriel','Mr.Gabriel'],
-  ['Plaza La Joya','Plaza La joya'], ['Fabiola Murillo','Fabi Murillo'], ['Rebe Bustamante','Rebe Bustamante'],
-  ['Angélica','Angelica'], ['Leandro','Leandro'], ['Huellitas Educativas','Huella Educativa'],
-  ['Fresura Tropical','Fresura Tropical'], ['Mega Soluciones','Mega Soluciones'], ['Ferva','Ferva'],
-  ['UNONUEVECR','UnoNueveCR']
-];
-const FORMATOS = [['Post','Post'], ['Stories','Historia'], ['Reel','Reel / video']];
-const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-const DIAS = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-
 const $ = (id) => document.getElementById(id);
 const guardar = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
 const leer = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
 const esc = (t) => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 let codigo = '';
-let estado = { cliente: null, carpeta: null, formato: 'Post', archivos: [], frames: [] };
+const nuevoId = () => 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+let estado = { id: nuevoId(), archivos: [], frames: [] };
 
 (function iniciar() {
   const url = new URL(location.href);
   const c = url.searchParams.get('c');
   if (c) { guardar('revisor_codigo', c.toUpperCase()); url.searchParams.delete('c'); history.replaceState(null, '', url.pathname + url.search + url.hash); }
   codigo = leer('revisor_codigo') || '';
-  const manana = new Date(Date.now() + 86400000);
-  $('fecha').value = manana.toISOString().slice(0, 10);
-  pintarClientes(); pintarFormatos();
-  const ult = leer('revisor_cliente');
-  if (ult) { const b = [...document.querySelectorAll('#clientes .chip')].find(x => x.dataset.carpeta === ult); if (b) b.click(); }
   mostrar(codigo ? 'subir' : 'codigo');
 })();
 
@@ -206,23 +176,6 @@ $('guardarCodigo').addEventListener('click', async () => {
   else { $('avisoCodigo').textContent = 'Ese código no funciona. Revisalo con Gerson.'; $('avisoCodigo').classList.remove('oculto'); }
 });
 
-function pintarClientes() {
-  $('clientes').innerHTML = CLIENTES.map(([n, f]) => '<button class="chip" aria-pressed="false" data-carpeta="' + esc(f) + '" data-nombre="' + esc(n) + '">' + esc(n) + '</button>').join('');
-  $('clientes').querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => {
-    $('clientes').querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', 'false'));
-    b.setAttribute('aria-pressed', 'true');
-    estado.cliente = b.dataset.nombre; estado.carpeta = b.dataset.carpeta;
-    guardar('revisor_cliente', estado.carpeta); revisarListo();
-  }));
-}
-function pintarFormatos() {
-  $('formatos').innerHTML = FORMATOS.map(([v, n]) => '<button class="chip" aria-pressed="' + (v === estado.formato) + '" data-v="' + v + '">' + n + '</button>').join('');
-  $('formatos').querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => {
-    $('formatos').querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', 'false'));
-    b.setAttribute('aria-pressed', 'true'); estado.formato = b.dataset.v;
-  }));
-}
-
 const zona = $('suelta');
 zona.addEventListener('click', () => $('archivo').click());
 zona.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') $('archivo').click(); });
@@ -235,11 +188,10 @@ function tomarArchivos(lista) {
   const arr = [...lista].filter(f => /^image\/|^video\//.test(f.type) || /\.(mov|mp4|m4v|jpe?g|png|webp)$/i.test(f.name));
   const videos = arr.filter(f => /^video\//.test(f.type) || /\.(mov|mp4|m4v)$/i.test(f.name));
   estado.archivos = videos.length ? [videos[0]] : arr.sort((a, b) => a.name.localeCompare(b.name, 'es', { numeric: true }));
-  if (videos.length && estado.formato === 'Post') { const b = $('formatos').querySelector('[data-v="Reel"]'); if (b) b.click(); }
   $('miniaturas').innerHTML = estado.archivos.map(f => /^image\//.test(f.type) ? '<img alt="" src="' + URL.createObjectURL(f) + '">' : '<div class="chip">🎬 ' + esc(f.name) + '</div>').join('');
   revisarListo();
 }
-function revisarListo() { $('revisar').disabled = !(estado.cliente && estado.archivos.length); }
+function revisarListo() { $('revisar').disabled = !estado.archivos.length; if (estado.archivos.length) $('revisar').click(); }
 
 function progreso(texto, pct) { $('progresoTexto').textContent = texto; $('barra').style.width = Math.round(pct) + '%'; }
 
@@ -315,8 +267,7 @@ $('revisar').addEventListener('click', async () => {
     progreso('La IA está leyendo el texto…', 60);
     let pct = 60; const reloj = setInterval(() => { pct = Math.min(95, pct + 2); $('barra').style.width = pct + '%'; }, 700);
     const r = await enviar({
-      codigo, accion: 'revisar', cliente: estado.cliente, fecha: $('fecha').value, formato: estado.formato,
-      pieza: $('pieza').value.trim(), tipo: esVideo ? 'video' : 'imagen', archivo: estado.archivos.map(f => f.name).join(', '),
+      codigo, accion: 'revisar', id: estado.id, tipo: esVideo ? 'video' : 'imagen', archivo: estado.archivos.map(f => f.name).join(', '),
       textoPost: $('textoPost').value.trim(), frames: estado.frames.map(f => ({ t: f.t, b64: f.b64 }))
     }).finally(() => clearInterval(reloj));
     progreso('Listo', 100);
@@ -329,12 +280,6 @@ $('revisar').addEventListener('click', async () => {
   }
 });
 
-function rutaIcloud() {
-  const d = new Date($('fecha').value + 'T12:00:00');
-  const mes = MESES[d.getMonth()];
-  return ['Trabajos Redes', estado.carpeta, 'Cronograma', d.getFullYear(), mes, DIAS[d.getDay()], estado.carpeta + ' ' + mes + ' ' + d.getDate() + ' del ' + d.getFullYear(), estado.formato].join(' / ');
-}
-
 function hablar(texto) {
   try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(texto); u.lang = 'es-419'; u.rate = 0.9; speechSynthesis.speak(u); } catch (e) {}
 }
@@ -345,10 +290,9 @@ function pintarResultado(r) {
   const errores = r.errores || []; const dudas = r.dudas || [];
   let h = '';
   if (r.aprobado) {
-    h += '<div class="cabeza bien"><h2>✅ ¡Perfecto! Sin faltas</h2><p style="margin:0">Versión ' + r.version + '. Ya le avisé a Gerson.</p></div>';
-    h += '<div class="paso"><h2>☁️ Ahora subila a iCloud</h2><p style="margin:0">Guardala en esta carpeta:</p><div class="ruta" id="ruta">' + esc(rutaIcloud()) + '</div><button class="boton secundario" id="copiarRuta">Copiar la ruta</button></div>';
+    h += '<div class="cabeza bien"><h2>✅ ¡Perfecto! Sin faltas</h2><p style="margin:0;font-size:22px">☁️ Ya la podés subir a iCloud.</p></div>';
   } else {
-    h += '<div class="cabeza mal"><h2>✋ Hay ' + errores.length + (errores.length === 1 ? ' falta' : ' faltas') + ' que corregir</h2><p style="margin:0">Versión ' + r.version + '. Corregila y volvé a subirla.</p></div>';
+    h += '<div class="cabeza mal"><h2>✋ Hay ' + errores.length + (errores.length === 1 ? ' falta' : ' faltas') + ' que corregir</h2><p style="margin:0">Corregila y volvé a subirla.</p></div>';
     errores.forEach((e, i) => {
       const f = estado.frames[(Number(e.fotograma) || 1) - 1];
       h += '<div class="falta">' + (f ? '<img alt="Dónde está la falta" src="' + f.url + '" data-zoom>' : '<div></div>') +
@@ -363,7 +307,7 @@ function pintarResultado(r) {
     h += '<div class="paso"><h2>🤔 Para revisar con calma</h2><p class="sub" style="margin-bottom:10px">Esto no frena la pieza, pero fijate:</p>' +
       dudas.map(d => '<div class="duda"><b>' + esc(d.dice) + '</b> → ' + esc(d.debe_decir) + (d.explicacion ? '<br><small>' + esc(d.explicacion) + '</small>' : '') + '</div>').join('') + '</div>';
   }
-  h += '<button class="boton" id="otraVez">' + (r.aprobado ? 'Subir otra pieza' : 'Ya corregí, subir de nuevo') + '</button>';
+  h += '<button class="boton" id="otraVez">' + (r.aprobado ? 'Subir otra pieza' : 'Subir la corregida') + '</button>';
   if (!r.aprobado) h += '<button class="boton secundario" id="reclamo">Creo que la IA se equivocó</button><div id="cajaReclamo" class="paso oculto" style="margin-top:12px"><label class="campo" for="nota">¿Qué pasó? (opcional)</label><textarea id="nota"></textarea><button class="boton secundario" id="enviarReclamo">Avisarle a Gerson</button><div id="okReclamo" class="sub"></div></div>';
   res.innerHTML = h;
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -372,18 +316,18 @@ function pintarResultado(r) {
     const e = errores[Number(b.dataset.oir)]; hablar('Dice ' + e.dice + '. Tiene que decir ' + e.debe_decir + '.');
   }));
   res.querySelectorAll('[data-zoom]').forEach(img => img.addEventListener('click', () => { $('visor').querySelector('img').src = img.src; $('visor').classList.add('visible'); }));
-  const cr = $('copiarRuta'); if (cr) cr.addEventListener('click', () => { navigator.clipboard && navigator.clipboard.writeText(rutaIcloud()); cr.textContent = 'Copiada ✓'; });
   $('otraVez').addEventListener('click', () => {
     res.classList.remove('visible'); $('formulario').classList.remove('oculto');
     estado.archivos = []; $('miniaturas').innerHTML = ''; $('archivo').value = '';
-    if (r.aprobado) { $('pieza').value = ''; $('textoPost').value = ''; }
+    if (r.aprobado) { $('textoPost').value = ''; estado.id = nuevoId(); }
     revisarListo(); window.scrollTo({ top: 0 });
+    $('archivo').click();
   });
   const rc = $('reclamo');
   if (rc) {
     rc.addEventListener('click', () => $('cajaReclamo').classList.remove('oculto'));
     $('enviarReclamo').addEventListener('click', async () => {
-      const x = await enviar({ codigo, accion: 'reclamo', cliente: estado.cliente, fecha: $('fecha').value, formato: estado.formato, pieza: $('pieza').value.trim(), nota: $('nota').value.trim() }).catch(() => null);
+      const x = await enviar({ codigo, accion: 'reclamo', id: estado.id, nota: $('nota').value.trim() }).catch(() => null);
       $('okReclamo').textContent = x && x.ok ? '✓ Listo, Gerson ya sabe. Él te responde.' : 'No se pudo enviar. Probá otra vez.';
     });
   }
@@ -397,9 +341,9 @@ async function cargarHistorial() {
   const et = { 'aprobada': ['aprobada', 'Aprobada'], 'con faltas': ['faltas', 'Con faltas'], 'consulta': ['consulta', 'Consultando a Gerson'] };
   $('listaHistorial').innerHTML = (r.historial || []).length ? r.historial.map(x => {
     const e = et[x.estado] || ['faltas', x.estado || ''];
-    return '<div class="item"><b>' + esc(x.cliente) + '</b> · ' + esc(x.formato) + ' · ' + esc(x.fecha) + (x.pieza && x.pieza !== 'pieza' ? ' · ' + esc(x.pieza) : '') +
+    return '<div class="item">' + (x.tipo === 'video' ? '🎬 ' : '🖼️ ') + '<b>' + esc(x.cliente || '') + '</b>' + (x.tema ? ' · ' + esc(x.tema) : '') +
       '<span class="estado ' + e[0] + '">' + esc(e[1]) + '</span><br><small>' +
-      (x.versiones || []).map(v => 'v' + v.v + ' ' + hora(v.hora) + (v.faltas ? ' (' + v.faltas + ' faltas)' : ' ✓')).join(' → ') + '</small></div>';
+      (x.versiones || []).map(v => 'v' + v.v + ' ' + hora(v.hora) + (v.faltas ? ' (' + v.faltas + (v.faltas === 1 ? ' falta)' : ' faltas)') : ' ✓')).join(' → ') + '</small></div>';
   }).join('') : 'Todavía no has subido nada.';
 }
 </script>
