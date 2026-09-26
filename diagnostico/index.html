@@ -140,7 +140,8 @@ var CONFIG = {
   TC: 505,                /* ₡ por dólar, aproximado */
   CONTENIDO_USD: 800,     /* servicio de creación de contenido hecho por UNONUEVECR, por mes */
   COSTO_HORA: 2430,       /* ₡505.000 (₡350.000 de salario + 44,5% de cargas y provisiones) ÷ 208 h al mes */
-  MENSUALIDAD: [[2,300],[99,350]],   /* hasta N áreas → USD/mes */
+  MENSUALIDAD: [[2,300],[99,350]],   /* mantenimiento OPCIONAL (desde $300) + licencias de IA, estimado → USD/mes. Se suma para que el cálculo sea conservador */
+  PISO_USD: 3000,         /* todo sistema arranca en $3.000 (pago único, se puede pagar en partes) */
   /* Implementación por módulo, USD, una sola vez. NO se muestra como lista: solo alimenta el cálculo. */
   IMPL: { crm:3500,          /* WhatsApp + CRM: cubre atención y ventas */
           conta:1000,        /* contabilidad y cobros */
@@ -256,6 +257,9 @@ function resultado(){
   var usaCRM = tiene('atencion') || tiene('ventas') || tiene('prospeccion') || tiene('reportes');
   var implUSD = (usaCRM ? I.crm : 0) + (tiene('conta') ? I.conta : 0) + (tiene('prospeccion') ? I.prospeccion : 0) + (tiene('reportes') ? I.reportes : 0);
   var implContUSD = I.contenido;
+  /* Piso: ningún sistema baja de $3.000 */
+  var sumaImpl = implUSD + (contSistema ? implContUSD : 0);
+  if (sumaImpl > 0 && sumaImpl < CONFIG.PISO_USD) { if (implUSD) implUSD += CONFIG.PISO_USD - sumaImpl; else implContUSD += CONFIG.PISO_USD - sumaImpl; }
   var impl = (implUSD + (contSistema ? implContUSD : 0)) * CONFIG.TC;
   var nNoCont = nSis - (contSistema ? 1 : 0);
   var mensual = mensualSis + contenidoMes;         /* lo que se paga cada mes desde el 2.º año */
@@ -293,14 +297,15 @@ function resultado(){
   if(referencia > mensual){
     h += '<div class="tiempo"><div><span>Primer año</span><b>'+fmt(anio1Sis)+'</b><small>'+(impl ? 'implementación de '+fmt(impl)+' (una sola vez) + ' : '')+'12 meses de '+fmt(mensual)+(contenidoMes ? ' (incluye contenido '+fmt(contenidoMes)+')' : '')+'</small></div>';
     h += '<div><span>Primer año '+(cubrir==='fre'?'con freelance':cubrir==='emp'?'contratando':'como hoy')+'</span><b>'+fmt(anio1Ref)+'</b><small>'+fmt(referencia)+' × 12 meses</small></div>';
-    h += '<div><span>En 3 años ahorrás</span><b class="oro">'+fmt(Math.max(0,tres))+'</b><small>desde el 2.º año solo pagás la mensualidad</small></div></div>';
+    h += '<div><span>En 3 años ahorrás</span><b class="oro">'+fmt(Math.max(0,tres))+'</b><small>desde el 2.º año solo licencias de IA y, si querés, mantenimiento</small></div></div>';
     h += '<p style="margin-top:22px;font-size:18px">'+(ahorro > 0 ? 'Ahorro estimado el primer año: <b style="color:var(--oro2)">'+fmt(ahorro)+' al mes</b>, y desde el segundo año <b style="color:var(--oro2)">'+fmt(ahorro2)+' al mes</b>. ' : 'El primer año la inversión pesa más que el ahorro, pero desde el segundo año ahorrás <b style="color:var(--oro2)">'+fmt(ahorro2)+' al mes</b>. ')+(meses ? 'La implementación se paga sola en <b style="color:var(--oro2)">'+meses+(meses>1?' meses':' mes')+'</b>.' : '')+'</p>';
+    h += '<p style="margin-top:10px;font-size:13.5px;color:#C4B9AB">El sistema es un <b>pago único desde $3.000</b> (se puede pagar en partes). No hay mensualidad obligatoria: solo pagás las licencias de IA que usés. Para ser conservadores, este cálculo ya suma el mantenimiento, que es opcional (desde $300 al mes). <a href="/terminos/" style="color:var(--oro2)">Términos y condiciones</a>.</p>';
   }
   else h += '<p style="margin-top:22px;font-size:18px">Con tus respuestas, <b style="color:var(--oro2)">hoy no te conviene automatizar</b>. Y está bien: preferimos decírtelo.</p>';
   h += '</div><h2 style="margin-top:40px">Área por área</h2><div class="res-areas">';
   filas.forEach(function(f){
     h += '<div class="ra"><div class="cab"><span style="font-size:24px">'+f.a.ic+'</span><b>'+f.a.n+'</b><span class="veredicto '+f.ver[0]+'">'+f.ver[1]+'</span></div>';
-    h += '<div class="comp"><div><span>Hoy, a mano</span><b>'+fmt(f.hoy)+'</b></div><div><span>Contratar '+f.a.rol+'</span><b>'+fmt(f.contratar)+'</b></div>'+(f.k === 'contenido' ? (contSistema ? '<div class="ia"><span>Tu propio sistema (1.er año)</span><b>'+fmt(contSistemaMes)+'</b></div></div><div class="alt"><b>O que UNONUEVECR lo cree por vos:</b> '+fmt(CONFIG.CONTENIDO_USD * CONFIG.TC)+' al mes, sin implementación. Nosotros lo hacemos y lo publicamos.</div>' : '<div class="ia"><span>UNONUEVECR lo crea por vos</span><b>'+fmt(contenidoMes)+'</b></div></div><div class="alt"><b>O tu propio sistema de contenido</b> — hace los videos, las imágenes y los recortes; tu equipo solo aprueba y acomoda los textos. Sale en '+fmt(contSistemaMes)+' al mes el primer año y después solo la mensualidad.</div>') : '<div class="ia"><span>Con el sistema (1.er año)</span><b>'+fmt(porArea)+'</b></div></div>');
+    h += '<div class="comp"><div><span>Hoy, a mano</span><b>'+fmt(f.hoy)+'</b></div><div><span>Contratar '+f.a.rol+'</span><b>'+fmt(f.contratar)+'</b></div>'+(f.k === 'contenido' ? (contSistema ? '<div class="ia"><span>Tu propio sistema (1.er año)</span><b>'+fmt(contSistemaMes)+'</b></div></div><div class="alt"><b>O que UNONUEVECR lo cree por vos:</b> '+fmt(CONFIG.CONTENIDO_USD * CONFIG.TC)+' al mes, sin implementación. Nosotros lo hacemos y lo publicamos.</div>' : '<div class="ia"><span>UNONUEVECR lo crea por vos</span><b>'+fmt(contenidoMes)+'</b></div></div><div class="alt"><b>O tu propio sistema de contenido</b> — hace los videos, las imágenes y los recortes; tu equipo solo aprueba y acomoda los textos. Sale en '+fmt(contSistemaMes)+' al mes el primer año y después solo licencias de IA y mantenimiento opcional.</div>') : '<div class="ia"><span>Con el sistema (1.er año)</span><b>'+fmt(porArea)+'</b></div></div>');
     h += '<p>'+Math.round(f.hMes)+' horas al mes de tu equipo se van en esto. '+(f.k === 'contenido' ? 'Con nosotros o con tu propio sistema, nadie en tu equipo vuelve a crear desde cero.' : 'El sistema lo cubre 24/7 y tu gente se dedica a lo que ninguna máquina hace bien.')+'</p></div>';
   });
   h += '</div><div class="card" style="margin-top:40px"><h2>Recibí el informe y <em>agendá tu reunión</em></h2><p class="nota" style="font-size:15px">En 45 minutos revisamos estos números con los tuyos reales. Sin compromiso.</p>';
