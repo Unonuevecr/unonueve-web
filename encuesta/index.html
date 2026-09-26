@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es-CR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#14110E">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://n8n-unonueve-n8n.i5i6e4.easypanel.host; base-uri 'self'; form-action 'none'">
+<title>Tu opinión | UNONUEVECR</title>
+<meta property="og:title" content="¿Nos regalás un minuto? | UNONUEVECR">
+<meta property="og:description" content="Tres preguntas cortas para mejorar lo que hacemos.">
+<meta property="og:image" content="https://unonuevecr.com/assets/og.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+:root{--crema:#EFE7DC;--crema2:#F6F1E9;--tinta:#14110E;--oro:#C8892F;--oro2:#E0B168;--gris:#6f6456;--linea:rgba(20,17,14,.12)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:var(--crema);color:var(--tinta);line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh}
+em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;color:var(--oro)}
+header{background:var(--tinta);color:var(--crema)}
+header .in{max-width:640px;margin:0 auto;padding:16px 20px;display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.5px}
+header svg{height:24px;width:auto}
+header .cr{color:var(--oro)}
+main{max-width:640px;margin:0 auto;padding:34px 20px 70px}
+h1{font-size:clamp(28px,6vw,38px);line-height:1.08;letter-spacing:-1px;font-weight:800}
+.bajada{color:var(--gris);margin-top:10px;font-size:16.5px}
+.q{background:#fff;border:1px solid var(--linea);border-radius:20px;padding:22px 20px;margin-top:16px}
+.q h2{font-size:17.5px;letter-spacing:-.2px;line-height:1.3}
+.q .ay{color:var(--gris);font-size:13.5px;margin-top:3px}
+.estrellas{display:flex;gap:6px;margin-top:14px}
+.estrellas button{font-size:34px;line-height:1;background:none;border:0;cursor:pointer;color:#D9CFC2;transition:transform .1s}
+.estrellas button.on{color:var(--oro)}
+.estrellas button:hover{transform:scale(1.12)}
+.ops{display:grid;gap:8px;margin-top:14px}
+.ops button{display:flex;align-items:center;gap:12px;text-align:left;border:1.5px solid var(--linea);border-radius:14px;padding:13px 15px;background:#fff;cursor:pointer;font:inherit;font-size:15.5px;color:var(--tinta);transition:.15s}
+.ops button:hover{border-color:var(--oro)}
+.ops button.on{border-color:var(--oro);background:#FFF5E6}
+.ops button i{flex:none;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--linea)}
+.ops button.on i{background:var(--oro);border-color:var(--oro);box-shadow:inset 0 0 0 3px #fff}
+textarea,input[type=text]{width:100%;margin-top:12px;border:1.5px solid var(--linea);border-radius:14px;padding:13px 14px;font:inherit;font-size:15.5px;background:#fff;resize:vertical}
+textarea{min-height:90px}
+textarea:focus,input:focus{outline:none;border-color:var(--oro)}
+.hp{position:absolute;left:-9999px}
+.enviar{margin-top:22px;width:100%;background:var(--tinta);color:var(--crema);border:0;border-radius:999px;padding:17px;font:inherit;font-weight:700;font-size:17px;cursor:pointer}
+.enviar:disabled{opacity:.5;cursor:default}
+.msg{text-align:center;padding:60px 10px}
+.msg .ic{font-size:52px}
+.msg h1{margin-top:14px}
+.msg p{color:var(--gris);margin-top:10px;font-size:16.5px}
+.err{color:#9A2A1E;font-size:14px;margin-top:12px;text-align:center;min-height:20px}
+.cargando{text-align:center;color:var(--gris);padding:70px 0}
+footer{text-align:center;color:var(--gris);font-size:12.5px;padding:0 20px 30px}
+footer a{color:var(--gris)}
+</style>
+</head><body>
+<header><div class="in"><svg viewBox="0 0 647.47 557.92" fill="#EFE7DC" aria-hidden="true"><path d="M102.04,0v543.23h-38.91V52.12L5.14,114.52l-5.14-4.4L102.04,0Z"/><path d="M137.27,372.92c0-18.35,14.68-33.03,33.04-33.03s32.3,14.68,32.3,33.03-14.68,32.3-32.3,32.3-33.04-14.68-33.04-32.3ZM137.27,524.88c0-17.62,14.68-32.3,33.04-32.3s32.3,14.68,32.3,32.3-14.68,33.03-32.3,33.03-33.04-14.68-33.04-33.03Z"/><path d="M352.36,549.84c140.21,0,224.63-132.14,246.66-255.47-26.43,65.33-90.29,106.44-161.5,106.44-116.72,0-199.68-83.69-199.68-199.67S326.67,2.2,437.52,2.2c129.2,0,209.95,104.98,209.95,228.31,0,162.97-123.33,326.67-295.11,326.67v-7.34ZM605.62,225.37c0-99.84-53.59-216.56-168.11-216.56-101.31,0-158.57,101.31-158.57,192.33s57.26,192.33,158.57,192.33c94.7,0,168.11-73.41,168.11-168.11Z"/></svg><span>UNONUEVE<span class="cr">CR</span></span></div></header>
+<main id="m"><div class="cargando">Cargando…</div></main>
+<footer>Tus respuestas las lee solo el equipo de UNONUEVECR. <a href="/privacidad/">Privacidad</a></footer>
+<script>
+var API = "https://n8n-unonueve-n8n.i5i6e4.easypanel.host/webhook/sistema-encuesta";
+var T = (location.search.match(/[?&]t=([a-z0-9]{10,40})/i) || [])[1] || "";
+var R = {};
+function $(i){ return document.getElementById(i); }
+function esc(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function mensaje(ic, t, p){ $("m").innerHTML = '<div class="msg"><div class="ic">' + ic + '</div><h1>' + t + '</h1><p>' + p + '</p></div>'; }
+function post(b){ b.t = T; return fetch(API, { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(b) }).then(function(r){ return r.json(); }); }
+function ops(id, l){ return '<div class="ops" data-g="' + id + '">' + l.map(function(o){ return '<button type="button" data-v="' + esc(o) + '"><i></i>' + esc(o) + '</button>'; }).join("") + '</div>'; }
+
+function pintar(tipo, nombre){
+  var hola = nombre ? esc(nombre) + ", " : "";
+  var h;
+  if(tipo === "no_compra"){
+    h = '<h1>' + hola + '¿nos ayudás a <em>mejorar?</em></h1><p class="bajada">Tres preguntas, un minuto. Nos sirve muchísimo saber qué pasó, sea lo que sea.</p>' +
+      '<div class="q"><h2>¿Qué te frenó para avanzar?</h2>' + ops("motivo", ["Precio", "No entendí bien para qué me sirve", "No es el momento", "Tengo que consultarlo", "Ya tengo otra solución", "Me pareció complicado", "Sí quiero avanzar", "Otro"]) + '</div>' +
+      '<div class="q"><h2>¿Qué tendría que pasar para que lo retomaras?</h2><p class="ay">Opcional</p><input type="text" id="retomar" maxlength="400" placeholder="Ej.: empezar solo con el WhatsApp, pagarlo en partes…"></div>' +
+      '<div class="q"><h2>¿Cómo calificás la atención que te dimos?</h2><div class="estrellas" id="est"></div></div>' +
+      '<div class="q"><h2>¿Te podemos escribir más adelante?</h2>' + ops("contactar", ["Sí, en un mes", "Sí, en tres meses", "No, gracias"]) + '</div>';
+  } else {
+    h = '<h1>' + hola + 'gracias por la <em>reunión.</em></h1><p class="bajada">¿Nos regalás un minuto? Así la próxima sale mejor.</p>' +
+      '<div class="q"><h2>¿Qué te pareció la reunión?</h2><div class="estrellas" id="est"></div></div>' +
+      '<div class="q"><h2>¿Te quedó claro qué haría el sistema por tu negocio?</h2>' + ops("claridad", ["Muy claro", "Más o menos", "No me quedó claro"]) + '</div>' +
+      '<div class="q"><h2>¿Qué fue lo más útil?</h2><p class="ay">Opcional</p><input type="text" id="util" maxlength="400"></div>' +
+      '<div class="q"><h2>¿Qué te frena hoy para empezar?</h2>' + ops("motivo", ["Sí quiero avanzar", "Precio", "No entendí bien para qué me sirve", "No es el momento", "Tengo que consultarlo", "Ya tengo otra solución", "Otro"]) + '</div>';
+  }
+  h += '<div class="q"><h2>¿Algo más que nos quieras decir?</h2><p class="ay">Opcional</p><textarea id="com" maxlength="1500"></textarea></div>' +
+    '<input class="hp" id="sitio" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+    '<button class="enviar" id="env">Enviar respuestas</button><div class="err" id="err"></div>';
+  $("m").innerHTML = h;
+  var est = $("est"); est.innerHTML = [1, 2, 3, 4, 5].map(function(n){ return '<button type="button" data-n="' + n + '" aria-label="' + n + ' de 5">★</button>'; }).join("");
+  est.onclick = function(e){ var b = e.target.closest("button"); if(!b) return; R.calificacion = +b.getAttribute("data-n"); est.querySelectorAll("button").forEach(function(x){ x.classList.toggle("on", +x.getAttribute("data-n") <= R.calificacion); }); };
+  document.querySelectorAll(".ops").forEach(function(g){ g.onclick = function(e){ var b = e.target.closest("button"); if(!b) return; g.querySelectorAll("button").forEach(function(x){ x.classList.remove("on"); }); b.classList.add("on"); R[g.getAttribute("data-g")] = b.getAttribute("data-v"); }; });
+  $("env").onclick = function(){
+    if(!R.calificacion && !R.motivo && !R.claridad){ $("err").textContent = "Contestá al menos una pregunta."; return; }
+    $("env").disabled = true; $("err").textContent = "";
+    post({ accion:"responder", calificacion:R.calificacion || 0, claridad:R.claridad || "", motivo:R.motivo || "", contactar:R.contactar || "",
+      util:($("util") || {}).value || "", retomar:($("retomar") || {}).value || "", comentario:$("com").value, sitio:$("sitio").value })
+      .then(function(d){
+        if(d && d.ok){ mensaje("🙏", "¡Mil gracias!", R.motivo === "Sí quiero avanzar" ? "Te escribimos pronto para arrancar." : "Tus respuestas ya nos llegaron. Nos ayudan de verdad."); window.scrollTo(0, 0); }
+        else { $("env").disabled = false; $("err").textContent = "No se pudo enviar. Probá otra vez."; }
+      }).catch(function(){ $("env").disabled = false; $("err").textContent = "No se pudo enviar. Revisá el internet."; });
+  };
+}
+if(!T) mensaje("🔗", "Enlace incompleto", "Abrí el enlace completo que te enviamos por WhatsApp.");
+else post({}).then(function(d){
+  if(d && d.ok) pintar(d.tipo, d.nombre);
+  else if(d && d.motivo === "respondida") mensaje("✅", "Ya la respondiste", "Gracias" + (d.nombre ? ", " + esc(d.nombre) : "") + ". Tus respuestas ya nos habían llegado.");
+  else mensaje("🔗", "Este enlace no es válido", "Puede que esté incompleto. Escribinos por WhatsApp al 6050-8446.");
+}).catch(function(){ mensaje("📶", "No se pudo cargar", "Revisá el internet y volvé a abrir el enlace."); });
+</script>
+</body></html>
