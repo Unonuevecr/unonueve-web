@@ -156,8 +156,12 @@ footer a{text-decoration:none}footer a:hover{color:var(--oro2)}
 <footer><div class="wrap"><span>© 2026 UNONUEVE<span class="cr">CR</span> · Infraestructura de inteligencia artificial</span>
 <span><a href="/demos/">Demostraciones</a> · <a href="/diagnostico/">Test gratuito</a> · <a href="/privacidad/">Privacidad</a> · <a href="#" data-cookies>Cookies</a> · <a href="/aviso-legal/">Aviso legal</a></span>
 <span>San José, Costa Rica · @unonuevecr</span></div></footer>
+<script src="/js/campana.js"></script>
 <script>
-document.querySelectorAll('[data-demo]').forEach(function(a){a.addEventListener('click',function(){
+document.querySelectorAll('[data-demo]').forEach(function(a){
+  var c = window.un9Campana ? window.un9Campana() : '';
+  if (c && a.href.indexOf('?') === -1) a.href += '?' + c;   /* la demo sabe de qué anuncio vino */
+  a.addEventListener('click',function(){
   if(window.un9Evento) window.un9Evento('ver_demo',{demo:a.dataset.demo,origen:location.pathname},{meta:'ViewContent',datos:{content_name:'demo_'+a.dataset.demo,content_category:'demos'}});
 });});
 </script>

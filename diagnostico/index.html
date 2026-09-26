@@ -309,7 +309,7 @@ function resultado(){
   h += '<p class="nota">Cifras estimadas con tus respuestas y con costos de referencia del mercado costarricense. En la reunión las ajustamos con tus números reales. Al enviar aceptás nuestra <a href="../privacidad/">política de privacidad</a> · <a href="#" data-cookies>Preferencias de cookies</a>.</p></div>';
   var v = document.getElementById('v-res'); v.innerHTML = h; vista('v-res');
   if(window.un9Evento) window.un9Evento('test_completado', {areas: sel.toString(), ahorro_mensual: Math.round(ahorro)}, {meta:'TestCompletado', custom:true, datos:{areas: sel.toString()}});
-  if(CONFIG.WEBHOOK){ try { fetch(CONFIG.WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({tipo:'test', areas:sel, respuestas:resp, cubrir:cubrir, hoy:Math.round(totHoy), contratar:Math.round(totContratar), sistema:Math.round(sistemaMes), ahorro:Math.round(ahorro), origen:location.pathname})}).catch(function(){}); } catch(x){} }
+  if(CONFIG.WEBHOOK){ try { fetch(CONFIG.WEBHOOK, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({tipo:'test', areas:sel, respuestas:resp, cubrir:cubrir, hoy:Math.round(totHoy), contratar:Math.round(totContratar), sistema:Math.round(sistemaMes), ahorro:Math.round(ahorro), origen:(window.un9Origen ? window.un9Origen() : location.pathname)})}).catch(function(){}); } catch(x){} }
   document.getElementById('agenda').href = CONFIG.AGENDA; document.getElementById('agenda-frame').src = CONFIG.AGENDA + '?gv=true';
   var f = document.getElementById('f');
   f.addEventListener('submit', function(e){
@@ -332,6 +332,7 @@ function resultado(){
 }
 
 </script>
+<script src="/js/campana.js"></script>
 <script src="/js/claudia.js" defer></script>
 <script src="/js/analitica.js" defer></script>
 <script src="/js/idiomas.js" defer></script>
