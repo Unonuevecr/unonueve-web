@@ -122,7 +122,7 @@ function tarjeta(d){
     </div></section>`;
 }
 function pintarMes(m){ mesAct=m; [...$('#meses').children].forEach(b=>b.setAttribute('aria-current', b.textContent===m)); $('#lista').innerHTML = DIAS.filter(d=>d.mes===m).map(tarjeta).join(''); }
-function progreso(){ const ap=Object.values(estados).filter(e=>e.estado==='aprobado').length; $('#progTxt').textContent=`${ap} de ${DIAS.length} aprobadas`; $('#progFill').style.width=(ap/DIAS.length*100)+'%'; }
+function progreso(){ const ap=DIAS.filter(d=>(estados[d.fecha]||{}).estado==='aprobado').length; $('#progTxt').textContent=`${ap} de ${DIAS.length} aprobadas`; $('#progFill').style.width=(ap/DIAS.length*100)+'%'; }
 $('#meses').innerHTML = meses.map(m=>`<button>${m}</button>`).join(''); [...$('#meses').children].forEach(b=>b.onclick=()=>pintarMes(b.textContent));
 const lb=$('#lb');
 document.addEventListener('click', e=>{
