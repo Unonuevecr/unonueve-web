@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contenido de Metales SQ · Octubre 2026 · UNONUEVE</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F4F6FB; --panel:#FFFFFF; --linea:#E3E8F2; --tinta:#1B2440; --gris:#5A6480; --suave:#8A93AC;
+  --azul:#2F5BE0; --azul-suave:#EAF0FF; --oro:#C99A3B; --ok:#1F9D63; --ok-bg:#E4F5EC; --amb:#C77A16; --amb-bg:#FBEEDB;
+  --f-disp:"Fraunces",Georgia,serif; --f-ui:"Inter",system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tinta);font:16px/1.55 var(--f-ui);padding-inline:16px}
+.wrap{max-width:940px;margin:0 auto;padding-block:20px 60px}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 20px;padding-bottom:16px;border-bottom:1px solid var(--linea)}
+.marca{font:700 13px/1 var(--f-ui);letter-spacing:.2em;color:var(--gris)} .marca b{color:var(--tinta)} .marca .cr{color:var(--oro)}
+h1{font:600 27px/1.12 var(--f-disp);margin:6px 0 2px;text-wrap:balance}
+.sub{color:var(--gris);font-size:14px}
+.prog{margin-left:auto;text-align:right;min-width:170px}
+.prog .bar{height:8px;border-radius:99px;background:var(--linea);overflow:hidden;margin-top:6px}
+.prog .fill{height:100%;background:var(--ok);width:0;transition:width .4s}
+.prog small{font-size:12px;color:var(--gris)}
+.aviso{background:var(--azul-suave);border:1px solid var(--linea);border-radius:12px;padding:12px 16px;margin:16px 0 0;font-size:14px;color:var(--gris)}
+.filtros{display:flex;gap:8px;position:sticky;top:0;z-index:5;padding:14px 0 10px;background:linear-gradient(var(--bg) 72%,transparent);flex-wrap:wrap}
+.filtros button{font:600 13.5px var(--f-ui);border:1px solid var(--linea);background:var(--panel);color:var(--gris);border-radius:99px;padding:8px 14px;cursor:pointer}
+.filtros button[aria-pressed="true"]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.dia{background:var(--panel);border:1px solid var(--linea);border-radius:18px;padding:18px;margin-bottom:16px;scroll-margin-top:70px}
+.dia.aprobado{border-color:var(--ok)} .dia.cambios{border-color:var(--amb)}
+.dhead{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:6px}
+.fecha{font:600 20px/1.1 var(--f-disp)}
+.badges{display:flex;gap:6px;flex-wrap:wrap}
+.badge{font:600 11.5px/1 var(--f-ui);letter-spacing:.06em;text-transform:uppercase;padding:5px 9px;border-radius:99px;background:var(--azul-suave);color:var(--azul)}
+.badge.g{background:var(--panel);border:1px solid var(--linea);color:var(--gris)}
+.badge.p{background:#F3ECDD;color:#8a6417}
+.estado{margin-left:auto;font:600 12.5px var(--f-ui);padding:5px 11px;border-radius:99px;background:var(--linea);color:var(--gris)}
+.estado.ok{background:var(--ok-bg);color:var(--ok)} .estado.amb{background:var(--amb-bg);color:var(--amb)}
+.seccion{font:600 12px var(--f-ui);letter-spacing:.14em;text-transform:uppercase;color:var(--suave);margin:18px 0 8px}
+.galeria{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch}
+.galeria img{height:320px;width:auto;border-radius:12px;border:1px solid var(--linea);cursor:zoom-in;background:#eef}
+.reel{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start}
+.reel video,.reel img{height:420px;width:auto;max-width:100%;border-radius:14px;border:1px solid var(--linea);background:#000}
+.reel img{cursor:zoom-in}
+.nota{flex:1;min-width:220px;background:var(--bg);border:1px dashed var(--linea);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--gris)}
+.texto{white-space:pre-wrap;background:var(--bg);border:1px solid var(--linea);border-radius:12px;padding:14px 16px;font-size:15px}
+.texto.corto{max-height:128px;overflow:hidden;position:relative}
+.texto.corto:after{content:"";position:absolute;left:0;right:0;bottom:0;height:56px;background:linear-gradient(transparent,var(--panel))}
+.vermas{margin-top:8px;background:none;border:0;color:var(--azul);font:600 14px var(--f-ui);cursor:pointer;padding:0}
+details{background:var(--bg);border:1px solid var(--linea);border-radius:12px;padding:12px 16px}
+details summary{cursor:pointer;font-weight:600;font-size:15px}
+.gb{margin:10px 0 0;font-size:15px}
+.gb h4{margin:12px 0 4px;font:600 12px var(--f-ui);letter-spacing:.12em;text-transform:uppercase;color:var(--suave)}
+.rotulo{font:600 17px/1.3 var(--f-disp)}
+.hist{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.hist li{background:var(--bg);border:1px solid var(--linea);border-radius:12px;padding:10px 14px;font-size:14.5px}
+.hist li b{font:700 11px var(--f-ui);letter-spacing:.1em;color:var(--azul);display:block;margin-bottom:2px}
+.acc{margin-top:18px;border-top:1px dashed var(--linea);padding-top:16px}
+.acc .fila{display:flex;gap:10px;flex-wrap:wrap}
+.btn{font:600 15px var(--f-ui);border-radius:12px;padding:11px 18px;cursor:pointer;border:1px solid var(--linea);background:var(--panel);color:var(--tinta)}
+.btn.ap[aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.cb[aria-pressed="true"]{background:var(--amb);border-color:var(--amb);color:#fff}
+textarea{width:100%;margin-top:12px;min-height:70px;resize:vertical;font:15px var(--f-ui);color:var(--tinta);background:var(--bg);border:1px solid var(--linea);border-radius:12px;padding:11px 13px}
+textarea:focus{outline:none;border-color:var(--azul)}
+.guardar{margin-top:10px;display:flex;align-items:center;gap:12px}
+.guardar .msg{font-size:13px;color:var(--gris)}
+.lightbox{position:fixed;inset:0;background:#0B0F1EE8;display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.lightbox.on{display:flex} .lightbox img{max-width:100%;max-height:100%;border-radius:12px}
+.lightbox .x{position:absolute;top:14px;right:18px;font-size:30px;color:#fff;background:none;border:0;cursor:pointer}
+footer{color:var(--suave);font-size:13px;text-align:center;margin-top:30px}
+:focus-visible{outline:2px solid var(--azul);outline-offset:2px}
+.reel.par{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start}.rfig{margin:0;display:flex;flex-direction:column;gap:6px;align-items:center}.rfig figcaption{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gris)}
+@media (max-width:560px){.galeria img{height:240px}.reel video,.reel img{height:360px}.reel.par video,.reel.par img{height:300px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="marca"><b>UNONUEVE</b><span class="cr">CR</span> · REVISIÓN DE CONTENIDO</div>
+      <h1>Contenido de Metales SQ · Octubre 2026</h1>
+      <div class="sub">Revisá cada carrusel (deslizá las láminas, tocá para ampliar), leé el texto y dale <b>Aprobar</b>, o escribí el cambio que haga falta. Se guarda solo y le llega a UNONUEVE.</div>
+    </div>
+    <div class="prog"><small id="progTxt">0 de 0 aprobadas</small><div class="bar"><div class="fill" id="progFill"></div></div></div>
+  </header>
+  <div class="aviso" id="aviso">Cargando…</div>
+  <nav class="filtros" id="filtros" aria-label="Filtrar publicaciones"></nav>
+  <main id="lista"></main>
+  <footer>UNONUEVE · Ecosistemas de marca · Hecho para Metales SQ</footer>
+</div>
+<div class="lightbox" id="lb"><button class="x" aria-label="Cerrar">✕</button><img alt=""></div>
+<script>
+const WEBHOOK = "https://n8n-unonueve-n8n.i5i6e4.easypanel.host/webhook/metalessq-contenido";
+const DIAS = [{"fecha": "2026-10-01", "etiqueta": "Jueves 1 de octubre · Kiosco de jardín", "tipo": "Carrusel · Proyecto", "imgs": ["img/01-1.jpg", "img/01-2.jpg", "img/01-3.jpg", "img/01-4.jpg", "img/01-5.jpg", "img/01-6.jpg"], "texto": "🌿 Un kiosco en el jardín: el rincón donde la casa se vuelve más grande sin levantar una pared.\n\nDeslizá y mirá cómo se levanta:\n1️⃣ Seis columnas en tubo 3x3, ancladas y a plomo\n2️⃣ Vigas perimetrales en tubo 2x2 y correas en perlín 2x3\n3️⃣ Anticorrosivo y acabado en negro mate\n4️⃣ Techo en lámina esmaltada calibre 26 con cumbrera\n5️⃣ Piso de madera, plantas colgantes y luces cálidas: listo para estrenar\n\n🔧 LO QUE SE USÓ: tubo 3x3 y 2x2 · perlín 2x3 · lámina esmaltada cal. 26 · cumbrera · tornillo con empaque · soldadura · spray anticorrosivo\n\nContanos las medidas del espacio y te armamos la lista completa.\n\n📍 Coronado – Tibás – Guápiles – Alajuela · 📲 8739-8634", "historias": "", "video": "", "portada": "", "guion": null, "zip": "hd/metalessq-octubre-01.zip", "drive": "113DmYrQOdUPM_1P2_m2OoWnjsOg6x8JV"}, {"fecha": "2026-10-05", "etiqueta": "Lunes 5 de octubre · Duretán", "tipo": "Carrusel · Contra filtraciones", "imgs": ["img/05-1.jpg", "img/05-2.jpg", "img/05-3.jpg", "img/05-4.jpg"], "texto": "💧 ¿Te gotea el techo justo donde se traslapa la lámina o alrededor de un tornillo? Ahí no hace falta cambiar nada: hace falta sellar.\n\nDuretán, el sellador de poliuretano que aguanta el invierno tico:\n1️⃣ Sella traslapes, tornillos y uniones de canoa en una sola pasada\n2️⃣ Se pega al metal, al concreto y al Fibrolit sin despegarse\n3️⃣ Queda flexible: se mueve con la lámina con el calor y el frío, y no se raja\n4️⃣ Se puede pintar y dura años bajo el sol\n\nUn cartucho hoy te ahorra el balde en la sala en la próxima tormenta.\n\n📍 Coronado – Tibás – Guápiles – Alajuela · 📲 8739-8634", "historias": "", "video": "", "portada": "", "guion": null, "zip": "hd/metalessq-octubre-05.zip", "drive": "12pkZr3vH61yKz-3jMfdnpDkJDNysUvYq"}, {"fecha": "2026-10-08", "etiqueta": "Jueves 8 de octubre · Deck de piscina con pérgola techada", "tipo": "Carrusel · Proyecto", "imgs": ["img/08-1.jpg", "img/08-2.jpg", "img/08-3.jpg", "img/08-4.jpg", "img/08-5.jpg", "img/08-6.jpg"], "texto": "🏊 Deck de piscina con pérgola techada: sombra, sillas y el mejor lugar de la casa en verano y en invierno.\n\nDeslizá y mirá cómo se levanta:\n1️⃣ Columnas en tubo 4x4 ancladas al borde del deck\n2️⃣ Estructura de pérgola en tubo 3x3 y correas en perlín\n3️⃣ Acabado en gris grafito con anticorrosivo\n4️⃣ Techo en lámina calibre 26 para que la lluvia no te saque de la piscina\n5️⃣ Deck de madera, plantas tropicales e iluminación: a disfrutar\n\n🔧 LO QUE SE USÓ: tubo 4x4 y 3x3 · perlín 2x3 · lámina cal. 26 · canoa metálica · tornillo con empaque · soldadura · spray anticorrosivo\n\n¿Tenés la piscina? Nosotros tenemos el material para techarla.\n\n📍 Coronado – Tibás – Guápiles – Alajuela · 📲 8739-8634", "historias": "", "video": "", "portada": "", "guion": null, "zip": "hd/metalessq-octubre-08.zip", "drive": "12UU2jypKoVhPDpLA_M05IgqmuhcCFQr6"}, {"fecha": "2026-10-12", "etiqueta": "Lunes 12 de octubre · Día del Encuentro de las Culturas", "tipo": "Imagen · Encuentro de las Culturas", "imgs": ["img/12-1.jpg"], "texto": "🇨🇷 Hoy celebramos el Día del Encuentro de las Culturas.\n\nCosta Rica se construyó con muchas manos: las que llegaron del Caribe, las de los pueblos originarios, las de Europa y Asia, y las de cada familia tica que levantó su casa con esfuerzo. Culturas distintas, un mismo país.\n\nEn Metales SQ lo vivimos todos los días: en nuestras sucursales llega gente de todos lados, con acentos y costumbres distintas, y todos buscan lo mismo: construir bien y a buen precio.\n\nGracias por dejarnos ser parte de lo que construís.\n¡Feliz Día del Encuentro de las Culturas!\n\n📍 Coronado – Tibás – Guápiles – Alajuela · 📲 8739-8634", "historias": "", "video": "", "portada": "", "guion": null, "zip": "hd/12-1.jpg", "drive": "1jBBpvOeKWT7M6OuU7mc5rMzdQ6s6I1lq"}, {"fecha": "2026-10-15", "etiqueta": "Jueves 15 de octubre · Cochera techada con jardín", "tipo": "Carrusel · Proyecto", "imgs": ["img/15-1.jpg", "img/15-2.jpg", "img/15-3.jpg", "img/15-4.jpg", "img/15-5.jpg", "img/15-6.jpg"], "texto": "🚙 De cochera abierta a cochera techada y con jardín: el carro protegido y la entrada de la casa más bonita.\n\nDeslizá y mirá cómo se levanta:\n1️⃣ Columnas en tubo 4x4 a un costado, para no perder espacio de parqueo\n2️⃣ Vigas en tubo 3x3 y correas en perlín 2x3\n3️⃣ Anticorrosivo y pintura en blanco hueso\n4️⃣ Techo en lámina calibre 26 + canoa para que el agua no caiga en la entrada\n5️⃣ Jardineras, muro verde y luces: la fachada cambió por completo\n\n🔧 LO QUE SE USÓ: tubo 4x4 y 3x3 · perlín 2x3 · lámina cal. 26 · canoa metálica · pecho de paloma · tornillo con empaque · spray anticorrosivo\n\nMedí el frente y el fondo de tu cochera y te sacamos la cuenta.\n\n📍 Coronado – Tibás – Guápiles – Alajuela · 📲 8739-8634", "historias": "", "video": "", "portada": "", "guion": null, "zip": "hd/metalessq-octubre-15.zip", "drive": "1CblBhMtzPRFfFkiQEzpZ6Aqh5yHulNnz"}, {"fecha": "2026-10-19", "etiqueta": "Lunes 19 de octubre · Tornillo de techo con empaque", "tipo": "Carrusel · Contra filtraciones", "imgs": ["img/19-1.jpg", "img/19-2.jpg", "img/19-3.jpg", "img/19-4.jpg"], "texto": "🔩 Cada tornillo de techo es un hueco en la lámina. Lo que decide si por ahí entra agua o no es el empaque.\n\nTornillo de techo con empaque, el que sí cierra:\n1️⃣ Arandela de neopreno que sella el hueco al apretar\n2️⃣ Punta de broca: perfora lámina y perlín sin pretaladrar\n3️⃣ Galvanizado: no se oxida ni mancha el techo\n4️⃣ Una caja rinde para todo el techo y lo llevás con la lámina en la misma compra\n\nOjo: se aprieta hasta que el empaque toque, no hasta aplastarlo. Así no gotea nunca.\n\n📍 Coronado – Tibás – Guápiles – Alajuela · 📲 8739-8634", "historias": "", "video": "", "portada": "", "guion": null, "zip": "hd/metalessq-octubre-19.zip", "drive": "1CiXUJ_lzZw2GTQWfPoO8tvREXCaHQcr2"}, {"fecha": "2026-10-22", "etiqueta": "Jueves 22 de octubre · Comedor en el patio de atrás", "tipo": "Carrusel · Proyecto", "imgs": ["img/22-1.jpg", "img/22-2.jpg", "img/22-3.jpg", "img/22-4.jpg", "img/22-5.jpg", "img/22-6.jpg"], "texto": "🍽️ Un comedor en el patio de atrás: la ampliación más rica que le podés hacer a una casa tica.\n\nDeslizá y mirá cómo se levanta:\n1️⃣ Columnas en tubo 3x3 pegadas a la pared trasera\n2️⃣ Techo a un agua con vigas en tubo 2x2 y perlín 2x3\n3️⃣ Anticorrosivo y acabado en negro mate\n4️⃣ Lámina esmaltada calibre 26 + canoa metálica hacia el jardín\n5️⃣ Mesa larga, plantas, luces colgantes y el café de la tarde bajo techo\n\n🔧 LO QUE SE USÓ: tubo 3x3 y 2x2 · perlín 2x3 · lámina esmaltada cal. 26 · canoa metálica · pecho de paloma · tornillo con empaque · soldadura · spray anticorrosivo\n\nContanos cuánto espacio tenés atrás y te decimos qué material ocupás.\n\n📍 Coronado – Tibás – Guápiles – Alajuela · 📲 8739-8634", "historias": "", "video": "", "portada": "", "guion": null, "zip": "hd/metalessq-octubre-22.zip", "drive": "1q1i-dwlcBRIzQywVJ224jNvhfyU6xPZG"}, {"fecha": "2026-10-26", "etiqueta": "Lunes 26 de octubre · Spray anticorrosivo", "tipo": "Carrusel · Contra filtraciones", "imgs": ["img/26-1.jpg", "img/26-2.jpg", "img/26-3.jpg", "img/26-4.jpg"], "texto": "🛡️ El óxido empieza en un corte y termina en una gotera. Cada punto de soldadura y cada borde cortado es una puerta abierta para el agua.\n\nSpray anticorrosivo, la protección que va antes de la pintura:\n1️⃣ Sella cortes, soldaduras y raspones en segundos\n2️⃣ Frena el óxido antes de que perfore la lámina o el tubo\n3️⃣ Alarga la vida de la estructura por años\n4️⃣ Se seca rápido y encima le podés dar el color que querás\n\nAntes de techar, protegé. Es más barato que cambiar lámina en dos años.\n\n📍 Coronado – Tibás – Guápiles – Alajuela · 📲 8739-8634", "historias": "", "video": "", "portada": "", "guion": null, "zip": "hd/metalessq-octubre-26.zip", "drive": "1Ydz4cM9HAhYT6CXr3L-uJHUvOjwKP1L0"}, {"fecha": "2026-10-29", "etiqueta": "Jueves 29 de octubre · Terraza techada en segundo piso", "tipo": "Carrusel · Proyecto", "imgs": ["img/29-1.jpg", "img/29-2.jpg", "img/29-3.jpg", "img/29-4.jpg", "img/29-5.jpg", "img/29-6.jpg"], "texto": "🏠 Terraza techada en el segundo piso: el espacio que ya tenías y no estabas usando.\n\nDeslizá y mirá cómo se levanta:\n1️⃣ Columnas en tubo 3x3 fijadas a la losa\n2️⃣ Vigas en tubo 3x3, correas en perlín 2x3 y baranda en tubo 2x2\n3️⃣ Anticorrosivo y pintura en gris grafito\n4️⃣ Techo en lámina calibre 26 con cumbrera y canoa\n5️⃣ Muebles de exterior, plantas y vista a la montaña: la mejor habitación de la casa\n\n🔧 LO QUE SE USÓ: tubo 3x3 y 2x2 · perlín 2x3 · lámina cal. 26 · cumbrera · canoa metálica · tornillo con empaque · soldadura · spray anticorrosivo\n\nMandanos una foto de la terraza y te armamos la lista del material.\n\n📍 Coronado – Tibás – Guápiles – Alajuela · 📲 8739-8634", "historias": "", "video": "", "portada": "", "guion": null, "zip": "hd/metalessq-octubre-29.zip", "drive": "1U250etNOMPA0LhVgfdly5d8CMjx2uJcJ"}];
+const $ = s => document.querySelector(s);
+const esc = s => (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const estados = {};
+const FILTROS = [["todas","Todas"],["pend","Pendientes"],["aprob","Aprobadas"],["cambios","Con cambios"]];
+let filtro = "todas";
+
+function historias(t){
+  if(!t) return '';
+  const partes = t.split(/\n?\s*(?=\d\)\s)/).map(s=>s.trim()).filter(s=>/^\d\)/.test(s));
+  if(!partes.length) return `<div class="texto">${esc(t)}</div>`;
+  return `<ul class="hist">${partes.map(p=>{ const m=p.match(/^(\d)\)\s*([A-ZÁÉÍÓÚÑ ]+?)\s*·\s*([\s\S]*)$/); return m?`<li><b>${m[1]} · ${esc(m[2])}</b>${esc(m[3])}</li>`:`<li>${esc(p)}</li>`; }).join('')}</ul>`;
+}
+function guion(g, listo){
+  if(!g) return '';
+  return `<div class="seccion">${listo?'Guion original (referencia)':'Guion del video (lo graba Rebe)'}</div><details><summary>Video nº ${g.num} · «${esc(g.titulo)}»${g.duracion?' · '+esc(g.duracion):''}</summary><div class="gb">
+    ${g.rotulo&&g.rotulo.length?`<h4>Texto en pantalla</h4><div class="rotulo">${g.rotulo.map(esc).join(' ')}</div>`:''}
+    <h4>Lo que dice</h4><div>${esc(g.guion)}</div>
+    ${g.cierre?`<h4>Cierre</h4><div>${esc(g.cierre)}</div>`:''}
+    ${g.nota?`<h4>Nota de producción</h4><div style="color:var(--gris)">${esc(g.nota)}</div>`:''}</div></details>`;
+}
+function tarjeta(d){
+  const e = estados[d.fecha] || {};
+  const cls = e.estado==='aprobado'?'aprobado':e.estado==='cambios'?'cambios':'';
+  const be = e.estado==='aprobado'?'<span class="estado ok">✓ Aprobada</span>':e.estado==='cambios'?'<span class="estado amb">Pidió cambios</span>':'<span class="estado">Pendiente</span>';
+  const b = [`<span class="badge">${esc(d.tipo)}</span>`];
+  if(d.guion && !d.video) b.push('<span class="badge p">Video por grabar</span>');
+  if(d.historias) b.push('<span class="badge g">Historias</span>');
+  let pieza = '';
+  if(d.imgs.length){
+    pieza = `<div class="seccion">${d.imgs.length>1?'Carrusel':'Imagen'}</div><div class="galeria">${d.imgs.map(u=>`<img loading="lazy" src="${u}" alt="Lámina de la publicación" data-full="${u}">`).join('')}</div>`;
+  } else if(d.video || d.portada || d.guion){
+    const med = d.video ? `<figure class="rfig"><video controls playsinline preload="none" ${d.portada?`poster="${d.portada}"`:''} src="${d.video}"></video><figcaption>Video</figcaption></figure>${d.portada?`<figure class="rfig"><img loading="lazy" src="${d.portada}" alt="Portada del reel" data-full="${d.portada}"><figcaption>Portada</figcaption></figure>`:''}`
+              : d.portada ? `<img src="${d.portada}" alt="Portada del reel" data-full="${d.portada}">` : '';
+    const nota = d.video ? '' : `<div class="nota">${d.portada?'Esta es la portada del reel.':'La portada de este reel está en preparación.'} El video lo graba Rebe con el guion de abajo; cuando esté editado, aparece aquí.</div>`;
+    pieza = `<div class="seccion">${d.video?'Reel · video y portada':'Reel'}</div><div class="reel${d.video?' par':''}">${med}${nota}</div>`;
+  }
+  const texto = d.texto ? `<div class="seccion">Texto de la publicación</div><div class="texto corto" id="tx-${d.fecha}">${esc(d.texto)}</div><button class="vermas" data-tx="${d.fecha}">Ver todo el texto ▾</button>` : '';
+  const desc = `<div class="seccion">Archivos</div><div class="fila" style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="${d.zip}" download>⬇ Descargar en alta calidad</a><a class="btn" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/${d.drive}">Abrir carpeta en Drive</a></div>`;
+  const hist = d.historias ? `<div class="seccion">Historias del día</div>${historias(d.historias.replace(/^HISTORIAS[^\n]*\n?/,''))}` : '';
+  return `<section class="dia ${cls}" id="d-${d.fecha}">
+    <div class="dhead"><span class="fecha">${esc(d.etiqueta)}</span><div class="badges">${b.join('')}</div>${be}</div>
+    ${pieza}${texto}${desc}${hist}
+    <div class="acc"><div class="fila">
+      <button class="btn ap" data-ap="${d.fecha}" aria-pressed="${e.estado==='aprobado'}">✓ Aprobar</button>
+      <button class="btn cb" data-cb="${d.fecha}" aria-pressed="${e.estado==='cambios'}">Pedir un cambio</button></div>
+      <textarea id="cm-${d.fecha}" aria-label="Comentario" placeholder="¿Hay que cambiar algo? Escribilo aquí y le llega a UNONUEVE.">${esc(e.comentario||'')}</textarea>
+      <div class="guardar"><button class="btn" data-save="${d.fecha}">Guardar comentario</button><span class="msg" id="mg-${d.fecha}"></span></div>
+    </div></section>`;
+}
+function pasa(d){
+  const e=(estados[d.fecha]||{}).estado;
+  if(filtro==='aprob') return e==='aprobado';
+  if(filtro==='pend') return !e;
+  if(filtro==='cambios') return e==='cambios';
+  return true;
+}
+function pintar(){ const L=DIAS.filter(pasa); $('#lista').innerHTML = L.length?L.map(tarjeta).join(''):'<p class="sub">No hay publicaciones con este filtro.</p>'; }
+function progreso(){ const ap=DIAS.filter(d=>(estados[d.fecha]||{}).estado==='aprobado').length; $('#progTxt').textContent=`${ap} de ${DIAS.length} aprobadas`; $('#progFill').style.width=(ap/DIAS.length*100)+'%'; }
+$('#filtros').innerHTML = FILTROS.map(([k,t])=>`<button data-f="${k}" aria-pressed="${k===filtro}">${t}</button>`).join('');
+const lb=$('#lb');
+document.addEventListener('click', e=>{
+  const fb=e.target.closest('[data-f]'); if(fb){ filtro=fb.dataset.f; [...$('#filtros').children].forEach(b=>b.setAttribute('aria-pressed', b.dataset.f===filtro)); pintar(); return; }
+  const im=e.target.closest('.galeria img, .reel img'); if(im){ lb.querySelector('img').src=im.dataset.full; lb.classList.add('on'); return; }
+  if(e.target.closest('.lightbox')) lb.classList.remove('on');
+  const vm=e.target.closest('[data-tx]'); if(vm){ const t=$('#tx-'+vm.dataset.tx); t.classList.remove('corto'); vm.remove(); }
+});
+async function enviar(fecha, patch){
+  estados[fecha]=Object.assign({}, estados[fecha], patch);
+  const foco=document.activeElement && document.activeElement.id;
+  const vieja=$('#d-'+fecha);
+  if(vieja){ const n=document.createElement('div'); n.innerHTML=tarjeta(DIAS.find(d=>d.fecha===fecha)); vieja.replaceWith(n.firstElementChild); }
+  if(foco){ const el=document.getElementById(foco); if(el) el.focus(); }
+  progreso();
+  try{
+    const body='data='+encodeURIComponent(JSON.stringify({accion:'guardar', fecha, estado:estados[fecha].estado||null, comentario:estados[fecha].comentario||'', quien:'Alina Segura'}));
+    const r=await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body});
+    return r.ok;
+  }catch(e){ return false; }
+}
+function flash(f,msg){ const m=document.getElementById('mg-'+f); if(m){ m.textContent=msg; if(msg) setTimeout(()=>{if(m)m.textContent='';},2600);} }
+document.addEventListener('click', async e=>{
+  const ap=e.target.closest('[data-ap]'), cb=e.target.closest('[data-cb]'), sv=e.target.closest('[data-save]');
+  if(ap){ const f=ap.dataset.ap; const on=(estados[f]||{}).estado==='aprobado'; const ok=await enviar(f,{estado:on?null:'aprobado'}); flash(f, on?'':(ok?'¡Aprobada! Muchas gracias':'Se guardó aquí, pero no hubo conexión: volvé a intentar')); }
+  if(cb){ const f=cb.dataset.cb; await enviar(f,{estado:'cambios'}); const t=document.getElementById('cm-'+f); if(t) t.focus(); }
+  if(sv){ const f=sv.dataset.save; const c=document.getElementById('cm-'+f).value.trim(); const ok=await enviar(f,{comentario:c, estado:(estados[f]||{}).estado||(c?'cambios':null)}); flash(f, ok?'Enviado ✓':'No se pudo enviar, volvé a intentar'); }
+});
+pintar(); progreso();
+(async()=>{
+  try{
+    const r=await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body:'data='+encodeURIComponent(JSON.stringify({accion:'estado'}))});
+    const j=await r.json(); const rows=(j&&j.rows)||{};
+    Object.keys(rows).forEach(f=>{ estados[f]={estado:rows[f].estado, comentario:rows[f].comentario}; });
+    pintar(); progreso();
+    $('#aviso').innerHTML='Tocá <b>Aprobar</b> en cada publicación, o escribí el cambio y tocá <b>Guardar comentario</b>. Todo le llega a UNONUEVE al instante. Los videos de martes y viernes no pasan por aquí.';
+  }catch(e){ $('#aviso').textContent='No se pudo conectar para cargar lo ya aprobado. Podés revisar el contenido igual; si aprobás, volvé a intentar con conexión.'; }
+})();
+</script>
+</body>
+</html>
