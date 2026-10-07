@@ -53,7 +53,8 @@ textarea,select{width:100%;font:400 16px Inter;padding:12px 14px;border:1px soli
         <div class="aviso" id="etiqueta"></div>
       </div>
       <p class="nota" id="consent" style="margin-top:16px"></p>
-      <div style="margin-top:16px"><button class="btn oro" id="btn-publicar" disabled>Publish to TikTok</button></div>
+      <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:10px"><button class="btn oro" id="btn-publicar" disabled>Publish to TikTok</button><button class="btn" id="btn-borrador" style="background:transparent;color:var(--tinta);border:1.5px solid var(--tinta)">Send to TikTok as draft</button></div>
+      <p class="nota">“Send as draft” uploads the video to your TikTok inbox so you can finish editing and post it from the TikTok app.</p>
       <p class="estado" id="estado"></p>
     </div>
   </div>
@@ -102,5 +103,14 @@ $("btn-publicar").onclick=async()=>{const b=$("btn-publicar"),e=$("estado");b.di
   if(st==="FAILED"){e.className="estado mal";e.textContent="TikTok could not publish the video: "+(q.data.fail_reason||"");b.disabled=false;return}
   e.textContent="TikTok is processing the video ("+(st||"…")+"). This can take a few minutes…"}
  e.textContent="Still processing. Check your TikTok profile in a few minutes."};
+$("btn-borrador").onclick=async()=>{const b=$("btn-borrador"),e=$("estado");b.disabled=true;e.className="estado";e.textContent="Uploading the draft to TikTok…";
+ const r=await llamar({accion:"borrador",video_url:VIDEO});
+ if(!r.data||!r.data.publish_id){e.className="estado mal";e.textContent="TikTok rejected the draft: "+((r.error&&(r.error.code+" — "+r.error.message))||"unknown error");b.disabled=false;return}
+ const id=r.data.publish_id;
+ for(let i=0;i<40;i++){await new Promise(x=>setTimeout(x,6000));const q=await llamar({accion:"estado",publish_id:id});const st=q.data&&q.data.status;
+  if(st==="SEND_TO_USER_INBOX"||st==="PUBLISH_COMPLETE"){e.className="estado ok";e.textContent="Draft sent ✓ Open the TikTok app and check your inbox notifications to finish the post.";return}
+  if(st==="FAILED"){e.className="estado mal";e.textContent="TikTok could not receive the draft: "+(q.data.fail_reason||"");b.disabled=false;return}
+  e.textContent="TikTok is receiving the draft ("+(st||"…")+")…"}
+ e.textContent="Still processing. Check your TikTok inbox in a few minutes."};
 iniciar();
 </script></body></html>
