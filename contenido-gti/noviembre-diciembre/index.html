@@ -222,6 +222,7 @@ document.addEventListener('click', async e=>{
     const ok=await enviar(f,{comentario:c, estado:cambio?'cambios':((estados[f]||{}).estado||null)}); flash('me-'+f, !cambio?'No cambió nada del texto':(ok?'Corrección guardada ✓ Le llega a UNONUEVE':'No se pudo enviar, vuelva a intentar')); }
   if(en){ const v=$('#cm-enlaces-tests').value.trim(); const r=await post({accion:'guardar', fecha:'enlaces-tests', estado:v?'cambios':null, comentario:v}); flash('mg-enlaces-tests', r?'Guardado ✓ Muchas gracias':'No se pudo enviar, vuelva a intentar'); }
 });
+window.addEventListener('hashchange', ()=>{ const h=(decodeURIComponent(location.hash.slice(1))||'').toLowerCase(); const m=MESES.find(x=>x.toLowerCase()===h); if(m && m!==mes){ mes=m; pintar(); progreso(); } });
 pintar(); progreso();
 (async()=>{
   const j=await post({accion:'estado'});
