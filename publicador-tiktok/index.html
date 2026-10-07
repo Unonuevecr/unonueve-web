@@ -38,10 +38,10 @@ textarea,select{width:100%;font:400 16px Inter;padding:12px 14px;border:1px soli
     <a href="#" id="salir" class="nota" style="margin:0">Disconnect</a>
   </div>
   <div class="grid" style="margin-top:18px">
-    <div><video id="vid" src="/tiktok/reel-sistemas.mp4" poster="/tiktok/reel-sistemas.jpg" controls playsinline preload="metadata"></video><p class="nota">Approved video · 1080×1920 · <span id="dur"></span></p></div>
+    <div><video id="vid" src="/tiktok/reel-sistemas.mp4?v=4" poster="/tiktok/reel-sistemas.jpg?v=4" controls playsinline preload="metadata"></video><p class="nota">Approved video · 1080×1920 · <span id="dur"></span></p></div>
     <div>
       <label class="t" for="titulo">Title (caption)</label>
-      <textarea id="titulo" maxlength="2200">Tu equipo, diez veces mejor. Así se ve un sistema con inteligencia artificial por dentro. #unonuevecr #marketingdigital</textarea>
+      <textarea id="titulo" maxlength="2200">Tu equipo, diez veces mejor. La inteligencia artificial hace el trabajo repetitivo y tu vendedor pone la conexión y el cierre. #unonuevecr #inteligenciaartificial #ventas</textarea>
       <label class="t" for="priv">Who can view this video</label>
       <select id="priv"><option value="" selected disabled>Select privacy…</option></select>
       <label class="t">Allow users to</label>
@@ -62,7 +62,7 @@ textarea,select{width:100%;font:400 16px Inter;padding:12px 14px;border:1px soli
 </div>
 <script>
 const API="https://n8n-unonueve-n8n.i5i6e4.easypanel.host/webhook/tiktok-panel";
-const VIDEO="https://unonuevecr.com/tiktok/reel-sistemas.mp4";
+const VIDEO="https://unonuevecr.com/tiktok/reel-sistemas.mp4?v=4";
 const $=id=>document.getElementById(id);
 const NOMBRES={PUBLIC_TO_EVERYONE:"Everyone",MUTUAL_FOLLOW_FRIENDS:"Friends",FOLLOWER_OF_CREATOR:"Followers",SELF_ONLY:"Only me"};
 let s=null,maxDur=0;
