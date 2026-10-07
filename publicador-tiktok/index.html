@@ -1,0 +1,106 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UNONUEVECR Publicador · Post to TikTok</title><meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+:root{--crema:#EFE7DC;--crema2:#F6F1E9;--tinta:#14110E;--oro:#C8892F;--gris:#7d7266;--linea:rgba(20,17,14,.14)}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,system-ui,sans-serif;background:var(--crema);color:var(--tinta);line-height:1.5;font-size:16px}
+.wrap{max-width:980px;margin:0 auto;padding:22px 20px 60px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}header img{height:30px}header span{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gris)}
+h1{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(34px,6vw,54px);line-height:1.02;margin-bottom:10px}h1 em{color:var(--oro)}
+.lead{color:#3a332c;max-width:640px;margin-bottom:24px}
+.card{background:var(--crema2);border:1px solid var(--linea);border-radius:18px;padding:22px;margin-bottom:16px}
+.btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;padding:14px 26px;font:700 16px Inter;cursor:pointer;background:var(--tinta);color:#fff;text-decoration:none}
+.btn.oro{background:var(--oro);color:var(--tinta)}.btn:disabled{opacity:.4;cursor:not-allowed}
+.grid{display:grid;grid-template-columns:260px 1fr;gap:22px}@media(max-width:720px){.grid{grid-template-columns:1fr}}
+video{width:100%;border-radius:14px;background:#000;aspect-ratio:9/16;object-fit:cover}
+label.t{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--oro);margin:16px 0 6px}
+textarea,select{width:100%;font:400 16px Inter;padding:12px 14px;border:1px solid var(--linea);border-radius:12px;background:#fff;color:var(--tinta)}textarea{min-height:92px;resize:vertical}
+.cuenta{display:flex;align-items:center;gap:12px}.cuenta img{width:46px;height:46px;border-radius:50%;background:#ddd}.cuenta b{display:block}.cuenta small{color:var(--gris)}
+.fila{display:flex;flex-wrap:wrap;gap:18px}.chk{display:flex;align-items:center;gap:8px;font-size:15px}.chk input{width:18px;height:18px}
+.nota{font-size:13.5px;color:var(--gris);margin-top:8px}.aviso{font-size:14px;background:#fff;border:1px solid var(--linea);border-radius:12px;padding:10px 14px;margin-top:10px}
+.estado{font-weight:600;margin-top:14px}.ok{color:#1c7a3d}.mal{color:#b3261e}[hidden]{display:none!important}a{color:inherit}
+</style></head><body><div class="wrap">
+<header><img src="/assets/logo-unonueve-negro.svg" alt="UNONUEVECR"><span>Publicador · internal tool</span></header>
+<h1>Post to <em>TikTok</em></h1>
+<p class="lead">UNONUEVECR Publicador schedules and publishes the content our agency has produced and the account owner has approved. Connect the TikTok account, review the post settings and publish.</p>
+
+<div class="card" id="paso-conectar">
+  <h2 style="font-size:20px;margin-bottom:8px">1 · Connect your TikTok account</h2>
+  <p class="nota" style="margin:0 0 14px">You will be taken to TikTok to log in and authorize UNONUEVECR Publicador. We never see your password.</p>
+  <a class="btn" id="btn-conectar" href="https://n8n-unonueve-n8n.i5i6e4.easypanel.host/webhook/tiktok-conectar">Continue with TikTok</a>
+  <p class="estado mal" id="err-conectar" hidden></p>
+</div>
+
+<div class="card" id="paso-publicar" hidden>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+    <div class="cuenta"><img id="avatar" alt=""><div><small>Posting to</small><b id="nick">…</b><small id="user"></small></div></div>
+    <a href="#" id="salir" class="nota" style="margin:0">Disconnect</a>
+  </div>
+  <div class="grid" style="margin-top:18px">
+    <div><video id="vid" src="/tiktok/reel-sistemas.mp4" poster="/tiktok/reel-sistemas.jpg" controls playsinline preload="metadata"></video><p class="nota">Approved video · 1080×1920 · <span id="dur"></span></p></div>
+    <div>
+      <label class="t" for="titulo">Title (caption)</label>
+      <textarea id="titulo" maxlength="2200">Tu equipo, diez veces mejor. Así se ve un sistema con inteligencia artificial por dentro. #unonuevecr #marketingdigital</textarea>
+      <label class="t" for="priv">Who can view this video</label>
+      <select id="priv"><option value="" selected disabled>Select privacy…</option></select>
+      <label class="t">Allow users to</label>
+      <div class="fila"><label class="chk"><input type="checkbox" id="c-com"> Comment</label><label class="chk"><input type="checkbox" id="c-duet"> Duet</label><label class="chk"><input type="checkbox" id="c-st"> Stitch</label></div>
+      <label class="t">Disclose video content</label>
+      <label class="chk"><input type="checkbox" id="c-comercial"> This video promotes a brand, product or service</label>
+      <div id="comercial" hidden style="margin-top:10px">
+        <div class="fila"><label class="chk"><input type="checkbox" id="c-propia"> Your brand</label><label class="chk"><input type="checkbox" id="c-tercero"> Branded content (a third party)</label></div>
+        <div class="aviso" id="etiqueta"></div>
+      </div>
+      <p class="nota" id="consent" style="margin-top:16px"></p>
+      <div style="margin-top:16px"><button class="btn oro" id="btn-publicar" disabled>Publish to TikTok</button></div>
+      <p class="estado" id="estado"></p>
+    </div>
+  </div>
+</div>
+<p class="nota">UNONUEVECR · Costa Rica · <a href="/terminos/">Terms of Service</a> · <a href="/privacidad/">Privacy Policy</a></p>
+</div>
+<script>
+const API="https://n8n-unonueve-n8n.i5i6e4.easypanel.host/webhook/tiktok-panel";
+const VIDEO="https://unonuevecr.com/tiktok/reel-sistemas.mp4";
+const $=id=>document.getElementById(id);
+const NOMBRES={PUBLIC_TO_EVERYONE:"Everyone",MUTUAL_FOLLOW_FRIENDS:"Friends",FOLLOWER_OF_CREATOR:"Followers",SELF_ONLY:"Only me"};
+let s=null,maxDur=0;
+try{const h=new URLSearchParams(location.hash.slice(1));if(h.get("s")){sessionStorage.setItem("tt_s",h.get("s"));history.replaceState(null,"",location.pathname)}
+ if(h.get("error")){$("err-conectar").hidden=false;$("err-conectar").textContent="TikTok did not complete the connection: "+h.get("error");history.replaceState(null,"",location.pathname)}
+ s=sessionStorage.getItem("tt_s")}catch(e){}
+async function llamar(cuerpo){const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(Object.assign({s},cuerpo))});return r.json()}
+function consent(){const t=$("c-tercero").checked&&$("c-comercial").checked;
+ $("consent").innerHTML=t?'By posting, you agree to TikTok\'s <a href="https://www.tiktok.com/legal/page/global/bc-policy/en" target="_blank" rel="noopener">Branded Content Policy</a> and <a href="https://www.tiktok.com/legal/page/global/music-usage-confirmation/en" target="_blank" rel="noopener">Music Usage Confirmation</a>.'
+ :'By posting, you agree to TikTok\'s <a href="https://www.tiktok.com/legal/page/global/music-usage-confirmation/en" target="_blank" rel="noopener">Music Usage Confirmation</a>.'}
+function revisar(){const com=$("c-comercial").checked,pro=$("c-propia").checked,ter=$("c-tercero").checked;
+ $("comercial").hidden=!com;
+ const solo=[...$("priv").options].find(o=>o.value==="SELF_ONLY");
+ if(solo){solo.disabled=com&&ter;solo.textContent=NOMBRES.SELF_ONLY+(com&&ter?" (not available for branded content)":"");if(com&&ter&&$("priv").value==="SELF_ONLY")$("priv").value=""}
+ $("etiqueta").textContent=!com?"":(ter?"Your video will be labeled “Paid partnership”.":pro?"Your video will be labeled “Promotional content”.":"Select at least one option to indicate what this video promotes.");
+ consent();
+ $("btn-publicar").disabled=!$("priv").value||(com&&!pro&&!ter)||(maxDur&&$("vid").duration>maxDur)}
+["priv","c-comercial","c-propia","c-tercero"].forEach(i=>$(i).addEventListener("change",revisar));
+$("vid").addEventListener("loadedmetadata",()=>{$("dur").textContent=Math.round($("vid").duration)+" s";revisar()});
+$("salir").onclick=e=>{e.preventDefault();sessionStorage.removeItem("tt_s");location.reload()};
+async function iniciar(){if(!s)return;
+ const r=await llamar({accion:"info"});
+ if(!r.data||(r.error&&r.error.code!=="ok")){sessionStorage.removeItem("tt_s");$("err-conectar").hidden=false;$("err-conectar").textContent="Your session expired. Connect your TikTok account again.";return}
+ const d=r.data;$("paso-conectar").hidden=true;$("paso-publicar").hidden=false;
+ $("nick").textContent=d.creator_nickname||"";$("user").textContent="@"+(d.creator_username||"");if(d.creator_avatar_url)$("avatar").src=d.creator_avatar_url;
+ maxDur=d.max_video_post_duration_sec||0;
+ (d.privacy_level_options||[]).forEach(p=>{const o=document.createElement("option");o.value=p;o.textContent=NOMBRES[p]||p;$("priv").appendChild(o)});
+ if(d.comment_disabled){$("c-com").disabled=true}if(d.duet_disabled){$("c-duet").disabled=true}if(d.stitch_disabled){$("c-st").disabled=true}
+ revisar()}
+$("btn-publicar").onclick=async()=>{const b=$("btn-publicar"),e=$("estado");b.disabled=true;e.className="estado";e.textContent="Sending your video to TikTok…";
+ const com=$("c-comercial").checked;
+ const r=await llamar({accion:"publicar",video_url:VIDEO,titulo:$("titulo").value,privacidad:$("priv").value,disable_comment:!$("c-com").checked,disable_duet:!$("c-duet").checked,disable_stitch:!$("c-st").checked,brand_organic_toggle:com&&$("c-propia").checked,brand_content_toggle:com&&$("c-tercero").checked});
+ if(!r.data||!r.data.publish_id){e.className="estado mal";e.textContent="TikTok rejected the post: "+((r.error&&(r.error.code+" — "+r.error.message))||"unknown error");b.disabled=false;return}
+ const id=r.data.publish_id;e.textContent="TikTok is processing the video. This can take a few minutes…";
+ for(let i=0;i<40;i++){await new Promise(x=>setTimeout(x,6000));const q=await llamar({accion:"estado",publish_id:id});const st=q.data&&q.data.status;
+  if(st==="PUBLISH_COMPLETE"){e.className="estado ok";e.textContent="Published ✓ Your video is now on your TikTok profile.";return}
+  if(st==="FAILED"){e.className="estado mal";e.textContent="TikTok could not publish the video: "+(q.data.fail_reason||"");b.disabled=false;return}
+  e.textContent="TikTok is processing the video ("+(st||"…")+"). This can take a few minutes…"}
+ e.textContent="Still processing. Check your TikTok profile in a few minutes."};
+iniciar();
+</script></body></html>
