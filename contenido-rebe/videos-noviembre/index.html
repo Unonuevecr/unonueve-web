@@ -139,7 +139,7 @@ function bloque(id, clase, txt){ const largo = clase!=='guion' && txt.length>420
 function tarjeta(d){
   const e = estados[d.fecha] || {}; const p = partes(e.comentario);
   const cls = e.estado==='aprobado'?'aprobado':e.estado==='cambios'?'cambios':'';
-  const be = e.estado==='aprobado'?'<span class="estado ok">✓ Aprobada</span>':e.estado==='cambios'?'<span class="estado amb">Con cambios</span>':'<span class="estado">Pendiente</span>';
+  const be = e.estado==='aprobado'?'<span class="estado ok">✓ Aprobado</span>':e.estado==='cambios'?'<span class="estado amb">Con cambios</span>':'<span class="estado">Pendiente</span>';
   const nomCont = d.pieza==='Video'?'Guion del video (lo graba usted)':d.pieza==='Carrusel'?'Láminas del carrusel':'Texto de la imagen';
   const guion = p.guion!=null?p.guion:d.cont, texto = p.texto!=null?p.texto:d.texto;
   const corr = (p.guion!=null||p.texto!=null)?'<span class="badge g">Usted lo corrigió</span>':'';
@@ -189,8 +189,8 @@ function pintar(){
 }
 function progreso(){
   const delMes=DIAS.filter(d=>d.mes===mes), ap=delMes.filter(d=>(estados[d.fecha]||{}).estado==='aprobado').length;
-  $('#progTxt').textContent=`${mes}: ${ap} de ${delMes.length} aprobados`; $('#progFill').style.width=(delMes.length?ap/delMes.length*100:0)+'%';
-  $('#meses').innerHTML = MESES.map(m=>{ const t=DIAS.filter(d=>d.mes===m), a=t.filter(d=>(estados[d.fecha]||{}).estado==='aprobado').length; return `<button data-mes="${m}" aria-pressed="${m===mes}">${m}<small>${t.length} videos · ${a} aprobados</small></button>`; }).join('');
+  $('#progTxt').textContent=`${mes}: ${ap} de ${delMes.length} ${ap===1?'aprobado':'aprobados'}`; $('#progFill').style.width=(delMes.length?ap/delMes.length*100:0)+'%';
+  $('#meses').innerHTML = MESES.map(m=>{ const t=DIAS.filter(d=>d.mes===m), a=t.filter(d=>(estados[d.fecha]||{}).estado==='aprobado').length; return `<button data-mes="${m}" aria-pressed="${m===mes}">${m}<small>${t.length} videos · ${a} ${a===1?'aprobado':'aprobados'}</small></button>`; }).join('');
 }
 function filtros(){ $('#filtros').innerHTML = filtrosDe(mes).map(([k,t])=>`<button data-f="${k}" aria-pressed="${k===filtro}">${t}</button>`).join(''); }
 filtros();
@@ -213,7 +213,7 @@ document.addEventListener('click', async e=>{
   const vm=e.target.closest('[data-tx]'); if(vm){ abiertos.add(vm.dataset.tx); const t=document.getElementById(vm.dataset.tx); if(t) t.classList.remove('corto'); vm.remove(); return; }
   const ed=e.target.closest('[data-ed]'); if(ed){ const k='ed-'+ed.dataset.ed; abiertos.has(k)?abiertos.delete(k):abiertos.add(k); const box=document.getElementById(k); box.classList.toggle('on'); ed.setAttribute('aria-pressed', box.classList.contains('on')); if(box.classList.contains('on')) box.querySelector('textarea').focus(); return; }
   const ap=e.target.closest('[data-ap]'), sv=e.target.closest('[data-save]'), se=e.target.closest('[data-savee]');
-  if(ap){ const f=ap.dataset.ap; const on=(estados[f]||{}).estado==='aprobado'; const ok=await enviar(f,{estado:on?null:'aprobado'}); flash('mg-'+f, on?'':(ok?'¡Aprobada! Muchas gracias':'Se marcó aquí, pero no hubo conexión: vuelva a intentar')); }
+  if(ap){ const f=ap.dataset.ap; const on=(estados[f]||{}).estado==='aprobado'; const ok=await enviar(f,{estado:on?null:'aprobado'}); flash('mg-'+f, on?'':(ok?'¡Aprobado! Muchas gracias':'Se marcó aquí, pero no hubo conexión: vuelva a intentar')); }
   if(sv){ const f=sv.dataset.save; const p=partes((estados[f]||{}).comentario); p.com=document.getElementById('cm-'+f).value.trim(); const c=armar(p); const ok=await enviar(f,{comentario:c, estado:(estados[f]||{}).estado||(c?'cambios':null)}); flash('mg-'+f, ok?'Enviado ✓':'No se pudo enviar, vuelva a intentar'); }
   if(se){ const f=se.dataset.savee; const d=DIAS.find(x=>x.fecha===f); const p=partes((estados[f]||{}).comentario);
     const g=document.getElementById('eg-'+f).value.trim(), tx=document.getElementById('et-'+f); const t=tx?tx.value.trim():null;
