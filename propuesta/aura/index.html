@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="es-CR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>AURA · Restaurante en Escazú — propuesta de sitio web</title>
+<meta name="description" content="Propuesta de sitio web para Aura Restaurante, preparada por UNONUEVECR: carta, cócteles sin alcohol, catas, reservas en línea y una asesora que orienta según gustos y alergias.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230C0C0C'/%3E%3Cpath d='M24 78 L50 20 L76 78' fill='none' stroke='%23fff' stroke-width='6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&family=Source+Sans+3:wght@300;400;600&display=swap">
+
+<!-- MEDICIÓN (se activa al publicar el sitio real; aquí van los identificadores de Aura)
+  Google Tag Manager GTM-XXXXXXX · Google Analytics 4 G-XXXXXXXXXX · Píxel de Meta + API de Conversiones · Google Ads AW-XXXXXXXXXX
+  Eventos ya programados: clic_reservar, ver_carta, filtro_carta, reserva_inicio, asesora_abre, asesora_pregunta, clic_whatsapp, como_llegar -->
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Restaurant","name":"Aura Restaurante","servesCuisine":["Latinoamericana contemporánea","Cocina de autor"],"priceRange":"₡15.500 – ₡25.000","telephone":"+506 8415 4747","acceptsReservations":"True",
+"address":{"@type":"PostalAddress","streetAddress":"Calle 130, frente a Galería de Autos","addressLocality":"San Rafael de Escazú","addressRegion":"San José","postalCode":"10203","addressCountry":"CR"},
+"geo":{"@type":"GeoCoordinates","latitude":9.9295803,"longitude":-84.1380908},
+"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday"],"opens":"18:00","closes":"23:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"12:00","closes":"23:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"12:00","closes":"16:00"}],
+"potentialAction":{"@type":"ReserveAction","target":"https://www.opentable.com/restref/client/?rid=1482517&restref=1482517&lang=es-MX"}}
+</script>
+
+<style>
+:root{
+  --negro:#0C0C0C; --noche:#160B07; --carbon:#1D1512; --crema:#F5E8D8; --cobre:#BD8562; --blanco:#FFFFFF;
+  --linea:rgba(245,232,216,.16); --tenue:rgba(245,232,216,.68);
+  --titulo:"Josefin Sans","Century Gothic",Futura,sans-serif;
+  --texto:"Source Sans 3","Helvetica Neue",Arial,sans-serif;
+  --ancho:1140px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--negro);color:var(--crema);font-family:var(--texto);font-size:17px;line-height:1.65;font-weight:300;-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit}
+.wrap{max-width:var(--ancho);margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--titulo);font-weight:300;text-transform:uppercase;letter-spacing:.14em;margin:0;line-height:1.2;color:var(--blanco)}
+h2{font-size:clamp(1.5rem,3.4vw,2.3rem)}
+h3{font-size:1.02rem;font-weight:400;letter-spacing:.16em}
+p{margin:0 0 1em}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ceja{font-family:var(--titulo);font-size:.74rem;letter-spacing:.34em;text-transform:uppercase;color:var(--cobre);display:block;margin-bottom:1.1rem}
+.filete{width:44px;height:1px;background:var(--cobre);margin:1.6rem 0}
+.lead{font-size:1.12rem;color:var(--tenue);max-width:46ch}
+.btn{display:inline-block;font-family:var(--titulo);font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;padding:1rem 1.9rem .85rem;border:1px solid var(--crema);color:var(--crema);background:transparent;cursor:pointer;transition:background .25s,color .25s;text-align:center}
+.btn:hover,.btn:focus-visible{background:var(--crema);color:var(--negro)}
+.btn.lleno{background:var(--crema);color:var(--negro)}
+.btn.lleno:hover,.btn.lleno:focus-visible{background:var(--blanco)}
+.btn.ch{padding:.7rem 1.2rem .55rem;font-size:.7rem}
+:focus-visible{outline:2px solid var(--cobre);outline-offset:3px}
+.demo{display:inline-block;font-family:var(--titulo);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--negro);background:var(--cobre);padding:.32rem .6rem .2rem;vertical-align:middle;margin-left:.8rem}
+
+/* aviso de propuesta */
+.aviso{background:var(--crema);color:var(--negro);text-align:center;font-family:var(--titulo);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;padding:.55rem 1rem .4rem;line-height:1.5}
+
+/* encabezado */
+header{position:sticky;top:0;z-index:30;border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
+header.solido{background:rgba(12,12,12,.9);backdrop-filter:blur(10px);border-bottom-color:var(--linea)}
+.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;height:74px}
+.nav nav{display:flex;gap:1.5rem}
+.nav nav a{font-family:var(--titulo);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.78);padding-top:.2rem;white-space:nowrap}
+.nav nav a:hover{color:var(--blanco)}
+.marca svg{height:20px;width:81px;display:block;color:var(--blanco)}
+.nav .der{display:flex;justify-content:flex-end}
+header .marca{opacity:0;transition:opacity .3s}
+header.solido .marca{opacity:1}
+@media(max-width:940px){.nav nav{display:none}.nav{grid-template-columns:auto 1fr}.marca{justify-self:start}}
+
+/* portada con video */
+.portada{position:relative;height:calc(100svh - 34px);min-height:620px;margin-top:-75px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000}
+.portada video,.portada .foto-fija{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.portada .velo{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 46%,rgba(12,12,12,.14) 0%,rgba(12,12,12,.52) 72%),linear-gradient(180deg,rgba(12,12,12,.62) 0%,rgba(12,12,12,0) 24%,rgba(12,12,12,0) 60%,rgba(12,12,12,.88) 100%)}
+.centro{position:relative;z-index:2;text-align:center;padding:0 20px;margin-top:-4vh}
+.letra{width:clamp(250px,38vw,560px);height:auto;color:var(--blanco);display:block;margin:0 auto;filter:drop-shadow(0 2px 22px rgba(0,0,0,.55))}
+.centro .sub{font-family:var(--titulo);font-size:clamp(.66rem,1.2vw,.82rem);letter-spacing:.42em;text-transform:uppercase;color:rgba(255,255,255,.86);margin:2.1rem 0 0;padding-left:.42em}
+.centro .lema{font-size:clamp(1rem,1.6vw,1.2rem);color:rgba(255,255,255,.8);margin:.9rem 0 0}
+.baja{position:absolute;left:0;right:0;text-align:center;bottom:clamp(20px,4.5vh,44px);z-index:2;font-family:var(--titulo);font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.8)}
+.baja:hover{color:#fff}
+
+/* tarjeta de reserva (abajo a la derecha) */
+.reserva{position:absolute;z-index:3;right:20px;bottom:98px;width:404px;background:rgba(12,12,12,.76);backdrop-filter:blur(12px);border:1px solid var(--linea);padding:1.25rem 1.4rem 1rem}
+.reserva h2{font-size:.98rem;letter-spacing:.2em;font-weight:400}
+.reserva .por{font-size:.8rem;color:var(--tenue);margin:.2rem 0 .9rem}
+.reserva form{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:.8rem .9rem}
+.reserva .ancho{grid-column:1/-1}
+label{display:block;font-family:var(--titulo);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cobre);margin-bottom:.3rem}
+input,select{width:100%;background:transparent;border:0;border-bottom:1px solid var(--tenue);color:var(--crema);font-family:var(--texto);font-size:1rem;padding:.45rem 0;border-radius:0;color-scheme:dark}
+select option{color:#111}
+.reserva .btn{width:100%}
+.reserva .nota{grid-column:1/-1;font-size:.74rem;color:var(--tenue);margin:0;line-height:1.4}
+.reserva .enlace{display:block;margin-top:.75rem;font-size:.76rem;color:var(--tenue);text-decoration:none;border-top:1px solid var(--linea);padding-top:.7rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.reserva .enlace b{font-weight:400;color:var(--crema);border-bottom:1px solid var(--linea)}
+@media(max-width:820px){
+  .portada{height:auto;min-height:0;display:block;margin-top:-75px}
+  .portada .escena{position:relative;height:calc(100svh - 34px);min-height:560px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .reserva{position:static;width:auto;border-left:0;border-right:0;background:var(--carbon);backdrop-filter:none;padding:1.8rem 24px 1.6rem}
+  .reserva form{grid-template-columns:1fr 1fr}.reserva form>div:first-child{grid-column:1/-1}
+  .baja{bottom:22px}
+  .baja{left:0;right:0;text-align:center}
+}
+@media(min-width:821px){.portada .escena{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}}
+
+section{padding:clamp(4rem,9vw,7rem) 0}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem);align-items:center}
+@media(max-width:820px){.dos{grid-template-columns:1fr}}
+.foto{aspect-ratio:4/5;object-fit:cover;width:100%}
+
+/* carta */
+.carta{background:var(--noche)}
+.filtros{display:flex;flex-wrap:wrap;gap:.5rem;margin:2rem 0 0}
+.filtros button{font-family:var(--titulo);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;background:transparent;border:1px solid var(--linea);color:var(--tenue);padding:.6rem .95rem .45rem;cursor:pointer;transition:all .2s}
+.filtros button:hover{border-color:var(--crema);color:var(--crema)}
+.filtros button[aria-pressed="true"]{background:var(--crema);color:var(--negro);border-color:var(--crema)}
+.filtros .pista{align-self:center;font-size:.82rem;color:var(--tenue);margin-left:.4rem}
+.carta .cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem);margin-top:2.6rem}
+@media(max-width:820px){.carta .cols{grid-template-columns:1fr}}
+.plato{display:grid;grid-template-columns:1fr auto;gap:.2rem 1.2rem;padding:1.05rem 0;border-bottom:1px solid var(--linea);transition:opacity .25s}
+.plato b{font-family:var(--titulo);font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--blanco);font-size:.98rem}
+.plato .pr{font-weight:400;color:var(--crema);font-variant-numeric:tabular-nums;white-space:nowrap}
+.plato p{grid-column:1/-1;margin:0;font-size:.93rem;color:var(--tenue);line-height:1.5}
+.plato .al{grid-column:1/-1;font-size:.76rem;letter-spacing:.04em;color:rgba(245,232,216,.5);margin-top:.25rem}
+.plato .al i{font-style:normal;color:var(--cobre)}
+.plato.evitar{opacity:.3}
+.plato.evitar b{text-decoration:line-through;text-decoration-thickness:1px}
+.plato .marca-f{display:none;grid-column:1/-1;font-family:var(--titulo);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;margin-top:.35rem}
+.plato.evitar .marca-f.no,.plato.duda .marca-f.du,.plato.bien .marca-f.si{display:block}
+.marca-f.no{color:#E0907A}.marca-f.du{color:#E6C27A}.marca-f.si{color:#9CCB9F}
+.carta .pie{margin-top:2rem;font-size:.86rem;color:var(--tenue);max-width:70ch}
+
+.galeria{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:0}
+.galeria figure{margin:0;position:relative;overflow:hidden}
+.galeria img{aspect-ratio:3/4;object-fit:cover;width:100%;transition:transform .6s}
+.galeria figure:hover img{transform:scale(1.04)}
+.galeria figcaption{position:absolute;left:0;right:0;bottom:0;padding:2.4rem 1rem .8rem;font-family:var(--titulo);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;background:linear-gradient(transparent,rgba(12,12,12,.85))}
+@media(max-width:820px){.galeria{grid-template-columns:repeat(2,1fr)}}
+
+/* el espectro */
+.estrella-coctel{display:grid;grid-template-columns:auto 1fr;gap:clamp(1.6rem,5vw,4rem);align-items:center;margin-top:1rem}
+.orbe{width:clamp(170px,26vw,300px);aspect-ratio:1;border-radius:50%;position:relative;background:radial-gradient(circle at 50% 50%,rgba(240,222,250,.95) 0%,rgba(190,140,225,.85) 22%,rgba(125,70,180,.55) 44%,rgba(75,31,120,.22) 60%,rgba(75,31,120,0) 72%);filter:blur(5px)}
+.orbe::after{content:"";position:absolute;inset:14%;border-radius:50%;border:1px solid rgba(240,222,250,.35);filter:blur(1px)}
+@media(max-width:700px){.estrella-coctel{grid-template-columns:1fr;justify-items:center;text-align:center}.estrella-coctel .lead{margin-inline:auto}}
+.precio{font-family:var(--titulo);font-size:1.4rem;letter-spacing:.08em;color:var(--blanco)}
+.precio small{font-family:var(--texto);font-size:.84rem;color:var(--tenue);letter-spacing:0;display:block;margin-top:.2rem}
+.cocteles{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(2rem,6vw,5rem);margin-top:3.4rem}
+@media(max-width:820px){.cocteles{grid-template-columns:1fr}}
+.coctel{display:grid;grid-template-columns:auto 1fr auto;gap:.1rem 1rem;align-items:center;padding:1rem 0;border-bottom:1px solid var(--linea)}
+.coctel i{width:26px;height:26px;border-radius:50%;display:block;grid-row:1/3}
+.coctel b{font-family:var(--titulo);font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--blanco);font-size:.96rem}
+.coctel span{font-weight:400;font-variant-numeric:tabular-nums}
+.coctel p{grid-column:2/-1;margin:0;font-size:.9rem;color:var(--tenue);line-height:1.45}
+
+/* vinos */
+.vinos{background:var(--carbon)}
+.vino-g{margin-top:2.4rem}
+.vino-g h3{color:var(--cobre);font-size:.78rem;letter-spacing:.3em;margin-bottom:.4rem}
+.vino{display:grid;grid-template-columns:1fr auto auto;gap:.1rem 1.4rem;padding:.85rem 0;border-bottom:1px solid var(--linea);align-items:baseline}
+.vino b{font-family:var(--titulo);font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--blanco);font-size:.92rem}
+.vino small{display:block;font-family:var(--texto);text-transform:none;letter-spacing:0;font-size:.86rem;color:var(--tenue);margin-top:.1rem}
+.vino span{font-variant-numeric:tabular-nums;font-weight:400;white-space:nowrap;text-align:right;min-width:4.6em}
+.vino-cab{display:grid;grid-template-columns:1fr auto auto;gap:0 1.4rem;font-family:var(--titulo);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--tenue);margin-top:2rem}
+.vino-cab span{min-width:4.6em;text-align:right}
+.vcols{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(2rem,6vw,5rem)}
+@media(max-width:820px){.vcols{grid-template-columns:1fr}.vino,.vino-cab{gap:.1rem .8rem}.vino b{letter-spacing:.05em;font-size:.86rem}.vino span,.vino-cab span{min-width:3.9em;font-size:.92rem}.vino-cab span{font-size:.58rem}}
+
+/* catas */
+.catas .tres{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:3rem}
+@media(max-width:900px){.catas .tres{grid-template-columns:1fr}}
+.cata{border:1px solid var(--linea);display:flex;flex-direction:column}
+.cata .img{aspect-ratio:16/10;background:#111 center/cover;position:relative}
+.cata .img.orbes{display:flex;align-items:center;justify-content:center;gap:10px;background:radial-gradient(ellipse at center,#1d1512,#0c0c0c)}
+.cata .img.orbes i{width:26px;height:26px;border-radius:50%;display:block}
+.cata .cuerpo{padding:1.5rem 1.5rem 1.6rem;display:flex;flex-direction:column;gap:.7rem;flex:1}
+.cata h3{font-size:1.06rem;line-height:1.35}
+.cata p{margin:0;font-size:.94rem;color:var(--tenue);line-height:1.5}
+.cata .cuando{font-family:var(--titulo);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cobre)}
+.cata .precio{font-size:1.2rem;margin-top:auto;padding-top:.6rem}
+.cata .demo{margin:0;align-self:flex-start}
+
+/* sección asesora */
+.asesora{background:var(--noche);text-align:center;overflow:hidden;position:relative}
+.asesora .astro{width:74px;height:74px;margin:0 auto 1.6rem;color:var(--blanco);filter:drop-shadow(0 0 22px rgba(189,133,98,.75))}
+.asesora .lead{margin:1.4rem auto 0;max-width:52ch}
+.sug{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;margin:2.2rem auto 0;max-width:820px}
+.sug button{font-family:var(--texto);font-size:.95rem;background:transparent;border:1px solid var(--linea);color:var(--crema);padding:.65rem 1.1rem;border-radius:40px;cursor:pointer;transition:all .2s}
+.sug button:hover{border-color:var(--cobre);background:rgba(189,133,98,.12)}
+.asesora .letra-chica{font-size:.82rem;color:var(--tenue);margin:2rem auto 0;max-width:62ch}
+
+/* visitanos */
+.datos{display:grid;gap:1.4rem;margin:2rem 0}
+.datos div{border-top:1px solid var(--linea);padding-top:1rem}
+.datos p{margin:0;font-size:1rem}
+.acc2{display:flex;gap:.8rem;flex-wrap:wrap}
+
+footer{border-top:1px solid var(--linea);padding:3rem 0 3.4rem;text-align:center;color:var(--tenue);font-size:.86rem}
+footer .marca svg{height:24px;width:97px;margin:0 auto 1.4rem}
+footer a{text-decoration:none;border-bottom:1px solid var(--linea)}
+footer .prop{margin-top:1.6rem;font-size:.8rem;max-width:74ch;margin-inline:auto;line-height:1.55}
+
+/* botón fijo de celular */
+.fijo{display:none}
+@media(max-width:820px){.fijo{display:block;position:fixed;left:0;right:0;bottom:0;z-index:40;padding:.65rem 86px calc(.65rem + env(safe-area-inset-bottom)) 16px;background:rgba(12,12,12,.94);border-top:1px solid var(--linea)}.fijo .btn{display:block}body{padding-bottom:74px}}
+
+/* ===== asesora Aura (chat) ===== */
+.lanzador{position:fixed;right:20px;bottom:20px;z-index:50;display:flex;align-items:center;gap:.7rem;background:var(--negro);border:1px solid var(--cobre);color:var(--crema);border-radius:60px;padding:.55rem 1.15rem .55rem .6rem;cursor:pointer;box-shadow:0 0 0 0 rgba(189,133,98,.5),0 10px 30px rgba(0,0,0,.5);animation:aura 3.4s ease-in-out infinite}
+.lanzador svg{width:38px;height:38px;color:var(--blanco);filter:drop-shadow(0 0 8px rgba(189,133,98,.9))}
+.lanzador span{font-family:var(--titulo);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;line-height:1.35;text-align:left;padding-top:.15rem}
+.lanzador span small{display:block;font-family:var(--texto);font-size:.78rem;letter-spacing:0;text-transform:none;color:var(--tenue)}
+@keyframes aura{0%,100%{box-shadow:0 0 0 0 rgba(189,133,98,.45),0 10px 30px rgba(0,0,0,.5)}50%{box-shadow:0 0 0 14px rgba(189,133,98,0),0 10px 30px rgba(0,0,0,.5)}}
+@media(max-width:820px){.lanzador{right:12px;bottom:calc(10px + env(safe-area-inset-bottom));padding:.45rem}.lanzador span{display:none}.lanzador svg{width:40px;height:40px}}
+.chat{position:fixed;right:20px;bottom:20px;z-index:60;width:392px;max-width:calc(100vw - 24px);height:min(620px,calc(100svh - 40px));background:#110D0B;border:1px solid var(--linea);display:none;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.7)}
+.chat.abierto{display:flex}
+@media(max-width:820px){.chat{inset:0;width:auto;max-width:none;height:auto;border:0}}
+.chat .cab{display:flex;align-items:center;gap:.8rem;padding:.9rem 1rem;border-bottom:1px solid var(--linea);background:var(--negro)}
+.chat .cab svg{width:34px;height:34px;color:#fff;filter:drop-shadow(0 0 8px rgba(189,133,98,.9));flex:none}
+.chat .cab b{font-family:var(--titulo);font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#fff;font-size:.9rem;display:block;line-height:1.2;padding-top:.2rem}
+.chat .cab small{font-size:.78rem;color:var(--tenue)}
+.chat .cerrar{margin-left:auto;background:none;border:0;font-size:1.5rem;line-height:1;cursor:pointer;color:var(--tenue);padding:.2rem .5rem}
+.chat .hilo{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.7rem;scroll-behavior:smooth}
+.msj{max-width:88%;padding:.7rem .9rem;font-size:.96rem;line-height:1.5;border-radius:14px;font-weight:400}
+.msj.a{background:#1F1814;color:var(--crema);border-bottom-left-radius:3px;align-self:flex-start}
+.msj.u{background:var(--crema);color:var(--negro);border-bottom-right-radius:3px;align-self:flex-end}
+.msj h4{font-family:var(--titulo);font-weight:400;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;margin:.7rem 0 .25rem}
+.msj h4:first-child{margin-top:0}
+.msj h4.si{color:#9CCB9F}.msj h4.du{color:#E6C27A}.msj h4.no{color:#E0907A}
+.msj ul{margin:0;padding:0;list-style:none}
+.msj li{padding:.12rem 0}
+.msj li span{color:var(--tenue);font-size:.86rem}
+.msj .cierre{display:block;margin-top:.7rem;padding-top:.6rem;border-top:1px solid var(--linea);font-size:.82rem;color:var(--tenue)}
+.msj .acc{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}
+.msj .acc a{font-family:var(--titulo);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:1px solid var(--cobre);color:var(--crema);padding:.5rem .7rem .36rem}
+.msj.esc{display:flex;gap:5px;align-items:center;padding:.9rem 1rem}
+.msj.esc i{width:6px;height:6px;border-radius:50%;background:var(--cobre);display:block;animation:pt 1.1s infinite}
+.msj.esc i:nth-child(2){animation-delay:.18s}.msj.esc i:nth-child(3){animation-delay:.36s}
+@keyframes pt{0%,70%,100%{opacity:.25}35%{opacity:1}}
+.chat .rapidas{display:flex;gap:.4rem;overflow-x:auto;padding:.2rem 1rem .7rem;scrollbar-width:none}
+.chat .rapidas::-webkit-scrollbar{display:none}
+.chat .rapidas button{flex:none;font-family:var(--texto);font-size:.84rem;background:transparent;border:1px solid var(--linea);color:var(--crema);padding:.45rem .8rem;border-radius:40px;cursor:pointer;white-space:nowrap}
+.chat .rapidas button:hover{border-color:var(--cobre)}
+.chat form{display:flex;gap:.5rem;padding:.7rem 1rem;border-top:1px solid var(--linea);background:var(--negro)}
+.chat form input{flex:1;border:1px solid var(--linea);border-radius:40px;padding:.65rem 1rem;font-size:.96rem;background:#16110F}
+.chat form button{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--crema);color:var(--negro);cursor:pointer;font-size:1.1rem}
+.chat .pie-chat{font-size:.7rem;color:var(--tenue);text-align:center;padding:0 1rem calc(.6rem + env(safe-area-inset-bottom));background:var(--negro);line-height:1.4}
+
+/* panel de medición (solo en la propuesta) */
+.panel{position:fixed;left:16px;bottom:16px;z-index:45;width:300px;max-width:calc(100vw - 32px);background:#fff;color:#0D2240;font-family:var(--texto);font-weight:400;font-size:.8rem;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.5);overflow:hidden}
+.panel summary{cursor:pointer;padding:.6rem .9rem;font-weight:600;background:#1B4C7E;color:#fff;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.panel summary::-webkit-details-marker{display:none}
+.panel ul{list-style:none;margin:0;padding:.5rem .9rem .8rem;max-height:200px;overflow:auto}
+.panel li{padding:.35rem 0;border-bottom:1px solid #E3E9F0;display:flex;justify-content:space-between;gap:.6rem}
+.panel li b{font-weight:600}.panel li span{color:#61748A;white-space:nowrap}
+.panel .vac{color:#61748A;padding:.5rem 0;display:block}
+@media(max-width:820px){.panel{display:none}}
+@media print{.panel,.fijo,.aviso,.lanzador,.chat{display:none}}
+.captura .panel,.captura .aviso,.captura .fijo,.captura .lanzador{display:none}.captura body{padding-bottom:0}.captura .portada{height:900px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.galeria img{transition:none}.lanzador{animation:none}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="aura" viewBox="-4 -4 436 108">
+    <g fill="none" stroke="currentColor" stroke-width="4.6" stroke-linejoin="miter" stroke-miterlimit="8">
+      <path d="M0 100 L39 0 L78 100"/><path d="M124 0 V62 A35 38 0 0 0 194 62 V0"/>
+      <path d="M240 100 V0 H276 A28 28 0 0 1 276 56 H240 M274 56 L304 100"/><path d="M350 100 L389 0 L428 100"/>
+    </g>
+  </symbol>
+  <symbol id="astro" viewBox="0 0 100 100">
+    <path fill="currentColor" d="M50 2 C52 30 70 48 98 50 C70 52 52 70 50 98 C48 70 30 52 2 50 C30 48 48 30 50 2 Z"/>
+  </symbol>
+</svg>
+
+<div class="aviso">Propuesta de sitio web para Aura · preparada por UNONUEVECR · cócteles, vinos, catas y alérgenos son de demostración</div>
+
+<header id="cab">
+  <div class="wrap nav">
+    <nav aria-label="Principal">
+      <a href="#carta">Carta</a><a href="#espectro">El Espectro</a><a href="#vinos">Vinos</a><a href="#catas">Catas</a><a href="#asesora">Asesora</a><a href="#visita">Visitanos</a>
+    </nav>
+    <a class="marca" href="#inicio" aria-label="AURA, inicio"><svg viewBox="-4 -4 436 108" role="img" aria-label="AURA"><use href="#aura"/></svg></a>
+    <div class="der"><a class="btn ch" href="#reservar" data-evento="clic_reservar" data-detalle="encabezado">Reservar</a></div>
+  </div>
+</header>
+
+<main>
+  <div class="portada" id="inicio">
+    <div class="escena">
+      <video id="video" muted loop autoplay playsinline preload="metadata" aria-hidden="true"></video>
+      <div class="velo"></div>
+      <div class="centro">
+        <h1 class="sr">Aura Restaurante, cocina de autor en San Rafael de Escazú</h1>
+        <svg class="letra" viewBox="-4 -4 436 108" role="img" aria-label="AURA"><use href="#aura"/></svg>
+        <p class="sub">Restaurante · San Rafael de Escazú</p>
+        <p class="lema">No es solo un restaurante.</p>
+      </div>
+      <a class="baja" href="#casa">Conocé la casa ↓</a>
+    </div>
+
+    <aside class="reserva" id="reservar" aria-label="Reservar mesa">
+      <h2>Reservá tu mesa</h2>
+      <p class="por">Confirmación inmediata por OpenTable</p>
+      <form id="formReserva" novalidate>
+        <div><label for="fecha">Fecha</label><input type="date" id="fecha" name="fecha" required></div>
+        <div><label for="hora">Hora</label><select id="hora" name="hora"></select></div>
+        <div><label for="personas">Personas</label><select id="personas" name="personas"></select></div>
+        <button class="btn lleno ancho" type="submit">Buscar mesa</button>
+        <p class="nota" id="notaReserva" role="status">Mar a vie 6:00–11:00 p. m. · Sáb 12:00 md–11:00 p. m. · Dom 12:00 md–4:00 p. m.</p>
+      </form>
+      <a class="enlace" href="https://www.opentable.com/r/aura-escazu-costa-rica?restref=1482517&lang=es-MX&ot_source=Restaurant%20website&ot_campaign=sitio-web" target="_blank" rel="noopener" data-evento="reserva_inicio" data-detalle="enlace OpenTable">OpenTable ↗ <b>opentable.com/r/aura-escazu-costa-rica</b></a>
+    </aside>
+  </div>
+
+  <section id="casa">
+    <div class="wrap dos">
+      <div>
+        <span class="ceja">La casa</span>
+        <h2>Comida contemporánea, comida con sentido</h2>
+        <div class="filete"></div>
+        <p class="lead">La cocina, la luz, la música y el servicio se viven como una sola experiencia. El chef Edgardo Gamboa firma siete entradas y siete platos fuertes de autor, con lo que dan la tierra y el mar.</p>
+        <p class="lead">La hospitalidad es nuestro código: cómo te recibimos, cómo te acompañamos durante la noche y cómo te vas.</p>
+        <p style="margin-top:1.8rem"><a class="btn" href="#carta" data-evento="ver_carta" data-detalle="la casa">Ver la carta</a></p>
+      </div>
+      <img class="foto" src="img/ceviche-manos.jpg" alt="Ceviche de corvina reina servido en la mesa" loading="lazy">
+    </div>
+  </section>
+
+  <section class="carta" id="carta">
+    <div class="wrap">
+      <span class="ceja">La carta</span>
+      <h2>Siete entradas, siete fuertes</h2>
+      <div class="filtros" role="group" aria-label="Filtrar la carta por restricción">
+        <button type="button" data-f="" aria-pressed="true">Toda la carta</button>
+        <button type="button" data-f="gluten" aria-pressed="false">Sin gluten</button>
+        <button type="button" data-f="mariscos" aria-pressed="false">Sin mariscos</button>
+        <button type="button" data-f="lacteos" aria-pressed="false">Sin lácteos</button>
+        <button type="button" data-f="cerdo" aria-pressed="false">Sin cerdo</button>
+        <button type="button" data-f="crudo" aria-pressed="false">Sin crudos</button>
+        <span class="pista" id="pistaFiltro"></span>
+      </div>
+      <div class="cols">
+        <div><h3>Entradas y crudos</h3><div id="colEntradas"></div></div>
+        <div><h3>Platos fuertes</h3><div id="colFuertes"></div></div>
+      </div>
+      <p class="pie">IVA e impuesto de servicio incluidos. Platos y precios según la carta que Aura publicó el 7 de octubre de 2026; la carta cambia con lo que dan la tierra y el mar. <b style="font-weight:600;color:var(--crema)">La clasificación de alérgenos es una demostración</b> hecha a partir de la descripción de cada plato: en el sitio real la valida el chef.</p>
+    </div>
+  </section>
+
+  <div class="galeria">
+    <figure><img src="img/pejibaye.jpg" alt="Arroz cremoso de pejibaye con camarones jumbo" loading="lazy"><figcaption>Pejibaye</figcaption></figure>
+    <figure><img src="img/denver-tenedor.jpg" alt="Denver con puré de pipián" loading="lazy"><figcaption>Denver / Pipián</figcaption></figure>
+    <figure><img src="img/gnocchis.jpg" alt="Gnocchis con camarones jumbo" loading="lazy"><figcaption>Gnocchis</figcaption></figure>
+    <figure><img src="img/bizcocho.jpg" alt="Bizcocho de maíz con estofado de res" loading="lazy"><figcaption>Bizcocho</figcaption></figure>
+  </div>
+
+  <section id="espectro">
+    <div class="wrap">
+      <span class="ceja">Nuestro cóctel</span>
+      <div class="estrella-coctel">
+        <div class="orbe" aria-hidden="true"></div>
+        <div>
+          <h2>Aura <span class="demo">Demostración</span></h2>
+          <div class="filete"></div>
+          <p class="lead">Uva morada, lavanda, verjus y espumoso sin alcohol. Floral, seco y con burbuja fina: el cóctel de la casa, y el último color de El Espectro.</p>
+          <p class="precio">₡5.500 <small>Cero alcohol · IVA y servicio incluidos</small></p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:4.5rem">El Espectro · siete cócteles de autor, cero alcohol, uno por cada aura</h3>
+      <div class="cocteles" id="listaCocteles"></div>
+      <p style="margin-top:1.6rem;font-size:.86rem;color:var(--tenue);max-width:70ch">Nombres, recetas y precios de demostración: Aura todavía no ha publicado la carta de El Espectro. Aquí va la carta real, con su foto.</p>
+    </div>
+  </section>
+
+  <section class="vinos" id="vinos">
+    <div class="wrap">
+      <span class="ceja">La cava</span>
+      <h2>Vinos sin alcohol <span class="demo">Demostración</span></h2>
+      <p class="lead" style="margin-top:1.2rem">Etiquetas desalcoholizadas de bodegas reconocidas, para maridar de principio a fin sin una gota de alcohol.</p>
+      <div class="vcols" id="listaVinos"></div>
+      <p style="margin-top:1.8rem;font-size:.86rem;color:var(--tenue);max-width:70ch">Selección y precios de demostración, por copa y por botella. IVA y servicio incluidos.</p>
+    </div>
+  </section>
+
+  <section class="catas" id="catas">
+    <div class="wrap">
+      <span class="ceja">Catas y experiencias</span>
+      <h2>Una noche para probarlo todo</h2>
+      <div class="tres">
+        <article class="cata">
+          <div class="img orbes" aria-hidden="true"><i style="background:radial-gradient(circle,#E0564B,#7A1F1A)"></i><i style="background:radial-gradient(circle,#F0934A,#8A4312)"></i><i style="background:radial-gradient(circle,#F2D46B,#8C6B14)"></i><i style="background:radial-gradient(circle,#7DC98A,#1F5B33)"></i><i style="background:radial-gradient(circle,#6FB6E8,#1B4770)"></i><i style="background:radial-gradient(circle,#7C7BE0,#2A2777)"></i><i style="background:radial-gradient(circle,#C08BE0,#55237A)"></i></div>
+          <div class="cuerpo">
+            <span class="cuando">Jueves · 7:00 p. m.</span>
+            <h3>Cata de El Espectro</h3>
+            <p>Los siete cócteles de autor en formato de degustación, con un bocado de la cocina para cada color.</p>
+            <span class="demo">Demostración</span>
+            <p class="precio">₡24.500 <small>por persona</small></p>
+            <a class="btn" data-cata="Cata de El Espectro" data-hora="19:00" data-dia="4" href="#reservar">Apartar mi lugar</a>
+          </div>
+        </article>
+        <article class="cata">
+          <div class="img" style="background-image:url(img/tartar-atun.jpg)" role="img" aria-label="Tartar de atún servido en la sala"></div>
+          <div class="cuerpo">
+            <span class="cuando">Viernes · 7:00 p. m.</span>
+            <h3>Cata de vinos sin alcohol</h3>
+            <p>Cinco etiquetas guiadas por el equipo de sala, con tres bocados pensados para cada copa.</p>
+            <span class="demo">Demostración</span>
+            <p class="precio">₡28.500 <small>por persona</small></p>
+            <a class="btn" data-cata="Cata de vinos sin alcohol" data-hora="19:00" data-dia="5" href="#reservar">Apartar mi lugar</a>
+          </div>
+        </article>
+        <article class="cata">
+          <div class="img" style="background-image:url(img/denver-detalle.jpg)" role="img" aria-label="Corte Denver del menú de degustación"></div>
+          <div class="cuerpo">
+            <span class="cuando">Menú de degustación · chef Edgardo Gamboa</span>
+            <h3>Una noche, cinco tiempos</h3>
+            <p>Ceviche, tostada de atún, gnocchis, Denver / pipián y un postre sorpresa. Con maridaje sin alcohol.</p>
+            <p class="precio">₡39.950 <small>por persona · IVA y servicio incluidos</small></p>
+            <a class="btn lleno" data-cata="Menú de degustación" data-hora="18:00" data-dia="3" href="#reservar">Apartar mi lugar</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="asesora" id="asesora">
+    <div class="wrap">
+      <svg class="astro" aria-hidden="true"><use href="#astro"/></svg>
+      <span class="ceja">Tu asesora de la carta</span>
+      <h2>Preguntale a Aura</h2>
+      <p class="lead">Contale qué te gusta, qué celebrás o a qué sos alérgico. Aura conoce cada plato de la carta y te dice qué pedir, qué evitar y con qué acompañarlo.</p>
+      <div class="sug">
+        <button type="button" data-pregunta="Soy alérgico a los mariscos">Soy alérgico a los mariscos</button>
+        <button type="button" data-pregunta="¿Qué platos son sin gluten?">¿Qué es sin gluten?</button>
+        <button type="button" data-pregunta="Soy alérgico al maní">Alérgico al maní</button>
+        <button type="button" data-pregunta="Es mi primera vez, ¿qué me recomendás para dos?">Primera vez, somos dos</button>
+        <button type="button" data-pregunta="¿Qué vino sin alcohol va con el Denver?">¿Con qué acompaño el Denver?</button>
+        <button type="button" data-pregunta="Celebramos un aniversario, ¿qué nos sugerís?">Celebramos un aniversario</button>
+      </div>
+      <p class="letra-chica">Aura orienta con lo que dice la carta. Avisá siempre tu alergia al reservar y al llegar: la cocina es quien confirma cada plato.</p>
+    </div>
+  </section>
+
+  <section id="visita">
+    <div class="wrap dos">
+      <div>
+        <span class="ceja">Visitanos</span>
+        <h2>San Rafael de Escazú</h2>
+        <div class="datos">
+          <div><label>Dirección</label><p>Calle 130, frente a Galería de Autos, diagonal a la Compañía Nacional de Fuerza y Luz. Estacionamiento privado.</p></div>
+          <div><label>Horario</label><p>Martes a viernes, 6:00 a 11:00 p. m.<br>Sábado, 12:00 md a 11:00 p. m.<br>Domingo, 12:00 md a 4:00 p. m.<br>Lunes cerrado.</p></div>
+          <div><label>Teléfono y WhatsApp</label><p><a href="tel:+50684154747" style="text-decoration:none">8415 4747</a> · <a href="https://www.instagram.com/aura.escazu/" target="_blank" rel="noopener" style="text-decoration:none">@aura.escazu</a></p></div>
+        </div>
+        <div class="acc2">
+          <a class="btn" href="https://waze.com/ul/hd1u0mrs7h" target="_blank" rel="noopener" data-evento="como_llegar" data-detalle="Waze">Abrir en Waze</a>
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Aura+Restaurante+Escaz%C3%BA&query_place_id=ChIJZ7vwRBj9oI8R7-4BwfrXYzs" target="_blank" rel="noopener" data-evento="como_llegar" data-detalle="Google Maps">Google Maps</a>
+          <a class="btn lleno" href="https://wa.me/50684154747?text=Hola%2C%20quiero%20reservar%20en%20AURA" target="_blank" rel="noopener" data-evento="clic_whatsapp" data-detalle="visitanos">WhatsApp</a>
+        </div>
+      </div>
+      <img class="foto" style="aspect-ratio:1/1" src="img/fachada.jpg" alt="Fachada de Aura de noche, con sus tres arcos iluminados" loading="lazy">
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="marca" href="#inicio" aria-label="AURA"><svg viewBox="-4 -4 436 108" role="img" aria-label="AURA"><use href="#aura"/></svg></a>
+    <p>Restaurante · San Rafael de Escazú, Costa Rica<br><a href="https://www.instagram.com/aura.escazu/" target="_blank" rel="noopener">Instagram</a> · <a href="#reservar">Reservas</a> · <a href="#carta">Carta</a></p>
+    <p class="prop">Esta página es una propuesta de UNONUEVECR para Aura Restaurante y no es su sitio oficial. Las fotografías de los platos y la carta de comida son las que Aura tiene publicadas. Los cócteles, los vinos, las catas, sus precios y la clasificación de alérgenos son de demostración. El video de la portada es de banco, con una línea parecida a la fotografía de la casa.</p>
+  </div>
+</footer>
+
+<div class="fijo"><a class="btn lleno" href="#reservar" data-evento="clic_reservar" data-detalle="botón fijo">Reservar mesa</a></div>
+
+<button class="lanzador" id="lanzador" type="button" aria-haspopup="dialog" aria-controls="chat">
+  <svg aria-hidden="true"><use href="#astro"/></svg>
+  <span>Aura<small>Tu asesora de la carta</small></span>
+</button>
+
+<div class="chat" id="chat" role="dialog" aria-label="Aura, asesora de la carta">
+  <div class="cab">
+    <svg aria-hidden="true"><use href="#astro"/></svg>
+    <div><b>Aura</b><small>Asesora de la carta · demostración</small></div>
+    <button class="cerrar" type="button" id="cerrarChat" aria-label="Cerrar">×</button>
+  </div>
+  <div class="hilo" id="hilo" aria-live="polite"></div>
+  <div class="rapidas" id="rapidas">
+    <button type="button" data-pregunta="Soy alérgico a los mariscos">Alérgico a mariscos</button>
+    <button type="button" data-pregunta="¿Qué platos son sin gluten?">Sin gluten</button>
+    <button type="button" data-pregunta="Soy alérgico al maní">Alérgico al maní</button>
+    <button type="button" data-pregunta="¿Qué me recomendás?">¿Qué me recomendás?</button>
+    <button type="button" data-pregunta="¿Qué cóctel me sugerís?">Cócteles</button>
+    <button type="button" data-pregunta="Quiero reservar">Reservar</button>
+  </div>
+  <form id="formChat" autocomplete="off">
+    <input id="entrada" type="text" maxlength="400" placeholder="Escribile a Aura…" aria-label="Tu mensaje para Aura">
+    <button type="submit" aria-label="Enviar">➤</button>
+  </form>
+  <div class="pie-chat">Demostración. Avisá siempre tu alergia al reservar y al llegar.</div>
+</div>
+
+<details class="panel">
+  <summary>Medición en vivo (propuesta)<span id="cuenta">0</span></summary>
+  <ul id="registro"><li class="vac">Cada toque en «Reservar», en la carta o en la asesora aparece aquí como lo registrarían Analytics y el Píxel de Meta.</li></ul>
+</details>
+
+<script>
+if (/[?&]captura/.test(location.search)) document.documentElement.classList.add('captura');
+
+// ================= medición: un solo punto de salida para GA4, Píxel de Meta y Google Ads =================
+window.dataLayer = window.dataLayer || [];
+var META = {clic_reservar:'ViewContent', ver_carta:'ViewContent', filtro_carta:'CustomizeProduct', reserva_inicio:'InitiateCheckout', asesora_abre:'Contact', asesora_pregunta:'Search', clic_whatsapp:'Contact', como_llegar:'FindLocation'};
+var nEv = 0;
+function medir(evento, datos){
+  datos = datos || {};
+  window.dataLayer.push(Object.assign({event: evento}, datos));
+  if (window.gtag) gtag('event', evento, datos);
+  if (window.fbq && META[evento]) fbq('track', META[evento], datos);
+  var ul = document.getElementById('registro');
+  if (nEv === 0) ul.innerHTML = '';
+  nEv++;
+  var li = document.createElement('li');
+  li.innerHTML = '<div><b></b><br><small></small></div><span></span>';
+  li.querySelector('b').textContent = evento;
+  li.querySelector('small').textContent = Object.keys(datos).map(function(k){return datos[k]}).join(' · ').slice(0, 60);
+  li.querySelector('span').textContent = 'GA4' + (META[evento] ? ' + Meta' : '');
+  ul.insertBefore(li, ul.firstChild);
+  document.getElementById('cuenta').textContent = nEv;
+}
+document.querySelectorAll('[data-evento]').forEach(function(a){
+  a.addEventListener('click', function(){ medir(a.dataset.evento, {origen: a.dataset.detalle}); });
+});
+
+// ================= encabezado y video de portada =================
+var cab = document.getElementById('cab');
+function alBajar(){ cab.classList.toggle('solido', window.scrollY > window.innerHeight * 0.55); }
+window.addEventListener('scroll', alBajar, {passive: true}); alBajar();
+(function(){
+  var v = document.getElementById('video');
+  var cel = window.matchMedia('(max-width: 820px)').matches;
+  var base = cel ? 'video/portada-celular' : 'video/portada-escritorio';
+  v.poster = base + '.jpg';
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  v.src = base + '.mp4';
+  var arrancar = function(){ var p = v.play(); if (p && p.catch) p.catch(function(){}); };
+  v.addEventListener('canplay', arrancar, {once: true}); arrancar();
+})();
+
+// ================= datos de la carta (una sola fuente para la página y para la asesora) =================
+var ROT = {gluten:'gluten', crustaceos:'crustáceos', moluscos:'moluscos', pescado:'pescado', lacteos:'lácteos', huevo:'huevo', soya:'soya', sesamo:'sésamo', semillas:'semillas', cerdo:'cerdo', res:'res', pollo:'pollo', crudo:'crudo', mostaza:'mostaza', picante:'picante', anchoa:'anchoa'};
+var CARTA = [
+  {s:'e', n:'Ceviche', p:7000, d:'Leche de tigre clarificada, cremoso de aguacate, praliné salado de semillas de ayote, corvina reina, aceite de achiote.', c:['pescado','crudo','semillas'], q:['lacteos']},
+  {s:'e', n:'Ceviche mixto', p:9500, d:'Leche de tigre asada, pulpo, camarón, mejillones escabechados, corvina frita.', c:['pescado','crustaceos','moluscos'], q:['gluten']},
+  {s:'e', n:'Tartar de res', p:7500, d:'Papas fritas, pimentón ahumado, lomito de res, encurtidos.', c:['res','crudo'], q:['huevo','mostaza']},
+  {s:'e', n:'Tartar de atún', p:8500, d:'Salsa de soja especiada, hummus, aguacate, chips de pita, cebollino.', c:['pescado','crudo','soya','gluten','sesamo'], q:[]},
+  {s:'e', n:'Tostada de atún', p:6000, d:'Tortilla de maíz morado, mayonesa de chiles, atún, aguacate, aderezo cítrico.', c:['pescado','crudo','huevo','picante'], q:[]},
+  {s:'e', n:'Tiradito de atún', p:6000, d:'Leche de tigre de morrón, plátano maduro, ajo negro, chips de plátano.', c:['pescado','crudo'], q:[]},
+  {s:'e', n:'Ensalada Aura', p:5500, d:'Lechuga romana, aderezo de queso parmesano, pangrattato, guanciale, ralladura de limón.', c:['lacteos','gluten','cerdo'], q:['huevo','anchoa']},
+  {s:'f', n:'Pejibaye', p:13500, d:'Arroz cremoso de pejibaye, camarones jumbo asados, encurtidos, queso parmesano.', c:['crustaceos','lacteos'], q:[]},
+  {s:'f', n:'Denver / Pipián', p:15500, d:'Puré de pipián, lomo de entraña, demiglace de res, cebollitas tatemadas, aceite de culantro.', c:['res'], q:['gluten','lacteos']},
+  {s:'f', n:'Flat Iron / Maíz', p:15500, d:'Cremoso de maíz caramelizado, flat iron, jus de res, chicharrón suflado, cebollitas pickle.', c:['res','cerdo'], q:['lacteos']},
+  {s:'f', n:'Bizcocho', p:10500, d:'Estofado de res, ensalada de papaya verde, polvo de culantro, bizcocho de maíz.', c:['res'], q:['lacteos']},
+  {s:'f', n:'Pesca del día', p:13500, d:'Cambia cada día. Consultá la preparación.', c:['pescado'], q:['gluten','lacteos']},
+  {s:'f', n:'Gnocchis', p:15500, d:'Salsa de hongos, camarones jumbo, lomito de res, pangrattato, ayote encurtido.', c:['gluten','crustaceos','res'], q:['lacteos','huevo']},
+  {s:'f', n:'Pollo sous vide', p:9500, d:'Puré de ayote sazón, berros, demiglace de pollo.', c:['pollo'], q:['lacteos','gluten']}
+];
+var COCTELES = [
+  {n:'Raíz', p:4800, d:'Jamaica, remolacha asada, pimienta rosada, tónica.', g:'#E0564B,#7A1F1A'},
+  {n:'Brasa', p:4800, d:'Zanahoria tatemada, maracuyá, jengibre, naranja agria.', g:'#F0934A,#8A4312'},
+  {n:'Sol de cas', p:4500, d:'Cas, miel de abeja, cúrcuma, soda.', g:'#F2D46B,#8C6B14'},
+  {n:'Culantro', p:4800, d:'Culantro coyote, pepino, manzana verde, limón mandarina.', g:'#7DC98A,#1F5B33'},
+  {n:'Marea', p:5200, d:'Flor azul de clitoria, agua de pipa, limón, sal de mar.', g:'#6FB6E8,#1B4770'},
+  {n:'Medianoche', p:5200, d:'Mora, cacao, café en frío, vainilla.', g:'#7C7BE0,#2A2777'},
+  {n:'Aura', p:5500, d:'Uva morada, lavanda, verjus, espumoso sin alcohol. El cóctel de la casa.', g:'#C08BE0,#55237A'}
+];
+var VINOS = [
+  ['Espumosos', [['Freixenet 0,0 % Brut','España · Cava desalcoholizado',4800,24000],['Noughty Blanc de Blancs','Thomson & Scott · Chardonnay orgánico',6500,34000],['French Bloom Le Blanc','Francia · Chardonnay',8500,46000]]],
+  ['Blancos', [['Torres Natureo Moscatel','España · Penedès',4800,24000],['Leitz Eins Zwei Zero Riesling','Alemania · Rheingau',5800,30000],['Giesen 0 % Sauvignon Blanc','Nueva Zelanda · Marlborough',5800,30000]]],
+  ['Rosado', [['Leitz Eins Zwei Zero Rosé','Alemania · Pinot Noir',5800,30000]]],
+  ['Tintos', [['Torres Natureo Syrah','España · Penedès',4800,24000],['Giesen 0 % Merlot','Nueva Zelanda',5800,30000],['Leitz Zero Point Five Pinot Noir','Alemania · Rheingau',6500,34000]]]
+];
+function col(n){ return '₡' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function lista(a){ return a.map(function(k){ return ROT[k] || k; }).join(' · '); }
+
+// carta en pantalla
+CARTA.forEach(function(pl, i){
+  var el = document.createElement('div'); el.className = 'plato'; el.dataset.i = i;
+  el.innerHTML = '<b>' + esc(pl.n) + '</b><span class="pr">' + col(pl.p) + '</span><p>' + esc(pl.d) + '</p>' +
+    '<div class="al">Contiene: ' + lista(pl.c) + (pl.q.length ? ' <i>· Confirmar: ' + lista(pl.q) + '</i>' : '') + '</div>' +
+    '<div class="marca-f si">✓ Sin ese ingrediente según la descripción</div><div class="marca-f du">? Preguntá antes de pedir</div><div class="marca-f no">✕ Lo contiene</div>';
+  document.getElementById(pl.s === 'e' ? 'colEntradas' : 'colFuertes').appendChild(el);
+});
+COCTELES.forEach(function(c){
+  var el = document.createElement('div'); el.className = 'coctel';
+  el.innerHTML = '<i style="background:radial-gradient(circle,' + c.g + ')"></i><b>' + esc(c.n) + '</b><span>' + col(c.p) + '</span><p>' + esc(c.d) + '</p>';
+  document.getElementById('listaCocteles').appendChild(el);
+});
+VINOS.forEach(function(g){
+  var el = document.createElement('div'); el.className = 'vino-g';
+  var h = '<h3>' + g[0] + '</h3><div class="vino-cab"><span></span><span>Copa</span><span>Botella</span></div>';
+  g[1].forEach(function(v){ h += '<div class="vino"><b>' + esc(v[0]) + '<small>' + esc(v[1]) + '</small></b><span>' + col(v[2]) + '</span><span>' + col(v[3]) + '</span></div>'; });
+  el.innerHTML = h; document.getElementById('listaVinos').appendChild(el);
+});
+
+// filtros de la carta
+var GRUPO = {gluten:['gluten'], mariscos:['crustaceos','moluscos'], lacteos:['lacteos'], cerdo:['cerdo'], crudo:['crudo'], pescado:['pescado'], huevo:['huevo'], soya:['soya'], sesamo:['sesamo']};
+function estado(pl, claves){
+  var tiene = claves.some(function(k){ return pl.c.indexOf(k) > -1; });
+  if (tiene) return 'evitar';
+  return claves.some(function(k){ return pl.q.indexOf(k) > -1; }) ? 'duda' : 'bien';
+}
+document.querySelectorAll('.filtros button').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('.filtros button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    var f = b.dataset.f, n = 0;
+    document.querySelectorAll('.plato').forEach(function(el){
+      el.classList.remove('evitar','duda','bien');
+      if (!f) return;
+      var e = estado(CARTA[+el.dataset.i], GRUPO[f]); el.classList.add(e); if (e === 'bien') n++;
+    });
+    document.getElementById('pistaFiltro').textContent = f ? n + ' de 14 platos, según la descripción' : '';
+    if (f) medir('filtro_carta', {filtro: b.textContent.trim()});
+  });
+});
+
+// ================= módulo de reservas: arma el enlace de OpenTable =================
+var RID = 1482517;
+var HORARIO = {0:['12:00','15:30'], 2:['18:00','22:30'], 3:['18:00','22:30'], 4:['18:00','22:30'], 5:['18:00','22:30'], 6:['12:00','22:30']}; // 1 = lunes, cerrado
+var fecha = document.getElementById('fecha'), hora = document.getElementById('hora'), personas = document.getElementById('personas'), nota = document.getElementById('notaReserva');
+var NOTA = nota.textContent, campana = 'sitio-web';
+function iso(d){ return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+function deIso(s){ var p = s.split('-'); return new Date(+p[0], p[1]-1, +p[2]); }
+function doce(h){ var p = h.split(':'), x = +p[0]; if (x === 12) return '12:' + p[1] + ' md'; return (x > 12 ? x-12 : x) + ':' + p[1] + (x >= 12 ? ' p. m.' : ' a. m.'); }
+function llenarHoras(preferida){
+  var d = deIso(fecha.value), r = HORARIO[d.getDay()];
+  hora.innerHTML = '';
+  if (!r){ hora.disabled = true; hora.innerHTML = '<option>Cerrado</option>'; nota.textContent = 'Los lunes estamos cerrados. Elegí otro día.'; return; }
+  hora.disabled = false; nota.textContent = NOTA;
+  var a = r[0].split(':'), b = r[1].split(':'), m = a[0]*60 + +a[1], fin = b[0]*60 + +b[1];
+  for (; m <= fin; m += 30){
+    var v = String(Math.floor(m/60)).padStart(2,'0') + ':' + String(m%60).padStart(2,'0');
+    var o = document.createElement('option'); o.value = v; o.textContent = doce(v);
+    if (v === (preferida || (r[0] === '12:00' ? '13:00' : '19:00'))) o.selected = true;
+    hora.appendChild(o);
+  }
+}
+for (var i = 1; i <= 12; i++){ var o = document.createElement('option'); o.value = i; o.textContent = i + (i === 1 ? ' persona' : ' personas'); if (i === 2) o.selected = true; personas.appendChild(o); }
+var hoy = new Date(); if (hoy.getDay() === 1) hoy.setDate(hoy.getDate() + 1);
+fecha.min = iso(new Date()); fecha.value = iso(hoy); llenarHoras();
+fecha.addEventListener('change', function(){ llenarHoras(); });
+function enlaceReserva(){
+  return 'https://www.opentable.com/restref/client/?rid=' + RID + '&restref=' + RID + '&partysize=' + personas.value +
+         '&datetime=' + encodeURIComponent(fecha.value + 'T' + hora.value) + '&lang=es-MX&ot_source=Restaurant%20website&ot_campaign=' + encodeURIComponent(campana);
+}
+document.getElementById('formReserva').addEventListener('submit', function(e){
+  e.preventDefault();
+  if (hora.disabled || !fecha.value) return;
+  medir('reserva_inicio', {fecha: fecha.value, hora: hora.value, personas: personas.value, origen: campana});
+  window.open(enlaceReserva(), '_blank', 'noopener');
+});
+// los botones de las catas dejan lista la fecha del próximo día que toca y la hora
+document.querySelectorAll('[data-cata]').forEach(function(a){
+  a.addEventListener('click', function(){
+    var d = new Date(), dia = +a.dataset.dia; d.setDate(d.getDate() + ((dia - d.getDay() + 7) % 7 || 7));
+    fecha.value = iso(d); llenarHoras(a.dataset.hora); campana = a.dataset.cata;
+    nota.textContent = a.dataset.cata + ': ' + d.toLocaleDateString('es-CR', {weekday:'long', day:'numeric', month:'long'}) + ', ' + doce(a.dataset.hora) + '. Tocá «Buscar mesa».';
+    medir('clic_reservar', {origen: a.dataset.cata});
+  });
+});
+
+// ================= Aura, la asesora de la carta =================
+var WEBHOOK = 'https://n8n-unonueve-n8n.i5i6e4.easypanel.host/webhook/aura-asesora';
+var chat = document.getElementById('chat'), hilo = document.getElementById('hilo'), entrada = document.getElementById('entrada');
+var sesion; try { sesion = sessionStorage.getItem('aura_s'); if (!sesion){ sesion = 'aura_' + Math.random().toString(36).slice(2) + Date.now().toString(36); sessionStorage.setItem('aura_s', sesion); } } catch(e){ sesion = 'aura_' + Math.random().toString(36).slice(2); }
+var restricciones = {}, saludo = false;
+var ALERG = {
+  gluten:     {n:'gluten', k:['gluten'], re:/gluten|cel[ií]ac|trigo|harina/},
+  mariscos:   {n:'mariscos (crustáceos y moluscos)', k:['crustaceos','moluscos'], re:/marisc|camar[oó]n|crust[aá]ce|langost|cangrej|molusc|pulpo|mejill|calamar|almeja|ostra/},
+  pescado:    {n:'pescado', k:['pescado'], re:/pescado|at[uú]n|corvina/},
+  lacteos:    {n:'lácteos', k:['lacteos'], re:/l[aá]cte|lactosa|leche|queso/},
+  huevo:      {n:'huevo', k:['huevo'], re:/huevo/},
+  soya:       {n:'soya', k:['soya'], re:/soya|soja/},
+  sesamo:     {n:'sésamo', k:['sesamo'], re:/s[eé]samo|ajonjol/},
+  mani:       {n:'maní', k:['mani'], re:/man[ií]\b|cacahu/},
+  frutos:     {n:'frutos secos', k:['frutos'], re:/nuez|nueces|almendra|frutos? secos?|avellana|pistach|marañ[oó]n/},
+  cerdo:      {n:'cerdo', k:['cerdo'], re:/cerdo|chancho|puerco|tocino/},
+  crudo:      {n:'crudos', k:['crudo'], re:/crudo|cruda|embaraz/}
+};
+function burbuja(html, quien){ var d = document.createElement('div'); d.className = 'msj ' + (quien || 'a'); d.innerHTML = html; hilo.appendChild(d); hilo.scrollTop = hilo.scrollHeight; return d; }
+function abrir(){
+  chat.classList.add('abierto'); document.getElementById('lanzador').style.display = 'none';
+  if (!saludo){ saludo = true; burbuja('Hola, soy <b>Aura</b> ✦<br>Te ayudo a elegir según tus gustos, tu ocasión o tus alergias. ¿Por dónde empezamos?'); medir('asesora_abre', {origen: 'chat'}); }
+  setTimeout(function(){ if (window.innerWidth > 820) entrada.focus(); }, 60);
+}
+function cerrar(){ chat.classList.remove('abierto'); document.getElementById('lanzador').style.display = ''; }
+document.getElementById('lanzador').addEventListener('click', abrir);
+document.getElementById('cerrarChat').addEventListener('click', cerrar);
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') cerrar(); });
+
+function respuestaAlergia(claves){
+  var k = [], nombres = [];
+  claves.forEach(function(c){ restricciones[c] = 1; k = k.concat(ALERG[c].k); nombres.push(ALERG[c].n); });
+  var bien = [], duda = [], evitar = [];
+  CARTA.forEach(function(pl){
+    var e = estado(pl, k);
+    if (e === 'bien') bien.push('<li>' + esc(pl.n) + ' <span>' + col(pl.p) + '</span></li>');
+    else if (e === 'duda') duda.push('<li>' + esc(pl.n) + ' <span>· por ' + lista(pl.q.filter(function(x){ return k.indexOf(x) > -1; })) + '</span></li>');
+    else evitar.push(esc(pl.n));
+  });
+  var soloNoListados = claves.every(function(c){ return c === 'mani' || c === 'frutos'; });
+  var h = 'Anotado: ' + (claves.indexOf('crudo') > -1 && claves.length === 1 ? 'sin crudos' : 'evitás <b>' + nombres.join(' y ') + '</b>') + '. Según la carta:';
+  if (soloNoListados) h = 'Buena noticia: <b>ningún plato de la carta lista ' + nombres.join(' ni ') + '</b> entre sus ingredientes. El ceviche lleva praliné de semillas de ayote, que es semilla y no fruto seco.';
+  else {
+    if (bien.length) h += '<h4 class="si">✓ Podés pedir</h4><ul>' + bien.join('') + '</ul>';
+    if (duda.length) h += '<h4 class="du">? Preguntá antes</h4><ul>' + duda.join('') + '</ul>';
+    if (evitar.length) h += '<h4 class="no">✕ Mejor evitá</h4>' + evitar.join(', ') + '.';
+    if (claves.indexOf('mariscos') > -1 && claves.indexOf('pescado') < 0) h += '<br><br>Si también evitás el pescado, decímelo y ajusto la lista.';
+  }
+  h += '<span class="cierre">Avisá tu alergia al reservar y al llegar: la cocina confirma cada plato y las trazas. Esta clasificación es de demostración.</span>';
+  return h;
+}
+function local(t){
+  if (/vegetarian|vegan/.test(t)) return 'La carta de demostración no trae un plato vegetariano tal cual. La <b>Ensalada Aura</b> lleva guanciale y parmesano: se puede consultar sin guanciale. Si nos avisás al reservar, el chef suele preparar algo a tu medida.<span class="cierre">Indicalo en la reserva o escribinos por WhatsApp al 8415 4747.</span>';
+  if (/reserv|mesa|apart/.test(t)) return 'Con gusto. Elegí fecha, hora y personas en el módulo de reservas y se abre OpenTable con todo listo. Para grupos de más de 8 o eventos privados, mejor por WhatsApp.<div class="acc"><a href="#reservar" data-cerrar="1">Ir a reservar</a><a href="https://wa.me/50684154747" target="_blank" rel="noopener">WhatsApp</a></div>';
+  if (/horario|abren|abierto|cierran|hora/.test(t)) return 'Martes a viernes de 6:00 a 11:00 p. m. · Sábado de 12:00 md a 11:00 p. m. · Domingo de 12:00 md a 4:00 p. m. Los lunes cerramos.';
+  if (/d[oó]nde|ubicaci|direcci|llegar|waze|parqueo|estacion/.test(t)) return 'Estamos en Calle 130, San Rafael de Escazú, frente a Galería de Autos y diagonal a la CNFL. Hay estacionamiento privado.<div class="acc"><a href="https://waze.com/ul/hd1u0mrs7h" target="_blank" rel="noopener">Abrir en Waze</a></div>';
+  if (/vino|maridaj|copa/.test(t)) return 'Todos nuestros vinos son sin alcohol. Para crudos y ceviches, el <b>Leitz Riesling</b> (' + col(5800) + ' la copa). Para el Denver o el Flat Iron, el <b>Torres Natureo Syrah</b> (' + col(4800) + '). Y para brindar, <b>Noughty Blanc de Blancs</b> (' + col(6500) + ').';
+  if (/c[oó]ctel|trago|bebida|espectro|tomar/.test(t)) return 'El Espectro son siete cócteles de autor, todos sin alcohol. Empezá por <b>Aura</b>, el de la casa (' + col(5500) + '): uva morada, lavanda y burbuja. Si preferís algo fresco, <b>Culantro</b> (' + col(4800) + '); si te gusta lo intenso, <b>Medianoche</b> (' + col(5200) + ').';
+  if (/cata|degustaci|experienc/.test(t)) return 'Tenemos la <b>Cata de El Espectro</b> los jueves (' + col(24500) + ' por persona), la <b>Cata de vinos sin alcohol</b> los viernes (' + col(28500) + ') y el <b>menú de degustación</b> de cinco tiempos (' + col(39950) + ').<div class="acc"><a href="#catas" data-cerrar="1">Ver las catas</a></div>';
+  return 'Para una primera visita te sugiero abrir con el <b>Tiradito de atún</b> (' + col(6000) + '), compartir el <b>Pejibaye</b> al centro (' + col(13500) + ') y cerrar con el <b>Denver / Pipián</b> (' + col(15500) + '). Para la copa, el cóctel <b>Aura</b> (' + col(5500) + ').<span class="cierre">Si tenés alguna alergia, decímela y ajusto la recomendación.</span>';
+}
+function limpiar(s){ return esc(s).replace(/\*\*/g, '').replace(/\*/g, '').replace(/^#+\s*/gm, '').replace(/\n/g, '<br>'); }
+function preguntar(texto){
+  texto = (texto || '').trim(); if (!texto) return;
+  abrir(); burbuja(esc(texto), 'u'); entrada.value = '';
+  var t = texto.toLowerCase();
+  var claves = Object.keys(ALERG).filter(function(c){ return ALERG[c].re.test(t); });
+  var esRestriccion = claves.length && /al[eé]rgi|intoler|\bsin\b|no puedo|no como|evit|cel[ií]ac|embaraz|libre de/.test(t);
+  if (esRestriccion){
+    medir('asesora_pregunta', {tipo: 'alergia', detalle: claves.join(', ')});
+    setTimeout(function(){ burbuja(respuestaAlergia(claves)); }, 420);
+    return;
+  }
+  medir('asesora_pregunta', {tipo: 'consulta'});
+  var esp = burbuja('<i></i><i></i><i></i>', 'a esc');
+  var ctrl = window.AbortController ? new AbortController() : null;
+  var tope = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 20000);
+  var rest = Object.keys(restricciones).map(function(c){ return ALERG[c].n; }).join(', ');
+  fetch(WEBHOOK, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({sessionId: sesion, mensaje: texto.slice(0, 400), restricciones: rest}), signal: ctrl ? ctrl.signal : undefined})
+    .then(function(r){ return r.json(); })
+    .then(function(j){ clearTimeout(tope); esp.remove(); var r = j && j.reply ? String(j.reply).trim() : ''; burbuja(r ? limpiar(r) : local(t)); })
+    .catch(function(){ clearTimeout(tope); esp.remove(); burbuja(local(t)); });
+}
+document.getElementById('formChat').addEventListener('submit', function(e){ e.preventDefault(); preguntar(entrada.value); });
+document.querySelectorAll('[data-pregunta]').forEach(function(b){ b.addEventListener('click', function(){ preguntar(b.dataset.pregunta); }); });
+hilo.addEventListener('click', function(e){ var a = e.target.closest('[data-cerrar]'); if (a && window.innerWidth <= 820) cerrar(); });
+</script>
+</body>
+</html>
