@@ -20,6 +20,7 @@
 "address":{"@type":"PostalAddress","streetAddress":"Calle 130, frente a Galería de Autos","addressLocality":"San Rafael de Escazú","addressRegion":"San José","postalCode":"10203","addressCountry":"CR"},
 "geo":{"@type":"GeoCoordinates","latitude":9.9295803,"longitude":-84.1380908},
 "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday"],"opens":"18:00","closes":"23:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"12:00","closes":"23:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"12:00","closes":"16:00"}],
+"sameAs":["https://www.instagram.com/aura.escazu/","https://www.tiktok.com/@aura.escazu"],
 "potentialAction":{"@type":"ReserveAction","target":"https://www.opentable.com/restref/client/?rid=1482517&restref=1482517&lang=es-MX"}}
 </script>
 
@@ -252,6 +253,28 @@ section{padding:clamp(4rem,9vw,7rem) 0}
 .sug button:hover{border-color:var(--cobre);background:rgba(189,133,98,.12)}
 .asesora .letra-chica{font-size:.82rem;color:var(--tenue);margin:2rem auto 0;max-width:62ch}
 
+/* redes sociales */
+.nav .der{align-items:center;gap:.9rem}
+.nav .red{display:flex;color:rgba(255,255,255,.8);transition:color .2s}
+.nav .red:hover{color:var(--cobre)}
+.nav .red svg{width:21px;height:21px;display:block}
+.redes{text-align:center;background:var(--carbon)}
+.redes .lead{margin:1.2rem auto 0;max-width:54ch}
+.feed{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:2.6rem 0 2.2rem}
+.feed a{display:block;overflow:hidden;position:relative}
+.feed img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;display:block;transition:transform .5s,opacity .3s}
+.feed a:hover img{transform:scale(1.04);opacity:.86}
+.redes-btn{display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap}
+.redes-btn .btn{display:inline-flex;align-items:center;gap:.7rem}
+.redes-btn svg{width:18px;height:18px}
+.redes .letra-chica{font-size:.82rem;color:var(--tenue);margin:1.8rem auto 0;max-width:62ch}
+.redes-pie{display:flex;justify-content:center;gap:1.4rem;margin:0 0 1.2rem}
+.redes-pie a{color:var(--crema);border:0;display:flex}
+.redes-pie a:hover{color:var(--cobre)}
+.redes-pie svg{width:24px;height:24px}
+@media(max-width:820px){.feed{grid-template-columns:repeat(3,1fr);gap:5px}}
+@media(max-width:420px){.nav .red{display:none}}
+
 /* visitanos */
 .datos{display:grid;gap:1.4rem;margin:2rem 0}
 .datos div{border-top:1px solid var(--linea);padding-top:1rem}
@@ -328,6 +351,9 @@ footer .prop{margin-top:1.6rem;font-size:.8rem;max-width:74ch;margin-inline:auto
       <path d="M240 100 V0 H276 A28 28 0 0 1 276 56 H240 M274 56 L304 100"/><path d="M350 100 L389 0 L428 100"/>
     </g>
   </symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></symbol>
+  <symbol id="i-tt" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5v10.9a3.4 3.4 0 1 1-3.4-3.4"/><path d="M14 3.5c.3 2.6 1.9 4.3 4.5 4.6"/></g></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-4.4A8 8 0 1 1 8.5 19z"/><path d="M9.3 8.6c-.4 2 3.1 5.6 5.2 5.2l1-1.1-1.8-1.1-.9.7c-.8-.4-1.6-1.2-2-2l.7-.9-1.1-1.8z"/></g></symbol>
   <symbol id="astro" viewBox="0 0 100 100">
     <path fill="currentColor" d="M50 2 C52 30 70 48 98 50 C70 52 52 70 50 98 C48 70 30 52 2 50 C30 48 48 30 50 2 Z"/>
   </symbol>
@@ -338,10 +364,10 @@ footer .prop{margin-top:1.6rem;font-size:.8rem;max-width:74ch;margin-inline:auto
 <header id="cab">
   <div class="wrap nav">
     <nav aria-label="Principal">
-      <a href="#carta">Carta</a><a href="#espectro">El Espectro</a><a href="#vinos">Vinos</a><a href="#catas">Catas</a><a href="#asesora">Asesora</a><a href="#visita">Visitanos</a>
+      <a href="#carta">Carta</a><a href="#espectro">El Espectro</a><a href="#vinos">Vinos</a><a href="#catas">Catas</a><a href="#asesora">Asesora</a><a href="#redes">Redes</a><a href="#visita">Visitanos</a>
     </nav>
     <a class="marca" href="#inicio" aria-label="AURA, inicio"><svg viewBox="-4 -4 436 108" role="img" aria-label="AURA"><use href="#aura"/></svg></a>
-    <div class="der"><a class="btn ch" href="#reservar" data-evento="clic_reservar" data-detalle="encabezado">Reservar</a></div>
+    <div class="der"><a class="red" href="https://www.instagram.com/aura.escazu/" target="_blank" rel="noopener" aria-label="Instagram de Aura" data-evento="clic_red" data-detalle="Instagram · encabezado"><svg><use href="#i-ig"/></svg></a><a class="red" href="https://www.tiktok.com/@aura.escazu" target="_blank" rel="noopener" aria-label="TikTok de Aura" data-evento="clic_red" data-detalle="TikTok · encabezado"><svg><use href="#i-tt"/></svg></a><a class="btn ch" href="#reservar" data-evento="clic_reservar" data-detalle="encabezado">Reservar</a></div>
   </div>
 </header>
 
@@ -511,6 +537,21 @@ footer .prop{margin-top:1.6rem;font-size:.8rem;max-width:74ch;margin-inline:auto
     </div>
   </section>
 
+  <section class="redes" id="redes">
+    <div class="wrap">
+      <span class="ceja">Redes sociales</span>
+      <h2>Seguí la cocina de cerca</h2>
+      <p class="lead">Platos nuevos, la gente de la casa y las fechas de cada experiencia, primero en <b style="font-weight:400;color:var(--crema)">@aura.escazu</b>.</p>
+      <div class="feed"><a href="https://www.instagram.com/aura.escazu/p/DeM9ZUxCi_o/" target="_blank" rel="noopener" data-evento="clic_red" data-detalle="Instagram · publicación 1"><img src="img/ig-1.jpg" width="512" height="640" alt="Publicación de Aura en Instagram: arroz cremoso de pejibaye con camarones" loading="lazy"></a><a href="https://www.instagram.com/aura.escazu/p/DeNpp29Csp6/" target="_blank" rel="noopener" data-evento="clic_red" data-detalle="Instagram · publicación 2"><img src="img/ig-2.jpg" width="512" height="640" alt="Publicación de Aura en Instagram: el chef Edgardo Gamboa describe Aura en una palabra" loading="lazy"></a><a href="https://www.instagram.com/aura.escazu/p/DeUd82kCG86/" target="_blank" rel="noopener" data-evento="clic_red" data-detalle="Instagram · publicación 3"><img src="img/ig-3.jpg" width="512" height="640" alt="Publicación de Aura en Instagram: tiradito de atún" loading="lazy"></a><a href="https://www.instagram.com/aura.escazu/p/DeQOchhipAU/" target="_blank" rel="noopener" data-evento="clic_red" data-detalle="Instagram · publicación 4"><img src="img/ig-4.jpg" width="512" height="640" alt="Publicación de Aura en Instagram: por qué nos llamamos Aura" loading="lazy"></a><a href="https://www.instagram.com/aura.escazu/p/DeW_FBACIWb/" target="_blank" rel="noopener" data-evento="clic_red" data-detalle="Instagram · publicación 5"><img src="img/ig-5.jpg" width="512" height="640" alt="Publicación de Aura en Instagram: ceviche de corvina reina" loading="lazy"></a><a href="https://www.instagram.com/aura.escazu/p/DeVN3H_jQX1/" target="_blank" rel="noopener" data-evento="clic_red" data-detalle="Instagram · publicación 6"><img src="img/ig-6.jpg" width="512" height="640" alt="Publicación de Aura en Instagram: la hospitalidad es nuestro código" loading="lazy"></a></div>
+      <div class="redes-btn">
+        <a class="btn" href="https://www.instagram.com/aura.escazu/" target="_blank" rel="noopener" data-evento="clic_red" data-detalle="Instagram"><svg><use href="#i-ig"/></svg>Instagram</a>
+        <a class="btn" href="https://www.tiktok.com/@aura.escazu" target="_blank" rel="noopener" data-evento="clic_red" data-detalle="TikTok"><svg><use href="#i-tt"/></svg>TikTok</a>
+        <a class="btn" href="https://wa.me/50684154747?text=Hola%2C%20quiero%20reservar%20en%20AURA" target="_blank" rel="noopener" data-evento="clic_whatsapp" data-detalle="redes"><svg><use href="#i-wa"/></svg>WhatsApp</a>
+      </div>
+      <p class="letra-chica">Son publicaciones reales de la cuenta de Aura. En el sitio definitivo esta galería se actualiza sola con cada publicación nueva.</p>
+    </div>
+  </section>
+
   <section id="visita">
     <div class="wrap dos">
       <div>
@@ -535,7 +576,8 @@ footer .prop{margin-top:1.6rem;font-size:.8rem;max-width:74ch;margin-inline:auto
 <footer>
   <div class="wrap">
     <a class="marca" href="#inicio" aria-label="AURA"><svg viewBox="-4 -4 436 108" role="img" aria-label="AURA"><use href="#aura"/></svg></a>
-    <p>Restaurante · San Rafael de Escazú, Costa Rica<br><a href="https://www.instagram.com/aura.escazu/" target="_blank" rel="noopener">Instagram</a> · <a href="#reservar">Reservas</a> · <a href="#carta">Carta</a></p>
+    <div class="redes-pie"><a href="https://www.instagram.com/aura.escazu/" target="_blank" rel="noopener" aria-label="Instagram de Aura" data-evento="clic_red" data-detalle="Instagram · pie"><svg><use href="#i-ig"/></svg></a><a href="https://www.tiktok.com/@aura.escazu" target="_blank" rel="noopener" aria-label="TikTok de Aura" data-evento="clic_red" data-detalle="TikTok · pie"><svg><use href="#i-tt"/></svg></a><a href="https://wa.me/50684154747?text=Hola%2C%20quiero%20reservar%20en%20AURA" target="_blank" rel="noopener" aria-label="WhatsApp de Aura" data-evento="clic_whatsapp" data-detalle="pie"><svg><use href="#i-wa"/></svg></a></div>
+    <p>Restaurante · San Rafael de Escazú, Costa Rica<br>@aura.escazu · <a href="#reservar">Reservas</a> · <a href="#carta">Carta</a></p>
     <p class="prop">Esta página es una propuesta de UNONUEVECR para Aura Restaurante y no es su sitio oficial. Las fotografías de los platos y la carta de comida son las que Aura tiene publicadas. Los cócteles, los vinos, las catas, sus precios y la clasificación de alérgenos son de demostración. El video de la portada es de banco, con una línea parecida a la fotografía de la casa. El ceviche visto desde arriba, la copa y la botella son imágenes de referencia hechas con inteligencia artificial; el plato con las manos es la fotografía de Aura, completada con inteligencia artificial.</p>
   </div>
 </footer>
@@ -596,7 +638,7 @@ if (/[?&]captura/.test(location.search)) document.documentElement.classList.add(
 
 // ================= medición: un solo punto de salida para GA4, Píxel de Meta y Google Ads =================
 window.dataLayer = window.dataLayer || [];
-var META = {clic_reservar:'ViewContent', ver_carta:'ViewContent', filtro_carta:'CustomizeProduct', reserva_inicio:'InitiateCheckout', asesora_abre:'Contact', asesora_pregunta:'Search', clic_whatsapp:'Contact', como_llegar:'FindLocation'};
+var META = {clic_reservar:'ViewContent', ver_carta:'ViewContent', filtro_carta:'CustomizeProduct', reserva_inicio:'InitiateCheckout', asesora_abre:'Contact', asesora_pregunta:'Search', clic_whatsapp:'Contact', como_llegar:'FindLocation', clic_red:'ViewContent'};
 var nEv = 0;
 function medir(evento, datos){
   datos = datos || {};
