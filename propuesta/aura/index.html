@@ -81,28 +81,98 @@ header.solido .marca{opacity:1}
 .baja{position:absolute;left:0;right:0;text-align:center;bottom:clamp(20px,4.5vh,44px);z-index:2;font-family:var(--titulo);font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.8)}
 .baja:hover{color:#fff}
 
-/* tarjeta de reserva (abajo a la derecha) */
-.reserva{position:absolute;z-index:3;right:20px;bottom:98px;width:404px;background:rgba(12,12,12,.76);backdrop-filter:blur(12px);border:1px solid var(--linea);padding:1.25rem 1.4rem 1rem}
-.reserva h2{font-size:.98rem;letter-spacing:.2em;font-weight:400}
-.reserva .por{font-size:.8rem;color:var(--tenue);margin:.2rem 0 .9rem}
-.reserva form{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:.8rem .9rem}
-.reserva .ancho{grid-column:1/-1}
+/* portada en celular */
+@media(max-width:820px){
+  .portada{height:calc(100svh - 34px);min-height:560px}
+  .baja{bottom:26px}
+}
+.portada .escena{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+
 label{display:block;font-family:var(--titulo);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cobre);margin-bottom:.3rem}
 input,select{width:100%;background:transparent;border:0;border-bottom:1px solid var(--tenue);color:var(--crema);font-family:var(--texto);font-size:1rem;padding:.45rem 0;border-radius:0;color-scheme:dark}
 select option{color:#111}
+
+/* reserva: iconito + ventanita */
+.ico-reserva{position:fixed;right:24px;bottom:94px;z-index:50;width:50px;height:50px;border-radius:50%;background:var(--negro);border:1px solid var(--linea);color:var(--crema);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.5);transition:border-color .2s,transform .2s}
+.ico-reserva:hover{border-color:var(--cobre);transform:translateY(-2px)}
+.ico-reserva svg{width:22px;height:22px}
+.ico-reserva span{position:absolute;right:60px;white-space:nowrap;font-family:var(--titulo);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;background:var(--negro);border:1px solid var(--linea);padding:.55rem .75rem .4rem;opacity:0;pointer-events:none;transition:opacity .2s}
+.ico-reserva:hover span,.ico-reserva:focus-visible span{opacity:1}
+.reserva{position:fixed;right:24px;bottom:156px;z-index:56;width:340px;max-width:calc(100vw - 24px);background:#110D0B;border:1px solid var(--linea);padding:1.3rem 1.4rem 1.1rem;box-shadow:0 24px 70px rgba(0,0,0,.72);display:none}
+.reserva.abierta{display:block;animation:entra .35s both}
+.reserva h2{font-size:.98rem;letter-spacing:.2em;font-weight:400}
+.reserva .por{font-size:.8rem;color:var(--tenue);margin:.2rem 0 1rem}
+.reserva form{display:grid;grid-template-columns:1fr 1fr;gap:.85rem .9rem}
+.reserva form>div:first-child{grid-column:1/-1}
+.reserva .ancho{grid-column:1/-1}
 .reserva .btn{width:100%}
 .reserva .nota{grid-column:1/-1;font-size:.74rem;color:var(--tenue);margin:0;line-height:1.4}
-.reserva .enlace{display:block;margin-top:.75rem;font-size:.76rem;color:var(--tenue);text-decoration:none;border-top:1px solid var(--linea);padding-top:.7rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.reserva .enlace{display:block;margin-top:.8rem;font-size:.76rem;color:var(--tenue);text-decoration:none;border-top:1px solid var(--linea);padding-top:.7rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .reserva .enlace b{font-weight:400;color:var(--crema);border-bottom:1px solid var(--linea)}
+.cerrar-r{position:absolute;right:.5rem;top:.35rem;background:none;border:0;font-size:1.5rem;line-height:1;cursor:pointer;color:var(--tenue);padding:.2rem .5rem}
+@media(max-width:820px){.ico-reserva{right:16px;bottom:calc(76px + env(safe-area-inset-bottom));width:48px;height:48px}.ico-reserva span{display:none}.reserva{left:12px;right:12px;width:auto;bottom:calc(136px + env(safe-area-inset-bottom))}}
+
+/* la casa: el plato con las manos entra desde el filo derecho */
+#casa{position:relative;overflow:hidden;min-height:clamp(560px,58vw,760px);display:flex;align-items:center}
+#casa .wrap{position:relative;z-index:2;width:100%}
+#casa .texto{max-width:450px}
+.manos{position:absolute;right:0;top:50%;width:min(52vw,800px);transform:translate(75%,-50%);opacity:0;transition:transform 1.6s cubic-bezier(.16,.84,.3,1),opacity 1s;z-index:1;pointer-events:none}
+.manos.dentro{transform:translate(0,-50%);opacity:1}
+.manos img{width:100%;height:auto;display:block;filter:drop-shadow(0 34px 44px rgba(0,0,0,.6))}
+@media(max-width:1100px){#casa .texto{max-width:400px}}
 @media(max-width:820px){
-  .portada{height:auto;min-height:0;display:block;margin-top:-75px}
-  .portada .escena{position:relative;height:calc(100svh - 34px);min-height:560px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-  .reserva{position:static;width:auto;border-left:0;border-right:0;background:var(--carbon);backdrop-filter:none;padding:1.8rem 24px 1.6rem}
-  .reserva form{grid-template-columns:1fr 1fr}.reserva form>div:first-child{grid-column:1/-1}
-  .baja{bottom:22px}
-  .baja{left:0;right:0;text-align:center}
+  #casa{display:block;min-height:0;padding-bottom:2.5rem}
+  #casa .texto{max-width:none}
+  .manos{position:relative;top:auto;right:auto;width:94vw;margin:2.6rem 0 0 6vw;transform:translateX(75%)}
+  .manos.dentro{transform:none}
 }
-@media(min-width:821px){.portada .escena{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}}
+
+/* módulos que se tocan para desplegar */
+.rev{display:grid;grid-template-columns:1fr;justify-items:center;margin-top:3.2rem}
+.rev+.rev{margin-top:4.6rem}
+.rev-obj{background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:1.7rem;color:inherit;-webkit-tap-highlight-color:transparent;will-change:transform}
+.rev-obj:focus-visible{outline-offset:12px}
+.esc3d{perspective:1100px;display:block}
+.rev-cta{display:flex;align-items:center;gap:.9rem;font-family:var(--titulo);font-size:.86rem;letter-spacing:.18em;text-transform:uppercase;color:var(--crema);text-align:left;line-height:1.55}
+.rev-cta b{font-weight:600;font-size:.62rem;letter-spacing:.22em;background:var(--crema);color:var(--negro);padding:.55rem .8rem .4rem;border-radius:40px;animation:late 1.8s ease-in-out infinite}
+@keyframes late{0%,100%{box-shadow:0 0 0 0 rgba(245,232,216,.6)}60%{box-shadow:0 0 0 13px rgba(245,232,216,0)}}
+.rev-lista{display:none;width:100%;min-width:0}
+.rev.abierto{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(1.5rem,5vw,4.5rem);align-items:start;justify-items:stretch}
+.rev.abierto .rev-lista{display:block;grid-column:1;grid-row:1;animation:entra .8s .3s both}
+.rev.abierto .rev-obj{grid-column:2;grid-row:1;position:sticky;top:110px;justify-self:center}
+.rev.abierto .rev-cta b{animation:none;background:transparent;color:var(--tenue);border:1px solid var(--linea)}
+.rev.abierto .rev-cta span{display:none}
+.rev.abierto .rev-cta b::after{content:" · cerrar"}
+@keyframes entra{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media(max-width:820px){
+  .rev.abierto{grid-template-columns:1fr}
+  .rev.abierto .rev-obj{grid-column:1;grid-row:1;position:static}
+  .rev.abierto .rev-lista{grid-row:2}
+}
+/* plato visto desde arriba: gira como en una tornamesa */
+.plato3d{display:block;width:clamp(230px,31vw,390px);transform:rotateX(50deg);filter:drop-shadow(0 34px 26px rgba(0,0,0,.65))}
+.plato3d img{width:100%;height:auto;display:block;animation:gira 26s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
+.rev.abierto .plato3d{width:clamp(190px,24vw,320px)}
+/* cuenco, copa y botella: se mecen en tres dimensiones */
+.flota3d{display:block;animation:flota 6.5s ease-in-out infinite}
+.flota3d img,.botella3d img{display:block;width:100%;height:auto;filter:drop-shadow(0 26px 26px rgba(0,0,0,.6))}
+@keyframes flota{0%,100%{transform:translateY(0) rotateY(-20deg) rotateX(5deg)}50%{transform:translateY(-14px) rotateY(20deg) rotateX(-4deg)}}
+.cuenco{width:clamp(250px,34vw,430px)}
+.rev.abierto .cuenco{width:clamp(200px,25vw,330px)}
+.copa{width:clamp(150px,19vw,250px)}
+.rev.abierto .copa{width:clamp(130px,16vw,210px)}
+.botella3d{display:block;position:relative;width:clamp(92px,10.5vw,138px);animation:bamboleo 5.2s ease-in-out infinite}
+.rev.abierto .botella3d{width:clamp(78px,8.6vw,112px)}
+@keyframes bamboleo{0%,100%{transform:rotateY(-38deg)}50%{transform:rotateY(38deg)}}
+.botella3d::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.34) 50%,transparent 70%);background-size:260% 100%;animation:brillo 5.2s ease-in-out infinite;-webkit-mask:url(img/r-botella.webp) center/100% 100% no-repeat;mask:url(img/r-botella.webp) center/100% 100% no-repeat;mix-blend-mode:screen;pointer-events:none}
+@keyframes brillo{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+.vuelta{animation:vuelta 1s cubic-bezier(.3,.1,.2,1) 1 !important}
+@keyframes vuelta{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+.vinos .rev-lista .vino-g:first-of-type{margin-top:1.6rem}
+#panelVinos .vino-cab{margin-top:1.2rem}
+#panelCocteles .cocteles{grid-template-columns:1fr;margin-top:1rem}
+
 
 section{padding:clamp(4rem,9vw,7rem) 0}
 .dos{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem);align-items:center}
@@ -145,7 +215,7 @@ section{padding:clamp(4rem,9vw,7rem) 0}
 @media(max-width:700px){.estrella-coctel{grid-template-columns:1fr;justify-items:center;text-align:center}.estrella-coctel .lead{margin-inline:auto}}
 .precio{font-family:var(--titulo);font-size:1.4rem;letter-spacing:.08em;color:var(--blanco)}
 .precio small{font-family:var(--texto);font-size:.84rem;color:var(--tenue);letter-spacing:0;display:block;margin-top:.2rem}
-.cocteles{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(2rem,6vw,5rem);margin-top:3.4rem}
+.cocteles{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(2rem,6vw,5rem);margin-top:1.4rem}
 @media(max-width:820px){.cocteles{grid-template-columns:1fr}}
 .coctel{display:grid;grid-template-columns:auto 1fr auto;gap:.1rem 1rem;align-items:center;padding:1rem 0;border-bottom:1px solid var(--linea)}
 .coctel i{width:26px;height:26px;border-radius:50%;display:block;grid-row:1/3}
@@ -200,9 +270,6 @@ footer .marca svg{height:24px;width:97px;margin:0 auto 1.4rem}
 footer a{text-decoration:none;border-bottom:1px solid var(--linea)}
 footer .prop{margin-top:1.6rem;font-size:.8rem;max-width:74ch;margin-inline:auto;line-height:1.55}
 
-/* botón fijo de celular */
-.fijo{display:none}
-@media(max-width:820px){.fijo{display:block;position:fixed;left:0;right:0;bottom:0;z-index:40;padding:.65rem 86px calc(.65rem + env(safe-area-inset-bottom)) 16px;background:rgba(12,12,12,.94);border-top:1px solid var(--linea)}.fijo .btn{display:block}body{padding-bottom:74px}}
 
 /* ===== asesora Aura (chat) ===== */
 .lanzador{position:fixed;right:20px;bottom:20px;z-index:50;display:flex;align-items:center;gap:.7rem;background:var(--negro);border:1px solid var(--cobre);color:var(--crema);border-radius:60px;padding:.55rem 1.15rem .55rem .6rem;cursor:pointer;box-shadow:0 0 0 0 rgba(189,133,98,.5),0 10px 30px rgba(0,0,0,.5);animation:aura 3.4s ease-in-out infinite}
@@ -210,7 +277,7 @@ footer .prop{margin-top:1.6rem;font-size:.8rem;max-width:74ch;margin-inline:auto
 .lanzador span{font-family:var(--titulo);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;line-height:1.35;text-align:left;padding-top:.15rem}
 .lanzador span small{display:block;font-family:var(--texto);font-size:.78rem;letter-spacing:0;text-transform:none;color:var(--tenue)}
 @keyframes aura{0%,100%{box-shadow:0 0 0 0 rgba(189,133,98,.45),0 10px 30px rgba(0,0,0,.5)}50%{box-shadow:0 0 0 14px rgba(189,133,98,0),0 10px 30px rgba(0,0,0,.5)}}
-@media(max-width:820px){.lanzador{right:12px;bottom:calc(10px + env(safe-area-inset-bottom));padding:.45rem}.lanzador span{display:none}.lanzador svg{width:40px;height:40px}}
+@media(max-width:820px){.lanzador{right:12px;bottom:calc(12px + env(safe-area-inset-bottom));padding:.45rem}.lanzador span{display:none}.lanzador svg{width:40px;height:40px}}
 .chat{position:fixed;right:20px;bottom:20px;z-index:60;width:392px;max-width:calc(100vw - 24px);height:min(620px,calc(100svh - 40px));background:#110D0B;border:1px solid var(--linea);display:none;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.7)}
 .chat.abierto{display:flex}
 @media(max-width:820px){.chat{inset:0;width:auto;max-width:none;height:auto;border:0}}
@@ -254,9 +321,9 @@ footer .prop{margin-top:1.6rem;font-size:.8rem;max-width:74ch;margin-inline:auto
 .panel li b{font-weight:600}.panel li span{color:#61748A;white-space:nowrap}
 .panel .vac{color:#61748A;padding:.5rem 0;display:block}
 @media(max-width:820px){.panel{display:none}}
-@media print{.panel,.fijo,.aviso,.lanzador,.chat{display:none}}
-.captura .panel,.captura .aviso,.captura .fijo,.captura .lanzador{display:none}.captura body{padding-bottom:0}.captura .portada{height:900px}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.galeria img{transition:none}.lanzador{animation:none}}
+@media print{.panel,.aviso,.lanzador,.chat,.ico-reserva,.reserva{display:none}}
+.captura .panel,.captura .aviso,.captura .lanzador,.captura .ico-reserva{display:none}.captura .portada{height:900px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.galeria img{transition:none}.lanzador,.plato3d img,.flota3d,.botella3d,.botella3d::after,.rev-cta b{animation:none}.manos{transition:none}}
 </style>
 </head>
 <body>
@@ -299,23 +366,11 @@ footer .prop{margin-top:1.6rem;font-size:.8rem;max-width:74ch;margin-inline:auto
       <a class="baja" href="#casa">Conocé la casa ↓</a>
     </div>
 
-    <aside class="reserva" id="reservar" aria-label="Reservar mesa">
-      <h2>Reservá tu mesa</h2>
-      <p class="por">Confirmación inmediata por OpenTable</p>
-      <form id="formReserva" novalidate>
-        <div><label for="fecha">Fecha</label><input type="date" id="fecha" name="fecha" required></div>
-        <div><label for="hora">Hora</label><select id="hora" name="hora"></select></div>
-        <div><label for="personas">Personas</label><select id="personas" name="personas"></select></div>
-        <button class="btn lleno ancho" type="submit">Buscar mesa</button>
-        <p class="nota" id="notaReserva" role="status">Mar a vie 6:00–11:00 p. m. · Sáb 12:00 md–11:00 p. m. · Dom 12:00 md–4:00 p. m.</p>
-      </form>
-      <a class="enlace" href="https://www.opentable.com/r/aura-escazu-costa-rica?restref=1482517&lang=es-MX&ot_source=Restaurant%20website&ot_campaign=sitio-web" target="_blank" rel="noopener" data-evento="reserva_inicio" data-detalle="enlace OpenTable">OpenTable ↗ <b>opentable.com/r/aura-escazu-costa-rica</b></a>
-    </aside>
   </div>
 
   <section id="casa">
-    <div class="wrap dos">
-      <div>
+    <div class="wrap">
+      <div class="texto">
         <span class="ceja">La casa</span>
         <h2>Comida contemporánea, comida con sentido</h2>
         <div class="filete"></div>
@@ -323,8 +378,8 @@ footer .prop{margin-top:1.6rem;font-size:.8rem;max-width:74ch;margin-inline:auto
         <p class="lead">La hospitalidad es nuestro código: cómo te recibimos, cómo te acompañamos durante la noche y cómo te vas.</p>
         <p style="margin-top:1.8rem"><a class="btn" href="#carta" data-evento="ver_carta" data-detalle="la casa">Ver la carta</a></p>
       </div>
-      <img class="foto" src="img/ceviche-manos.jpg" alt="Ceviche de corvina reina servido en la mesa" loading="lazy">
     </div>
+    <div class="manos" id="manos"><img src="img/r-manos.webp" width="842" height="641" alt="Dos manos acercan a la mesa el ceviche de corvina reina de Aura"></div>
   </section>
 
   <section class="carta" id="carta">
@@ -340,9 +395,19 @@ footer .prop{margin-top:1.6rem;font-size:.8rem;max-width:74ch;margin-inline:auto
         <button type="button" data-f="crudo" aria-pressed="false">Sin crudos</button>
         <span class="pista" id="pistaFiltro"></span>
       </div>
-      <div class="cols">
-        <div><h3>Entradas y crudos</h3><div id="colEntradas"></div></div>
-        <div><h3>Platos fuertes</h3><div id="colFuertes"></div></div>
+      <div class="rev" id="revEntradas">
+        <button class="rev-obj" type="button" aria-expanded="false" aria-controls="panelEntradas" data-nombre="entradas">
+          <span class="esc3d"><span class="plato3d"><img src="img/r-ceviche.webp" width="841" height="842" alt="Ceviche servido en un plato hondo de cerámica, visto desde arriba"></span></span>
+          <span class="rev-cta"><b>Clic</b><span>Presioná aquí para ver<br>las siete entradas</span></span>
+        </button>
+        <div class="rev-lista" id="panelEntradas"><h3>Entradas y crudos</h3><div id="colEntradas"></div></div>
+      </div>
+      <div class="rev" id="revFuertes">
+        <button class="rev-obj" type="button" aria-expanded="false" aria-controls="panelFuertes" data-nombre="fuertes">
+          <span class="esc3d"><span class="flota3d cuenco"><img src="img/r-fuerte.webp" width="900" height="642" alt="Flat iron de Aura servido en un cuenco de cerámica"></span></span>
+          <span class="rev-cta"><b>Clic</b><span>Presioná aquí para ver<br>los siete platos fuertes</span></span>
+        </button>
+        <div class="rev-lista" id="panelFuertes"><h3>Platos fuertes</h3><div id="colFuertes"></div></div>
       </div>
       <p class="pie">IVA e impuesto de servicio incluidos. Platos y precios según la carta que Aura publicó el 7 de octubre de 2026; la carta cambia con lo que dan la tierra y el mar. <b style="font-weight:600;color:var(--crema)">La clasificación de alérgenos es una demostración</b> hecha a partir de la descripción de cada plato: en el sitio real la valida el chef.</p>
     </div>
@@ -358,19 +423,21 @@ footer .prop{margin-top:1.6rem;font-size:.8rem;max-width:74ch;margin-inline:auto
   <section id="espectro">
     <div class="wrap">
       <span class="ceja">Nuestro cóctel</span>
-      <div class="estrella-coctel">
-        <div class="orbe" aria-hidden="true"></div>
-        <div>
-          <h2>Aura <span class="demo">Demostración</span></h2>
-          <div class="filete"></div>
-          <p class="lead">Uva morada, lavanda, verjus y espumoso sin alcohol. Floral, seco y con burbuja fina: el cóctel de la casa, y el último color de El Espectro.</p>
+      <h2>El Espectro <span class="demo">Demostración</span></h2>
+      <div class="rev" id="revCocteles">
+        <button class="rev-obj" type="button" aria-expanded="false" aria-controls="panelCocteles" data-nombre="cócteles">
+          <span class="esc3d"><span class="flota3d copa"><img src="img/r-coctel.webp" width="429" height="732" alt="Cóctel violeta sin alcohol en copa de cristal, con lavanda"></span></span>
+          <span class="rev-cta"><b>Clic</b><span>Presioná aquí para ver<br>los siete cócteles</span></span>
+        </button>
+        <div class="rev-lista" id="panelCocteles">
+          <h3>Aura · el cóctel de la casa</h3>
+          <p class="lead" style="margin-top:.8rem">Uva morada, lavanda, verjus y espumoso sin alcohol. Floral, seco y con burbuja fina: el último color de El Espectro.</p>
           <p class="precio">₡5.500 <small>Cero alcohol · IVA y servicio incluidos</small></p>
+          <h3 style="margin-top:2.6rem">Siete cócteles de autor, cero alcohol, uno por cada aura</h3>
+          <div class="cocteles" id="listaCocteles"></div>
+          <p style="margin-top:1.4rem;font-size:.86rem;color:var(--tenue)">Nombres, recetas y precios de demostración: Aura todavía no ha publicado la carta de El Espectro.</p>
         </div>
       </div>
-
-      <h3 style="margin-top:4.5rem">El Espectro · siete cócteles de autor, cero alcohol, uno por cada aura</h3>
-      <div class="cocteles" id="listaCocteles"></div>
-      <p style="margin-top:1.6rem;font-size:.86rem;color:var(--tenue);max-width:70ch">Nombres, recetas y precios de demostración: Aura todavía no ha publicado la carta de El Espectro. Aquí va la carta real, con su foto.</p>
     </div>
   </section>
 
@@ -378,9 +445,17 @@ footer .prop{margin-top:1.6rem;font-size:.8rem;max-width:74ch;margin-inline:auto
     <div class="wrap">
       <span class="ceja">La cava</span>
       <h2>Vinos sin alcohol <span class="demo">Demostración</span></h2>
-      <p class="lead" style="margin-top:1.2rem">Etiquetas desalcoholizadas de bodegas reconocidas, para maridar de principio a fin sin una gota de alcohol.</p>
-      <div class="vcols" id="listaVinos"></div>
-      <p style="margin-top:1.8rem;font-size:.86rem;color:var(--tenue);max-width:70ch">Selección y precios de demostración, por copa y por botella. IVA y servicio incluidos.</p>
+      <div class="rev" id="revVinos">
+        <button class="rev-obj" type="button" aria-expanded="false" aria-controls="panelVinos" data-nombre="vinos">
+          <span class="esc3d"><span class="botella3d"><img src="img/r-botella.webp" width="220" height="929" alt="Botella de espumoso sin etiqueta"></span></span>
+          <span class="rev-cta"><b>Clic</b><span>Presioná aquí para ver<br>espumosos, blancos y tintos</span></span>
+        </button>
+        <div class="rev-lista" id="panelVinos">
+          <p class="lead">Etiquetas desalcoholizadas de bodegas reconocidas, para maridar de principio a fin sin una gota de alcohol.</p>
+          <div id="listaVinos"></div>
+          <p style="margin-top:1.6rem;font-size:.86rem;color:var(--tenue)">Selección y precios de demostración, por copa y por botella. IVA y servicio incluidos.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -468,11 +543,28 @@ footer .prop{margin-top:1.6rem;font-size:.8rem;max-width:74ch;margin-inline:auto
   <div class="wrap">
     <a class="marca" href="#inicio" aria-label="AURA"><svg viewBox="-4 -4 436 108" role="img" aria-label="AURA"><use href="#aura"/></svg></a>
     <p>Restaurante · San Rafael de Escazú, Costa Rica<br><a href="https://www.instagram.com/aura.escazu/" target="_blank" rel="noopener">Instagram</a> · <a href="#reservar">Reservas</a> · <a href="#carta">Carta</a></p>
-    <p class="prop">Esta página es una propuesta de UNONUEVECR para Aura Restaurante y no es su sitio oficial. Las fotografías de los platos y la carta de comida son las que Aura tiene publicadas. Los cócteles, los vinos, las catas, sus precios y la clasificación de alérgenos son de demostración. El video de la portada es de banco, con una línea parecida a la fotografía de la casa.</p>
+    <p class="prop">Esta página es una propuesta de UNONUEVECR para Aura Restaurante y no es su sitio oficial. Las fotografías de los platos y la carta de comida son las que Aura tiene publicadas. Los cócteles, los vinos, las catas, sus precios y la clasificación de alérgenos son de demostración. El video de la portada es de banco, con una línea parecida a la fotografía de la casa. El ceviche que gira, la copa y la botella son imágenes de referencia hechas con inteligencia artificial; el plato con las manos es la fotografía de Aura, completada con inteligencia artificial.</p>
   </div>
 </footer>
 
-<div class="fijo"><a class="btn lleno" href="#reservar" data-evento="clic_reservar" data-detalle="botón fijo">Reservar mesa</a></div>
+<button class="ico-reserva" id="icoReserva" type="button" aria-haspopup="dialog" aria-controls="reservar" aria-label="Reservar mesa">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="1.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4M9 15l2.2 2.2L15.5 13"/></svg>
+  <span>Reservar mesa</span>
+</button>
+
+<aside class="reserva" id="reservar" role="dialog" aria-label="Reservar mesa">
+  <button class="cerrar-r" type="button" id="cerrarReserva" aria-label="Cerrar">×</button>
+  <h2>Reservá tu mesa</h2>
+  <p class="por">Confirmación inmediata por OpenTable</p>
+  <form id="formReserva" novalidate>
+    <div><label for="fecha">Fecha</label><input type="date" id="fecha" name="fecha" required></div>
+    <div><label for="hora">Hora</label><select id="hora" name="hora"></select></div>
+    <div><label for="personas">Personas</label><select id="personas" name="personas"></select></div>
+    <button class="btn lleno ancho" type="submit">Buscar mesa</button>
+    <p class="nota" id="notaReserva" role="status">Mar a vie 6:00–11:00 p. m. · Sáb 12:00 md–11:00 p. m. · Dom 12:00 md–4:00 p. m.</p>
+  </form>
+  <a class="enlace" href="https://www.opentable.com/r/aura-escazu-costa-rica?restref=1482517&lang=es-MX&ot_source=Restaurant%20website&ot_campaign=sitio-web" target="_blank" rel="noopener" data-evento="reserva_inicio" data-detalle="enlace OpenTable">OpenTable ↗ <b>opentable.com/r/aura-escazu-costa-rica</b></a>
+</aside>
 
 <button class="lanzador" id="lanzador" type="button" aria-haspopup="dialog" aria-controls="chat">
   <svg aria-hidden="true"><use href="#astro"/></svg>
@@ -616,6 +708,7 @@ document.querySelectorAll('.filtros button').forEach(function(b){
   b.addEventListener('click', function(){
     document.querySelectorAll('.filtros button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
     var f = b.dataset.f, n = 0;
+    if (f){ abrirModulo(document.getElementById('revEntradas'), true); abrirModulo(document.getElementById('revFuertes'), true); }
     document.querySelectorAll('.plato').forEach(function(el){
       el.classList.remove('evitar','duda','bien');
       if (!f) return;
@@ -625,6 +718,39 @@ document.querySelectorAll('.filtros button').forEach(function(b){
     if (f) medir('filtro_carta', {filtro: b.textContent.trim()});
   });
 });
+
+// ================= módulos que se tocan: el objeto se corre a la derecha y aparece la lista =================
+var QUIETO = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function ritmo(mod, v){ var im = mod.querySelector('.plato3d img'); if (!im || !im.getAnimations) return; im.getAnimations().forEach(function(a){ try { a.updatePlaybackRate(v); } catch(e){ a.playbackRate = v; } }); }
+function abrirModulo(mod, soloAbrir){
+  var boton = mod.querySelector('.rev-obj'), abierto = mod.classList.contains('abierto');
+  if (soloAbrir && abierto) return;
+  var antes = boton.getBoundingClientRect();
+  mod.classList.toggle('abierto', !abierto); boton.setAttribute('aria-expanded', String(!abierto));
+  if (!abierto && !soloAbrir) medir('ver_carta', {origen: boton.dataset.nombre});
+  if (QUIETO) return;
+  var despues = boton.getBoundingClientRect();
+  var dx = antes.left + antes.width / 2 - (despues.left + despues.width / 2), dy = antes.top - despues.top;
+  if (boton.animate) boton.animate([{transform: 'translate(' + dx + 'px,' + dy + 'px)'}, {transform: 'none'}], {duration: 950, easing: 'cubic-bezier(.2,.8,.2,1)'});
+  // impulso: el plato da vueltas rápidas; la copa, el cuenco y la botella dan una vuelta completa
+  ritmo(mod, 14); setTimeout(function(){ ritmo(mod, 1); }, 950);
+  var g = mod.querySelector('.flota3d, .botella3d');
+  if (g){ g.classList.add('vuelta'); setTimeout(function(){ g.classList.remove('vuelta'); }, 1020); }
+}
+document.querySelectorAll('.rev').forEach(function(mod){
+  var boton = mod.querySelector('.rev-obj');
+  boton.addEventListener('click', function(){ abrirModulo(mod); });
+  boton.addEventListener('mouseenter', function(){ ritmo(mod, 3.5); });
+  boton.addEventListener('mouseleave', function(){ ritmo(mod, 1); });
+});
+if (/[?&]abierto/.test(location.search)) document.querySelectorAll('.rev').forEach(function(m){ m.classList.add('abierto'); });
+
+// el plato con las manos entra cuando la sección se asoma
+(function(){
+  var m = document.getElementById('manos');
+  if (!('IntersectionObserver' in window) || QUIETO || /[?&]captura/.test(location.search)){ m.classList.add('dentro'); return; }
+  new IntersectionObserver(function(ent, ob){ ent.forEach(function(x){ if (x.isIntersecting){ m.classList.add('dentro'); ob.disconnect(); } }); }, {threshold: 0.3}).observe(document.getElementById('casa'));
+})();
 
 // ================= módulo de reservas: arma el enlace de OpenTable =================
 var RID = 1482517;
@@ -661,13 +787,23 @@ document.getElementById('formReserva').addEventListener('submit', function(e){
   medir('reserva_inicio', {fecha: fecha.value, hora: hora.value, personas: personas.value, origen: campana});
   window.open(enlaceReserva(), '_blank', 'noopener');
 });
+// la reserva vive en una ventanita que abre el iconito
+var cajaReserva = document.getElementById('reservar');
+function abrirReserva(origen){ cajaReserva.classList.add('abierta'); if (origen) medir('clic_reservar', {origen: origen}); }
+function cerrarReserva(){ cajaReserva.classList.remove('abierta'); }
+document.getElementById('icoReserva').addEventListener('click', function(){ if (cajaReserva.classList.contains('abierta')) cerrarReserva(); else abrirReserva('iconito'); });
+document.getElementById('cerrarReserva').addEventListener('click', cerrarReserva);
+document.addEventListener('click', function(e){
+  var a = e.target.closest('a[href="#reservar"]'); if (!a) return;
+  e.preventDefault(); abrirReserva(a.dataset.cata ? null : null);
+});
 // los botones de las catas dejan lista la fecha del próximo día que toca y la hora
 document.querySelectorAll('[data-cata]').forEach(function(a){
   a.addEventListener('click', function(){
     var d = new Date(), dia = +a.dataset.dia; d.setDate(d.getDate() + ((dia - d.getDay() + 7) % 7 || 7));
     fecha.value = iso(d); llenarHoras(a.dataset.hora); campana = a.dataset.cata;
     nota.textContent = a.dataset.cata + ': ' + d.toLocaleDateString('es-CR', {weekday:'long', day:'numeric', month:'long'}) + ', ' + doce(a.dataset.hora) + '. Tocá «Buscar mesa».';
-    medir('clic_reservar', {origen: a.dataset.cata});
+    medir('clic_reservar', {origen: a.dataset.cata}); abrirReserva();
   });
 });
 
@@ -698,7 +834,7 @@ function abrir(){
 function cerrar(){ chat.classList.remove('abierto'); document.getElementById('lanzador').style.display = ''; }
 document.getElementById('lanzador').addEventListener('click', abrir);
 document.getElementById('cerrarChat').addEventListener('click', cerrar);
-document.addEventListener('keydown', function(e){ if (e.key === 'Escape') cerrar(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape'){ cerrar(); cerrarReserva(); } });
 
 function respuestaAlergia(claves){
   var k = [], nombres = [];
