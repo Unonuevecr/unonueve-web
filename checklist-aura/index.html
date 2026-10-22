@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es-CR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src https://n8n-unonueve-n8n.i5i6e4.easypanel.host; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#0C0C0C">
+<title>Checklist · Aura Restaurante</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #0C0C0C; --noche: #160B07; --carbon: #1D1512; --crema: #F5E8D8; --crema-2: rgba(245, 232, 216, .72);
+    --crema-3: rgba(245, 232, 216, .5); --cobre: #BD8562; --cobre-claro: #D9A47E; --linea: rgba(245, 232, 216, .13);
+    --ok: #9CCB9C; --error: #F0A58A; --radio: 14px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--negro); color: var(--crema); font: 300 17px/1.55 'Source Sans 3', system-ui, sans-serif; }
+  .ck-envoltura { max-width: 720px; margin: 0 auto; padding: 28px 16px 64px; }
+  .ck-titulo, .ck-seccion h2, .ck-item__titulo { font-family: 'Josefin Sans', sans-serif; text-transform: uppercase; letter-spacing: .14em; font-weight: 300; }
+  a { color: var(--cobre-claro); }
+
+  .ck-cabeza { text-align: center; padding: 18px 0 8px; }
+  .ck-cabeza img { width: 190px; height: auto; display: block; margin: 0 auto 26px; }
+  .ck-etiqueta { font: 400 12px/1 'Josefin Sans', sans-serif; letter-spacing: .32em; text-transform: uppercase; color: var(--cobre-claro); }
+  .ck-titulo { font-size: clamp(26px, 6.4vw, 38px); line-height: 1.15; margin: 14px 0 12px; }
+  .ck-bajada { color: var(--crema-2); max-width: 520px; margin: 0 auto; }
+
+  .ck-tarjeta { background: var(--noche); border: 1px solid var(--linea); border-radius: var(--radio); padding: 18px; margin-top: 18px; }
+  .ck-nombre label { display: block; font-size: 14px; color: var(--crema-2); margin-bottom: 8px; }
+  .ck-progreso { display: flex; align-items: center; gap: 14px; margin-top: 16px; }
+  .ck-barra { flex: 1; height: 6px; background: var(--linea); border-radius: 6px; overflow: hidden; }
+  .ck-barra span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--cobre), var(--cobre-claro)); transition: width .6s ease; }
+  .ck-progreso b { font-weight: 600; font-size: 14px; white-space: nowrap; color: var(--crema-2); }
+
+  .ck-seguridad summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 10px; font-weight: 600; }
+  .ck-seguridad summary::-webkit-details-marker { display: none; }
+  .ck-seguridad summary::after { content: '+'; margin-left: auto; color: var(--cobre-claro); font-size: 22px; font-weight: 300; }
+  .ck-seguridad[open] summary::after { content: '–'; }
+  .ck-seguridad ul { margin: 12px 0 0; padding-left: 20px; color: var(--crema-2); font-size: 15.5px; }
+  .ck-seguridad li { margin: 6px 0; }
+
+  .ck-seccion { margin-top: 38px; }
+  .ck-seccion h2 { font-size: 15px; letter-spacing: .26em; color: var(--cobre-claro); margin: 0 0 4px; }
+  .ck-seccion > p { margin: 0 0 12px; color: var(--crema-3); font-size: 15px; }
+
+  .ck-item { background: var(--noche); border: 1px solid var(--linea); border-radius: var(--radio); margin-top: 10px; overflow: hidden; }
+  .ck-item.es-listo { border-color: rgba(156, 203, 156, .35); }
+  .ck-item__cabeza { width: 100%; display: flex; align-items: center; gap: 14px; padding: 16px; background: none; border: 0; color: inherit; text-align: left; cursor: pointer; font: inherit; }
+  .ck-item__num { flex: 0 0 34px; height: 34px; border-radius: 50%; border: 1px solid var(--cobre); color: var(--cobre-claro); display: grid; place-items: center; font: 400 14px/1 'Josefin Sans', sans-serif; }
+  .ck-item.es-listo .ck-item__num { background: var(--ok); border-color: var(--ok); color: var(--negro); font-weight: 600; }
+  .ck-item__texto { flex: 1; min-width: 0; }
+  .ck-item__titulo { display: block; font-size: 15px; letter-spacing: .1em; line-height: 1.35; }
+  .ck-item__estado { display: block; font-size: 13.5px; color: var(--crema-3); margin-top: 3px; }
+  .ck-item.es-listo .ck-item__estado { color: var(--ok); }
+  .ck-item__flecha { color: var(--cobre-claro); transition: transform .25s; font-size: 18px; }
+  .ck-item.esta-abierto .ck-item__flecha { transform: rotate(90deg); }
+  .ck-item__cuerpo { display: none; padding: 0 16px 18px; border-top: 1px solid var(--linea); }
+  .ck-item.esta-abierto .ck-item__cuerpo { display: block; }
+  .ck-item__desc { color: var(--crema-2); font-size: 15.5px; margin: 14px 0; }
+
+  .ck-campo { margin-top: 12px; }
+  .ck-campo label { display: block; font-size: 14px; color: var(--crema-2); margin-bottom: 6px; }
+  input[type=text], input[type=url], input[type=password], input[type=email], input[type=tel], textarea, select {
+    width: 100%; background: var(--carbon); border: 1px solid var(--linea); border-radius: 10px; color: var(--crema);
+    font: 400 16px/1.4 'Source Sans 3', sans-serif; padding: 12px 13px; outline: none; }
+  textarea { min-height: 92px; resize: vertical; }
+  input:focus, textarea:focus, select:focus { border-color: var(--cobre); box-shadow: 0 0 0 3px rgba(189, 133, 98, .18); }
+  .ck-clave { position: relative; }
+  .ck-clave button { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: none; border: 0; color: var(--cobre-claro); font: 400 13px 'Source Sans 3'; cursor: pointer; padding: 6px; }
+
+  .ck-boton { display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-top: 14px; padding: 12px 22px; border-radius: 999px;
+    border: 1px solid var(--cobre); background: var(--cobre); color: var(--negro); font: 600 15px/1 'Source Sans 3', sans-serif; cursor: pointer; text-decoration: none; }
+  .ck-boton--claro { background: transparent; color: var(--cobre-claro); }
+  .ck-boton[disabled] { opacity: .55; cursor: wait; }
+  .ck-mensaje { margin-top: 12px; font-size: 15px; }
+  .ck-mensaje.es-ok { color: var(--ok); }
+  .ck-mensaje.es-error { color: var(--error); }
+
+  .ck-opciones { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; }
+  .ck-opciones button { flex: 1 1 auto; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--linea); background: var(--carbon); color: var(--crema-2);
+    font: 400 14.5px 'Source Sans 3', sans-serif; cursor: pointer; }
+  .ck-opciones button.esta-activa { border-color: var(--cobre); color: var(--crema); background: rgba(189, 133, 98, .14); }
+  .ck-panel { display: none; }
+  .ck-panel.esta-activo { display: block; }
+  .ck-pasos { margin: 12px 0 0; padding-left: 22px; color: var(--crema-2); font-size: 15.5px; }
+  .ck-pasos li { margin: 7px 0; }
+  .ck-pasos code { background: var(--carbon); border: 1px solid var(--linea); padding: 1px 7px; border-radius: 6px; color: var(--crema); font: 600 15px 'Source Sans 3'; user-select: all; }
+  .ck-nota { font-size: 13.5px; color: var(--crema-3); margin-top: 10px; }
+  .ck-candado { display: flex; gap: 10px; align-items: flex-start; background: rgba(156, 203, 156, .07); border: 1px solid rgba(156, 203, 156, .25); border-radius: 10px; padding: 10px 12px; font-size: 14px; color: var(--crema-2); margin-top: 12px; }
+
+  .ck-pie { margin-top: 46px; text-align: center; color: var(--crema-3); font-size: 14px; }
+  .ck-pie a { display: inline-block; margin-bottom: 14px; }
+
+  body.esta-bloqueado .ck-cabeza > :not(img) { display: none; }
+  .ck-bloqueo { min-height: 60vh; display: grid; place-items: center; text-align: center; }
+  .ck-bloqueo p { color: var(--crema-2); max-width: 420px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+  <main class="ck-envoltura">
+    <header class="ck-cabeza">
+      <img src="img/aura.png" alt="AURA" width="520" height="128">
+      <div class="ck-etiqueta">Para arrancar juntos</div>
+      <h1 class="ck-titulo">Lo que necesitamos<br>de Aura</h1>
+      <p class="ck-bajada">Pegá el enlace o escribí el dato y tocá <b>Enviar</b>: le llega al instante a Gerson y queda anotado en el plan. Cada punto se marca cuando ya lo recibimos.</p>
+    </header>
+
+    <section id="bloqueo" class="ck-bloqueo" hidden>
+      <div>
+        <div class="ck-etiqueta">Checklist privado</div>
+        <h1 class="ck-titulo">Abrilo con tu enlace</h1>
+        <p id="bloqueoTexto">Este checklist solo se abre con el enlace que te mandó Gerson. Si lo perdiste, pedíselo de nuevo por WhatsApp.</p>
+      </div>
+    </section>
+
+    <div id="contenido" hidden>
+      <div class="ck-tarjeta ck-nombre">
+        <label for="quien">Tu nombre (para saber quién lo envía)</label>
+        <input type="text" id="quien" maxlength="80" autocomplete="name" placeholder="Ej.: Moisés">
+        <div class="ck-progreso"><div class="ck-barra"><span id="barra"></span></div><b id="cuenta">0 de 0 enviados</b></div>
+      </div>
+
+      <details class="ck-tarjeta ck-seguridad">
+        <summary>🔒 Cómo cuidamos sus datos</summary>
+        <ul>
+          <li>Todo viaja cifrado (https) directo a nuestro sistema; esta página no guarda nada en tu teléfono, salvo tu nombre.</li>
+          <li>Las <b>contraseñas se cifran en tu propio teléfono</b> antes de salir. Ni el servidor, ni el WhatsApp, ni la hoja de cálculo pueden leerlas: solo Gerson, con una llave que está únicamente en su computadora.</li>
+          <li>Lo más seguro es <b>no pasar contraseñas</b>: en Meta, Google y OpenTable pueden invitarnos con nuestro correo y conservan el control de sus cuentas.</li>
+          <li>Si preferís, cualquier acceso también se lo podés pasar a Gerson directo por WhatsApp.</li>
+          <li><b>Nunca</b> nos manden números de tarjeta: el método de pago de los anuncios lo agrega Aura en Meta.</li>
+        </ul>
+      </details>
+
+      <div id="secciones"></div>
+
+      <footer class="ck-pie">
+        <a id="waPie" class="ck-boton ck-boton--claro" href="#" target="_blank" rel="noopener">¿Dudas? Escribile a Gerson por WhatsApp</a>
+        <div>Checklist de UNONUEVECR para Aura Restaurante</div>
+      </footer>
+    </div>
+  </main>
+  <script src="js/checklist.js"></script>
+</body>
+</html>
