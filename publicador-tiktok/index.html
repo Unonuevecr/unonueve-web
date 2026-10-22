@@ -89,6 +89,9 @@ async function iniciar(){if(!s)return;
  if(!r.data||(r.error&&r.error.code!=="ok")){sessionStorage.removeItem("tt_s");$("err-conectar").hidden=false;$("err-conectar").textContent="Your session expired. Connect your TikTok account again.";return}
  const d=r.data;$("paso-conectar").hidden=true;$("paso-publicar").hidden=false;
  $("nick").textContent=d.creator_nickname||"";$("user").textContent="@"+(d.creator_username||"");if(d.creator_avatar_url)$("avatar").src=d.creator_avatar_url;
+ // Solo la cuenta de UNONUEVECR ve el video de muestra. Las demás (clientes) solo confirman la conexión:
+ // lo suyo sale desde su cola de publicación, nunca el video de la agencia (pedido de Gerson, 22-oct-2026).
+ if(!/unonuevecr/i.test((d.creator_username||"")+" "+(d.creator_nickname||""))){const g=document.querySelector("#paso-publicar .grid");g.innerHTML='<div style="grid-column:1/-1"><p class="estado ok">Cuenta conectada ✓ Las publicaciones de esta cuenta salen solas desde su cola de publicación. Ya podés cerrar esta página.</p></div>';return}
  maxDur=d.max_video_post_duration_sec||0;
  (d.privacy_level_options||[]).forEach(p=>{const o=document.createElement("option");o.value=p;o.textContent=NOMBRES[p]||p;$("priv").appendChild(o)});
  if(d.comment_disabled){$("c-com").disabled=true}if(d.duet_disabled){$("c-duet").disabled=true}if(d.stitch_disabled){$("c-st").disabled=true}
