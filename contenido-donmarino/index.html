@@ -136,6 +136,16 @@ footer{text-align:center;color:#9aa4b4;font-size:12px;padding:26px 16px}
 .carr .tv{position:absolute;top:10px;left:10px;background:#AC1713;color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;padding:4px 9px;border-radius:20px;display:none}
 .carr .nav{display:flex;justify-content:space-between;margin-top:6px}
 .carr .nav button{border:1px solid #c9d4ee;background:#fff;border-radius:20px;padding:6px 14px;font-weight:700;color:#1d3f8f;cursor:pointer}
+.imptabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
+.imptab{flex:1;min-width:200px;border:1.5px solid var(--linea);background:#fff;border-radius:999px;padding:10px 14px;font-weight:700;font-size:14px;color:var(--azul2);cursor:pointer}
+.imptab.on{background:var(--azul);border-color:var(--azul);color:#fff}
+.imp{border:1px solid var(--linea);border-radius:14px;padding:14px;margin-top:14px;background:#fafbfe}
+.imp.aprobado{border-color:#b6e3c8;background:#f6fcf8}.imp.cambios{border-color:#f2d798;background:#fffbf0}
+.imp h3{margin:0;color:var(--azul2);font-size:16px}.imp .med{font-size:12.5px;color:var(--gris);margin:2px 0 10px}
+.caras{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.cara{text-align:center}.cara img{width:100%;border-radius:8px;border:1px solid var(--linea);background:#fff;display:block}
+.cara .lb{font-size:11.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--gris);margin-top:5px}
+.cara a{font-size:12.5px;font-weight:700}
 .mesmarca{display:block;font-size:13px;font-weight:600;opacity:.8;margin-top:2px}
 </style>
 </head>
@@ -171,80 +181,12 @@ footer{text-align:center;color:#9aa4b4;font-size:12px;padding:26px 16px}
       Las piezas que dicen <b>“pendiente de grabación”</b> todavía se van a grabar.
     </div>
 
-    <div class="propuesta">
-      <span class="ptag">Propuesta para la reunión</span>
-      <h2>El siguiente paso: un ecosistema digital propio</h2>
-      <p class="lead">Una web con <b>dominio propio</b> para Don Marino y para Marisquería, donde el cliente reserva, pide y se registra en cada actividad… y nosotros convertimos cada visita en <b>datos para vender más</b>.</p>
-      <div class="pdemos">
-        <a id="tourDemoDM" href="../demo-donmarino/" target="_blank">👀 Ver demo — Don Marino<span>Reservas · buffet · reseñas · fidelidad</span></a>
-        <a id="tourDemoMQ" class="mq" href="../demo-marisqueria/" target="_blank">👀 Ver demo — Marisquería<span>Menú · pedidos · reservar mesa · salón</span></a>
-      </div>
-      <div id="tourRefs">
-        <div class="prefs-h">Webs de referencia — lo que ya construimos</div>
-        <p class="prefs-s">Ejemplos en vivo de otras marcas, para mostrar el tipo de web y sus funciones.</p>
-        <div class="prefs">
-          <div class="pref"><div class="rh">Registro a una actividad</div><div class="rf">La gente confirma su asistencia y sus datos caen a una base y a WhatsApp. Justo lo que serviría para las <b>actividades y eventos del local</b> (como los que se organizan en el salón).</div><a href="https://imparable.unonuevecr.com" target="_blank" rel="noopener">Ver ›</a></div>
-          <div class="pref"><div class="rh">Control de ingreso</div><div class="rf">App para el día del evento: lista en vivo, buscador y marcar ingreso, conectada a los mismos datos.</div><a href="https://leandrojimenez.com/ingreso/" target="_blank" rel="noopener">Ver ›</a></div>
-        </div>
-      </div>
-      <div class="pgrid">
-        <div class="pcol">
-          <h3>Qué podría hacer el cliente</h3>
-          <ul>
-            <li><b>Reservar mesa</b> en línea.</li>
-            <li><b>Reservar el salón y espacios</b> para eventos especiales: celebraciones, actividades de índole religioso, familiares y de empresa.</li>
-            <li><b>Registrarse en cada actividad</b> — cada evento suma contactos nuevos.</li>
-            <li><b>Hacer pedidos</b> desde la web.</li>
-            <li><b>Buses y grupos</b>: reservar horarios especiales de llegada.</li>
-            <li><b>Tarjeta de fidelización</b>: acumula beneficios y recolecta datos del cliente.</li>
-          </ul>
-        </div>
-        <div class="pcol">
-          <h3>Por qué importa (el ecosistema de datos)</h3>
-          <ul>
-            <li>Conectamos <b>Píxel de Meta, Google Ads, Google Analytics y TikTok</b> a una sola <b>centralizadora de datos</b> → todo cae en un mismo lugar para medir y dirigir los anuncios (el mismo modelo que ya montamos y funciona).</li>
-            <li>Ver <b>mes a mes quién visitó y quién no</b>, para reactivar a los que se enfrían.</li>
-            <li>Base de <b>clientes frecuentes</b> para campañas personalizadas.</li>
-            <li><b>Encuesta estilo Subway</b>: el cliente escanea la factura, llena la encuesta y deja su reseña en Google → gana una galleta o una entrada. Ganamos <b>reseñas, interacción y datos</b>.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="pplus">
-        <div class="h">🔑 Todo queda a nombre del cliente — un plus que las agencias pequeñas no dan</div>
-        <p>La centralizadora, los <b>accesos y los tokens</b> (Meta, Google Ads, Google Analytics, TikTok y el dominio) quedan <b>a nombre del negocio</b>. Si algún día cambian de agencia —o si dejamos de trabajar juntos— no pierden nada: la siguiente agencia solo toma los accesos y sigue el camino. <b>Los datos y el ecosistema son suyos, no de la agencia.</b></p>
-      </div>
-      <div class="pdiagram" id="tourEco">
-        <img src="esquema-datos.png" alt="Esquema: qué pasa con los datos">
-        <div class="cap">Esquema para la reunión: de dónde vienen los datos, cómo se centralizan y qué hacemos con ellos.</div>
-      </div>
-      <h3>Costos (solo herramientas — no cobramos mano de obra)</h3>
-      <div class="pcosts" id="tourCostos">
-        <div class="pcost tot">
-          <span class="pc-h">Hosting (VPS) + correos profesionales</span>
-          <span class="pc-p">$29 <span>/ mes · total</span></span>
-          <a id="tourVer" href="https://www.hostinger.com/vps-hosting" target="_blank" rel="noopener">Ver ›</a>
-          <span class="pc-d">Servidor VPS ($21) donde vive todo el ecosistema + correos del dominio, ej. hola@donmarino.cr ($8, lo que cuesta Gmail).</span>
-        </div>
-        <div class="pcost">
-          <span class="pc-h">App · Apple Developer</span>
-          <span class="pc-p">$99 <span>/ año</span></span>
-          <a href="https://developer.apple.com/programs/" target="_blank" rel="noopener">Ver ›</a>
-          <span class="pc-d"><b>≈ $8,25 / mes.</b> Con esto tenés la app: tarjeta de fidelidad, pedidos y reservas en el teléfono del cliente.</span>
-        </div>
-        <div class="pcost">
-          <span class="pc-h">Dominio · Squarespace</span>
-          <span class="pc-p">≈ $15 <span>/ año</span></span>
-          <a href="https://www.squarespace.com/domains" target="_blank" rel="noopener">Ver ›</a>
-          <span class="pc-d">La dirección web de cada marca.</span>
-        </div>
-        <div class="pcost">
-          <span class="pc-h">Medición centralizada</span>
-          <span class="pc-p">Gratis <span>· las plataformas</span></span>
-          <a href="https://analytics.google.com/" target="_blank" rel="noopener">Ver ›</a>
-          <span class="pc-d">Píxel de Meta + Google Ads + Google Analytics + TikTok conectados a una sola centralizadora de datos.</span>
-        </div>
-      </div>
-      <p class="pnote"><b>Importante:</b> en este momento <b>solo se cobra el costo de las herramientas</b> — el desarrollo va por nuestra cuenta. Son pagos que <b>mantienen vivo el ecosistema</b>: unos anuales (dominio, app) y otros mensuales (hosting). Con eso ya montado, mes a mes se puede: centralizar todos los datos (Meta, Google Ads, Analytics y TikTok), ver quién visita, fidelizar con la tarjeta y lanzar campañas dirigidas a los clientes frecuentes.</p>
+    <div class="propuesta" id="tourImpresos">
+      <span class="ptag">Para aprobar · impresos del local</span>
+      <h2>Material para imprimir</h2>
+      <p class="lead">Lo que va en el local para que cada cliente <b>nos siga</b> (Instagram, Facebook y TikTok), <b>deje su reseña en Google</b> y <b>vuelva</b> con la tarjeta de cliente frecuente. Revisá cada pieza y tocá <b>Aprobar</b> o <b>Pedir un cambio</b>. El PDF es el archivo para la imprenta (con 3 mm de sangrado).</p>
+      <div class="imptabs"><button class="imptab on" data-m="marisqueria">🦐 Marisquería Don Marino</button><button class="imptab" data-m="donmarino">🍽️ Restaurante Don Marino</button></div>
+      <div id="impLista"></div>
     </div>
   </div>
   <footer>Hecho por UNONUEVE · Uso interno de aprobación</footer>
@@ -282,12 +224,7 @@ footer{text-align:center;color:#9aa4b4;font-size:12px;padding:26px 16px}
 const TOUR=[
  {sel:"#tourDM",t:"Cronograma de Don Marino",x:"Aquí ves el contenido del mes de Don Marino: cada publicación con su video y su texto, para aprobar o pedir un cambio."},
  {sel:"#tourMQ",t:"Cronograma de Marisquería",x:"Lo mismo para Marisquería Don Marino: revisás y aprobás cada pieza del mes."},
- {sel:"#tourDemoDM",t:"Demo de la web — Don Marino",x:"Aquí abrís la demo de la web de Don Marino: reservas de eventos, buffet con horarios, reseñas y tarjeta de fidelidad."},
- {sel:"#tourDemoMQ",t:"Demo de la web — Marisquería",x:"Y aquí la demo de Marisquería: menú con carrito, pedidos, reservar mesa con croquis y el salón para eventos."},
- {sel:"#tourRefs",t:"Webs de referencia",x:"Ejemplos en vivo de otras marcas que ya construimos — para mostrar el tipo de web y las funciones que se pueden lograr (registro, base de datos, control de ingreso)."},
- {sel:"#tourEco",t:"El ecosistema digital",x:"Este es el proyecto: de dónde llegan los clientes → los centralizamos en una base de datos → y hacia dónde los dirigimos para vender más."},
- {sel:"#tourCostos",t:"Costos promedio",x:"Aquí están los costos. Son solo el costo de las herramientas — sin ningún cargo adicional de nuestra parte."},
- {sel:"#tourVer",t:"Precios reales",x:"El botón “Ver” te lleva a la página oficial de cada plataforma, para que confirmes que es el precio real, tal cual, sin recargos."},
+ {sel:"#tourImpresos",t:"Impresos para el local",x:"Al final están los impresos de las dos marcas: tarjeta de cliente frecuente, servilletero, cartel de caja y QR de Google para la mesa. Cada uno se aprueba aquí y trae su PDF para la imprenta."},
  {sel:null,t:"Y esto apenas empieza",x:"Más adelante se pueden crear apps propias para iOS — para Marisquería, para Don Marino, o para cualquier otra tienda o sucursal que tengan."},
 ];
 let ti=0;
@@ -446,6 +383,38 @@ function card(it,idx){
   return el;
 }
 cargarEstados();
+</script>
+<script>
+const IMPRESOS=[
+ {k:"tarjeta",t:"Tarjeta de cliente frecuente",m:"8,5 × 5,5 cm · tiro y retiro · solo física",c:[["TIRO","1-tarjeta-cliente-frecuente-TIRO"],["RETIRO","1-tarjeta-cliente-frecuente-RETIRO"]],n:"9 sellos y la décima visita lleva premio · 1 sello por compra desde ₡10.000 (confirmar el premio)."},
+ {k:"servilletero",t:"Hablador de servilletero",m:"12 × 17 cm · tiro y retiro",c:[["TIRO · seguinos","2-hablador-servilletero-TIRO"],["RETIRO · Google","2-hablador-servilletero-RETIRO"]],n:"Un lado: Instagram, Facebook y TikTok + descuento al mostrar una publicación en caja. El otro: reseña en Google."},
+ {k:"caja",t:"Cartel de caja",m:"Carta 21,6 × 27,9 cm",c:[["CARTEL","3-cartel-caja"]],n:"«Mostralo aquí»: quien nos sigue y enseña una publicación del mes recibe descuento (falta definir el %)."},
+ {k:"mesa",t:"Tarjeta de mesa · QR de Google",m:"10 × 15 cm",c:[["MESA","4-mesa-qr-google"]],n:"El QR abre directo la reseña en Google."}
+];
+let IMP_M="marisqueria";
+function impKey(m,k){return "impresos-"+m+"|"+k;}
+function impRender(){
+  const L=document.getElementById("impLista"); if(!L) return; L.innerHTML="";
+  IMPRESOS.forEach(p=>{
+    const key=impKey(IMP_M,p.k), st=(typeof ESTADOS!=="undefined"&&ESTADOS[key])||{};
+    const el=document.createElement("div"); el.className="imp "+(st.estado||"");
+    const caras=p.c.map(([lb,f])=>'<div class="cara"><a href="impresos/'+IMP_M+'/'+f+'.jpg" target="_blank"><img loading="lazy" src="impresos/'+IMP_M+'/'+f+'.jpg" alt="'+lb+'"></a><div class="lb">'+lb+'</div><a href="impresos/'+IMP_M+'/'+f+'.pdf" target="_blank">PDF para imprenta</a></div>').join("");
+    el.innerHTML='<div class="ihead"><h3>'+p.t+'</h3><span class="st '+(st.estado||"pendiente")+'" data-st>'+({aprobado:"Aprobado",cambios:"Pide cambios"}[st.estado]||"Pendiente")+'</span></div>'+
+      '<div class="med">'+p.m+'</div><div class="caras">'+caras+'</div><div class="formato" style="margin-top:8px">'+p.n+'</div>'+
+      '<div class="actions"><button class="btn ap'+(st.estado==="aprobado"?" on":"")+'" data-ap>✓ Aprobar</button><button class="btn cb'+(st.estado==="cambios"?" on":"")+'" data-cb>✎ Pedir un cambio</button></div>'+
+      '<div class="coment"><textarea placeholder="Observaciones (opcional)" data-com>'+esc(st.comentario||"")+'</textarea></div><button class="save" data-save>Guardar</button><div class="saved" data-saved></div>';
+    const q=s=>el.querySelector(s); let estado=st.estado||null; const bap=q("[data-ap]"),bcb=q("[data-cb]");
+    bap.onclick=()=>{estado="aprobado";bap.classList.add("on");bcb.classList.remove("on");};
+    bcb.onclick=()=>{estado="cambios";bcb.classList.add("on");bap.classList.remove("on");};
+    q("[data-save]").onclick=async()=>{const b=q("[data-save]");b.disabled=true;b.textContent="Guardando…";const com=q("[data-com]").value.trim();if(!estado){estado="aprobado";bap.classList.add("on");}
+      try{await api({accion:"guardar",marca:"impresos-"+IMP_M,fecha:p.k,estado,comentario:com});ESTADOS[key]={estado,comentario:com,actualizado:new Date().toISOString()};el.className="imp "+estado;const s=q("[data-st]");s.className="st "+estado;s.textContent={aprobado:"Aprobado",cambios:"Pide cambios"}[estado];q("[data-saved]").textContent="Guardado ✓";toast("Guardado");}
+      catch(e){q("[data-saved]").textContent="Error al guardar, reintentá";}
+      b.disabled=false;b.textContent="Guardar";};
+    L.appendChild(el);
+  });
+}
+document.querySelectorAll(".imptab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".imptab").forEach(x=>x.classList.remove("on"));b.classList.add("on");IMP_M=b.dataset.m;impRender();});
+impRender(); setTimeout(impRender,2500);
 </script>
 </body>
 </html>
