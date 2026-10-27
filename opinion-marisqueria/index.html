@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Contanos cómo te fue · Marisquería Don Marino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&family=Grand+Hotel&family=Urbanist:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#032430;--coral:#F08A63;--crema:#F7ECD5;--azul:#337FBC;--blanco:#fff;--gris:#5b6b70}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Urbanist,system-ui,sans-serif;background:var(--crema);color:var(--navy);min-height:100vh}
+.top{background:linear-gradient(180deg,#A6CDEE,#4E97D0 60%,#337FBC);padding:22px 16px 60px;text-align:center}
+.top img{width:170px;max-width:52vw}
+main{max-width:480px;margin:-40px auto 40px;padding:0 16px}
+.card{background:var(--blanco);border-radius:22px;padding:24px 20px;box-shadow:0 10px 30px rgba(3,36,48,.12)}
+h1{font-family:Antonio;font-weight:700;text-transform:uppercase;font-size:40px;line-height:1;letter-spacing:.5px}
+.acento{font-family:'Grand Hotel';color:var(--coral);font-size:32px;line-height:1}
+p{font-size:16px;line-height:1.45;color:var(--gris);margin-top:8px}
+.estrellas{display:flex;justify-content:center;gap:6px;margin:22px 0 6px}
+.estrellas button{background:none;border:0;font-size:46px;line-height:1;cursor:pointer;color:#d9d2c3;transition:transform .12s}
+.estrellas button.on{color:#F5B301}.estrellas button:active{transform:scale(.9)}
+.nota{text-align:center;font-weight:600;min-height:22px;color:var(--navy)}
+label{display:block;font-weight:600;font-size:14px;margin:16px 0 6px}
+input[type=text],input[type=tel],textarea{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid #dcd3c2;border-radius:12px;background:#fffdf8;color:var(--navy)}
+textarea{min-height:96px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{font:inherit;font-size:14px;padding:8px 12px;border-radius:999px;border:1.5px solid #dcd3c2;background:#fffdf8;color:var(--navy);cursor:pointer}
+.chips button.on{background:var(--navy);border-color:var(--navy);color:var(--crema)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--gris);margin-top:14px;line-height:1.35}
+.check input{margin-top:3px;width:18px;height:18px;flex:none}
+.btn{display:block;width:100%;text-align:center;text-decoration:none;font:800 17px Urbanist;padding:15px;border-radius:14px;border:0;cursor:pointer;margin-top:18px}
+.btn.prim{background:var(--coral);color:var(--navy)}
+.btn.azul{background:var(--azul);color:var(--blanco)}
+.btn.suave{background:#efe6d3;color:var(--navy);font-weight:600;font-size:15px}
+.btn:disabled{opacity:.5}
+.oculto{display:none}
+.premio{background:var(--navy);color:var(--crema);border-radius:22px;padding:24px 20px;text-align:center;position:relative;overflow:hidden}
+.premio .acento{font-size:34px}
+.premio h2{font-family:Antonio;font-size:56px;line-height:1;text-transform:uppercase;margin:6px 0}
+.premio .reloj{font:800 22px Urbanist;letter-spacing:1px;margin-top:10px;color:var(--blanco)}
+.premio .cod{display:inline-block;margin-top:10px;background:var(--coral);color:var(--navy);font:800 18px Urbanist;padding:6px 14px;border-radius:999px;letter-spacing:2px}
+.premio small{display:block;margin-top:12px;font-size:13px;opacity:.85;line-height:1.4}
+.ola{position:absolute;inset:auto -20% -40px -20%;height:80px;border-radius:50%;background:rgba(240,138,99,.18)}
+.sep{height:1px;background:#e9e1d1;margin:22px 0 4px}
+.pie{text-align:center;font-size:12px;color:var(--gris);margin-top:18px;line-height:1.5}
+.err{color:#b3261e;font-size:14px;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="top"><img src="logo.png" alt="Marisquería Don Marino"></div>
+<main>
+  <!-- PASO 1 -->
+  <section class="card" id="p1">
+    <div class="acento">Contanos</div>
+    <h1>¿Cómo te fue hoy?</h1>
+    <p>Tu opinión nos ayuda a mejorar cada plato. Al terminar, la cocina te regala un <b>postre a elección</b>.</p>
+    <div class="estrellas" id="est"></div>
+    <div class="nota" id="nota"></div>
+  </section>
+
+  <!-- PASO 2 -->
+  <section class="card oculto" id="p2">
+    <div class="acento" id="t2a"></div>
+    <h1 id="t2"></h1>
+    <p id="t2p"></p>
+    <div id="bloqueQueja" class="oculto">
+      <label for="comentario">¿Qué pasó? Héctor lo va a leer personalmente</label>
+      <textarea id="comentario" placeholder="Contanos con confianza…"></textarea>
+    </div>
+    <label for="pidio">¿Qué pediste?</label>
+    <input type="text" id="pidio" placeholder="Ej. ceviche Poderoso, pescado entero…">
+    <label>¿Cómo nos conociste?</label>
+    <div class="chips" id="como"></div>
+    <label for="nombre">Tu nombre</label>
+    <input type="text" id="nombre" autocomplete="given-name">
+    <label for="tel">Tu WhatsApp</label>
+    <input type="tel" id="tel" inputmode="tel" placeholder="8888-8888" autocomplete="tel">
+    <div id="bloqueBien">
+      <label for="comentarioB">¿Algo que quieras contarnos? (opcional)</label>
+      <textarea id="comentarioB" placeholder="Lo que más te gustó, lo que mejorarías…"></textarea>
+    </div>
+    <label class="check"><input type="checkbox" id="datos"> Acepto que Marisquería Don Marino guarde estos datos para atender mi opinión (Ley 8968).</label>
+    <label class="check"><input type="checkbox" id="promos"> Quiero recibir promociones por WhatsApp.</label>
+    <button class="btn prim" id="enviar">Enviar y reclamar mi postre</button>
+    <div class="err" id="err"></div>
+  </section>
+
+  <!-- PASO 3 -->
+  <section class="oculto" id="p3">
+    <div class="premio">
+      <div class="acento">¡Gracias, <span id="nomP"></span>!</div>
+      <h2>Postre a elección</h2>
+      <div>Mostrá esta pantalla en caja</div>
+      <div class="reloj" id="reloj"></div>
+      <div class="cod" id="cod"></div>
+      <small>Una cortesía por mesa y por visita. Válida hoy.</small>
+      <div class="ola"></div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <div id="resenaBien">
+        <div class="acento">¿Nos ayudás?</div>
+        <h1>Contalo en Google</h1>
+        <p>Una reseña tuya ayuda a que más gente nos encuentre cuando busca dónde comer en Puntarenas.</p>
+      </div>
+      <div id="resenaQueja" class="oculto">
+        <div class="acento">Gracias por avisarnos</div>
+        <h1>Ya lo estamos viendo</h1>
+        <p>Héctor recibió tu mensaje. Si querés, también podés dejar tu opinión en Google o en Facebook.</p>
+      </div>
+      <a class="btn azul" target="_blank" rel="noopener" href="https://search.google.com/local/writereview?placeid=ChIJMSb1SgAxoI8RoqKgxeWK7B8">Dejar mi reseña en Google</a>
+      <a class="btn suave" target="_blank" rel="noopener" href="https://www.facebook.com/profile.php?id=61568774805575&sk=reviews">Recomendarnos en Facebook</a>
+    </div>
+    <div class="pie">Marisquería Don Marino · Frente al Hotel Fiesta, El Roble de Puntarenas · WhatsApp 8712-8484</div>
+  </section>
+</main>
+<script>
+const HOOK='https://n8n-unonueve-n8n.i5i6e4.easypanel.host/webhook/marisqueria-opinion';
+const q=new URLSearchParams(location.search); const MESA=(q.get('mesa')||q.get('m')||'').slice(0,10);
+const NOTAS=['','Muy mal','Mal','Regular','Bien','¡Excelente!'];
+const COMO=['Instagram','Facebook','TikTok','Google o Waze','Pasaba por aquí','Me recomendaron'];
+let est=0, como='';
+const $=id=>document.getElementById(id);
+const e=$('est');
+for(let i=1;i<=5;i++){const b=document.createElement('button');b.type='button';b.textContent='★';b.setAttribute('aria-label',i+' estrellas');b.onclick=()=>elegir(i);e.appendChild(b)}
+COMO.forEach(c=>{const b=document.createElement('button');b.type='button';b.textContent=c;b.onclick=()=>{como=c;[...$('como').children].forEach(x=>x.classList.toggle('on',x===b))};$('como').appendChild(b)});
+function elegir(n){
+  est=n;[...e.children].forEach((b,i)=>b.classList.toggle('on',i<n));$('nota').textContent=NOTAS[n];
+  setTimeout(()=>{
+    $('p1').classList.add('oculto');$('p2').classList.remove('oculto');
+    const malo=n<=3;
+    $('bloqueQueja').classList.toggle('oculto',!malo);$('bloqueBien').classList.toggle('oculto',malo);
+    $('t2a').textContent=malo?'Lo sentimos':'¡Qué alegría!';
+    $('t2').textContent=malo?'Queremos arreglarlo':'Contanos un poco más';
+    $('t2p').textContent=malo?'Tu mensaje le llega directo al dueño. Dejanos tu WhatsApp si querés que te contactemos.':'Son cuatro datos y listo. Tu postre te espera en caja.';
+    window.scrollTo(0,0);
+  },350);
+}
+function codigo(){const a='ABCDEFGHJKMNPQRSTUVWXYZ23456789';let s='';for(let i=0;i<6;i++)s+=a[Math.floor(Math.random()*a.length)];return s}
+function tic(){const d=new Date();$('reloj').textContent=d.toLocaleDateString('es-CR',{weekday:'long',day:'numeric',month:'long'})+' · '+d.toLocaleTimeString('es-CR',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}
+$('enviar').onclick=async()=>{
+  $('err').textContent='';
+  const malo=est<=3, coment=(malo?$('comentario'):$('comentarioB')).value.trim();
+  if(!$('nombre').value.trim()){$('err').textContent='Escribí tu nombre, por favor.';return}
+  if(malo&&!coment){$('err').textContent='Contanos qué pasó para poder arreglarlo.';return}
+  if(!$('datos').checked){$('err').textContent='Para continuar, aceptá el uso de tus datos.';return}
+  const cod=codigo();
+  const datos={estrellas:est,mesa:MESA,nombre:$('nombre').value.trim(),telefono:$('tel').value.trim(),como,pidio:$('pidio').value.trim(),comentario:coment,promos:$('promos').checked,codigo:cod};
+  $('enviar').disabled=true;$('enviar').textContent='Enviando…';
+  try{await fetch(HOOK,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'data='+encodeURIComponent(JSON.stringify(datos))})}catch(x){}
+  $('nomP').textContent=datos.nombre.split(' ')[0];$('cod').textContent=cod;
+  $('resenaQueja').classList.toggle('oculto',!malo);$('resenaBien').classList.toggle('oculto',malo);
+  $('p2').classList.add('oculto');$('p3').classList.remove('oculto');tic();setInterval(tic,1000);window.scrollTo(0,0);
+};
+</script>
+</body>
+</html>
