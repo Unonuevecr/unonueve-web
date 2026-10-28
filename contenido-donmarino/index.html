@@ -146,6 +146,8 @@ footer{text-align:center;color:#9aa4b4;font-size:12px;padding:26px 16px}
 .cara{text-align:center}.cara img{width:100%;border-radius:8px;border:1px solid var(--linea);background:#fff;display:block}
 .cara .lb{font-size:11.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--gris);margin-top:5px}
 .cara a{font-size:12.5px;font-weight:700}
+.pdfbtn{display:inline-block;margin-top:10px;background:var(--azul2);color:#fff!important;text-decoration:none;padding:9px 14px;border-radius:10px;font-weight:800;font-size:13.5px}
+.pdfbtn.todo{display:block;text-align:center;margin-top:16px;padding:13px;font-size:14.5px;background:var(--verde)}
 .mesmarca{display:block;font-size:13px;font-weight:600;opacity:.8;margin-top:2px}
 </style>
 </head>
@@ -184,7 +186,7 @@ footer{text-align:center;color:#9aa4b4;font-size:12px;padding:26px 16px}
     <div class="propuesta" id="tourImpresos">
       <span class="ptag">Para aprobar · impresos del local</span>
       <h2>Material para imprimir</h2>
-      <p class="lead">Lo que va en el local para que cada cliente <b>nos siga</b> (Instagram, Facebook y TikTok), <b>deje su reseña en Google</b> y <b>vuelva</b> con la tarjeta de cliente frecuente. Revisá cada pieza y tocá <b>Aprobar</b> o <b>Pedir un cambio</b>. El PDF es el archivo para la imprenta (con 3 mm de sangrado).</p>
+      <p class="lead">Lo que va en el local para que cada cliente <b>nos siga</b> (Instagram, Facebook y TikTok), <b>deje su reseña en Google</b> y <b>vuelva</b> con la tarjeta de cliente frecuente. Revisá cada pieza y tocá <b>Aprobar</b> o <b>Pedir un cambio</b>. Cada pieza trae su PDF listo para la imprenta.</p>
       <div class="pgrid" id="estrategia">
         <div class="pcol">
           <h3>📣 La estrategia detrás</h3>
@@ -205,6 +207,8 @@ footer{text-align:center;color:#9aa4b4;font-size:12px;padding:26px 16px}
       </div>
       <div class="imptabs"><button class="imptab on" data-m="marisqueria">🦐 Marisquería Don Marino</button><button class="imptab" data-m="donmarino">🍽️ Restaurante Don Marino</button></div>
       <div id="impLista"></div>
+      <a class="pdfbtn todo" id="impTodo" href="impresos/marisqueria/IMPRENTA-paquete-completo.pdf" download>⬇ Descargar todo para la imprenta (un solo PDF)</a>
+      <p class="pnote">Los PDF para la imprenta ya traen <b>3 mm de sangrado y marcas de corte</b>, cada pieza a su medida y con tiro y retiro en páginas seguidas. Se mandan tal cual.</p>
     </div>
   </div>
   <footer>Hecho por UNONUEVE · Uso interno de aprobación</footer>
@@ -404,10 +408,10 @@ cargarEstados();
 </script>
 <script>
 const IMPRESOS=[
- {k:"tarjeta",t:"Tarjeta de cliente frecuente",m:"8,5 × 5,5 cm · tiro y retiro · solo física",c:[["TIRO","1-tarjeta-cliente-frecuente-TIRO"],["RETIRO","1-tarjeta-cliente-frecuente-RETIRO"]],n:"9 sellos y la décima visita lleva premio · 1 sello por compra desde ₡10.000 (confirmar el premio)."},
- {k:"servilletero",t:"Hablador de servilletero",m:"12 × 17 cm · tiro y retiro",c:[["TIRO · seguinos","2-hablador-servilletero-TIRO"],["RETIRO · Google","2-hablador-servilletero-RETIRO"]],n:"Un lado: Instagram, Facebook y TikTok + descuento al mostrar una publicación en caja. El otro: reseña en Google."},
- {k:"caja",t:"Cartel de caja",m:"Carta 21,6 × 27,9 cm",c:[["CARTEL","3-cartel-caja"]],n:"«Mostralo aquí»: quien nos sigue y enseña una publicación del mes recibe descuento (falta definir el %)."},
- {k:"mesa",t:"Tarjeta de mesa · QR de Google",m:"10 × 15 cm",c:[["MESA","4-mesa-qr-google"]],n:"El QR abre directo la reseña en Google."}
+ {k:"tarjeta",t:"Tarjeta de cliente frecuente",m:"Tamaño tarjeta de presentación 9 × 5 cm · tiro y retiro · solo física",c:[["TIRO","1-tarjeta-cliente-frecuente-TIRO"],["RETIRO","1-tarjeta-cliente-frecuente-RETIRO"]],pdf:"IMPRENTA-1-tarjeta-cliente-frecuente-9x5cm-tiro-y-retiro.pdf",n:"9 sellos y la décima visita lleva premio · 1 sello por compra desde ₡10.000 (confirmar el premio)."},
+ {k:"servilletero",t:"Hablador de servilletero",m:"12 × 17 cm · tiro y retiro",c:[["TIRO · seguinos","2-hablador-servilletero-TIRO"],["RETIRO · Google","2-hablador-servilletero-RETIRO"]],pdf:"IMPRENTA-2-servilletero-12x17cm-tiro-y-retiro.pdf",n:"Un lado: Instagram, Facebook y TikTok + descuento al mostrar una publicación en caja. El otro: reseña en Google."},
+ {k:"caja",t:"Cartel de caja",m:"Media carta 14 × 21,6 cm",c:[["CARTEL","3-cartel-caja-media-carta"]],pdf:"IMPRENTA-3-cartel-caja-media-carta.pdf",n:"«Mostralo aquí»: quien nos sigue y enseña una publicación del mes recibe descuento (falta definir el %)."},
+ {k:"mesa",t:"Tarjeta de mesa · QR de Google",m:"10 × 15 cm",c:[["MESA","4-mesa-qr-google"]],pdf:"IMPRENTA-4-mesa-qr-google-10x15cm.pdf",n:"El QR abre directo la reseña en Google."}
 ];
 let IMP_M="marisqueria";
 function impKey(m,k){return "impresos-"+m+"|"+k;}
@@ -416,9 +420,9 @@ function impRender(){
   IMPRESOS.forEach(p=>{
     const key=impKey(IMP_M,p.k), st=(typeof ESTADOS!=="undefined"&&ESTADOS[key])||{};
     const el=document.createElement("div"); el.className="imp "+(st.estado||"");
-    const caras=p.c.map(([lb,f])=>'<div class="cara"><a href="impresos/'+IMP_M+'/'+f+'.jpg" target="_blank"><img loading="lazy" src="impresos/'+IMP_M+'/'+f+'.jpg" alt="'+lb+'"></a><div class="lb">'+lb+'</div><a href="impresos/'+IMP_M+'/'+f+'.pdf" target="_blank">PDF para imprenta</a></div>').join("");
+    const caras=p.c.map(([lb,f])=>'<div class="cara"><a href="impresos/'+IMP_M+'/'+f+'.jpg" target="_blank"><img loading="lazy" src="impresos/'+IMP_M+'/'+f+'.jpg" alt="'+lb+'"></a><div class="lb">'+lb+'</div></div>').join("");
     el.innerHTML='<div class="ihead"><h3>'+p.t+'</h3><span class="st '+(st.estado||"pendiente")+'" data-st>'+({aprobado:"Aprobado",cambios:"Pide cambios"}[st.estado]||"Pendiente")+'</span></div>'+
-      '<div class="med">'+p.m+'</div><div class="caras">'+caras+'</div><div class="formato" style="margin-top:8px">'+p.n+'</div>'+
+      '<div class="med">'+p.m+'</div><div class="caras">'+caras+'</div><div class="formato" style="margin-top:8px">'+p.n+'</div><a class="pdfbtn" href="impresos/'+IMP_M+'/'+p.pdf+'" download>⬇ PDF para la imprenta</a>'+
       '<div class="actions"><button class="btn ap'+(st.estado==="aprobado"?" on":"")+'" data-ap>✓ Aprobar</button><button class="btn cb'+(st.estado==="cambios"?" on":"")+'" data-cb>✎ Pedir un cambio</button></div>'+
       '<div class="coment"><textarea placeholder="Observaciones (opcional)" data-com>'+esc(st.comentario||"")+'</textarea></div><button class="save" data-save>Guardar</button><div class="saved" data-saved></div>';
     const q=s=>el.querySelector(s); let estado=st.estado||null; const bap=q("[data-ap]"),bcb=q("[data-cb]");
@@ -431,7 +435,7 @@ function impRender(){
     L.appendChild(el);
   });
 }
-document.querySelectorAll(".imptab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".imptab").forEach(x=>x.classList.remove("on"));b.classList.add("on");IMP_M=b.dataset.m;impRender();});
+document.querySelectorAll(".imptab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".imptab").forEach(x=>x.classList.remove("on"));b.classList.add("on");IMP_M=b.dataset.m;document.getElementById("impTodo").href="impresos/"+IMP_M+"/IMPRENTA-paquete-completo.pdf";impRender();});
 impRender(); setTimeout(impRender,2500);
 </script>
 </body>
