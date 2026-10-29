@@ -411,13 +411,15 @@ const IMPRESOS=[
  {k:"tarjeta",t:"Tarjeta de cliente frecuente",m:"Tamaño tarjeta de presentación 9 × 5 cm · tiro y retiro · solo física",c:[["TIRO","1-tarjeta-cliente-frecuente-TIRO"],["RETIRO","1-tarjeta-cliente-frecuente-RETIRO"]],pdf:"IMPRENTA-1-tarjeta-cliente-frecuente-9x5cm-tiro-y-retiro.pdf",n:"9 sellos y la décima visita lleva premio · 1 sello por compra desde ₡10.000 (confirmar el premio)."},
  {k:"servilletero",t:"Hablador de servilletero",m:"12 × 17 cm · tiro y retiro",c:[["TIRO · seguinos","2-hablador-servilletero-TIRO"],["RETIRO · Google","2-hablador-servilletero-RETIRO"]],pdf:"IMPRENTA-2-servilletero-12x17cm-tiro-y-retiro.pdf",n:"Un lado: Instagram, Facebook y TikTok + descuento al mostrar una publicación en caja. El otro: reseña en Google."},
  {k:"caja",t:"Cartel de caja",m:"Media carta 14 × 21,6 cm",c:[["CARTEL","3-cartel-caja-media-carta"]],pdf:"IMPRENTA-3-cartel-caja-media-carta.pdf",n:"«Mostralo aquí»: quien nos sigue y enseña una publicación del mes recibe descuento (falta definir el %)."},
- {k:"mesa",t:"Tarjeta de mesa · QR de Google",m:"10 × 15 cm",c:[["MESA","4-mesa-qr-google"]],pdf:"IMPRENTA-4-mesa-qr-google-10x15cm.pdf",n:"El QR abre directo la reseña en Google."}
+ {k:"mesa",t:"Tarjeta de mesa · QR de Google",m:"10 × 15 cm",c:[["MESA","4-mesa-qr-google"]],pdf:"IMPRENTA-4-mesa-qr-google-10x15cm.pdf",n:"El QR abre directo la reseña en Google."},
+ {k:"guia",solo:"marisqueria",t:"Guía para el equipo",m:"Hoja A4 · se imprime en la oficina",c:[["GUÍA","04-guia-para-el-personal"]],pdf:"IMPRENTA-5-guia-para-el-equipo-A4.pdf",n:"Qué decir en los 4 momentos (al sentarse, al pedir, al pagar y al despedir) para que cada cliente nos siga, deje su reseña y quede registrado."},
+ {k:"registro",solo:"marisqueria",t:"Hoja de registro en caja",m:"Hoja A4 horizontal · se imprime en la oficina",c:[["REGISTRO","05-hoja-registro-caja"]],pdf:"IMPRENTA-6-hoja-registro-caja-A4.pdf",n:"Una fila por mesa: nombre, WhatsApp, cómo nos conoció, oferta usada y si acepta promociones. Se pasa cada lunes a la base de clientes."}
 ];
 let IMP_M="marisqueria";
 function impKey(m,k){return "impresos-"+m+"|"+k;}
 function impRender(){
   const L=document.getElementById("impLista"); if(!L) return; L.innerHTML="";
-  IMPRESOS.forEach(p=>{
+  IMPRESOS.filter(p=>!p.solo||p.solo===IMP_M).forEach(p=>{
     const key=impKey(IMP_M,p.k), st=(typeof ESTADOS!=="undefined"&&ESTADOS[key])||{};
     const el=document.createElement("div"); el.className="imp "+(st.estado||"");
     const caras=p.c.map(([lb,f])=>'<div class="cara"><a href="impresos/'+IMP_M+'/'+f+'.jpg" target="_blank"><img loading="lazy" src="impresos/'+IMP_M+'/'+f+'.jpg" alt="'+lb+'"></a><div class="lb">'+lb+'</div></div>').join("");
