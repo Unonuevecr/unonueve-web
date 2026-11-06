@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reels de noviembre · Leandro Jiménez</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+@font-face{font-family:Brice;src:url(../fuentes/Brice-Black-Semi-Expanded.otf);font-display:swap}
+:root{--bg:#F2ECDD;--panel:#fff;--linea:#E3D9C2;--tinta:#070B1C;--gris:#4A4F63;--noche:#070B1C;--oro:#E6B24E;--oro-o:#B9832A;--oro-c:#F7E0A0;--oro-suave:#FBF3DE;
+--f-disp:Brice,"Arial Black",sans-serif;--f-ui:system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tinta);font:16px/1.55 var(--f-ui);padding-inline:16px}
+header{background:var(--noche);color:#F2ECDD;margin:0 -16px;padding:26px 16px 22px;border-bottom:4px solid var(--oro)}
+header .in,.wrap{max-width:980px;margin:0 auto}
+.logo{height:58px;display:block;margin-bottom:12px}
+.marca{font:700 12px/1 var(--f-ui);letter-spacing:.22em;color:var(--oro)}
+h1{font:400 32px/1.08 var(--f-disp);margin:8px 0 6px;color:var(--oro-c)}
+.sub{color:#CFC8B8;font-size:14.5px;max-width:600px;margin:0}
+.wrap{padding:20px 0 60px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.reel{background:var(--panel);border:1px solid var(--linea);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.reel.pend{background:#FFFDF7;border-style:dashed;justify-content:center;min-height:150px}
+.dia{font:700 12px var(--f-ui);letter-spacing:.14em;text-transform:uppercase;color:var(--oro-o)}
+h2{font:400 20px/1.15 var(--f-disp);margin:0}
+.medios{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+video,.por{width:100%;aspect-ratio:9/16;border-radius:10px;background:var(--noche);display:block;object-fit:cover}
+.cap{font-size:12px;color:var(--gris);text-align:center;margin-top:3px}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:600 14px var(--f-ui);text-decoration:none;border-radius:99px;padding:9px 14px;border:1px solid var(--noche);color:var(--noche);background:#fff;cursor:pointer}
+.btn.p{background:var(--noche);color:var(--oro-c)}
+details{border-top:1px solid var(--linea);padding-top:8px}
+summary{cursor:pointer;font-weight:600;color:var(--gris);font-size:14px}
+pre{white-space:pre-wrap;font:14px/1.5 var(--f-ui);background:var(--oro-suave);border-radius:10px;padding:10px;margin:8px 0}
+.tag{display:inline-block;font:600 12.5px var(--f-ui);border-radius:99px;padding:4px 10px;background:var(--oro-suave);color:var(--oro-o);width:max-content}
+</style>
+</head>
+<body>
+<header><div class="in">
+<img class="logo" src="../img/logo.png" alt="Leandro Jiménez">
+<div class="marca">REELS DE NOVIEMBRE</div>
+<h1>Videos editados para EXPANDE</h1>
+<p class="sub">Cada reel trae el video en alta calidad, su portada y el texto para publicar. Toque «Descargar» para guardarlos. 1 de 9 listos; los demás se agregan aquí apenas estén editados.</p>
+</div></header>
+<div class="wrap"><div class="grid" id="grid"></div></div>
+<script>
+const R=[{"fecha": "2026-11-02", "dia": "Lunes 2 de noviembre", "titulo": "Clave 1 · El día que dejé de culpar", "nota": "", "video": "hd/leandro-2026-11-02-el-dia-que-deje-de-culpar.mp4", "portada": "hd/leandro-2026-11-02-el-dia-que-deje-de-culpar-portada.jpg", "mb": 58, "texto": "Le echás la culpa a la economía, al gobierno, al cliente que no pagó, a la familia que no te apoyó. Y puede que tengás razón en algo… pero mientras tanto, nada cambia.\n\n✅ La primera clave para crecer es dejar de preguntarte «¿por qué me pasa esto?» y empezar a preguntarte «¿qué tengo que hacer diferente?». Lo que te pasó no siempre dependió de vos. Lo que hacés ahora, sí. Y el día que te hacés responsable, recuperás el control.\n\n📲 EXPANDE · sábado 21 de noviembre · 9 a.m. a 2 p.m. · Auditorio Casa Pasión, Avenida 10, San José. Precio de preventa por tiempo limitado · cupos limitados. Reservá tu espacio en leandrojimenez.com/expande\n\n#Expande #Imparable #LeandroJiménez #Despierta"}, {"fecha": "2026-11-04", "dia": "Miércoles 4 de noviembre", "titulo": "Comer y pagar", "nota": ""}, {"fecha": "2026-11-09", "dia": "Lunes 9 de noviembre", "titulo": "Clave 2 · Decidí a tiempo", "nota": ""}, {"fecha": "2026-11-11", "dia": "Miércoles 11 de noviembre", "titulo": "El carro lleno y los bolsillos vacíos", "nota": ""}, {"fecha": "2026-11-16", "dia": "Lunes 16 de noviembre", "titulo": "Clave 3 · Pensá más allá de hoy", "nota": ""}, {"fecha": "2026-11-18", "dia": "Miércoles 18 de noviembre", "titulo": "Cuando el mundo se detuvo", "nota": ""}, {"fecha": "2026-11-23", "dia": "Lunes 23 de noviembre", "titulo": "Clave 4 · Lo que ya tenés en las manos", "nota": ""}, {"fecha": "2026-11-25", "dia": "Miércoles 25 de noviembre", "titulo": "Una llamada más", "nota": ""}, {"fecha": "2026-11-30", "dia": "Lunes 30 de noviembre", "titulo": "Clave 5 · Lo que repetís te define", "nota": "Falta grabarla"}];
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+document.getElementById('grid').innerHTML=R.map((r,i)=>r.video?`
+<article class="reel"><div class="dia">${r.dia}</div><h2>${esc(r.titulo)}</h2>
+<div class="medios"><div><video src="${r.video}" poster="${r.portada}" controls playsinline preload="none"></video><div class="cap">Video · ${r.mb} MB</div></div>
+<div><img class="por" src="${r.portada}" alt="Portada" loading="lazy"><div class="cap">Portada</div></div></div>
+<div class="btns"><a class="btn p" href="${r.video}" download>Descargar video</a><a class="btn" href="${r.portada}" download>Descargar portada</a></div>
+${r.texto?`<details><summary>Texto para publicar</summary><pre id="t${i}">${esc(r.texto)}</pre><button class="btn" onclick="navigator.clipboard.writeText(document.getElementById('t${i}').textContent).then(()=>this.textContent='Copiado ✓')">Copiar texto</button></details>`:''}
+</article>`:`<article class="reel pend"><div class="dia">${r.dia}</div><h2>${esc(r.titulo)}</h2><span class="tag">${r.nota||'En edición'}</span></article>`).join('');
+</script>
+</body>
+</html>
