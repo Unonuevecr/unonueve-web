@@ -297,7 +297,8 @@ function parseJSON(s){ // toma el primer arreglo JSON completo del texto
   throw 0;
 }
 
-const h=location.hash.slice(1);if(['agendar','eventos','contenido'].includes(h))abre(h);
+const porHash=()=>{const h=location.hash.slice(1);if(['agendar','eventos','contenido'].includes(h))abre(h);};
+window.addEventListener('hashchange',porHash);porHash();
 </script>
 </body>
 </html>
