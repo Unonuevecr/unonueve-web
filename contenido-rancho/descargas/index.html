@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Rancho JSM · Descargas de noviembre</title>
+<title>Rancho JSM · Contenido y eventos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -43,16 +43,100 @@ summary{cursor:pointer;font-family:Oswald,sans-serif;text-transform:uppercase;co
 details{min-width:0}
 pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14.5px/1.5 "IBM Plex Sans",sans-serif;background:var(--fondo);border-radius:10px;padding:10px 12px;margin:8px 0}
 .vacio{color:var(--suave);padding:30px 0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tabs button{border:0;border-radius:12px;padding:10px 14px;font:600 15px "IBM Plex Sans",sans-serif;cursor:pointer;background:rgba(255,255,255,.14);color:#fff}
+.tabs button.on{background:#fff;color:var(--navy)}
+.vista{display:none}.vista.on{display:block}
+.bloque{padding:22px 0 60px}
+.bloque h2.t{font-size:24px;margin-bottom:4px}
+.sub{color:var(--suave);margin:0 0 16px}
+.caja{background:#fff;border:1px solid var(--linea);border-radius:18px;padding:18px}
+form.ev{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form.ev .full{grid-column:1/-1}
+form.ev label{display:block;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:5px}
+form.ev label i{font-style:normal;font-weight:400;color:var(--suave)}
+form.ev label b{color:#c0392b}
+form.ev input,form.ev textarea{width:100%;font:16px "IBM Plex Sans",sans-serif;color:var(--tinta);background:var(--fondo);border:1px solid var(--linea);border-radius:12px;padding:11px 12px}
+form.ev textarea{min-height:84px;resize:vertical}
+form.ev input:focus,form.ev textarea:focus{outline:2px solid var(--azul);border-color:transparent}
+.msg{padding:12px 14px;border-radius:12px;margin-top:10px}
+.msg.ok{background:var(--pubf);color:var(--pub)}.msg.err{background:#fde8e5;color:#a33a2b}
+.calhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:8px}
+.calhead h3{font:500 21px Oswald,sans-serif;text-transform:uppercase;color:var(--navy);margin:0}
+.flecha{font-size:20px;width:40px;height:40px;border-radius:50%;border:1px solid var(--linea);background:#fff;cursor:pointer;color:var(--navy)}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.dn{font-size:12px;color:var(--suave);text-align:center;text-transform:uppercase;font-weight:600}
+.dia{background:#fff;border:1px solid var(--linea);border-radius:10px;min-height:74px;padding:5px;font-size:13px;overflow:hidden;min-width:0}
+.dia.vacio{background:transparent;border-color:transparent}
+.dia.hoy{outline:2px solid var(--acento)}
+.dia .n{font-size:13px;color:var(--suave);font-weight:600}
+.dia.click{cursor:pointer}
+.dia.ev{background:var(--progf);border-color:var(--azul)}
+.dia .tag{display:block;margin-top:3px;font-size:11.5px;line-height:1.25;background:var(--azul);color:#fff;border-radius:6px;padding:2px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dia .th{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;margin-top:3px;background:var(--fondo)}
+.dia .pt{display:inline-block;width:9px;height:9px;border-radius:50%;margin:3px 2px 0 0}
+.leyenda{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0 0;font-size:13.5px;color:var(--suave)}
+.leyenda span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;background:var(--c)}
+.eventos{display:grid;gap:12px;margin-top:16px}
+.ev-card{background:#fff;border:1px solid var(--linea);border-radius:16px;padding:14px 16px;display:grid;gap:6px}
+.ev-card .f{font-size:12.5px;color:var(--suave);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.ev-card .d{color:var(--suave);font-size:14.5px}
+.ev-card .acc,.estados,.evf{display:flex;flex-wrap:wrap;gap:8px}
+.estados button,.evf button{font:600 13px "IBM Plex Sans",sans-serif;border:1px solid var(--linea);background:var(--fondo);border-radius:99px;padding:6px 12px;cursor:pointer;color:var(--navy)}
+.estados button.on,.evf button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.evf{margin-top:16px}
+@media (max-width:620px){form.ev{grid-template-columns:1fr}.dia{min-height:58px;padding:3px;border-radius:8px}.dia .tag{font-size:10px;padding:1px 3px}}
 </style>
 </head>
 <body>
 <header><div class="ancho">
 <div class="marca">RANCHO JSM · NOVIEMBRE 2026</div>
-<h1>Contenido del mes para descargar</h1>
-<p>Cada pieza trae el video o las imágenes en alta calidad, la foto de portada y el texto para publicar. En el celular, «Guardar en el celular» lo deja en la galería.</p>
-<div class="filtros" id="filtros"></div>
+<h1>Contenido y eventos</h1>
+<div class="tabs" id="tabs">
+  <button data-v="contenido" class="on">📲 Contenido para descargar</button>
+  <button data-v="calendario">🗓️ Calendario del mes</button>
+  <button data-v="agendar">➕ Anotar evento</button>
+  <button data-v="eventos">🎉 Eventos</button>
+</div>
 </div></header>
-<div class="ancho"><div class="grid" id="grid"></div></div>
+
+<div class="vista on" id="v-contenido"><div class="ancho">
+  <p class="sub" style="margin-top:18px">Cada pieza trae el video o las imágenes en alta calidad, la foto de portada y el texto para publicar. En el celular, «Guardar en el celular» lo deja en la galería.</p>
+  <div class="filtros evf" id="filtros"></div>
+  <div class="grid" id="grid"></div>
+</div></div>
+
+<div class="vista" id="v-calendario"><div class="ancho bloque">
+  <h2 class="t">Calendario de publicaciones</h2>
+  <p class="sub">Lo que sale cada día en Facebook e Instagram. Tocá un día para ver la pieza y su texto.</p>
+  <div class="caja"><div class="calhead"><h3 id="pubMes"></h3></div><div class="cal" id="pubCal"></div>
+  <div class="leyenda" id="pubLey"></div></div>
+</div></div>
+
+<div class="vista" id="v-agendar"><div class="ancho bloque">
+  <h2 class="t">Anotar un evento</h2>
+  <p class="sub">Anotá la fecha y el invitado. Lo demás, solo si lo tienen.</p>
+  <div class="caja"><form class="ev" id="form" autocomplete="off">
+    <div><label>Fecha del evento <b>*</b></label><input type="date" name="fecha" required></div>
+    <div><label>Hora <i>(si ya la saben)</i></label><input type="text" name="hora" placeholder="Ej.: 8:00 p.m."></div>
+    <div class="full"><label>Nombre de la persona invitada <b>*</b></label><input type="text" name="nombre" required placeholder="Ej.: Alonso Sanabria"></div>
+    <div class="full"><label>Tipo de evento <i>(opcional)</i></label><input type="text" name="tipo" placeholder="Ej.: cantante invitado, noche de karaoke…"></div>
+    <div><label>Instagram <i>(si lo tienen)</i></label><input type="text" name="instagram" placeholder="@usuario" autocapitalize="off"></div>
+    <div><label>Teléfono <i>(si lo tienen)</i></label><input type="tel" name="telefono" inputmode="tel" placeholder="8888-8888"></div>
+    <div class="full"><label>Notas <i>(opcional)</i></label><textarea name="notas" placeholder="Lo que haga falta saber"></textarea></div>
+    <div class="full"><label>¿Quién lo anota? <b>*</b></label><input type="text" name="quien" required placeholder="Tu nombre"></div>
+    <div class="full"><button class="btn p" type="submit" id="enviar">Guardar evento</button><div id="msg"></div></div>
+  </form></div>
+</div></div>
+
+<div class="vista" id="v-eventos"><div class="ancho bloque">
+  <h2 class="t">Eventos anotados</h2>
+  <p class="sub">Tocá un día marcado para ver el detalle.</p>
+  <div class="caja"><div class="calhead"><button class="flecha" data-m="-1" aria-label="Mes anterior">‹</button><h3 id="evMes"></h3><button class="flecha" data-m="1" aria-label="Mes siguiente">›</button></div>
+  <div class="cal" id="evCal"></div></div>
+  <div class="evf" id="evFiltro"></div>
+  <div class="eventos" id="evLista"><p class="vacio">Cargando…</p></div>
+</div></div>
 <script>
 const R=[{"key": "2026-11-02", "dia": "Lunes 2 de noviembre", "titulo": "Casados típicos y cortes de carne", "tipo": "Reel", "estado": "Lista (no salió)", "est": "nosalio", "texto": "🍽️ En Rancho JSM tenemos nuestra sazón, ¡vení a disfrutarla!\n\nCasados típicos bien servidos, con ese sabor de casa que te hace volver. 🇨🇷\n\nY si lo tuyo es la carne, también tenemos deliciosos cortes. 🥩\n\n¿Con cuál te antojás hoy?\n\n📍 Encontranos en Waze como \"Rancho JSM\" — en el cruce de La Suiza de Turrialba, frente a la bomba JSM.\n📲 Reservá al 8940-0003\nLink de Waze: https://waze.com/ul?q=Rancho%20JSM%20La%20Suiza%20de%20Turrialba", "archivos": [], "video": "../vid/2.mp4", "descarga": "../vid/2.mp4", "portada": "hd/rancho-2026-11-02-casados-tipicos-y-cortes-de-carne-portada.jpg", "mb": 4}, {"key": "2026-11-03", "dia": "Martes 3 de noviembre", "titulo": "Teaser del evento #1: Hermanos Vallejo", "tipo": "Reel (publicación cruzada FB + IG)", "estado": "Publicado", "est": "publicado", "texto": "¡Ya viene lo bueno! 🎸🔥 Este DOMINGO 15 los HERMANOS VALLEJO se toman el Rancho JSM 🎶\nMúsica para bailar y cantar, la mejor sazón y cerveza a ¢1.000 🍺 ¡En familia y con el ambiente de siempre!\nAgendá la fecha… esto se va a llenar. 👀\n📍 Frente al cruce de La Suiza de Turrialba · Waze: Rancho JSM Turrialba\n📞 Reservaciones: 8940-0003\n#RanchoJSM #HermanosVallejo #Turrialba #LaSuiza #MúsicaEnVivo", "archivos": [], "video": "../vid/3.mp4", "descarga": "../vid/3.mp4", "portada": "hd/rancho-2026-11-03-teaser-del-evento-1-hermanos-vallejo-portada.jpg", "mb": 5}, {"key": "2026-11-04", "dia": "Miércoles 4 de noviembre", "titulo": "Café y postres", "tipo": "Reel", "estado": "Publicado", "est": "publicado", "texto": "¿Se te antoja algo dulce? 😋 Miércoles de CAFÉ Y POSTRES en Rancho JSM ☕🍰\nTres leches, pastel de chocolate y el gustito perfecto para la tarde. ¡Venite a consentir!\n🎶 Y apartá el DOMINGO 15: @loshermanosvallejocr y @alonso25ss EN VIVO, desde la 1:00 p.m.\n📍 Frente al cruce de La Suiza de Turrialba · Waze: Rancho JSM Turrialba\n📞 Reservaciones: 8940-0003\n#RanchoJSM #CaféYPostres #Turrialba #HermanosVallejo #AlonsoSanabria", "archivos": [], "video": "../vid/4.mp4", "descarga": "../vid/4.mp4", "portada": "hd/rancho-2026-11-04-cafe-y-postres-portada.jpg", "mb": 4}, {"key": "2026-11-05", "dia": "Jueves 5 de noviembre", "titulo": "Tarjeta de fidelidad", "tipo": "Imagen", "estado": "Lista para publicar", "est": "lista", "texto": "🎁 ¡Comé rico y ganá! Pedí tu Tarjeta de Fidelidad de Rancho JSM en caja.\n\n⭐ Por cada plato acumulás un sticker.\n🏆 Juntá 10 stickers y reclamá tu premio.\n\nEmpezá a acumular en tu próxima visita.\n\n📍 Encontranos en Waze como \"Rancho JSM\" — en el cruce de La Suiza de Turrialba, frente a la bomba JSM.\n📲 Reservá al 8940-0003\nLink de Waze: https://waze.com/ul?q=Rancho%20JSM%20La%20Suiza%20de%20Turrialba", "archivos": [{"src": "hd/rancho-2026-11-05-tarjeta-de-fidelidad-post.jpg", "hist": false}]}, {"key": "2026-11-06", "dia": "Viernes 6 de noviembre", "titulo": "El mejor ambiente ya se siente", "tipo": "Reel", "estado": "Publicado", "est": "publicado", "texto": "¡El mejor ambiente ya se siente en el Rancho! 🎄✨ Antojos, buena música y la gente más bonita de La Suiza.\nArrancá el finde con nosotros. 🍻\n🎶 Y apartá el DOMINGO 15: @loshermanosvallejocr y @alonso25ss EN VIVO, desde la 1:00 p.m.\n📍 Frente al cruce de La Suiza de Turrialba · Waze: Rancho JSM Turrialba\n📞 Reservaciones: 8940-0003\n#RanchoJSM #Turrialba #LaSuiza #HermanosVallejo #AlonsoSanabria", "archivos": [], "video": "../vid/6.mp4", "descarga": "../vid/6.mp4", "portada": "hd/rancho-2026-11-06-el-mejor-ambiente-ya-se-siente-portada.jpg", "mb": 3}, {"key": "2026-11-06-b", "dia": "Viernes 6 de noviembre", "titulo": "Afiche del evento: «Un ambiente lleno de fiesta» (recordatorio)", "tipo": "Post + historia (post publicado en FB + IG)", "estado": "Publicado", "est": "publicado", "texto": "¡Recordá la fiesta que tenemos con Alonso Sanabria (@alonso25ss) y los Hermanos Vallejo (@loshermanosvallejocr)! 🎉 Este DOMINGO 15 de noviembre, a partir de la 1:00 p.m., EN VIVO en Rancho JSM 🎸🎤\nFotos y videos musicales en vivo, baile y muchas sorpresas. Traete a tu familia y a tus compas, ¡que la tarde va a estar buenísima! 🍻\n📍 Frente al cruce de La Suiza de Turrialba · Waze: Rancho JSM Turrialba\n📞 Reservaciones: 8940-0003\n#RanchoJSM #HermanosVallejo #AlonsoSanabria #MúsicaEnVivo #Turrialba #LaSuiza", "archivos": [{"src": "hd/rancho-2026-11-06-b-afiche-del-evento-un-ambiente-lleno-de-f-post.jpg", "hist": false}, {"src": "hd/rancho-2026-11-06-b-afiche-del-evento-un-ambiente-lleno-de-f-historia.jpg", "hist": true}]}, {"key": "2026-11-07", "dia": "Sábado 7 de noviembre", "titulo": "Sábado de buen ambiente", "tipo": "Reel", "estado": "Programado 7:30 a.m.", "est": "programado", "texto": "¡Sábado de BUEN AMBIENTE! 🍻 Venite con la familia a disfrutar la sazón de siempre y la cerveza bien fría.\nReservá tu mesa para este finde. 🙌\n🎶 Y apartá el DOMINGO 15: @loshermanosvallejocr y @alonso25ss EN VIVO, desde la 1:00 p.m.\n📍 Frente al cruce de La Suiza de Turrialba · Waze: Rancho JSM Turrialba\n📞 Reservaciones: 8940-0003\n#RanchoJSM #Turrialba #EnFamilia #HermanosVallejo #AlonsoSanabria", "archivos": [], "video": "../vid/7.mp4", "descarga": "../vid/7.mp4", "portada": "hd/rancho-2026-11-07-sabado-de-buen-ambiente-portada.jpg", "mb": 3}, {"key": "2026-11-09", "dia": "Lunes 9 de noviembre", "titulo": "Cortes de carne", "tipo": "Reel", "estado": "Programado 7:30 a.m.", "est": "programado", "texto": "En Rancho JSM tenemos NUESTRA SAZÓN 🔥 Cortes de carne jugosos y a tu punto, directo a la parrilla.\nVenite por el mejor sabor de Turrialba. 🥩\n🎶 ¡Esta semana se viene la fiesta! DOMINGO 15: @loshermanosvallejocr y @alonso25ss EN VIVO, desde la 1:00 p.m.\n📍 Frente al cruce de La Suiza de Turrialba · Waze: Rancho JSM Turrialba\n📞 Reservaciones: 8940-0003\n#RanchoJSM #Parrilla #Turrialba #HermanosVallejo #AlonsoSanabria", "archivos": [], "video": "../vid/9.mp4", "descarga": "../vid/9.mp4", "portada": "hd/rancho-2026-11-09-cortes-de-carne-portada.jpg", "mb": 6}, {"key": "2026-11-10", "dia": "Martes 10 de noviembre", "titulo": "Teaser del evento #2: Alonso Sanabria", "tipo": "Reel", "estado": "Programado 7:30 a.m.", "est": "programado", "texto": "¡ESTA SEMANA ES LA FIESTA! 🎤🔥 @alonso25ss EN VIVO en Rancho JSM este DOMINGO 15, junto a @loshermanosvallejocr 🎸, a partir de la 1:00 p.m.\nBailar y cantar en familia, con la mejor sazón y cerveza a ¢1.000 🍺 ¡No te lo podés perder!\n📍 Frente al cruce de La Suiza de Turrialba · Waze: Rancho JSM Turrialba\n📞 Reservaciones: 8940-0003\n#RanchoJSM #AlonsoSanabria #HermanosVallejo #MúsicaEnVivo #Turrialba", "archivos": [], "video": "../vid/10.mp4", "descarga": "../vid/10.mp4", "portada": "hd/rancho-2026-11-10-teaser-del-evento-2-alonso-sanabria-portada.jpg", "mb": 5}, {"key": "2026-11-12", "dia": "Jueves 12 de noviembre", "titulo": "Tarjeta de fidelidad", "tipo": "Imagen", "estado": "Lista para publicar", "est": "lista", "texto": "🌟 Cada plato suma.\n\nCon la Tarjeta de Fidelidad de Rancho JSM, por cada plato ganás un sticker… y al llegar a 10 te llevás tu premio. 🏆\n\nSolicitala en caja.\n\n📍 Encontranos en Waze como \"Rancho JSM\" — en el cruce de La Suiza de Turrialba, frente a la bomba JSM.\n📲 Reservá al 8940-0003\nLink de Waze: https://waze.com/ul?q=Rancho%20JSM%20La%20Suiza%20de%20Turrialba", "archivos": [{"src": "hd/rancho-2026-11-12-tarjeta-de-fidelidad-post.jpg", "hist": false}]}, {"key": "2026-11-12-b", "dia": "Jueves 12 de noviembre", "titulo": "Carrusel de postres: «¿Se te antoja algo dulce?»", "tipo": "Carrusel (4) + historia", "estado": "Programado 7:30 a.m.", "est": "programado", "texto": "🥭 ¿Se te antoja algo dulce? En Rancho JSM tenemos un postre para vos.\n\nElegí entre nuestro Cheesecake de mango cremoso, el Tres Leches o el Queque de zanahoria… y acompañalo con un buen café. ☕\n\nEl mejor final para tu comida.\n\n🎶 Y apartá el DOMINGO 15: @loshermanosvallejocr y @alonso25ss EN VIVO, desde la 1:00 p.m.\n\n📍 Encontranos en Waze como \"Rancho JSM\" — en el cruce de La Suiza de Turrialba, frente a la bomba JSM.\n📲 Reservá al 8940-0003\nLink de Waze: https://waze.com/ul?q=Rancho%20JSM%20La%20Suiza%20de%20Turrialba", "archivos": [{"src": "hd/rancho-2026-11-12-b-carrusel-de-postres-se-te-antoja-algo-du-post1.jpg", "hist": false}, {"src": "hd/rancho-2026-11-12-b-carrusel-de-postres-se-te-antoja-algo-du-post2.jpg", "hist": false}, {"src": "hd/rancho-2026-11-12-b-carrusel-de-postres-se-te-antoja-algo-du-post3.jpg", "hist": false}, {"src": "hd/rancho-2026-11-12-b-carrusel-de-postres-se-te-antoja-algo-du-post4.jpg", "hist": false}, {"src": "hd/rancho-2026-11-12-b-carrusel-de-postres-se-te-antoja-algo-du-historia.jpg", "hist": true}]}, {"key": "2026-11-13", "dia": "Viernes 13 de noviembre", "titulo": "Navidad: nuevos platillos para las familias", "tipo": "Reel", "estado": "Programado 7:30 a.m.", "est": "programado", "texto": "🎅 En Rancho JSM ya se siente la Navidad.\n\nEstamos preparando nuevos platillos para esta época y muchas actividades para que las familias disfruten juntas. 🌟\n\nEsperalo… y atento a nuestra agenda de diciembre. 🎄\n\n🎶 Y apartá el DOMINGO 15: @loshermanosvallejocr y @alonso25ss EN VIVO, desde la 1:00 p.m.\n\n📍 Encontranos en Waze como \"Rancho JSM\" — en el cruce de La Suiza de Turrialba, frente a la bomba JSM.\n📲 Reservá al 8940-0003\nLink de Waze: https://waze.com/ul?q=Rancho%20JSM%20La%20Suiza%20de%20Turrialba", "archivos": [], "video": "../vid/13.mp4", "descarga": "../vid/13.mp4", "portada": "hd/rancho-2026-11-13-navidad-nuevos-platillos-para-las-famili-portada.jpg", "mb": 4}, {"key": "2026-11-14", "dia": "Sábado 14 de noviembre", "titulo": "¡Mañana es el día!", "tipo": "Reel", "estado": "Programado 7:30 a.m.", "est": "programado", "texto": "¡MAÑANA ES EL DÍA! ⭐🎸 @loshermanosvallejocr y @alonso25ss EN VIVO este DOMINGO 15 en Rancho JSM, a partir de la 1:00 p.m.\nLa mejor sazón, cerveza a ¢1.000 y música para gozar en familia. ¡Te esperamos!\n📍 Frente al cruce de La Suiza de Turrialba · Waze: Rancho JSM Turrialba\n📞 Reservaciones: 8940-0003\n#RanchoJSM #HermanosVallejo #AlonsoSanabria #MúsicaEnVivo #Turrialba", "archivos": [], "video": "../vid/14.mp4", "descarga": "../vid/14.mp4", "portada": "hd/rancho-2026-11-14-manana-es-el-dia-portada.jpg", "mb": 6}, {"key": "2026-11-15", "dia": "Domingo 15 de noviembre", "titulo": "¡HOY ES EL DÍA! Afiche del evento", "tipo": "Post + historia", "estado": "Programado 7:30 a.m.", "est": "programado", "texto": "¡HOY ES EL DÍA! 🎉 @loshermanosvallejocr y @alonso25ss EN VIVO en Rancho JSM, a partir de la 1:00 p.m. 🎸🎤\nMúsica para bailar y cantar, la mejor sazón de Turrialba y cerveza a ¢1.000 🍺 ¡Venite con toda la familia, hoy la rompemos! 🔥\n📍 Frente al cruce de La Suiza de Turrialba · Waze: Rancho JSM Turrialba\n📞 Reservaciones: 8940-0003\n#RanchoJSM #HermanosVallejo #AlonsoSanabria #MúsicaEnVivo #Turrialba #LaSuiza", "archivos": [{"src": "hd/rancho-2026-11-15-hoy-es-el-dia-afiche-del-evento-post.jpg", "hist": false}, {"src": "hd/rancho-2026-11-15-hoy-es-el-dia-afiche-del-evento-historia.jpg", "hist": true}]}, {"key": "2026-11-16", "dia": "Lunes 16 de noviembre", "titulo": "Mariscos: lomito en salsa de camarón y ceviche", "tipo": "Reel", "estado": "Programado 7:30 a.m.", "est": "programado", "texto": "En Rancho JSM tenemos NUESTRA SAZÓN 🦐 Lomito en salsa de camarón, ceviches frescos y todo el sabor del mar aquí en Turrialba.\n¡Arrancá la semana comiendo rico! 😋\n📍 Frente al cruce de La Suiza de Turrialba · Waze: Rancho JSM Turrialba\n📞 Reservaciones: 8940-0003\n#RanchoJSM #Ceviche #Mariscos #Turrialba #LaSuiza", "archivos": [], "video": "../vid/16.mp4", "descarga": "../vid/16.mp4", "portada": "hd/rancho-2026-11-16-mariscos-lomito-en-salsa-de-camaron-y-ce-portada.jpg", "mb": 4}, {"key": "2026-11-18", "dia": "Miércoles 18 de noviembre", "titulo": "Cafecito con postre", "tipo": "Reel", "estado": "Programado 7:30 a.m.", "est": "programado", "texto": "☕ Hoy toca cafecito con postre.\n\nEn Rancho JSM podés elegir tu antojo: Queque de zanahoria con glaseado de queso crema, Tres Leches o Cheesecake de mango. 🍰\n\n¿Cuál te llevás?\n\n📍 Encontranos en Waze como \"Rancho JSM\" — en el cruce de La Suiza de Turrialba, frente a la bomba JSM.\n📲 Reservá al 8940-0003\nLink de Waze: https://waze.com/ul?q=Rancho%20JSM%20La%20Suiza%20de%20Turrialba", "archivos": [], "video": "../vid/18.mp4", "descarga": "../vid/18.mp4", "portada": "hd/rancho-2026-11-18-cafecito-con-postre-portada.jpg", "mb": 3}, {"key": "2026-11-19", "dia": "Jueves 19 de noviembre", "titulo": "Tarjeta de fidelidad", "tipo": "Imagen", "estado": "Lista para publicar", "est": "lista", "texto": "💛 ¿Ya tenés tu Tarjeta de Fidelidad de Rancho JSM?\n\nPedila en caja, acumulá un sticker por cada plato y al completar 10 reclamá tu premio. 🎁\n\nCuanto más venís, más ganás.\n\n📍 Encontranos en Waze como \"Rancho JSM\" — en el cruce de La Suiza de Turrialba, frente a la bomba JSM.\n📲 Reservá al 8940-0003\nLink de Waze: https://waze.com/ul?q=Rancho%20JSM%20La%20Suiza%20de%20Turrialba", "archivos": [{"src": "hd/rancho-2026-11-19-tarjeta-de-fidelidad-post.jpg", "hist": false}]}, {"key": "2026-11-20", "dia": "Viernes 20 de noviembre", "titulo": "Navidad: algo especial en el horno", "tipo": "Reel", "estado": "Programado 7:30 a.m.", "est": "programado", "texto": "⭐ Se acerca la Navidad y en Rancho JSM tenemos algo especial en el horno.\n\nNuevos platillos y muchas actividades para las familias. 🍽️🎁\n\nMuy pronto te contamos todo: atento a nuestra agenda de diciembre.\n\n📍 Encontranos en Waze como \"Rancho JSM\" — en el cruce de La Suiza de Turrialba, frente a la bomba JSM.\n📲 Reservá al 8940-0003\nLink de Waze: https://waze.com/ul?q=Rancho%20JSM%20La%20Suiza%20de%20Turrialba", "archivos": [], "video": "../vid/20.mp4", "descarga": "../vid/20.mp4", "portada": "hd/rancho-2026-11-20-navidad-algo-especial-en-el-horno-portada.jpg", "mb": 4}, {"key": "2026-11-23", "dia": "Lunes 23 de noviembre", "titulo": "Bocas: chicharrón, chifrijo y yuca", "tipo": "Reel", "estado": "Programado 7:30 a.m.", "est": "programado", "texto": "¡Sazón de sobra! 🔥 Nuestras BOCAS, el chifrijo y todo el sabor de un buen rancho tico, para compartir con los tuyos. 🍻\nVenite a La Suiza y pedí tu favorita.\n📍 Frente al cruce de La Suiza de Turrialba · Waze: Rancho JSM Turrialba\n📞 Reservaciones: 8940-0003\n#RanchoJSM #Bocas #Chifrijo #RanchoTico #Turrialba", "archivos": [], "video": "../vid/23.mp4", "descarga": "../vid/23.mp4", "portada": "hd/rancho-2026-11-23-bocas-chicharron-chifrijo-y-yuca-portada.jpg", "mb": 5}, {"key": "2026-11-24", "dia": "Martes 24 de noviembre", "titulo": "Vení a almorzar esta semana", "tipo": "Post + historia", "estado": "Programado 7:30 a.m.", "est": "programado", "texto": "🍽️ Esta semana, vení a almorzar con nosotros en Rancho JSM.\n\nBuena comida, buen ambiente y el trato de siempre. 🇨🇷\n\nLa música en vivo, el baile y más siguen llegando: atento a nuestra agenda de diciembre. 🎶\n\n📍 Encontranos en Waze como \"Rancho JSM\" — en el cruce de La Suiza de Turrialba, frente a la bomba JSM.\n📲 Reservá al 8940-0003\nLink de Waze: https://waze.com/ul?q=Rancho%20JSM%20La%20Suiza%20de%20Turrialba", "archivos": [{"src": "hd/rancho-2026-11-24-veni-a-almorzar-esta-semana-post.jpg", "hist": false}, {"src": "hd/rancho-2026-11-24-veni-a-almorzar-esta-semana-historia.jpg", "hist": true}]}, {"key": "2026-11-25", "dia": "Miércoles 25 de noviembre", "titulo": "Carrusel de postres: «Dejá campito para el postre»", "tipo": "Carrusel (4) + historia", "estado": "Programado 7:30 a.m.", "est": "programado", "texto": "🍮 Dejá campito para el postre… y para el café. ☕\n\nTres Leches, Cheesecake de mango o Queque de zanahoria: en Rancho JSM tenés para elegir.\n\nVení a cerrar tu comida con broche de oro. ✨\n\n📍 Encontranos en Waze como \"Rancho JSM\" — en el cruce de La Suiza de Turrialba, frente a la bomba JSM.\n📲 Reservá al 8940-0003\nLink de Waze: https://waze.com/ul?q=Rancho%20JSM%20La%20Suiza%20de%20Turrialba", "archivos": [{"src": "hd/rancho-2026-11-25-carrusel-de-postres-deja-campito-para-el-post1.jpg", "hist": false}, {"src": "hd/rancho-2026-11-25-carrusel-de-postres-deja-campito-para-el-post2.jpg", "hist": false}, {"src": "hd/rancho-2026-11-25-carrusel-de-postres-deja-campito-para-el-post3.jpg", "hist": false}, {"src": "hd/rancho-2026-11-25-carrusel-de-postres-deja-campito-para-el-post4.jpg", "hist": false}, {"src": "hd/rancho-2026-11-25-carrusel-de-postres-deja-campito-para-el-historia.jpg", "hist": true}]}, {"key": "2026-11-26", "dia": "Jueves 26 de noviembre", "titulo": "Tarjeta de fidelidad", "tipo": "Imagen", "estado": "Lista para publicar", "est": "lista", "texto": "🏆 Tu constancia tiene premio.\n\nAcumulá 10 stickers —uno por cada plato— con tu Tarjeta de Fidelidad de Rancho JSM y reclamá tu recompensa. ⭐\n\nSi todavía no la tenés, pedila en caja.\n\n📍 Encontranos en Waze como \"Rancho JSM\" — en el cruce de La Suiza de Turrialba, frente a la bomba JSM.\n📲 Reservá al 8940-0003\nLink de Waze: https://waze.com/ul?q=Rancho%20JSM%20La%20Suiza%20de%20Turrialba", "archivos": [{"src": "hd/rancho-2026-11-26-tarjeta-de-fidelidad-post.jpg", "hist": false}]}, {"key": "2026-11-27", "dia": "Viernes 27 de noviembre", "titulo": "Navidad: diciembre a la vuelta de la esquina", "tipo": "Reel", "estado": "Programado 7:30 a.m.", "est": "programado", "texto": "🎁 Diciembre está a la vuelta de la esquina y Rancho JSM se prepara para la Navidad. 🎄\n\nNuevos platillos y muchas actividades para las familias, ¡esperalo!\n\nAtento a nuestra agenda de diciembre. ✨\n\n📍 Encontranos en Waze como \"Rancho JSM\" — en el cruce de La Suiza de Turrialba, frente a la bomba JSM.\n📲 Reservá al 8940-0003\nLink de Waze: https://waze.com/ul?q=Rancho%20JSM%20La%20Suiza%20de%20Turrialba", "archivos": [], "video": "../vid/27.mp4", "descarga": "../vid/27.mp4", "portada": "hd/rancho-2026-11-27-navidad-diciembre-a-la-vuelta-de-la-esqu-portada.jpg", "mb": 4}, {"key": "2026-11-30", "dia": "Lunes 30 de noviembre", "titulo": "Plato Ejecutivo del día", "tipo": "Reel", "estado": "Programado 7:30 a.m.", "est": "programado", "texto": "¡Cerremos noviembre con un almuerzo bien servido! 🍽️ PLATO EJECUTIVO del día, de lunes a viernes: un plato distinto cada día… y con ENTRADA DE CORTESÍA (aplican restricciones). 😋\n📍 Frente al cruce de La Suiza de Turrialba · Waze: Rancho JSM Turrialba\n📞 Reservaciones: 8940-0003\n#RanchoJSM #PlatoEjecutivo #Almuerzo #Turrialba #LaSuiza", "archivos": [], "video": "../vid/30.mp4", "descarga": "../vid/30.mp4", "portada": "hd/rancho-2026-11-30-plato-ejecutivo-del-dia-portada.jpg", "mb": 4}];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -77,7 +161,7 @@ function card(r){
     btns=`<button class="btn p" data-g="${r.archivos.map(a=>a.src).join('|')}">📲 Guardar ${r.archivos.length>1?'todo':'imagen'} en el celular</button>`+
       r.archivos.map((a,i)=>`<a class="btn" href="${a.src}" download>⬇ ${a.hist?'Historia':(n>1?'Imagen '+(i+1):'Post')}</a>`).join('');
   }
-  return `<article class="pieza"><div class="f">${esc(r.dia)}</div><h2>${esc(r.titulo)}</h2>
+  return `<article class="pieza" id="p-${esc(r.key)}"><div class="f">${esc(r.dia)}</div><h2>${esc(r.titulo)}</h2>
     <div class="tipo">${esc(r.tipo)}</div><span class="chip e-${r.est}">${esc(r.estado)}</span>
     ${medios}<div class="btns">${btns}</div>
     <details open><summary>Texto para publicar</summary><pre>${esc(r.texto)}</pre>
@@ -98,7 +182,119 @@ document.addEventListener('click',async e=>{
     g.textContent=txt;
   }
 });
+/* ---------- pestañas ---------- */
+const VISTAS=['contenido','calendario','agendar','eventos'];
+function abre(v){
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+  VISTAS.forEach(x=>document.getElementById('v-'+x).classList.toggle('on',x===v));
+  if(v==='calendario')pintaPub();
+  if(v==='eventos')cargaEventos();
+  if(location.hash!=='#'+v)history.replaceState(null,'','#'+v);
+}
+document.getElementById('tabs').addEventListener('click',e=>{const b=e.target.closest('[data-v]');if(b)abre(b.dataset.v)});
+const porHash=()=>{const h=location.hash.slice(1);if(VISTAS.includes(h))abre(h);};
+window.addEventListener('hashchange',porHash);
+
+const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const DIAS=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+const hoyISO=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')})();
+const fechaLarga=iso=>{const d=new Date(iso+'T12:00:00');return isNaN(d)?iso:DIAS[d.getDay()]+' '+d.getDate()+' de '+MESES[d.getMonth()]};
+function calendario(ym,celda){
+  const [y,m]=ym.split('-').map(Number),primero=new Date(y,m-1,1).getDay(),dias=new Date(y,m,0).getDate();
+  let h=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'].map(d=>`<div class="dn">${d}</div>`).join('');
+  for(let i=0;i<primero;i++)h+='<div class="dia vacio"></div>';
+  for(let d=1;d<=dias;d++)h+=celda(ym+'-'+String(d).padStart(2,'0'),d);
+  return h;
+}
+
+/* ---------- calendario de publicaciones ---------- */
+const COL={publicado:'--pub',programado:'--prog',lista:'--lista',nosalio:'--nos'};
+const NOMBRE={publicado:'Publicado',programado:'Programado',lista:'Lista',nosalio:'No salió'};
+function pintaPub(){
+  const P=R.map(r=>({...r,fecha:r.key.slice(0,10),est:(r.est==='programado'&&r.key.slice(0,10)<hoyISO)?'publicado':r.est}));
+  const ym=(P[0]?P[0].fecha:hoyISO).slice(0,7),[y,m]=ym.split('-').map(Number);
+  document.getElementById('pubMes').textContent=MESES[m-1]+' '+y;
+  document.getElementById('pubCal').innerHTML=calendario(ym,(iso,d)=>{
+    const ps=P.filter(p=>p.fecha===iso);if(!ps.length)return `<div class="dia${iso===hoyISO?' hoy':''}"><span class="n">${d}</span></div>`;
+    const p=ps[0],src=p.portada||(p.archivos[0]&&p.archivos[0].src);
+    return `<div class="dia click${iso===hoyISO?' hoy':''}" data-ir="${esc(p.key)}" title="${esc(ps.map(x=>x.titulo).join(' · '))}"><span class="n">${d}</span>${src?`<img class="th" loading="lazy" src="${src}" alt="">`:''}<div>${ps.map(x=>`<span class="pt" style="background:var(${COL[x.est]||'--suave'})"></span>`).join('')}</div></div>`;
+  });
+  document.getElementById('pubLey').innerHTML=Object.keys(NOMBRE).map(k=>`<span style="--c:var(${COL[k]})">${NOMBRE[k]}</span>`).join('');
+}
+document.getElementById('pubCal').addEventListener('click',e=>{
+  const d=e.target.closest('[data-ir]');if(!d)return;
+  filtro='todo';pinta();abre('contenido');
+  setTimeout(()=>document.getElementById('p-'+d.dataset.ir)?.scrollIntoView({behavior:'smooth',block:'start'}),50);
+});
+
+/* ---------- eventos ---------- */
+const API='https://n8n-unonueve-n8n.i5i6e4.easypanel.host/webhook/rancho-eventos';
+const guarda=(k,v)=>{try{localStorage.setItem(k,v)}catch(_){}};
+const lee=k=>{try{return localStorage.getItem(k)}catch(_){return null}};
+async function api(data){const r=await fetch(API,{method:'POST',body:new URLSearchParams({data:JSON.stringify(data)})});return r.json();}
+const form=document.getElementById('form');
+form.quien.value=lee('rancho_quien')||'';
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const msg=document.getElementById('msg'),btn=document.getElementById('enviar');
+  const d=Object.fromEntries(new FormData(form).entries());
+  btn.disabled=true;btn.textContent='Guardando…';msg.className='';msg.textContent='';
+  try{
+    const r=await api({accion:'registrar',...d});
+    if(!r.ok)throw new Error(r.error||'No se pudo guardar');
+    guarda('rancho_quien',d.quien);
+    msg.className='msg ok';msg.textContent='✅ Listo, quedó anotado: '+d.nombre+', '+fechaLarga(d.fecha)+'.';
+    const q=d.quien;form.reset();form.quien.value=q;eventos=null;
+  }catch(err){msg.className='msg err';msg.textContent='No se pudo guardar ('+err.message+'). Probá de nuevo.';}
+  btn.disabled=false;btn.textContent='Guardar evento';
+});
+let eventos=null,evMes=null,evFiltro='proximos';
+async function cargaEventos(){
+  if(eventos){pintaEventos();return;}
+  try{const r=await api({accion:'listar'});eventos=r.eventos||[];}
+  catch(_){document.getElementById('evLista').innerHTML='<p class="vacio">No se pudieron cargar los eventos. Recargá la página.</p>';return;}
+  if(!evMes){const prox=eventos.find(e=>e.fecha>=hoyISO&&e.estado!=='descartado');evMes=(prox?prox.fecha:hoyISO).slice(0,7);}
+  pintaEventos();
+}
+function pintaEventos(){
+  const [y,m]=evMes.split('-').map(Number);
+  document.getElementById('evMes').textContent=MESES[m-1]+' '+y;
+  const vivos=eventos.filter(e=>e.estado!=='descartado');
+  document.getElementById('evCal').innerHTML=calendario(evMes,(iso,d)=>{
+    const es=vivos.filter(e=>e.fecha===iso);
+    return `<div class="dia${es.length?' ev click':''}${iso===hoyISO?' hoy':''}" ${es.length?`data-dia="${iso}"`:''}><span class="n">${d}</span>${es.map(e=>`<span class="tag">${esc(e.nombre)}</span>`).join('')}</div>`;
+  });
+  const F=[['proximos','Próximos'],['mes','Este mes'],['todos','Todos'],['descartado','Descartados']];
+  document.getElementById('evFiltro').innerHTML=F.map(([k,t])=>`<button data-ef="${k}" class="${k===evFiltro?'on':''}">${t}</button>`).join('');
+  let L=evFiltro==='proximos'?vivos.filter(e=>e.fecha>=hoyISO):evFiltro==='mes'?vivos.filter(e=>e.fecha.startsWith(evMes)):evFiltro==='todos'?vivos:eventos.filter(e=>e.estado==='descartado');
+  document.getElementById('evLista').innerHTML=L.length?L.map(tarjetaEv).join(''):'<p class="vacio">No hay eventos en esta vista.</p>';
+}
+function tarjetaEv(e){
+  const tel=(e.telefono||'').replace(/\D/g,''),wa=tel?(tel.length===8?'506'+tel:tel):'';
+  const ig=(e.instagram||'').trim().replace(/^@/,'').replace(/^https?:\/\/(www\.)?instagram\.com\//,'').replace(/\/.*$/,'');
+  return `<article class="ev-card" id="ev-${esc(e.id)}">
+    <div class="f">${esc(fechaLarga(e.fecha))}${e.hora?' · '+esc(e.hora):''}</div>
+    <h2>${esc(e.nombre)}</h2>
+    ${e.tipo?`<div class="tipo">${esc(e.tipo)}</div>`:''}
+    ${e.notas?`<div class="d">${esc(e.notas)}</div>`:''}
+    ${(e.telefono||ig)?`<div class="d">${e.telefono?'📞 '+esc(e.telefono):''}${e.telefono&&ig?' · ':''}${ig?'📸 @'+esc(ig):''}</div>`:''}
+    <div class="d">Lo anotó ${esc(e.quien||'—')}</div>
+    ${(wa||ig)?`<div class="acc">${wa?`<a class="btn p" href="https://wa.me/${wa}" target="_blank" rel="noopener">💬 WhatsApp</a><a class="btn" href="tel:+${wa}">📞 Llamar</a>`:''}${ig?`<a class="btn" href="https://instagram.com/${encodeURIComponent(ig)}" target="_blank" rel="noopener">📸 Instagram</a>`:''}</div>`:''}
+    <div class="estados">${['nuevo','contactado','confirmado','descartado'].map(s=>`<button data-est="${s}" data-id="${esc(e.id)}" class="${e.estado===s?'on':''}">${s[0].toUpperCase()+s.slice(1)}</button>`).join('')}</div>
+  </article>`;
+}
+document.getElementById('v-eventos').addEventListener('click',async e=>{
+  const fl=e.target.closest('[data-m]');
+  if(fl){const [y,m]=evMes.split('-').map(Number),d=new Date(y,m-1+Number(fl.dataset.m),1);evMes=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');pintaEventos();return;}
+  const f=e.target.closest('[data-ef]');if(f){evFiltro=f.dataset.ef;pintaEventos();return;}
+  const dia=e.target.closest('[data-dia]');
+  if(dia){evFiltro='mes';pintaEventos();const x=eventos.find(v=>v.fecha===dia.dataset.dia&&v.estado!=='descartado');if(x)document.getElementById('ev-'+x.id)?.scrollIntoView({behavior:'smooth',block:'center'});return;}
+  const b=e.target.closest('[data-est]');
+  if(b){const ev=eventos.find(v=>v.id===b.dataset.id);if(!ev)return;const antes=ev.estado;ev.estado=b.dataset.est;pintaEventos();
+    try{const r=await api({accion:'estado',id:ev.id,estado:ev.estado});if(!r.ok)throw 0;}catch(_){ev.estado=antes;pintaEventos();alert('No se pudo cambiar el estado. Probá de nuevo.');}}
+});
 pinta();
+porHash();
 </script>
 </body>
 </html>
